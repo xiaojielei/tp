@@ -1,4 +1,4 @@
-# Duke
+# Common Cents
 
 {Give product intro here}
 
