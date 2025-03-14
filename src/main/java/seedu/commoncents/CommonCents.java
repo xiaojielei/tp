@@ -3,7 +3,6 @@ package seedu.commoncents;
 import summary.Summary;
 import summary.ui.SummaryDisplay;
 import ui.HelpDisplay;
-import exceptions.BudgetTrackerException;
 
 import java.util.Scanner;
 
@@ -20,21 +19,6 @@ public class CommonCents {
         Summary summary = new Summary();
         SummaryDisplay summaryDisplay = new SummaryDisplay(summary);
         HelpDisplay helpDisplay = new HelpDisplay();
-
-//        try {
-//            switch (command) {
-//            case "help":
-//                helpDisplay.displayHelp();
-//                break;
-//            case "summary":
-//                summaryDisplay.displaySummary();
-//                break;
-//            default:
-//                System.out.println("Unknown command. Type 'help' to see available commands.");
-//            }
-//        } catch (BudgetTrackerException e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
 
         in.close();
     }

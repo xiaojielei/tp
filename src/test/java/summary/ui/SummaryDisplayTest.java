@@ -4,7 +4,7 @@ import exceptions.BudgetTrackerException;
 import org.junit.jupiter.api.Test;
 import summary.Summary;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SummaryDisplayTest {
 
@@ -23,7 +23,7 @@ class SummaryDisplayTest {
                         "Total Expenses:      $250.25\n" +
                         "Available Balance:   $750.25\n" +
                         "Total Savings:       $100.00\n" +
-                        "===========================\n"; // Ensure consistent line endings
+                        "===========================\n";
 
         // Normalize line endings AND trim whitespace from each line:
         String expected = normalizeLineEndingsAndTrim(expectedOutput);
