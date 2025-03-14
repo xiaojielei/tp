@@ -1,4 +1,4 @@
-package seedu.commoncents;
+package seedu.duke;
 
 import summary.Summary;
 import summary.ui.SummaryDisplay;
@@ -6,7 +6,7 @@ import ui.HelpDisplay;
 
 import java.util.Scanner;
 
-public class CommonCents {
+public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello!");
         System.out.println("What is your name?");
