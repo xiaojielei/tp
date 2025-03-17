@@ -26,9 +26,9 @@ public class ExpenseParser {
                 return new ViewExpenseCommand();
             }
             break;
-
-            case "delete":
-                return parseDeleteExpense(argument);
+            
+        case "delete":
+            return parseDeleteExpense(argument);
 
         default:
             throw new BudgetTrackerException("Invalid command! Please enter a valid command.");

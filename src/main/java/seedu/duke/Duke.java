@@ -6,7 +6,6 @@ import summary.ui.SummaryDisplay;
 import ui.HelpDisplay;
 import expenses.BudgetTracker;
 import commands.Command;
-import commands.ExitCommand;
 import exceptions.BudgetTrackerException;
 import expenses.ExpenseParser;
 import java.util.Scanner;
