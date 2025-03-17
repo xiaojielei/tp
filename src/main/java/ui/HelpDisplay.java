@@ -10,7 +10,7 @@ public class HelpDisplay {
 
     // Category Headings
     private static final String INCOME_HEADING = "--- Income Management ---";
-    private static final String EXPENSE_HEADING = "--- Expense Management ---";
+    private static final String EXPENSE_HEADING = "--- expenses.Expense Management ---";
     private static final String SAVINGS_HEADING = "--- Savings Management ---";
     private static final String GOALS_HEADING = "--- Savings Goals ---";
     private static final String GENERAL_HEADING = "--- General Commands ---";
