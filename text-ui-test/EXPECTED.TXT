@@ -6,4 +6,37 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What is your name?
+===== Budget Tracker Help =====
+
+
+--- Income Management ---
+add income <AMOUNT> / <SOURCE>                               Adds an income record.
+delete income <INDEX>                                        Deletes an income record by index.
+view income                                                  Lists all income records.
+
+--- Expense Management ---
+add expense <AMOUNT> / <SOURCE>                              Adds an expense record.
+delete expense <INDEX>                                       Deletes an expense record by index.
+view expense                                                 Lists all expense records.
+
+--- Savings Management ---
+add savings <AMOUNT>                                         Adds a savings record.
+delete savings <INDEX>                                       Deletes a savings record by index.
+view savings                                                 Lists all savings records.
+
+--- Savings Goals ---
+savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
+savings goal view                                            Views all current savings goals.
+savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>         Updates an existing savings goal.
+savings goal delete <INDEX>                                  Deletes a savings goal by index.
+
+--- General Commands ---
+help                                                         Displays this help message.
+===============================
+===== BUDGET SUMMARY =====
+Total Income:        $0.00
+Total Expenses:      $0.00
+Available Balance:   $0.00
+Total Savings:       $0.00
+===========================
 Hello James Gosling
