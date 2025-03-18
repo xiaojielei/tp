@@ -4,17 +4,18 @@ import exceptions.BudgetTrackerException;
 import income.Income;
 import income.IncomeManager;
 import summary.Summary;
+import expenses.Ui;
 
 /**
  * Command to add a new income entry to the list and update the summary.
  */
-public class AddIncomeCommand {
+public class AddIncomeCommand extends IncomeCommand {
     private final double amount;
     private final String source;
     private final Summary summary;
 
     /**
-     * Creates a new AddIncomeCommand with the specified amount, source, and summary.
+     * Creates a new AddIncomeCommand with the specified amount, source, summary, and ui.
      *
      * @param amount the income amount
      * @param source the income source
@@ -27,11 +28,12 @@ public class AddIncomeCommand {
     }
 
     /**
-     * Executes the command to add the income entry.
+     * Executes the command to add the income entry and updates the summary.
      *
      * @throws BudgetTrackerException if the amount is invalid or the source is empty
      */
-    public void execute() throws BudgetTrackerException {
+    @Override
+    public void incomeExecute(IncomeManager incomeManager, Ui ui) throws BudgetTrackerException {
         if (amount <= 0) {
             throw new BudgetTrackerException("Income amount must be a positive number.");
         }
@@ -40,9 +42,16 @@ public class AddIncomeCommand {
         }
 
         Income income = new Income(amount, source);
-        IncomeManager.addIncome(income);
-        summary.addIncome(amount);
+        IncomeManager.addIncome(income);  // Add to the income manager's list
+        summary.addIncome(amount);  // Update the summary with the new income
 
-        System.out.println("Added income: $" + amount + " from " + source);
+        ui.showMessage("Added income: $" + amount + " from " + source); // Display success message using Ui
+    }
+    @Override
+    public boolean isExit() {
+        return false; // AddIncomeCommand does not exit the program
     }
 }
+
+
+

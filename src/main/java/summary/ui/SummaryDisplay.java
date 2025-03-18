@@ -12,7 +12,7 @@ public class SummaryDisplay {
     private static final String EXPENSES_LABEL = "Total Expenses:";
     private static final String BALANCE_LABEL = "Available Balance:";
     private static final String SAVINGS_LABEL = "Total Savings:";
-    private Summary summary;
+    private final Summary summary;
 
     /**
      * Constructs a new SummaryDisplay object with summary to be printed.

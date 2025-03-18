@@ -1,5 +1,6 @@
 package commands;
 
+import income.Income;
 import income.IncomeManager;
 import summary.Summary;
 
@@ -17,7 +18,7 @@ public class ListIncomeCommand {
      *
      * @param summary the summary to retrieve the total income from
      */
-    public ListIncomeCommand(Summary summary) { // Constructor accepting Summary
+    public ListIncomeCommand(Summary summary) {
         this.summary = summary;
     }
 
@@ -31,10 +32,12 @@ public class ListIncomeCommand {
         } else {
             System.out.println("List of income entries:");
             for (int i = 0; i < IncomeManager.getIncomeList().size(); i++) {
-                System.out.println((i + 1) + ". $" + IncomeManager.getIncomeList().get(i).amount() +
-                        " from " + IncomeManager.getIncomeList().get(i).source());
+                // Use getter methods to access the private fields
+                Income income = IncomeManager.getIncomeList().get(i);
+                System.out.println((i + 1) + ". $" + income.getAmount() + " from " + income.getSource());
             }
             System.out.println("Total Income: $" + summary.getTotalIncome()); // Display total income
         }
     }
 }
+

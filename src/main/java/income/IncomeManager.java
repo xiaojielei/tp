@@ -8,8 +8,14 @@ import java.util.List;
  * retrieve, and clear income entries.
  */
 public class IncomeManager {
+    private static final IncomeManager instance = new IncomeManager();
     private static final List<Income> incomeList = new ArrayList<>();
 
+    public IncomeManager() {}
+
+    public static IncomeManager getInstance() {
+        return instance;
+    }
     /**
      * Adds a new income entry to the list.
      *
