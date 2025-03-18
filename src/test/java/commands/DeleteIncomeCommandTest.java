@@ -19,7 +19,7 @@ public class DeleteIncomeCommandTest {
     void setUp() throws BudgetTrackerException {
         summary = new Summary();
         ui = new Ui(); // Initialize the UI object
-        IncomeManager.clearIncomeList();  // Reset income list before each test
+        IncomeManager.clearIncomeList();
 
         // Add some income entries
         IncomeManager.addIncome(new Income(200.0, "Freelance"));
@@ -32,12 +32,12 @@ public class DeleteIncomeCommandTest {
 
     @Test
     void testDeleteValidIncome() throws BudgetTrackerException {
-        DeleteIncomeCommand command = new DeleteIncomeCommand(1, summary);  // Pass summary
-        command.incomeExecute(IncomeManager.getInstance(), ui);  // Use incomeExecute instead of execute
+        DeleteIncomeCommand command = new DeleteIncomeCommand(1, summary);
+        command.incomeExecute(IncomeManager.getInstance(), ui);
 
         // Validate that the income list has the correct size and values after deletion
         assertEquals(1, IncomeManager.getIncomeList().size());
-        assertEquals(50.0, IncomeManager.getIncomeList().get(0).getAmount());  // Use getter for amount
+        assertEquals(50.0, IncomeManager.getIncomeList().get(0).getAmount());
         assertEquals(50.0, summary.getTotalIncome());
     }
 
@@ -45,7 +45,7 @@ public class DeleteIncomeCommandTest {
     void testDeleteInvalidIndexThrowsException() {
         // Try to delete an income with an invalid index (greater than the list size)
         Exception exception = assertThrows(BudgetTrackerException.class, () ->
-                new DeleteIncomeCommand(5, summary).incomeExecute(IncomeManager.getInstance(), ui)  // Use incomeExecute instead of execute
+                new DeleteIncomeCommand(5, summary).incomeExecute(IncomeManager.getInstance(), ui)
         );
         assertEquals("Invalid index. Please provide a valid income index.", exception.getMessage());
     }

@@ -10,7 +10,8 @@ public class IncomeParser {
     public static AddIncomeCommand parseAddIncomeCommand(String fullCommand) throws BudgetTrackerException {
         String[] parts = fullCommand.split(" / ");
         if (parts.length != 2) {
-            throw new BudgetTrackerException("Invalid format for 'add income' command. Please use 'add income <AMOUNT> / <SOURCE>'");
+            throw new BudgetTrackerException("Invalid format for 'add income' command. " +
+                    "Please use 'add income <AMOUNT> / <SOURCE>'");
         }
 
         try {
@@ -25,7 +26,8 @@ public class IncomeParser {
     public static DeleteIncomeCommand parseDeleteIncomeCommand(String fullCommand) throws BudgetTrackerException {
         String[] parts = fullCommand.split(" ");
         if (parts.length != 3 || !parts[1].equalsIgnoreCase("income")) {
-            throw new BudgetTrackerException("Invalid format for 'delete income' command. Please use 'delete income <INDEX>'");
+            throw new BudgetTrackerException("Invalid format for 'delete income' command. " +
+                    "Please use 'delete income <INDEX>'");
         }
 
         try {
