@@ -36,21 +36,21 @@ public class Duke {
         helpDisplay.displayHelp();
         System.out.println(summaryDisplay.displaySummary());
 
-        while (true) {
-
-            try {
-                String fullCommand = in.nextLine();
-                Command command = ExpenseParser.parse(fullCommand);
-                if (command != null) {
-                    tracker.executeCommand(command, ui);
-                }
-                if (command.isExit()) {
-                    break;
-                }
-            } catch (BudgetTrackerException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-}
+//        while (true) {
+//
+//            try {
+//                String fullCommand = in.nextLine();
+//                Command command = ExpenseParser.parse(fullCommand);
+//                if (command != null) {
+//                    tracker.executeCommand(command, ui);
+//                }
+//                if (command.isExit()) {
+//                    break;
+//                }
+//            } catch (BudgetTrackerException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
+//    }
+//}
 
