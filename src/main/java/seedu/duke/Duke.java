@@ -29,8 +29,12 @@ public class Duke {
         Summary summary = new Summary();
         SummaryDisplay summaryDisplay = new SummaryDisplay(summary);
         HelpDisplay helpDisplay = new HelpDisplay();
+
         Ui ui = new Ui();
         BudgetTracker tracker = new BudgetTracker();
+
+        helpDisplay.displayHelp();
+        System.out.println(summaryDisplay.displaySummary());
 
         while (true) {
 
