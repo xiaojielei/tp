@@ -43,4 +43,3 @@ public class DeleteIncomeCommand {
         System.out.println("Deleted income entry at index " + index);
     }
 }
-

@@ -7,7 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import summary.Summary;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeleteIncomeCommandTest {
     private Summary summary;
@@ -40,5 +41,3 @@ public class DeleteIncomeCommandTest {
         assertEquals("Invalid index. Please provide a valid income index.", exception.getMessage());
     }
 }
-
-

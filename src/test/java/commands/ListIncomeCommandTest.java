@@ -10,7 +10,8 @@ import summary.Summary;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListIncomeCommandTest {
     private Summary summary;
@@ -47,4 +48,3 @@ class ListIncomeCommandTest {
         assertEquals("No income entries available.", outputStream.toString().trim());
     }
 }
-

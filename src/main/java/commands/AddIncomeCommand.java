@@ -46,4 +46,3 @@ public class AddIncomeCommand {
         System.out.println("Added income: $" + amount + " from " + source);
     }
 }
-
