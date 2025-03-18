@@ -93,7 +93,7 @@ public class Summary {
      */
     public void addExpense(double expense) throws BudgetTrackerException {
         if (expense < 0) {
-            throw new BudgetTrackerException("expenses.Expense cannot be negative.");
+            throw new BudgetTrackerException("Expense cannot be negative.");
         }
         this.totalExpense += expense;
     }
@@ -106,7 +106,7 @@ public class Summary {
      */
     public void removeExpense(double expense) throws BudgetTrackerException {
         if (expense < 0) {
-            throw new BudgetTrackerException("expenses.Expense cannot be negative.");
+            throw new BudgetTrackerException("Expense cannot be negative.");
         }
         if (expense > this.totalExpense) {
             throw new BudgetTrackerException("Cannot remove more expense than the current total expenses.");
