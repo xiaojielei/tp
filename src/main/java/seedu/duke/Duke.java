@@ -32,53 +32,60 @@ public class Duke {
 
         while (true) {
             try {
-                String fullCommand = in.nextLine();
-                Command command = null;
-                IncomeCommand incomeCommand = null;
+                // Check if there's input available before reading
+                if (in.hasNextLine()) {
+                    String fullCommand = in.nextLine();  // Read the user input
+                    Command command = null;
+                    IncomeCommand incomeCommand = null;
 
-                if (fullCommand.equals("help")) {
-                    helpDisplay.displayHelp();
-                    System.out.println(summaryDisplay.displaySummary());
-                }
+                    if (fullCommand.equals("help")) {
+                        helpDisplay.displayHelp();
+                        System.out.println(summaryDisplay.displaySummary());
+                    }
 
-                // Handling view commands
-                if (fullCommand.equals("view income")) {
-                    ListIncomeCommand listIncomeCommand = new ListIncomeCommand(summary);
-                    listIncomeCommand.execute();
-                    continue;
-                } else if (fullCommand.equals("view expense")) {
-                    ViewExpenseCommand viewExpenseCommand = new ViewExpenseCommand();
-                    viewExpenseCommand.execute(expenseList, ui);
-                    continue;
-                }
+                    // Handling view commands
+                    if (fullCommand.equals("view income")) {
+                        ListIncomeCommand listIncomeCommand = new ListIncomeCommand(summary);
+                        listIncomeCommand.execute();
+                        continue;
+                    } else if (fullCommand.equals("view expense")) {
+                        ViewExpenseCommand viewExpenseCommand = new ViewExpenseCommand();
+                        viewExpenseCommand.execute(expenseList, ui);
+                        continue;
+                    }
 
-                // Handling income-related commands
-                if (fullCommand.startsWith("add income")) {
-                    incomeCommand = IncomeParser.parseAddIncomeCommand(fullCommand);
-                } else if (fullCommand.startsWith("delete income")) {
-                    incomeCommand = IncomeParser.parseDeleteIncomeCommand(fullCommand);
-                }
+                    // Handling income-related commands
+                    if (fullCommand.startsWith("add income")) {
+                        incomeCommand = IncomeParser.parseAddIncomeCommand(fullCommand);
+                    } else if (fullCommand.startsWith("delete income")) {
+                        incomeCommand = IncomeParser.parseDeleteIncomeCommand(fullCommand);
+                    }
 
-                // Handling expense-related commands
-                if (fullCommand.startsWith("add expense")) {
-                    command = ExpenseParser.parse(fullCommand);
-                } else if (fullCommand.startsWith("delete expense")) {
-                    command = ExpenseParser.parse(fullCommand);
-                }
+                    // Handling expense-related commands
+                    if (fullCommand.startsWith("add expense")) {
+                        command = ExpenseParser.parse(fullCommand);
+                    } else if (fullCommand.startsWith("delete expense")) {
+                        command = ExpenseParser.parse(fullCommand);
+                    }
 
-                // Execute income commands
-                if (incomeCommand != null) {
-                    tracker.executeincomeCommand(incomeCommand, ui);
-                }
-                if (incomeCommand != null && incomeCommand.isExit()) {
-                    break;
-                }
+                    // Execute income commands
+                    if (incomeCommand != null) {
+                        tracker.executeincomeCommand(incomeCommand, ui);
+                    }
+                    if (incomeCommand != null && incomeCommand.isExit()) {
+                        break;
+                    }
 
-                // Execute expense commands
-                if (command != null) {
-                    tracker.executeCommand(command, ui);
-                }
-                if (command != null && command.isExit()) {
+                    // Execute expense commands
+                    if (command != null) {
+                        tracker.executeCommand(command, ui);
+                    }
+                    if (command != null && command.isExit()) {
+                        break;
+                    }
+                } else {
+                    // If no input is available, break out of the loop
+                    System.out.println("No input available. Exiting program.");
                     break;
                 }
             } catch (BudgetTrackerException e) {
