@@ -1,9 +1,13 @@
 package seedu.duke;
 
+import expenses.Ui;
 import summary.Summary;
 import summary.ui.SummaryDisplay;
 import ui.HelpDisplay;
-
+import expenses.BudgetTracker;
+import commands.Command;
+import exceptions.BudgetTrackerException;
+import expenses.ExpenseParser;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,13 +23,34 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
+        Scanner in = new Scanner(System.in);
+        System.out.println("Hello!");
+
         Summary summary = new Summary();
         SummaryDisplay summaryDisplay = new SummaryDisplay(summary);
         HelpDisplay helpDisplay = new HelpDisplay();
+
+        Ui ui = new Ui();
+        BudgetTracker tracker = new BudgetTracker();
+
         helpDisplay.displayHelp();
         System.out.println(summaryDisplay.displaySummary());
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        while (true) {
+
+            try {
+                String fullCommand = in.nextLine();
+                Command command = ExpenseParser.parse(fullCommand);
+                if (command != null) {
+                    tracker.executeCommand(command, ui);
+                }
+                if (command.isExit()) {
+                    break;
+                }
+            } catch (BudgetTrackerException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
+

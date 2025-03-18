@@ -6,6 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What is your name?
+Hello!
 ===== Budget Tracker Help =====
 
 
@@ -39,4 +40,4 @@ Total Expenses:      $0.00
 Available Balance:   $0.00
 Total Savings:       $0.00
 ===========================
-Hello James Gosling
+Added expense: $53.0 | Source: transport to school
