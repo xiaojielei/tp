@@ -26,7 +26,7 @@ public class ExpenseParser {
                 return new ViewExpenseCommand();
             }
             break;
-            
+
         case "delete":
             return parseDeleteExpense(argument);
 
