@@ -22,6 +22,8 @@ public class Duke {
         Summary summary = new Summary();
         SummaryDisplay summaryDisplay = new SummaryDisplay(summary);
         HelpDisplay helpDisplay = new HelpDisplay();
+        helpDisplay.displayHelp();
+        System.out.println(summaryDisplay.displaySummary());
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
