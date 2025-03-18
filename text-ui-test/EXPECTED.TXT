@@ -7,7 +7,6 @@ Hello from
 
 What is your name?
 Hello!
-=======
 ===== Budget Tracker Help =====
 
 
