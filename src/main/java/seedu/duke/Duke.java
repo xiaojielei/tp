@@ -30,15 +30,16 @@ public class Duke {
         BudgetTracker tracker = new BudgetTracker();
         ExpenseList expenseList = new ExpenseList();
 
-        in.nextLine();
-        helpDisplay.displayHelp();
-        System.out.println(summaryDisplay.displaySummary());
-
         while (true) {
             try {
                 String fullCommand = in.nextLine();
                 Command command = null;
                 IncomeCommand incomeCommand = null;
+
+                if (fullCommand.equals("help")) {
+                    helpDisplay.displayHelp();
+                    System.out.println(summaryDisplay.displaySummary());
+                }
 
                 // Handling view commands
                 if (fullCommand.equals("view income")) {
