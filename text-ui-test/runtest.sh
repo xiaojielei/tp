@@ -11,8 +11,8 @@ cd text-ui-test
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
-dos2unix EXPECTED-UNIX.TXT input.txt
-diff EXPECTED-UNIX.TXT input.txt
+dos2unix EXPECTED-UNIX.TXT ACTUAL.txt
+diff EXPECTED-UNIX.TXT ACTUAL.txt
 if [ $? -eq 0 ]
 then
     echo "Test passed!"
