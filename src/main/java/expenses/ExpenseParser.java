@@ -31,7 +31,10 @@ public class ExpenseParser {
             break;
 
         case "delete":
-            return parseDeleteExpense(argument, summary);
+            if (argument.startsWith("expense ")) {
+                return parseDeleteExpense(argument.substring(8).trim(), summary);
+            }
+            break;
 
         default:
             throw new BudgetTrackerException("Invalid command! Please enter a valid command.");
