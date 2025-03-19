@@ -1,6 +1,9 @@
 package commands;
+import exceptions.BudgetTrackerException;
 import expenses.ExpenseList;
 import expenses.Ui;
+
+
 /**
  * Abstract base class for all commands.
  */
@@ -11,7 +14,7 @@ public abstract class Command {
      * @param expenseList The list of expenses to modify.
      * @param ui The UI handler for displaying messages.
      */
-    public abstract void execute(ExpenseList expenseList, Ui ui);
+    public abstract void execute(ExpenseList expenseList, Ui ui) throws BudgetTrackerException;
 
     /**
      * Determines if this command should exit the application.

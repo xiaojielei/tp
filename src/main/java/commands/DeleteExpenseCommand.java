@@ -4,7 +4,7 @@ import expenses.ExpenseList;
 import expenses.Ui;
 
 public class DeleteExpenseCommand extends Command {
-    private int expenseNumber;
+    private final int expenseNumber;
 
     public DeleteExpenseCommand(int expenseNumber) {
         this.expenseNumber = expenseNumber;
