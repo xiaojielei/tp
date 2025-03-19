@@ -95,7 +95,7 @@ public class Duke {
 
                     //execute savings commands
                     if (fullCommand.contains("savings")) {
-                        saving.run(in);
+                        saving.run(fullCommand);
                     }
 
                 } else {
