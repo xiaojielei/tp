@@ -43,7 +43,6 @@ public class Duke {
 
                     if (fullCommand.equals("help")) {
                         helpDisplay.displayHelp();
-                        System.out.println(summaryDisplay.displaySummary());
                     }
 
                     // Handling view commands
@@ -55,6 +54,8 @@ public class Duke {
                         ViewExpenseCommand viewExpenseCommand = new ViewExpenseCommand();
                         viewExpenseCommand.execute(expenseList, ui);
                         continue;
+                    } else if (fullCommand.equals("view summary")) {
+                        summaryDisplay.displaySummary();
                     }
 
                     // Handling income-related commands

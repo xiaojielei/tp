@@ -12,6 +12,7 @@ public class HelpDisplay {
     private static final String INCOME_HEADING = "--- Income Management ---";
     private static final String EXPENSE_HEADING = "--- Expense Management ---";
     private static final String SAVINGS_HEADING = "--- Savings Management ---";
+    private static final String SUMMARY_HEADING = "--- Summary Management ---";
     private static final String GOALS_HEADING = "--- Savings Goals ---";
     private static final String GENERAL_HEADING = "--- General Commands ---";
 
@@ -29,7 +30,7 @@ public class HelpDisplay {
      * Builds the complete help text string, organized by category.
      */
     private void buildHelpText() {
-        helpText.append(HELP_HEADER).append("\n\n");
+        helpText.append(HELP_HEADER).append("\n");
 
         addCategory(INCOME_HEADING);
         addCommandHelp("add income <AMOUNT> / <SOURCE>", "Adds an income record.");
@@ -45,6 +46,9 @@ public class HelpDisplay {
         addCommandHelp("add savings <AMOUNT>", "Adds a savings record.");
         addCommandHelp("delete savings <INDEX>", "Deletes a savings record by index.");
         addCommandHelp("view savings", "Lists all savings records.");
+
+        addCategory(SUMMARY_HEADING);
+        addCommandHelp("view summary", "Lists all income, expense and saving records.");
 
         addCategory(GOALS_HEADING);
         addCommandHelp("savings goal set <AMOUNT> / <DESCRIPTION>", "Sets a new savings goal.");
