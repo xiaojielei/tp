@@ -98,7 +98,7 @@ public class Summary {
      *
      * @param income The amount of income to remove.
      * @throws BudgetTrackerException If the income is negative or greater than the current total income,
-     * or if removing it would result in a negative balance.
+     *     or if removing it would result in a negative balance.
      */
     public void removeIncome(double income) throws BudgetTrackerException {
         if (income < 0) {

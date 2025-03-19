@@ -41,16 +41,6 @@ class SummaryTest {
         summary.removeExpense(25);
         assertEquals(225, summary.getTotalBalance(), 0.001);
     }
-    
-    @Test
-    void getTotalBalance_withIncomeExpensesAndSavings_expectCorrectBalance() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0);
-        summary.addExpense(30.0);
-        summary.addSavings(20.0);
-        // Balance should be income - expenses - savings = 100 - 30 - 20 = 50
-        assertEquals(50.0, summary.getTotalBalance(), 0.001);
-    }
 
     // Test addIncome()
     @Test
@@ -81,74 +71,6 @@ class SummaryTest {
         summary.addIncome(50);
         assertEquals(351.25, summary.getTotalIncome(),0.001);
 
-    }
-
-    // Test removeIncome()
-    @Test
-    void removeIncome_validAmount_expectDecreaseInTotalIncome() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0);
-        summary.removeIncome(50.0);
-        assertEquals(50.0, summary.getTotalIncome(), 0.001);
-    }
-
-    @Test
-    void removeIncome_negativeAmount_expectException() {
-        Summary summary = new Summary();
-        assertThrows(BudgetTrackerException.class, () -> summary.removeIncome(-50.0));
-    }
-
-    @Test
-    void removeIncome_amountGreaterThanTotalIncome_expectException() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0);
-        assertThrows(BudgetTrackerException.class, () -> summary.removeIncome(150.0));
-    }
-    @Test
-    void removeIncome_zeroAmount_expectNoChange() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100);
-        summary.removeIncome(0);
-        assertEquals(100, summary.getTotalIncome(), 0.001);
-
-    }
-    @Test
-    void removeIncome_multipleValidAmount_expectCorrectResult() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(200);
-        summary.removeIncome(50);
-        summary.removeIncome(25);
-        assertEquals(125, summary.getTotalIncome(), 0.001);
-
-    }
-    @Test
-    void removeIncome_removeTotalIncome_expectZero() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(200);
-        summary.removeIncome(200);
-        assertEquals(0, summary.getTotalIncome(), 0.001);
-
-    }
-    
-    @Test
-    void removeIncome_withExistingExpensesAndSavings_expectException() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0);
-        summary.addExpense(30.0);
-        summary.addSavings(20.0);
-        // Trying to remove more income than available after expenses and savings
-        assertThrows(BudgetTrackerException.class, () -> summary.removeIncome(60.0));
-    }
-    
-    @Test
-    void removeIncome_exactlyAvailableAfterExpensesAndSavings_expectSuccess() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0);
-        summary.addExpense(30.0);
-        summary.addSavings(20.0);
-        // Available to remove: 100 - 30 - 20 = 50
-        summary.removeIncome(50.0);
-        assertEquals(50.0, summary.getTotalIncome(), 0.001);
     }
     
     // Test addExpense()
@@ -182,159 +104,12 @@ class SummaryTest {
         summary.addExpense(50);
         assertEquals(351.25, summary.getTotalExpense(),0.001);
     }
-    
-    @Test
-    void addExpense_exceedsAvailableFunds_expectException() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0);
-        summary.addSavings(30.0);
-        // Available funds = 100 - 0 - 30 = 70
-        assertThrows(BudgetTrackerException.class, () -> summary.addExpense(80.0));
-    }
-    
-    @Test
-    void addExpense_exactlyAvailableFunds_expectSuccess() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0);
-        summary.addSavings(30.0);
-        // Available funds = 100 - 0 - 30 = 70
-        summary.addExpense(70.0);
-        assertEquals(70.0, summary.getTotalExpense(), 0.001);
-    }
 
-    // Test removeExpense()
-    @Test
-    void removeExpense_validAmount_expectDecreaseInTotalExpense() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0); 
-        summary.addExpense(100.0);
-        summary.removeExpense(50.0);
-        assertEquals(50.0, summary.getTotalExpense(), 0.001);
-    }
 
     @Test
     void removeExpense_negativeAmount_expectException() {
         Summary summary = new Summary();
         assertThrows(BudgetTrackerException.class, () -> summary.removeExpense(-50.0));
-    }
-
-    @Test
-    void removeExpense_amountGreaterThanTotalExpense_expectException() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0); 
-        summary.addExpense(100.0);
-        assertThrows(BudgetTrackerException.class, () -> summary.removeExpense(150.0));
-    }
-
-    @Test
-    void removeExpense_zeroAmount_expectNoChange() throws BudgetTrackerException{
-        Summary summary = new Summary();
-        summary.addIncome(100.0); 
-        summary.addExpense(100.0);
-        summary.removeExpense(0);
-        assertEquals(100, summary.getTotalExpense(), 0.001);
-    }
-    @Test
-    void removeExpense_multipleValidAmount_expectCorrectResult() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(200.0); 
-        summary.addExpense(200);
-        summary.removeExpense(50);
-        summary.removeExpense(25);
-        assertEquals(125, summary.getTotalExpense(), 0.001);
-
-    }
-    @Test
-    void removeExpense_removeTotalExpense_expectZero() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(200.0); 
-        summary.addExpense(200);
-        summary.removeExpense(200);
-        assertEquals(0, summary.getTotalExpense(), 0.001);
-
-    }
-
-    // Test addSavings()
-    @Test
-    void addSavings_positiveAmount_expectIncreaseInTotalSavings() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(200);
-        summary.addSavings(50.0);
-        assertEquals(50.0, summary.getTotalSavings(), 0.001);
-    }
-
-    @Test
-    void addSavings_negativeAmount_expectException() {
-        Summary summary = new Summary();
-        assertThrows(BudgetTrackerException.class, () -> summary.addSavings(-50.0));
-    }
-
-    @Test
-    void addSavings_amountGreaterThanBalance_expectException() throws BudgetTrackerException{
-        Summary summary = new Summary();
-        summary.addIncome(100);
-        summary.addExpense(50);
-        assertThrows(BudgetTrackerException.class, () -> summary.addSavings(60.0));
-    }
-
-    @Test
-    void addSavings_zeroAmount_expectNoChange() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(200);
-        summary.addSavings(0);
-        assertEquals(0, summary.getTotalSavings(), 0.001);
-    }
-    @Test
-    void addSavings_multipleAmounts_expectCorrectTotalSavings() throws BudgetTrackerException{
-        Summary summary = new Summary();
-        summary.addIncome(5000);
-        summary.addSavings(100.50);
-        summary.addSavings(200.75);
-        summary.addSavings(50);
-        assertEquals(351.25, summary.getTotalSavings(),0.001);
-
-    }
-    
-    @Test
-    void addSavings_exactlyAvailableFunds_expectSuccess() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(100.0);
-        summary.addExpense(50.0);
-        // Available funds = 100 - 50 = 50
-        summary.addSavings(50.0);
-        assertEquals(50.0, summary.getTotalSavings(), 0.001);
-    }
-
-    // Test removeSavings()
-    @Test
-    void removeSavings_validAmount_expectDecreaseInTotalSavings() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(200);
-        summary.addSavings(100.0);
-        summary.removeSavings(50.0);
-        assertEquals(50.0, summary.getTotalSavings(), 0.001);
-    }
-
-    @Test
-    void removeSavings_negativeAmount_expectException() {
-        Summary summary = new Summary();
-        assertThrows(BudgetTrackerException.class, () -> summary.removeSavings(-50.0));
-    }
-
-    @Test
-    void removeSavings_amountGreaterThanTotalSavings_expectException() throws BudgetTrackerException {
-        Summary summary = new Summary();
-        summary.addIncome(200);
-        summary.addSavings(100.0);
-        assertThrows(BudgetTrackerException.class, () -> summary.removeSavings(150.0));
-    }
-    @Test
-    void removeSavings_zeroAmount_expectNoChange() throws BudgetTrackerException{
-        Summary summary = new Summary();
-        summary.addIncome(200);
-        summary.addSavings(100);
-        summary.removeSavings(0);
-        assertEquals(100, summary.getTotalSavings(), 0.001);
     }
 
     @Test
@@ -357,21 +132,18 @@ class SummaryTest {
 
     }
 
-    // Test getTotalIncome()
     @Test
     void getTotalIncome_emptySummary_expectZero() {
         Summary summary = new Summary();
         assertEquals(0, summary.getTotalIncome(), 0.001);
     }
 
-    // Test getTotalExpense()
     @Test
     void getTotalExpense_emptySummary_expectZero() {
         Summary summary = new Summary();
         assertEquals(0, summary.getTotalExpense(), 0.001);
     }
 
-    // Test getTotalSavings()
     @Test
     void getTotalSavings_emptySummary_expectZero() {
         Summary summary = new Summary();

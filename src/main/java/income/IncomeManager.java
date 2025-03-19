@@ -35,7 +35,8 @@ public class IncomeManager {
     public static void deleteIncome(int index) throws BudgetTrackerException {
         // Validate index is within bounds
         if (index < 0 || index >= incomeList.size()) {
-            throw new BudgetTrackerException("Invalid index: " + (index + 1) + ". Index must be between 1 and " + incomeList.size());
+            throw new BudgetTrackerException("Invalid index: " + (index + 1)
+                    + ". Index must be between 1 and " + incomeList.size());
         }
         
         // Check that the list is not empty

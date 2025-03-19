@@ -7,7 +7,8 @@ import summary.Summary;
 
 public class IncomeParser {
 
-    public static AddIncomeCommand parseAddIncomeCommand(String fullCommand, Summary summary) throws BudgetTrackerException {
+    public static AddIncomeCommand parseAddIncomeCommand(String fullCommand, Summary summary)
+            throws BudgetTrackerException {
         String[] parts = fullCommand.split(" / ");
         if (parts.length != 2) {
             throw new BudgetTrackerException("Invalid format for 'add income' command. " +
@@ -23,7 +24,8 @@ public class IncomeParser {
         }
     }
 
-    public static DeleteIncomeCommand parseDeleteIncomeCommand(String fullCommand, Summary summary) throws BudgetTrackerException {
+    public static DeleteIncomeCommand parseDeleteIncomeCommand(String fullCommand, Summary summary)
+            throws BudgetTrackerException {
         String[] parts = fullCommand.split(" ");
         if (parts.length != 3 || !parts[1].equalsIgnoreCase("income")) {
             throw new BudgetTrackerException("Invalid format for 'delete income' command. " +

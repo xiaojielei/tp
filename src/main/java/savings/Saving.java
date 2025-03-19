@@ -2,7 +2,6 @@ package savings;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import exceptions.BudgetTrackerException;
 import summary.Summary;
