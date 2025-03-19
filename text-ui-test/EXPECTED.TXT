@@ -2,7 +2,6 @@ Welcome to Common Cents!
 Use `help` to see available commands.
 ===== Budget Tracker Help =====
 
-
 --- Income Management ---
 add income <AMOUNT> / <SOURCE>                               Adds an income record.
 delete income <INDEX>                                        Deletes an income record by index.
@@ -18,20 +17,58 @@ add savings <AMOUNT>                                         Adds a savings reco
 delete savings <INDEX>                                       Deletes a savings record by index.
 view savings                                                 Lists all savings records.
 
+--- Summary Management ---
+view summary                                                 Lists all income, expense and saving records.
+
 --- Savings Goals ---
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
 savings goal view                                            Views all current savings goals.
-savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>         Updates an existing savings goal.
+savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>       Updates an existing savings goal.
 savings goal delete <INDEX>                                  Deletes a savings goal by index.
+exit savings                                                 exited savings function
 
 --- General Commands ---
 help                                                         Displays this help message.
 ===============================
+Added income: $1000.0 from salary
+Added income: $200.5 from part-time job
+List of income entries:
+1. $1000.0 from salary
+2. $200.5 from part-time job
+Total Income: $1200.5
+Added expense: $120.75 | Source: groceries
+Added expense: $50.0 | Source: transportation
+Added expense: $75.25 | Source: dinner
+No expenses recorded.
 ===== BUDGET SUMMARY =====
-Total Income:        $0.00
-Total Expenses:      $0.00
-Available Balance:   $0.00
+Total Income:        $1200.50
+Total Expenses:      $246.00
+Available Balance:   $954.50
 Total Savings:       $0.00
 ===========================
-Added expense: $53.0 | Source: transport to school
+Sure! I have added your savings:
+1. 	[ ] 150.0
+Now you have 1 saving(s) in your list.
+Sure! I have added your savings:
+2. 	[ ] 100.0
+Now you have 2 saving(s) in your list.
+Here are the savings in your list:
+1. 	[ ] 150.0
+2. 	[ ] 100.0
+You have 2 saving(s) in total.
+Error: Error deleting income: Cannot remove this income as it would result in a negative balance. Please reduce your expenses or savings first.
+===== BUDGET SUMMARY =====
+Total Income:        $1200.50
+Total Expenses:      $246.00
+Available Balance:   $954.50
+Total Savings:       $250.00
+===========================
+Invalid expense number! Please enter a valid number.
+No expenses recorded.
+===== BUDGET SUMMARY =====
+Total Income:        $1200.50
+Total Expenses:      $246.00
+Available Balance:   $954.50
+Total Savings:       $250.00
+===========================
 Exiting the application. Goodbye!

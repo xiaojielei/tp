@@ -5,10 +5,11 @@ import commands.DeleteExpenseCommand;
 import commands.ViewExpenseCommand;
 import commands.Command;
 import exceptions.BudgetTrackerException;
+import summary.Summary;
 
 public class ExpenseParser {
 
-    public static Command parse(String fullCommand) throws BudgetTrackerException {
+    public static Command parse(String fullCommand, Summary summary) throws BudgetTrackerException {
         String[] words = fullCommand.split(" ", 2);  // Split the command into words
         String commandWord = words[0].toLowerCase(); // First word is the command
         String argument = words.length > 1 ? words[1] : ""; // Remaining part is the argument
@@ -16,7 +17,7 @@ public class ExpenseParser {
         switch (commandWord) {
         case "add":
             if (argument.startsWith("expense ")) {
-                return parseAddExpense(argument.substring(8).trim()); // remove "expense" part
+                return parseAddExpense(argument.substring(8).trim(), summary); // remove "expense" part
             } else {
                 throw new BudgetTrackerException("Invalid format! Use: add expense <amount> / <source>");
             }
@@ -28,7 +29,7 @@ public class ExpenseParser {
             break;
 
         case "delete":
-            return parseDeleteExpense(argument);
+            return parseDeleteExpense(argument, summary);
 
         default:
             throw new BudgetTrackerException("Invalid command! Please enter a valid command.");
@@ -36,7 +37,7 @@ public class ExpenseParser {
         return null;
     }
 
-    private static Command parseAddExpense(String argument) throws BudgetTrackerException {
+    private static Command parseAddExpense(String argument, Summary summary) throws BudgetTrackerException {
         if (argument.isEmpty()) {
             throw new BudgetTrackerException("Invalid format! Use: add expense <amount> / <source>");
         }
@@ -49,16 +50,16 @@ public class ExpenseParser {
         try {
             double amount = Double.parseDouble(parts[0].trim());  // Parse the amount
             String description = parts[1].trim();  // Parse the description
-            return new AddExpenseCommand(amount, description);
+            return new AddExpenseCommand(amount, description, summary);
         } catch (NumberFormatException e) {
             throw new BudgetTrackerException("Invalid amount! Please enter a valid number.");
         }
     }
 
-    private static Command parseDeleteExpense(String argument) throws BudgetTrackerException {
+    private static Command parseDeleteExpense(String argument, Summary summary) throws BudgetTrackerException {
         try {
             int expenseNumber = Integer.parseInt(argument.trim());
-            return new DeleteExpenseCommand(expenseNumber);
+            return new DeleteExpenseCommand(expenseNumber, summary);
         } catch (NumberFormatException e) {
             throw new BudgetTrackerException("Invalid expense number! Please enter a valid number.");
         }
