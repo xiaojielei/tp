@@ -13,12 +13,12 @@ add expense <AMOUNT> / <SOURCE>                              Adds an expense rec
 delete expense <INDEX>                                       Deletes an expense record by index.
 view expense                                                 Lists all expense records.
 
---- Savings Management ---
+--- savings Management ---
 add savings <AMOUNT>                                         Adds a savings record.
 delete savings <INDEX>                                       Deletes a savings record by index.
 view savings                                                 Lists all savings records.
 
---- Savings Goals ---
+--- savings Goals ---
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
 savings goal view                                            Views all current savings goals.
 savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>         Updates an existing savings goal.
@@ -31,7 +31,7 @@ help                                                         Displays this help 
 Total Income:        $0.00
 Total Expenses:      $0.00
 Available Balance:   $0.00
-Total Savings:       $0.00
+Total savings:       $0.00
 ===========================
 Added expense: $53.0 | Source: transport to school
 Exiting the application. Goodbye!
