@@ -9,7 +9,9 @@ import summary.Summary;
 
 public class ExpenseParser {
 
-    public static Command parse(String fullCommand, Summary summary) throws BudgetTrackerException {
+    public static Command parse(String fullCommand,
+                                Summary summary,
+                                ExpenseList expenseList) throws BudgetTrackerException {
         String[] words = fullCommand.split(" ", 2);  // Split the command into words
         String commandWord = words[0].toLowerCase(); // First word is the command
         String argument = words.length > 1 ? words[1] : ""; // Remaining part is the argument
@@ -17,19 +19,22 @@ public class ExpenseParser {
         switch (commandWord) {
         case "add":
             if (argument.startsWith("expense ")) {
-                return parseAddExpense(argument.substring(8).trim(), summary); // remove "expense" part
+                return parseAddExpense(argument.substring(8).trim(), summary);
             } else {
                 throw new BudgetTrackerException("Invalid format! Use: add expense <amount> / <source>");
             }
 
         case "view":
             if (argument.equalsIgnoreCase("expense")) {
-                return new ViewExpenseCommand();
+                return new ViewExpenseCommand(expenseList);
             }
             break;
 
         case "delete":
-            return parseDeleteExpense(argument, summary);
+            if (argument.startsWith("expense ")) {
+                return parseDeleteExpense(argument.substring(8).trim(), summary);
+            }
+            break;
 
         default:
             throw new BudgetTrackerException("Invalid command! Please enter a valid command.");

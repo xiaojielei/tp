@@ -39,7 +39,10 @@ Total Income: $1200.5
 Added expense: $120.75 | Source: groceries
 Added expense: $50.0 | Source: transportation
 Added expense: $75.25 | Source: dinner
-No expenses recorded.
+Your Expenses:
+1. Amount: $120.75 | Source: groceries
+2. Amount: $50.0 | Source: transportation
+3. Amount: $75.25 | Source: dinner
 ===== BUDGET SUMMARY =====
 Total Income:        $1200.50
 Total Expenses:      $246.00
@@ -63,12 +66,14 @@ Total Expenses:      $246.00
 Available Balance:   $954.50
 Total Savings:       $250.00
 ===========================
-Invalid expense number! Please enter a valid number.
-No expenses recorded.
+Deleted expense number 2.
+Your Expenses:
+1. Amount: $120.75 | Source: groceries
+2. Amount: $75.25 | Source: dinner
 ===== BUDGET SUMMARY =====
 Total Income:        $1200.50
-Total Expenses:      $246.00
-Available Balance:   $954.50
+Total Expenses:      $196.00
+Available Balance:   $1004.50
 Total Savings:       $250.00
 ===========================
 Exiting the application. Goodbye!
