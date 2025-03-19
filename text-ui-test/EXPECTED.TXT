@@ -34,3 +34,4 @@ Available Balance:   $0.00
 Total Savings:       $0.00
 ===========================
 Added expense: $53.0 | Source: transport to school
+Exiting the application. Goodbye!

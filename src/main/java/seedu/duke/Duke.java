@@ -1,16 +1,13 @@
 package seedu.duke;
 
+import commands.*;
 import exceptions.BudgetTrackerException;
 import expenses.Ui;
 import income.IncomeParser;
-import commands.IncomeCommand;
-import commands.ListIncomeCommand;
-import commands.ViewExpenseCommand;
 import summary.Summary;
 import summary.ui.SummaryDisplay;
 import ui.HelpDisplay;
 import expenses.BudgetTracker;
-import commands.Command;
 import expenses.ExpenseParser;
 import expenses.ExpenseList;
 import java.util.Scanner;
@@ -34,7 +31,7 @@ public class Duke {
             try {
                 // Check if there's input available before reading
                 if (in.hasNextLine()) {
-                    String fullCommand = in.nextLine();  // Read the user input
+                    String fullCommand = in.nextLine();
                     Command command = null;
                     IncomeCommand incomeCommand = null;
 
@@ -68,6 +65,12 @@ public class Duke {
                         command = ExpenseParser.parse(fullCommand);
                     }
 
+                    if (fullCommand.startsWith("bye")) {
+                        Command exitCommand = new ExitCommand();
+                        exitCommand.execute(expenseList, ui);
+                        break;
+                    }
+
                     // Execute income commands
                     if (incomeCommand != null) {
                         tracker.executeincomeCommand(incomeCommand, ui);
@@ -92,16 +95,11 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
-        displayExitMessage();
     }
 
     public static void displayWelcomeMessage() {
         System.out.println("Welcome to Common Cents!");
         System.out.println("Use `help` to see available commands.");
-    }
-
-    public static void displayExitMessage() {
-        System.out.println("Thank you for using Common Cents. See you next time!");
     }
 }
 
