@@ -67,6 +67,7 @@ Available Balance:   $954.50
 Total Savings:       $250.00
 ===========================
 Deleted expense number 2.
+Your expenses:
 1. Amount: $120.75 | Source: groceries
 2. Amount: $75.25 | Source: dinner
 ===== BUDGET SUMMARY =====
