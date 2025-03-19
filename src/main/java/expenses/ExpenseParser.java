@@ -17,7 +17,7 @@ public class ExpenseParser {
         switch (commandWord) {
         case "add":
             if (argument.startsWith("expense ")) {
-                return parseAddExpense(argument.substring(8).trim(), summary, expenseList); // remove "expense" part
+                return parseAddExpense(argument.substring(8).trim(), summary);
             } else {
                 throw new BudgetTrackerException("Invalid format! Use: add expense <amount> / <source>");
             }
@@ -37,7 +37,7 @@ public class ExpenseParser {
         return null;
     }
 
-    private static Command parseAddExpense(String argument, Summary summary, ExpenseList expenseList) throws BudgetTrackerException {
+    private static Command parseAddExpense(String argument, Summary summary) throws BudgetTrackerException {
         if (argument.isEmpty()) {
             throw new BudgetTrackerException("Invalid format! Use: add expense <amount> / <source>");
         }
@@ -50,7 +50,7 @@ public class ExpenseParser {
         try {
             double amount = Double.parseDouble(parts[0].trim());  // Parse the amount
             String description = parts[1].trim();  // Parse the description
-            return new AddExpenseCommand(amount, description, summary);  // No need to pass expenseList here
+            return new AddExpenseCommand(amount, description, summary);
         } catch (NumberFormatException e) {
             throw new BudgetTrackerException("Invalid amount! Please enter a valid number.");
         }

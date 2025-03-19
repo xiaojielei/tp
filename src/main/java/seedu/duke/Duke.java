@@ -90,10 +90,10 @@ public class Duke {
 
                 // Handle expense-related commands
                 if (fullCommand.startsWith("add expense")) {
-                    command = ExpenseParser.parse(fullCommand, summary, expenseList);  // Pass expenseList as an argument
+                    command = ExpenseParser.parse(fullCommand, summary, expenseList);
                     commandRecognized = true;
                 } else if (fullCommand.startsWith("delete expense")) {
-                    command = ExpenseParser.parse(fullCommand, summary, expenseList);  // Pass expenseList as an argument
+                    command = ExpenseParser.parse(fullCommand, summary, expenseList);
                     commandRecognized = true;
                 }
 
