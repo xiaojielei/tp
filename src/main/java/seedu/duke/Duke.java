@@ -1,6 +1,10 @@
 package seedu.duke;
 
-import commands.*;
+import commands.Command;
+import commands.IncomeCommand;
+import commands.ListIncomeCommand;
+import commands.ExitCommand;
+import commands.ViewExpenseCommand;
 import exceptions.BudgetTrackerException;
 import expenses.Ui;
 import income.IncomeParser;
