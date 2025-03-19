@@ -98,6 +98,9 @@ public class Duke {
                         saving.run(fullCommand);
                     }
 
+                    if (fullCommand.contains("summary")) {
+                        System.out.println(summaryDisplay.displaySummary());
+                    }
                 } else {
                     // If no input is available, break out of the loop
                     System.out.println("No input available. Exiting program.");
