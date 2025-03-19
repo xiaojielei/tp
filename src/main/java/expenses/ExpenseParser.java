@@ -9,7 +9,9 @@ import summary.Summary;
 
 public class ExpenseParser {
 
-    public static Command parse(String fullCommand, Summary summary, ExpenseList expenseList) throws BudgetTrackerException {
+    public static Command parse(String fullCommand,
+                                Summary summary,
+                                ExpenseList expenseList) throws BudgetTrackerException {
         String[] words = fullCommand.split(" ", 2);  // Split the command into words
         String commandWord = words[0].toLowerCase(); // First word is the command
         String argument = words.length > 1 ? words[1] : ""; // Remaining part is the argument
