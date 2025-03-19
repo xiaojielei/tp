@@ -43,7 +43,16 @@ public class Saving {
     }
 
     private final List<SavingsRecord> savingsRecords = new ArrayList<>();
-    Summary summary = new Summary();
+    private Summary summary;
+
+    /**
+     * Constructor that accepts a Summary instance.
+     * @param summary the shared Summary instance
+     */
+    public Saving(Summary summary) {
+        this.summary = summary;
+    }
+
     /**
      * Adds a savings record with the specified amount.
      * @param amount The amount to save.
@@ -53,7 +62,7 @@ public class Saving {
         System.out.println("Sure! I have added your savings:");
         System.out.println((savingsRecords.size()) + ". \t" + savingsRecords.get(savingsRecords.size() - 1));
         System.out.println("Now you have " + savingsRecords.size() + " saving(s) in your list.");
-//        summary.addSavings(amount);
+        summary.addSavings(amount);
     }
 
     /**
@@ -66,11 +75,11 @@ public class Saving {
             System.out.println((index + 1) + ". \t" + savingsRecords.get(index));
             savingsRecords.remove(index);
             System.out.println("Now you have " + savingsRecords.size() + " savings in your list.");
-//            try {
-//                summary.removeSavings(savingsRecords.get(index).amount);
-//            } catch (BudgetTrackerException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                summary.removeSavings(savingsRecords.get(index).amount);
+            } catch (BudgetTrackerException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             System.out.println("Invalid index.");
         }

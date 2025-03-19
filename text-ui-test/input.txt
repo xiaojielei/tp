@@ -1,3 +1,18 @@
 help
-add expense 53 / transport to school
+add income 1000 / salary
+add income 200.50 / part-time job
+view income
+add expense 120.75 / groceries
+add expense 50 / transportation
+add expense 75.25 / dinner
+view expense
+view summary
+add savings 150
+add savings 100
+view savings
+delete income 1
+view summary
+delete expense 2
+view expense
+view summary
 bye

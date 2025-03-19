@@ -47,7 +47,7 @@ public class DeleteIncomeCommandTest {
         Exception exception = assertThrows(BudgetTrackerException.class, () ->
                 new DeleteIncomeCommand(5, summary).incomeExecute(IncomeManager.getInstance(), ui)
         );
-        assertEquals("Invalid index. Please provide a valid income index.", exception.getMessage());
+        assertEquals("Invalid index. Please provide a valid income index between 1 and 2.", exception.getMessage());
     }
 }
 

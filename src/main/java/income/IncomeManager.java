@@ -2,6 +2,7 @@ package income;
 
 import java.util.ArrayList;
 import java.util.List;
+import exceptions.BudgetTrackerException;
 
 /**
  * Manages the list of income entries. Provides methods to add, delete,
@@ -29,8 +30,19 @@ public class IncomeManager {
      * Deletes an income entry at the specified index.
      *
      * @param index the index of the income entry to delete
+     * @throws BudgetTrackerException if the index is out of bounds
      */
-    public static void deleteIncome(int index) {
+    public static void deleteIncome(int index) throws BudgetTrackerException {
+        // Validate index is within bounds
+        if (index < 0 || index >= incomeList.size()) {
+            throw new BudgetTrackerException("Invalid index: " + (index + 1) + ". Index must be between 1 and " + incomeList.size());
+        }
+        
+        // Check that the list is not empty
+        if (incomeList.isEmpty()) {
+            throw new BudgetTrackerException("Cannot delete from an empty income list.");
+        }
+        
         incomeList.remove(index);
     }
 

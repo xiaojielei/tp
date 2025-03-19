@@ -28,9 +28,12 @@ public class SummaryDisplay {
         sb.append(SUMMARY_HEADER).append("\n");
         sb.append(String.format("%-20s $%.2f%n", INCOME_LABEL, summary.getTotalIncome()));
         sb.append(String.format("%-20s $%.2f%n", EXPENSES_LABEL, summary.getTotalExpense()));
-        sb.append(String.format("%-20s $%.2f%n", BALANCE_LABEL, summary.getTotalBalance()));
+        sb.append(String.format("%-20s $%.2f%n", BALANCE_LABEL, summary.getAvailableFunds()));
         sb.append(String.format("%-20s $%.2f%n", SAVINGS_LABEL, summary.getTotalSavings()));
         sb.append(SUMMARY_FOOTER);
-        return sb.toString(); // Return the formatted string
+        
+        String summaryText = sb.toString();
+        System.out.println(summaryText); // Print the summary to the console
+        return summaryText; // Return the formatted string
     }
 }
