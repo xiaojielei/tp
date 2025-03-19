@@ -42,7 +42,7 @@ public class Duke {
                     System.out.println("No input available. Exiting program.");
                     break;
                 }
-                
+
                 String fullCommand = in.nextLine();
                 Command command = null;
                 IncomeCommand incomeCommand = null;
@@ -69,7 +69,7 @@ public class Duke {
                     commandRecognized = true;
                     continue;
                 } else if (fullCommand.equals("view expense")) {
-                    ViewExpenseCommand viewExpenseCommand = new ViewExpenseCommand();
+                    ViewExpenseCommand viewExpenseCommand = new ViewExpenseCommand(expenseList);
                     viewExpenseCommand.execute(expenseList, ui);
                     commandRecognized = true;
                     continue;
@@ -90,10 +90,10 @@ public class Duke {
 
                 // Handle expense-related commands
                 if (fullCommand.startsWith("add expense")) {
-                    command = ExpenseParser.parse(fullCommand, summary);
+                    command = ExpenseParser.parse(fullCommand, summary, expenseList);  // Pass expenseList as an argument
                     commandRecognized = true;
                 } else if (fullCommand.startsWith("delete expense")) {
-                    command = ExpenseParser.parse(fullCommand, summary);
+                    command = ExpenseParser.parse(fullCommand, summary, expenseList);  // Pass expenseList as an argument
                     commandRecognized = true;
                 }
 
@@ -113,17 +113,18 @@ public class Duke {
 
                 // Execute expense commands if any
                 if (command != null) {
-                    tracker.executeCommand(command, ui);
+                    command.execute(expenseList, ui);  // Pass the correct expenseList here
                     if (command.isExit()) {
                         break;
                     }
                 }
-                
+
+
                 // Handle unrecognized commands
                 if (!commandRecognized && !fullCommand.trim().isEmpty()) {
                     System.out.println("Oops! I don't recognize that command. Type 'help' to see available commands.");
                 }
-                
+
             } catch (BudgetTrackerException e) {
                 System.out.println(e.getMessage());
             }
