@@ -14,6 +14,7 @@ import ui.HelpDisplay;
 import expenses.BudgetTracker;
 import expenses.ExpenseParser;
 import expenses.ExpenseList;
+import savings.Saving;
 import java.util.Scanner;
 
 public class Duke {
@@ -30,6 +31,7 @@ public class Duke {
         Ui ui = new Ui();
         BudgetTracker tracker = new BudgetTracker();
         ExpenseList expenseList = new ExpenseList();
+        Saving saving = new Saving();
 
         while (true) {
             try {
@@ -90,6 +92,12 @@ public class Duke {
                     if (command != null && command.isExit()) {
                         break;
                     }
+
+                    //execute savings commands
+                    if (fullCommand.contains("savings")) {
+                        saving.run(fullCommand);
+                    }
+
                 } else {
                     // If no input is available, break out of the loop
                     System.out.println("No input available. Exiting program.");
@@ -106,5 +114,4 @@ public class Duke {
         System.out.println("Use `help` to see available commands.");
     }
 }
-
 
