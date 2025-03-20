@@ -9,7 +9,6 @@ import expenses.ExpenseList;
 import expenses.Ui;
 import summary.Summary;
 
-import javax.swing.text.View;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -32,8 +31,6 @@ public class DeleteExpenseCommandTest {
         AddIncomeCommand command = new AddIncomeCommand(100.0, "Salary", summary);
         command.incomeExecute(IncomeManager.getInstance(), ui);
 
-        double amount = 50.0;
-        String description = "Lunch";
         AddExpenseCommand expense1 = new AddExpenseCommand(50.0, "Lunch", summary);
         AddExpenseCommand expense2 = new AddExpenseCommand(50.0, "Dinner", summary);
         expense1.execute(expenseList, ui);
