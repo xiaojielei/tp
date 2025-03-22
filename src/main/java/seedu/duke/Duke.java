@@ -16,6 +16,7 @@ import expenses.ExpenseParser;
 import expenses.ExpenseList;
 import savings.Saving;
 import alerts.FundsAlert;
+import alerts.AlertParser;
 import java.util.Scanner;
 
 public class Duke {
@@ -88,25 +89,14 @@ public class Duke {
                 }
                 
                 // Handle alert commands
-                if (fullCommand.startsWith("alert set")) {
+                if (fullCommand.startsWith("alert")) {
                     try {
-                        String thresholdStr = fullCommand.substring(9).trim();
-                        double threshold = Double.parseDouble(thresholdStr);
-                        
-                        if (threshold < 0) {
-                            ui.showMessage("Alert threshold cannot be negative.");
-                        } else {
-                            fundsAlert.setWarningThreshold(threshold);
-                            ui.showMessage("Funds alert threshold set to $" + String.format("%.2f", threshold));
-                        }
+                        Command alertCommand = AlertParser.parse(fullCommand, fundsAlert);
+                        alertCommand.execute(expenseList, ui);
                         commandRecognized = true;
                         continue;
-                    } catch (IndexOutOfBoundsException e) {
-                        ui.showMessage("Please provide a threshold amount. Example: alert set 50");
-                        commandRecognized = true;
-                        continue;
-                    } catch (NumberFormatException e) {
-                        ui.showMessage("Please provide a valid number for the threshold.");
+                    } catch (BudgetTrackerException e) {
+                        ui.showMessage(e.getMessage());
                         commandRecognized = true;
                         continue;
                     }

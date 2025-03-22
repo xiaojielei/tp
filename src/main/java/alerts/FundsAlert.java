@@ -1,6 +1,7 @@
 package alerts;
 
 import expenses.Ui;
+import exceptions.BudgetTrackerException;
 
 /**
  * Alerts when funds fall below a warning threshold.
@@ -25,10 +26,11 @@ public class FundsAlert implements FinancialObserver {
      * 
      * @param warningThreshold Threshold for warning alerts
      * @param ui UI handler for displaying alerts
+     * @throws BudgetTrackerException if the threshold is negative
      */
-    public FundsAlert(double warningThreshold, Ui ui) {
+    public FundsAlert(double warningThreshold, Ui ui) throws BudgetTrackerException {
         if (warningThreshold < 0) {
-            throw new IllegalArgumentException("Warning threshold cannot be negative");
+            throw new BudgetTrackerException("Warning threshold cannot be negative");
         }
         this.warningThreshold = warningThreshold;
         this.ui = ui;
@@ -39,11 +41,11 @@ public class FundsAlert implements FinancialObserver {
      * 
      * @param newThreshold The new warning threshold
      * @return true if the threshold was changed successfully
-     * @throws IllegalArgumentException if the threshold is negative
+     * @throws BudgetTrackerException if the threshold is negative
      */
-    public boolean setWarningThreshold(double newThreshold) {
+    public boolean setWarningThreshold(double newThreshold) throws BudgetTrackerException {
         if (newThreshold < 0) {
-            throw new IllegalArgumentException("Warning threshold cannot be negative");
+            throw new BudgetTrackerException("Warning threshold cannot be negative");
         }
         this.warningThreshold = newThreshold;
         return true;
