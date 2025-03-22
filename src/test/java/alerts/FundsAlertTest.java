@@ -28,8 +28,8 @@ public class FundsAlertTest {
     
     @Test
     public void getWarningThreshold_newFundsAlert_expectDefaultValue() {
-        assertEquals(10.0, fundsAlert.getWarningThreshold(), 
-                "Default warning threshold should be $10");
+        assertEquals(5.0, fundsAlert.getWarningThreshold(), 
+                "Default warning threshold should be $5");
     }
     
     @Test
@@ -55,7 +55,7 @@ public class FundsAlertTest {
         assertTrue(actualMessage.contains(expectedMessage),
                 "Exception message should indicate that threshold cannot be negative");
         
-        assertEquals(10.0, fundsAlert.getWarningThreshold(),
+        assertEquals(5.0, fundsAlert.getWarningThreshold(),
                 "Warning threshold should remain at default after rejected update");
     }
     
@@ -63,7 +63,7 @@ public class FundsAlertTest {
     public void update_fundsBelowThreshold_expectAlertTriggered() {
         outputStream.reset();
         
-        fundsAlert.update(5.0, 100.0, 95.0, 10.0);
+        fundsAlert.update(3.0, 100.0, 97.0, 0.0);
         
         String output = outputStream.toString();
         assertTrue(output.contains("WARNING") && output.contains("below warning threshold"),
@@ -74,7 +74,7 @@ public class FundsAlertTest {
     public void update_fundsAboveThreshold_expectNoAlert() {
         outputStream.reset();
         
-        fundsAlert.update(20.0, 100.0, 80.0, 10.0);
+        fundsAlert.update(10.0, 100.0, 90.0, 0.0);
         
         String output = outputStream.toString();
         assertFalse(output.contains("WARNING") && output.contains("below warning threshold"),
@@ -90,7 +90,7 @@ public class FundsAlertTest {
         String output = outputStream.toString();
         assertTrue(output.contains("Funds Alert feature is active"),
                 "Initial notification should indicate the feature is active");
-        assertTrue(output.contains("below $10.00"),
+        assertTrue(output.contains("below $5.00"),
                 "Initial notification should show the default threshold");
         assertTrue(output.contains("alert set"),
                 "Initial notification should mention how to change the threshold");
