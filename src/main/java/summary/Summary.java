@@ -3,7 +3,7 @@ package summary;
 import exceptions.BudgetTrackerException;
 
 /**
- * Represents a financial summary, storing total income, expenses, balance, and savings.
+ * Represents a financial summary, storing total income, expenses, and savings.
  * Provides methods for adding and removing income, expenses, and savings.
  */
 public class Summary {
@@ -56,16 +56,6 @@ public class Summary {
     }
 
     /**
-     * Gets the total balance (calculated as income - expenses - savings).
-     * This represents the amount left after setting aside savings.
-     *
-     * @return The total balance.
-     */
-    public double getTotalBalance() {
-        return getAvailableFunds() - totalSavings;
-    }
-
-    /**
      * Gets the total savings.
      *
      * @return The total savings.
@@ -108,15 +98,6 @@ public class Summary {
             throw new BudgetTrackerException("Cannot remove more income than the current total income.");
         }
         
-        // Check if removing income would result in a negative balance
-        double potentialNewTotalIncome = this.totalIncome - income;
-        double potentialNewBalance = potentialNewTotalIncome - this.totalExpense - this.totalSavings;
-        
-        if (potentialNewBalance < 0) {
-            throw new BudgetTrackerException("Cannot remove this income as it would result in a negative balance. "
-                    + "Please reduce your expenses or savings first.");
-        }
-        
         double oldIncome = this.totalIncome;
         this.totalIncome -= income;
         
@@ -137,7 +118,7 @@ public class Summary {
         }
         
         // Check if adding this expense would result in a negative balance
-        double availableBalance = getTotalBalance();
+        double availableBalance = getAvailableFunds();
         if (expense > availableBalance) {
             throw new BudgetTrackerException("Cannot add this expense as it would exceed your available funds. "
                     + "Available balance: " + availableBalance);
@@ -181,8 +162,7 @@ public class Summary {
         if (savings < 0) {
             throw new BudgetTrackerException("Savings cannot be negative.");
         }
-        
-        // Get available funds
+
         double availableFunds = getAvailableFunds();
         
         if (savings > availableFunds) {

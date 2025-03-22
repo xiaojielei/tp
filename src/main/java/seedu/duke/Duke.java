@@ -50,7 +50,7 @@ public class Duke {
 
                 // Handle help command
                 if (fullCommand.equals("help")) {
-                    helpDisplay.displayHelp();
+                    helpDisplay.display();
                     commandRecognized = true;
                     continue;
                 }

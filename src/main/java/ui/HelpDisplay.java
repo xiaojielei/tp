@@ -23,7 +23,9 @@ public class HelpDisplay {
      * Constructs a HelpDisplay object and builds the help text.
      */
     public HelpDisplay() {
+        assert helpText != null : "Help text StringBuilder should be initialized";
         buildHelpText();
+        assert helpText.length() > 0 : "Help text should not be empty after building";
     }
 
     /**
@@ -70,6 +72,10 @@ public class HelpDisplay {
      * @param heading The heading text.
      */
     private void addCategory(String heading) {
+        if (heading == null || heading.trim().isEmpty()) {
+            throw new IllegalArgumentException("Category heading cannot be null or empty");
+            
+        }
         helpText.append("\n").append(heading).append("\n");
     }
 
@@ -80,6 +86,13 @@ public class HelpDisplay {
      * @param description A brief description of the command.
      */
     private void addCommandHelp(String command, String description) {
+        if (command == null || command.trim().isEmpty()) {
+            throw new IllegalArgumentException("Command cannot be null or empty");
+        }
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Description cannot be null or empty");
+        }
+
         helpText.append(String.format("%-60s %s\n", command, description));
     }
 
@@ -95,7 +108,7 @@ public class HelpDisplay {
     /**
      * Displays the help text to the console.
      */
-    public void displayHelp() {
+    public void display() {
         System.out.println(helpText);
     }
 }
