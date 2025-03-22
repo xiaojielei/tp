@@ -15,6 +15,7 @@ import expenses.BudgetTracker;
 import expenses.ExpenseParser;
 import expenses.ExpenseList;
 import savings.Saving;
+import alerts.FundsAlert;
 import java.util.Scanner;
 
 public class Duke {
@@ -33,6 +34,13 @@ public class Duke {
         BudgetTracker tracker = new BudgetTracker();
         ExpenseList expenseList = new ExpenseList();
         Saving saving = new Saving(summary);
+        
+        // Initialize funds alert with default threshold of $10
+        FundsAlert fundsAlert = new FundsAlert(ui);
+        summary.registerObserver(fundsAlert);
+        
+        // Display the initial notification about funds alert feature
+        fundsAlert.displayInitialNotification();
 
         // Main program loop
         while (true) {
@@ -77,6 +85,31 @@ public class Duke {
                     summaryDisplay.displaySummary();
                     commandRecognized = true;
                     continue;
+                }
+                
+                // Handle alert commands
+                if (fullCommand.startsWith("alert set")) {
+                    try {
+                        String thresholdStr = fullCommand.substring(9).trim();
+                        double threshold = Double.parseDouble(thresholdStr);
+                        
+                        if (threshold < 0) {
+                            ui.showMessage("Alert threshold cannot be negative.");
+                        } else {
+                            fundsAlert.setWarningThreshold(threshold);
+                            ui.showMessage("Funds alert threshold set to $" + String.format("%.2f", threshold));
+                        }
+                        commandRecognized = true;
+                        continue;
+                    } catch (IndexOutOfBoundsException e) {
+                        ui.showMessage("Please provide a threshold amount. Example: alert set 50");
+                        commandRecognized = true;
+                        continue;
+                    } catch (NumberFormatException e) {
+                        ui.showMessage("Please provide a valid number for the threshold.");
+                        commandRecognized = true;
+                        continue;
+                    }
                 }
 
                 // Handle income-related commands

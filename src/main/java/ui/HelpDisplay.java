@@ -15,6 +15,7 @@ public class HelpDisplay {
     private static final String SUMMARY_HEADING = "--- Summary Management ---";
     private static final String GOALS_HEADING = "--- Savings Goals ---";
     private static final String GENERAL_HEADING = "--- General Commands ---";
+    private static final String ALERTS_HEADING = "--- Funds Alerts ---";
 
 
     private final StringBuilder helpText = new StringBuilder();
@@ -59,6 +60,9 @@ public class HelpDisplay {
                 , "Updates an existing savings goal.");
         addCommandHelp("savings goal delete <INDEX>", "Deletes a savings goal by index.");
         addCommandHelp("exit savings", "exited savings function");
+        
+        addCategory(ALERTS_HEADING);
+        addCommandHelp("alert set <AMOUNT>", "Sets the warning threshold for low available funds.");
 
         addCategory(GENERAL_HEADING);
         addCommandHelp("help", "Displays this help message.");
