@@ -35,12 +35,9 @@ public class Duke {
         BudgetTracker tracker = new BudgetTracker();
         ExpenseList expenseList = new ExpenseList();
         Saving saving = new Saving(summary);
-        
-        // Initialize funds alert with default threshold of $10
         FundsAlert fundsAlert = new FundsAlert(ui);
         summary.registerObserver(fundsAlert);
-        
-        // Display the initial notification about funds alert feature
+
         fundsAlert.displayInitialNotification();
 
         // Main program loop

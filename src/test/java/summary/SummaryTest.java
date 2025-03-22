@@ -55,10 +55,9 @@ class SummaryTest {
     }
 
     @Test
-    void addIncome_zeroAmount_expectNoChange() throws BudgetTrackerException{ 
+    void addIncome_zeroAmount_expectException() throws BudgetTrackerException{
         Summary summary = new Summary();
-        summary.addIncome(0);
-        assertEquals(0, summary.getTotalIncome(), 0.001);
+        assertThrows(BudgetTrackerException.class, () -> summary.addIncome(0));
 
     }
     @Test
@@ -88,8 +87,7 @@ class SummaryTest {
     @Test
     void addExpense_zeroAmount_expectNoChange() throws BudgetTrackerException { 
         Summary summary = new Summary();
-        summary.addExpense(0);
-        assertEquals(0, summary.getTotalExpense(), 0.001);
+        assertThrows(BudgetTrackerException.class, () -> summary.addExpense(0));
     }
 
     @Test
