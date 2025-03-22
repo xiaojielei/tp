@@ -119,7 +119,6 @@ public class Duke {
                     }
                 }
 
-
                 // Handle unrecognized commands
                 if (!commandRecognized && !fullCommand.trim().isEmpty()) {
                     System.out.println("Oops! I don't recognize that command. Type 'help' to see available commands.");
