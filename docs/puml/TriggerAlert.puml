@@ -1,0 +1,119 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+participant ":Duke" as Duke #LightBlue
+participant ":IncomeParser" as IncomeParser #LightGreen
+participant ":AddIncomeCommand" as AddIncomeCommand #LightCoral
+participant ":ExpenseParser" as ExpenseParser #PaleGreen
+participant ":AddExpenseCommand" as AddExpenseCommand #Coral
+participant ":ExpenseList" as ExpenseList #LightGoldenRodYellow
+participant ":Summary" as Summary #LightSalmon
+participant ":FundsAlert" as FundsAlert #LightCyan
+participant ":Ui" as Ui #Pink
+
+note right of Duke
+  Initially:
+  - totalIncome = $0
+  - totalExpense = $0
+  - availableFunds = $0
+  - alert threshold = $5.0 (default)
+end note
+
+' Step 1: Add income
+User -> Duke: "add income 43 / salary"
+activate Duke
+
+Duke -> IncomeParser: parseAddIncomeCommand("add income 43 / salary", summary)
+activate IncomeParser
+IncomeParser -> AddIncomeCommand: <<create>>(43.0, "salary", summary)
+AddIncomeCommand --> IncomeParser: command
+IncomeParser --> Duke: command
+deactivate IncomeParser
+
+Duke -> AddIncomeCommand: incomeExecute(incomeManager, ui)
+activate AddIncomeCommand
+AddIncomeCommand -> Summary: addIncome(43.0)
+activate Summary
+Summary -> Summary: validate and update totalIncome
+
+note right of Summary
+  Financial state after income:
+  - totalIncome = $43.00
+  - totalExpense = $0
+  - availableFunds = $43.00
+end note
+
+Summary --> AddIncomeCommand
+deactivate Summary
+
+AddIncomeCommand -> Ui: showMessage("Added income: $43.00 from salary")
+activate Ui
+Ui --> User: display confirmation message
+Ui --> AddIncomeCommand
+deactivate Ui
+
+AddIncomeCommand --> Duke
+deactivate AddIncomeCommand
+Duke --> User: command completed
+deactivate Duke
+
+' Step 2: Add expense that triggers alert
+User -> Duke: "add expense 40 / groceries"
+activate Duke
+
+Duke -> ExpenseParser: parse("add expense 40 / groceries", summary, expenseList)
+activate ExpenseParser
+ExpenseParser -> AddExpenseCommand: <<create>>(40.0, "groceries", summary, expenseList)
+AddExpenseCommand --> ExpenseParser: command
+ExpenseParser --> Duke: command
+deactivate ExpenseParser
+
+Duke -> AddExpenseCommand: execute(expenseList, ui)
+activate AddExpenseCommand
+
+AddExpenseCommand -> ExpenseList: addExpense(expense)
+activate ExpenseList
+ExpenseList --> AddExpenseCommand
+deactivate ExpenseList
+
+AddExpenseCommand -> Summary: addExpense(40.0)
+activate Summary
+Summary -> Summary: validate and update totalExpense
+
+note right of Summary
+  Financial state after expense:
+  - totalIncome = $43.00
+  - totalExpense = $40.00
+  - availableFunds = $3.00
+  - Alert triggered: funds below threshold of $5.00
+end note
+
+Summary -> FundsAlert: update(availableFunds, totalIncome, totalExpense, totalSavings)
+activate FundsAlert
+
+FundsAlert -> FundsAlert: checkAndDisplayAlert(availableFunds)
+FundsAlert -> Ui: showAlert("WARNING: Available funds ($3.00) are below warning threshold ($5.00)")
+activate Ui
+Ui --> User: display alert message
+Ui --> FundsAlert
+deactivate Ui
+
+FundsAlert --> Summary
+deactivate FundsAlert
+
+Summary --> AddExpenseCommand
+deactivate Summary
+
+AddExpenseCommand -> Ui: showMessage("Added expense: $40.00 for groceries")
+activate Ui
+Ui --> User: display confirmation message
+Ui --> AddExpenseCommand
+deactivate Ui
+
+AddExpenseCommand --> Duke
+deactivate AddExpenseCommand
+
+Duke --> User: command completed
+deactivate Duke
+@enduml

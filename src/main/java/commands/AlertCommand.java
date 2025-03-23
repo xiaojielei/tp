@@ -37,7 +37,7 @@ public class AlertCommand extends Command {
             ui.showMessage("Funds alert threshold set to $" + String.format("%.2f", threshold));
         } catch (BudgetTrackerException e) {
             ui.showMessage(e.getMessage());
-            throw e; // Re-throw to inform the caller
+            throw e;
         }
     }
 
