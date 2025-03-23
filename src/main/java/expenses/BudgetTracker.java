@@ -16,7 +16,6 @@ public class BudgetTracker {
         try {
             command.execute(expenseList, ui);
         } catch (BudgetTrackerException e) {
-            // Handle the exception, for example, by printing the message
             System.out.println("Error: " + e.getMessage());
         }
     }

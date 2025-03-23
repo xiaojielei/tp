@@ -26,7 +26,7 @@ public class AddExpenseCommandTest {
     }
 
     @Test
-    public void testAddExpense() throws BudgetTrackerException {
+    public void addExpense_withValidFormat_expectAdditionIntoList() throws BudgetTrackerException {
         AddIncomeCommand command = new AddIncomeCommand(100.0, "Salary", summary);
         command.incomeExecute(IncomeManager.getInstance(), ui);
         double amount = 50.0;

@@ -27,7 +27,7 @@ public class DeleteExpenseCommandTest {
     }
 
     @Test
-    public void testDeleteExpense() throws BudgetTrackerException {
+    public void deleteExpense_withExpenseListNumber_expectDeletion() throws BudgetTrackerException {
         AddIncomeCommand command = new AddIncomeCommand(100.0, "Salary", summary);
         command.incomeExecute(IncomeManager.getInstance(), ui);
 
