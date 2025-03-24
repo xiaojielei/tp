@@ -25,7 +25,7 @@ public class DeleteExpenseCommandTest {
     }
 
     @Test
-    public void testDeleteExpense() throws BudgetTrackerException {
+    public void deleteExpense_expectOneLessItemInList() throws BudgetTrackerException {
         AddIncomeCommand addIncome = new AddIncomeCommand(300.0, "salary", summary);
         addIncome.incomeExecute(IncomeManager.getInstance(), ui);
 

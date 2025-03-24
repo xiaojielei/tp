@@ -25,7 +25,7 @@ public class ViewExpenseCommandTest {
     }
 
     @Test
-    public void testViewExpense() throws BudgetTrackerException {
+    public void viewExpense_expectNumberedExpenseList() throws BudgetTrackerException {
         AddIncomeCommand addIncome = new AddIncomeCommand(300.0, "salary", summary);
         addIncome.incomeExecute(IncomeManager.getInstance(), ui);
 
