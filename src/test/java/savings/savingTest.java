@@ -25,20 +25,19 @@ class SavingTest {
     }
 
     @Test
-    void testAddSavings() throws BudgetTrackerException {
+    void addSavings_positiveAmount_expectSavingsAdded() throws BudgetTrackerException {
         saving.addSavings(100.0);
         assertTrue(outputStreamCaptor.toString().contains("Sure! I have added your savings:"));
     }
 
     @Test
-    void testDeleteSavings() throws BudgetTrackerException {
-        saving.addSavings(100.0);
+    void deleteSavings_invalidIndex_expectException() throws BudgetTrackerException {
         saving.deleteSavings(1);
         assertTrue(outputStreamCaptor.toString().contains("Sure! I have deleted the saving:"));
     }
 
     @Test
-    void testViewSavings() throws BudgetTrackerException {
+    void viewSavings_validSavingsRecords_expectCorrectOutput() throws BudgetTrackerException {
         saving.addSavings(100.0);
         outputStreamCaptor.reset();
         saving.viewSavings();
@@ -46,21 +45,21 @@ class SavingTest {
     }
 
     @Test
-    void testSetSavingsGoal() throws BudgetTrackerException {
+    void setSavingsGoal_validStringandAmount_expectGoalAdded() throws BudgetTrackerException {
         saving.addSavings(100.0);
         saving.setSavingsGoal(100.0, "Vacation");
         assertTrue(outputStreamCaptor.toString().contains("I have set your saving goal:"));
     }
 
     @Test
-    void testUpdateSavingsGoal() throws BudgetTrackerException {
+    void updateSavingsGoal_validAmountAndGoalDescription_expectAmountAndGoalGotUpdated() throws BudgetTrackerException {
         saving.addSavings(100.0);
         saving.updateSavingsGoal(0, 150.0, "New Goal");
         assertTrue(outputStreamCaptor.toString().contains("I have updated your saving amount and saving goal:"));
     }
 
     @Test
-    void testDeleteSavingsGoal() throws BudgetTrackerException {
+    void deleteSavingsGoal_validIndex_expectSavingRecordDeleted() throws BudgetTrackerException {
         saving.addSavings(100.0);
         saving.setSavingsGoal(100.0, "Vacation");
         saving.deleteSavingsGoal(0);
@@ -68,7 +67,7 @@ class SavingTest {
     }
 
     @Test
-    void testTransferSavings() throws BudgetTrackerException {
+    void transferSavings_validIndexesAndAmount_expectAmountTransferred() throws BudgetTrackerException {
         saving.addSavings(200.0);
         saving.addSavings(100.0);
 
