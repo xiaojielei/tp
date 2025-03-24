@@ -6,6 +6,9 @@ import java.util.List;
 import exceptions.BudgetTrackerException;
 import summary.Summary;
 
+//substring functions (substring(17)/substring(20), etc.) are used to trim the input
+//to only keep the amount/index/goal description part
+
 /**
  * The Saving class manages savings records, allowing users to add, delete,
  * view, and set goals for their savings.
