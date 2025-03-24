@@ -83,8 +83,8 @@ WARNING: Available funds ($4.50) are below warning threshold ($5.00)
 
 Deleted expense number 2.
 Your Expenses:
-1. Amount: $120.75 | Source: groceries
-2. Amount: $75.25 | Source: dinner
+1. [FOOD] $120.75 from groceries
+2. [FOOD] $75.25 from dinner
 ===== BUDGET SUMMARY =====
 Total Income:        $200.50
 Total Expenses:      $196.00
