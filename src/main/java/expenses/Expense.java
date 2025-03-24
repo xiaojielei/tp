@@ -1,5 +1,8 @@
 package expenses;
 
+/**
+ * Represents an expense with an amount and a description.
+ */
 import exceptions.BudgetTrackerException;
 
 public class Expense {
@@ -18,10 +21,20 @@ public class Expense {
         this.category = category;
     }
 
+    /**
+     * Retrieves the amount of the expense.
+     *
+     * @return The expense amount.
+     */
     public double getAmount() {
         return amount;
     }
 
+    /**
+     * Retrieves the description of the expense.
+     *
+     * @return The expense description.
+     */
     public String getDescription() {
         return description;
     }
@@ -30,6 +43,11 @@ public class Expense {
         return category;
     }
 
+    /**
+     * Returns a string representation of the expense.
+     *
+     * @return A formatted string containing the expense amount, source and description.
+     */
     @Override
     public String toString() {
         return "[" + category + "] " + amount + " from " + description;
