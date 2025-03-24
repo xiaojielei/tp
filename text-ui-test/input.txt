@@ -2,9 +2,9 @@ help
 add income 1000 / salary
 add income 200.50 / part-time job
 view income
-add expense 120.75 / groceries
-add expense 50 / transportation
-add expense 75.25 / dinner
+add expense 120.75 / groceries / F
+add expense 50 / transportation / T
+add expense 75.25 / dinner / F
 view expense
 view summary
 add savings 150

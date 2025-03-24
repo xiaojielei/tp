@@ -41,7 +41,7 @@ public class HelpDisplay {
         addCommandHelp("view income", "Lists all income records.");
 
         addCategory(EXPENSE_HEADING);
-        addCommandHelp("add expense <AMOUNT> / <SOURCE>", "Adds an expense record.");
+        addCommandHelp("add expense <AMOUNT> / <SOURCE> / <CATEGORY>", "Adds an expense record.");
         addCommandHelp("delete expense <INDEX>", "Deletes an expense record by index.");
         addCommandHelp("view expense", "Lists all expense records.");
 
