@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+participant ":Duke" as Duke #LightBlue
+participant ":AlertParser" as AlertParser #LightGreen
+participant ":AlertCommand" as AlertCommand #LightCoral
+participant ":FundsAlert" as FundsAlert #LightGoldenRodYellow
+participant ":Ui" as Ui #LightSalmon
+
+User -> Duke: "alert set 20"
+activate Duke
+
+Duke -> AlertParser: parse("alert set 20", fundsAlert)
+activate AlertParser
+AlertParser -> AlertParser: validate command format
+AlertParser -> AlertCommand: <<create>>(20.0, fundsAlert)
+activate AlertCommand
+AlertCommand --> AlertParser: alertCommand
+deactivate AlertCommand
+AlertParser --> Duke: alertCommand
+deactivate AlertParser
+
+Duke -> AlertCommand: execute(expenseList, ui)
+activate AlertCommand
+AlertCommand -> FundsAlert: setWarningThreshold(20.0)
+activate FundsAlert
+FundsAlert -> FundsAlert: validate threshold
+FundsAlert --> AlertCommand: true
+deactivate FundsAlert
+
+AlertCommand -> Ui: showMessage("Funds alert threshold set to $20.00")
+activate Ui
+Ui --> User: display confirmation message
+Ui --> AlertCommand
+deactivate Ui
+
+AlertCommand --> Duke
+deactivate AlertCommand
+
+Duke --> User: command completed
+deactivate Duke
+@enduml
