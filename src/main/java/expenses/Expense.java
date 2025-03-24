@@ -1,10 +1,9 @@
 package expenses;
+import exceptions.BudgetTrackerException;
 
 /**
  * Represents an expense with an amount and a description.
  */
-import exceptions.BudgetTrackerException;
-
 public class Expense {
 
     public enum Category {

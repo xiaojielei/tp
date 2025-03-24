@@ -51,6 +51,7 @@ public class DeleteExpenseCommandTest {
         assertEquals(1, expenseList.getExpenses().size(), "Expense list should contain 1 expense.");
 
         // Ensure the correct expense remains
-        assertEquals(description2, expenseList.getExpenses().get(0).getDescription(), "Remaining expense should be 'Dinner'.");
+        assertEquals(description2, expenseList.getExpenses().get(0).getDescription(),
+                "Remaining expense is 'Dinner'.");
     }
 }
