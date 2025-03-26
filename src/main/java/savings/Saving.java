@@ -230,11 +230,11 @@ public class Saving {
         double savingsRatio = totalSavings / totalIncome;
 
         if (savingsRatio >= 0.8) {
-            return "Good ✅ - You are saving well!";
+            return "Good - You are saving well!";
         } else if (savingsRatio < 0.5) {
-            return "Bad ❌ - Try to save more.";
+            return "Bad - Try to save more.";
         } else {
-            return "Neutral ⚠️ - You are on track.";
+            return "Neutral - You are on track.";
         }
     }
 

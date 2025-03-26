@@ -67,7 +67,7 @@ Here are the savings in your list:
 1. 	[ ] 150.0
 2. 	[ ] 100.0
 You have 2 saving(s) in total.
-Savings Indicator: Bad ❌ - Try to save more.
+Savings Indicator: Bad - Try to save more.
 
 ====== ALERT ======
 WARNING: Available funds ($-45.50) are below warning threshold ($5.00)
