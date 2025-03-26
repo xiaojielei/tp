@@ -17,11 +17,12 @@ How the Expense Component works:
 of the added expense. `ExpenseParser` class parses the command input by the user. When the `AddExpenseCommand` is
 called, the `parseAddExpense()` function splits the user input into amount, description and category respectively. The 
 inputs are sent to the `AddExpenseCommand` class, which adds the expense into `ExpenseList`.
-
+   ![Add Expense Sequence Diagram](images/AddExpense.png)
 2. Viewing Expense: The `ViewExpenseCommand` extends the `Command` class, and allows the user to view their list of
 expenses. Upon user input, `ViewExpenseCommand` class is called, and takes in the `ExpenseList` as a parameter. In the 
 `ExpenseList` class, all previously added expenses are accessed via the `List<Expense> expenses` ArrayList. The 
 `showExpenses()` command is called and a numbered list is shown.
+   ![View Expense Sequence Diagram](images/ViewExpense.png)
 
 3. Deleting Expense: The `DeleteExpenseCommand` class extends the `Command` class, and allows the user to delete an 
 expense based on its number in the expense list. Upon user input, `ExpenseParser` class parses the input, calling 
