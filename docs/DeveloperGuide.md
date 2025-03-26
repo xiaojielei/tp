@@ -6,6 +6,79 @@
 
 ## Design & Implementation
 
+### Expense Component
+
+The Expense component allows users to add, view, and delete expenses while categorizing them.
+
+### API: Expense.java
+How the Expense Component works:
+
+1. Adding Expense: The `AddExpenseCommand` extends the `Command` class, and contains amount, description and category 
+of the added expense. `ExpenseParser` class parses the command input by the user. When the `AddExpenseCommand` is
+called, the `parseAddExpense()` function splits the user input into amount, description and category respectively. The 
+inputs are sent to the `AddExpenseCommand` class, which adds the expense into `ExpenseList`.
+
+2. Viewing Expense: The `ViewExpenseCommand` extends the `Command` class, and allows the user to view their list of
+expenses. Upon user input, `ViewExpenseCommand` class is called, and takes in the `ExpenseList` as a parameter. In the 
+`ExpenseList` class, all previously added expenses are accessed via the `List<Expense> expenses` ArrayList. The 
+`showExpenses()` command is called and a numbered list is shown.
+
+3. Deleting Expense: The `DeleteExpenseCommand` class extends the `Command` class, and allows the user to delete an 
+expense based on its number in the expense list. Upon user input, `ExpenseParser` class parses the input, calling 
+`parseDeleteExpense()`, which takes the input integer. By calling `DeleteExpenseCommand`, `DeleteExpenseCommand` gets the 
+item to be deleted from the `ExpenseList` class and successfully deletes it.
+
+Why it's implemented this way:
+
+* Using an extension of the Command class allows each user action (Add, View, Delete) to be encapsulated in a separate 
+class. 
+  This makes it easier to:
+  * Extend functionality without modifying existing commands.
+  * Maintain Single Responsibility Principle (SRP), where each command class only does one thing.
+  * Track each command without going through a bunch of code.
+
+* Instead of treating categories as plain strings, we use Enums:
+  * Prevents invalid categories as FOOD, TRANSPORT, BILLS, OTHERS categories are predefined.
+  * More efficient and avoids checking string values at runtime.
+For example, in the `Expense` class:
+```java
+public enum Category {
+        FOOD, TRANSPORT, BILLS, OTHERS
+    }
+public static Category getCategoryFromInput(String input) throws BudgetTrackerException {
+    switch (input.toUpperCase()) {
+    case "F":
+        return Category.FOOD;
+    case "T":
+        return Category.TRANSPORT;
+    case "B":
+        return Category.BILLS;
+    case "O":
+        return Category.OTHERS;
+    default:
+        throw new BudgetTrackerException("Invalid category! Use: F (Food), T (Transport), B (Bills), O (Others).");
+    }
+}
+```
+
+Alternatives considered:
+* Direct handling of user input in `Expense` class instead of `ExpenseParser`.
+Example:
+```java
+public void executeCommand(String userInput) {
+    if (userInput.startsWith("add expense")) {
+        // Parse and add expense
+    } else if (userInput.equals("view expense")) {
+        // View expenses
+    }
+}
+```
+However, this would violate Single Responsibility Principle, as `Expense` class is used to manage expenses,  and not 
+parse user input. It would also make it hard to extend, as adding new commands would require modifying `Expense` class,
+making it harder to maintain. `ExpenseParser` separates user input handling from other logic, making the system more 
+modular and maintainable.
+
+
 ### Income Component
 
 The Income component is a critical part of the budget tracker, allowing users to add, delete,
