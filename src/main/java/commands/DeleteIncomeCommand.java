@@ -19,6 +19,25 @@ public class DeleteIncomeCommand extends IncomeCommand {
     private final int index;
     private final Summary summary;
 
+    /**
+     * Creates a new DeleteIncomeCommand with the specified index and summary.
+     *
+     * @param index   The index of the income entry to delete.
+     * @param summary The summary to update.
+     */
+    public DeleteIncomeCommand(int index, Summary summary) throws BudgetTrackerException {
+        if (index < 1) {
+            logger.log(Level.SEVERE, "Invalid income index: {0}", index);
+            throw new BudgetTrackerException("Index must be at least 1.");
+        }
+        if (summary == null) {
+            logger.severe("Summary object cannot be null.");
+            throw new BudgetTrackerException("Summary instance is required.");
+        }
+        this.index = index;
+        this.summary = summary;
+    }
+
     static {
         configureLogger();  // Configure the logger when the class is loaded
     }
@@ -44,25 +63,6 @@ public class DeleteIncomeCommand extends IncomeCommand {
 
         // Set the logger level to OFF to suppress all unwanted logging (including INFO, WARNING, etc.)
         logger.setLevel(Level.INFO);  // This will suppress all log levels except SEVERE
-    }
-
-    /**
-     * Creates a new DeleteIncomeCommand with the specified index and summary.
-     *
-     * @param index   The index of the income entry to delete.
-     * @param summary The summary to update.
-     */
-    public DeleteIncomeCommand(int index, Summary summary) throws BudgetTrackerException {
-        if (index < 1) {
-            logger.log(Level.SEVERE, "Invalid income index: {0}", index);
-            throw new BudgetTrackerException("Index must be at least 1.");
-        }
-        if (summary == null) {
-            logger.severe("Summary object cannot be null.");
-            throw new BudgetTrackerException("Summary instance is required.");
-        }
-        this.index = index;
-        this.summary = summary;
     }
 
     /**

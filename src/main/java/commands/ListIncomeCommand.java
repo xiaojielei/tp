@@ -19,6 +19,20 @@ public class ListIncomeCommand {
     private static final Logger logger = Logger.getLogger(ListIncomeCommand.class.getName());
     private final Summary summary;
 
+    /**
+     * Creates a new ListIncomeCommand with the specified summary.
+     *
+     * @param summary The summary to retrieve the total income from.
+     * @throws IllegalArgumentException If the summary is null.
+     */
+    public ListIncomeCommand(Summary summary) {
+        if (summary == null) {
+            logger.severe("Summary object is null.");
+            throw new IllegalArgumentException("Summary cannot be null.");
+        }
+        this.summary = summary;
+    }
+
     static {
         configureLogger();  // Configure the logger when the class is loaded
     }
@@ -44,20 +58,6 @@ public class ListIncomeCommand {
 
         // Set the logger level to OFF to suppress all unwanted logging (including INFO, WARNING, etc.)
         logger.setLevel(Level.INFO);  // This will suppress all log levels except SEVERE
-    }
-
-    /**
-     * Creates a new ListIncomeCommand with the specified summary.
-     *
-     * @param summary The summary to retrieve the total income from.
-     * @throws IllegalArgumentException If the summary is null.
-     */
-    public ListIncomeCommand(Summary summary) {
-        if (summary == null) {
-            logger.severe("Summary object is null.");
-            throw new IllegalArgumentException("Summary cannot be null.");
-        }
-        this.summary = summary;
     }
 
     /**

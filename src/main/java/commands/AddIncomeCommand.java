@@ -19,6 +19,32 @@ public class AddIncomeCommand extends IncomeCommand {
     private final String source;
     private final Summary summary;
 
+    /**
+     * Creates a new AddIncomeCommand with the specified amount, source, and summary.
+     *
+     * @param amount  The income amount.
+     * @param source  The income source.
+     * @param summary The summary to update.
+     * @throws BudgetTrackerException If the input values are invalid.
+     */
+    public AddIncomeCommand(double amount, String source, Summary summary) throws BudgetTrackerException {
+        if (amount <= 0) {
+            logger.log(Level.SEVERE, "Invalid income amount: {0}", amount);
+            throw new BudgetTrackerException("Income amount must be greater than zero.");
+        }
+        if (source.trim().isEmpty()) {
+            logger.log(Level.SEVERE, "Invalid income source: {0}", source);
+            throw new BudgetTrackerException("Income source cannot be empty.");
+        }
+
+        this.amount = amount;
+        this.source = source;
+        this.summary = summary;
+
+        assert this.amount > 0 : "Income amount should always be positive.";
+        assert !this.source.trim().isEmpty() : "Income source should not be empty.";
+    }
+
     static {
         configureLogger();  // Configure the logger when the class is loaded
     }
@@ -44,32 +70,6 @@ public class AddIncomeCommand extends IncomeCommand {
 
         // Set the logger level to OFF to suppress all unwanted logging (including INFO, WARNING, etc.)
         logger.setLevel(Level.INFO);  // This will suppress all log levels except SEVERE
-    }
-
-    /**
-     * Creates a new AddIncomeCommand with the specified amount, source, and summary.
-     *
-     * @param amount  The income amount.
-     * @param source  The income source.
-     * @param summary The summary to update.
-     * @throws BudgetTrackerException If the input values are invalid.
-     */
-    public AddIncomeCommand(double amount, String source, Summary summary) throws BudgetTrackerException {
-        if (amount <= 0) {
-            logger.log(Level.SEVERE, "Invalid income amount: {0}", amount);
-            throw new BudgetTrackerException("Income amount must be greater than zero.");
-        }
-        if (source.trim().isEmpty()) {
-            logger.log(Level.SEVERE, "Invalid income source: {0}", source);
-            throw new BudgetTrackerException("Income source cannot be empty.");
-        }
-
-        this.amount = amount;
-        this.source = source;
-        this.summary = summary;
-
-        assert this.amount > 0 : "Income amount should always be positive.";
-        assert !this.source.trim().isEmpty() : "Income source should not be empty.";
     }
 
     /**
