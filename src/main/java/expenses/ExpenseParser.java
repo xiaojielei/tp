@@ -64,20 +64,23 @@ public class ExpenseParser {
      */
     private static Command parseAddExpense(String argument, Summary summary) throws BudgetTrackerException {
         if (argument.isEmpty()) {
-            throw new BudgetTrackerException("Invalid format! Use: add expense <amount> / <source>");
+            throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <SOURCE> / <CATEGORY>");
         }
 
-        String[] parts = argument.split(" / ", 2);
-        if (parts.length < 2) {
-            throw new BudgetTrackerException("Invalid format! Use: add expense <amount> / <source>");
+        String[] parts = argument.split(" / ", 3);
+        if (parts.length < 3) {
+            throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <SOURCE> / <CATEGORY>");
         }
 
         try {
-            double amount = Double.parseDouble(parts[0].trim());  // Parse the amount
-            String description = parts[1].trim();  // Parse the description
-            return new AddExpenseCommand(amount, description, summary);
+            double amount = Double.parseDouble(parts[0].trim());
+            String description = parts[1].trim();
+            Expense.Category category = Expense.getCategoryFromInput(parts[2].trim());
+            return new AddExpenseCommand(amount, description, category, summary);
         } catch (NumberFormatException e) {
             throw new BudgetTrackerException("Invalid amount! Please enter a valid number.");
+        } catch (IllegalArgumentException e) {
+            throw new BudgetTrackerException(e.getMessage());
         }
     }
 

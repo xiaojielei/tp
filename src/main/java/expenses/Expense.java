@@ -1,21 +1,23 @@
 package expenses;
+import exceptions.BudgetTrackerException;
 
 /**
  * Represents an expense with an amount and a description.
  */
 public class Expense {
+
+    public enum Category {
+        FOOD, TRANSPORT, BILLS, OTHERS
+    }
+
     private double amount;
     private String description;
+    private Category category;
 
-    /**
-     * Constructs an Expense with the specified amount and description.
-     *
-     * @param amount      The monetary value of the expense.
-     * @param description The description or source of the expense.
-     */
-    public Expense(double amount, String description) {
+    public Expense(double amount, String description, Category category) {
         this.amount = amount;
         this.description = description;
+        this.category = category;
     }
 
     /**
@@ -36,13 +38,32 @@ public class Expense {
         return description;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     /**
      * Returns a string representation of the expense.
      *
-     * @return A formatted string containing the expense amount and source.
+     * @return A formatted string containing the expense amount, source and description.
      */
     @Override
     public String toString() {
-        return "Amount: $" + amount + " | Source: " + description;
+        return "[" + category + "] $" + amount + " from " + description;
+    }
+
+    public static Category getCategoryFromInput(String input) throws BudgetTrackerException {
+        switch (input.toUpperCase()) {
+        case "F":
+            return Category.FOOD;
+        case "T":
+            return Category.TRANSPORT;
+        case "B":
+            return Category.BILLS;
+        case "O":
+            return Category.OTHERS;
+        default:
+            throw new BudgetTrackerException("Invalid category! Use: F (Food), T (Transport), B (Bills), O (Others).");
+        }
     }
 }
