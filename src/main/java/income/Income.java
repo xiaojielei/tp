@@ -21,7 +21,7 @@ public class Income {
 
     @Override
     public String toString() {
-        return "Amount: $" + amount + " | Source: " + source;
+        return "$" + amount + " from " + source;
     }
 }
 
