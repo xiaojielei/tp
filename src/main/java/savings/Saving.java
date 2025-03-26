@@ -97,6 +97,7 @@ public class Saving {
             }
             System.out.println("You have " + savingsRecords.size() + " saving(s) in total.");
         }
+        System.out.println("Savings Indicator: " + getSavingsIndicator());
     }
 
     /**
@@ -210,4 +211,31 @@ public class Saving {
             System.out.println("Unknown command.");
         }
     }
+    /**
+     * Determines the savings indicator based on the total income.
+     * @return "Good" if savings are above 80% of income, "Bad" if below 50%, otherwise "Neutral".
+     */
+    public String getSavingsIndicator() {
+        double totalIncome = summary.getTotalIncome(); // Get total income from Summary
+        double totalSavings = 0;
+
+        for (SavingsRecord record : savingsRecords) {
+            totalSavings += record.amount;
+        }
+
+        if (totalIncome == 0) {
+            return "No income recorded.";
+        }
+
+        double savingsRatio = totalSavings / totalIncome;
+
+        if (savingsRatio >= 0.8) {
+            return "Good ✅ - You are saving well!";
+        } else if (savingsRatio < 0.5) {
+            return "Bad ❌ - Try to save more.";
+        } else {
+            return "Neutral ⚠️ - You are on track.";
+        }
+    }
+
 }
