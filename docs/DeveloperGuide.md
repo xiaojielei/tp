@@ -4,7 +4,87 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design & Implementation
+
+### Income Component
+
+The Income component is a critical part of the budget tracker, allowing users to add, delete,
+and list their income entries. The goal of this feature is to provide students with a simple and efficient way
+to record their income sources, making it easier for them to manage their finances over time. 
+
+### API: Income.java
+
+Here is the class diagram of the Income Component:
+
+How the Income Component works:
+
+1. Adding Income: The `AddIncomeCommand` class is responsible for parsing and adding income to the system. The 
+IncomeManager adds a new Income instance to the list of income records stored in the model.
+Example:
+```java
+public class AddIncomeCommand implements Command {
+    private final String amount;
+    private final String source;
+
+    public AddIncomeCommand(String amount, String source) {
+        this.amount = amount;
+        this.source = source;
+    }
+
+    @Override
+    public void execute() {
+        Income income = new Income(amount, source);
+        incomeManager.addIncome(income);
+    }
+}
+```
+
+2. Deleting Income: The `DeleteIncomeCommand` class handles the deletion of income entries. The manager removes the 
+selected Income record from the list.
+Example:
+```java
+public class DeleteIncomeCommand implements Command {
+    private final int incomeIndex;
+
+    public DeleteIncomeCommand(int incomeIndex) {
+        this.incomeIndex = incomeIndex;
+    }
+
+    @Override
+    public void execute() {
+        incomeManager.deleteIncome(incomeIndex);
+    }
+}
+```
+
+3. Listing Income: The `ListIncomeCommand` class retrieves the list of all income entries and displays them to the 
+user through the view.
+Example:
+```java
+public class ListIncomeCommand implements Command {
+    @Override
+    public void execute() {
+        List<Income> incomeList = incomeManager.getAllIncome();
+        incomeView.displayIncome(incomeList);
+    }
+}
+```
+Why it's implemented this way:
+
+* Separation of Concerns: By using separate classes for the model, manager, and view, the system remains modular, 
+making it easier to maintain and extend in the future.
+
+* Scalability: This design allows for easy expansion of features in the future, such as adding additional attributes 
+to income (e.g., categories like salary, allowance, etc.) or adding additional functionality like categorizing income.
+
+* Simplicity for Users: Students should find the interface intuitive, allowing them to easily manage their income 
+entries without unnecessary complexity.
+
+Alternatives considered:
+
+* Single Command Class: Another approach was to have a single IncomeCommand class that would handle all actions 
+(add, delete, list). However, this would lead to bloated code and a lack of clarity, so we chose to separate the 
+commands into individual classes.
 
 ### Summary Component
 
@@ -124,17 +204,83 @@ Alternatives considered:
 * Checking funds after each transaction in Duke.java, but this would scatter alert logic throughout the codebase.
 * A polling approach where alerts check the summary periodically, but this would be less efficient and responsive.
 
+## Savings component
+
+The `getSavingsIndicator()` method calculates a savings indicator based on the total savings and the total income of the 
+user. This indicator provides feedback to the user regarding their saving habits by categorizing them into three levels:
+
+* Good: Savings are 80% or more of the total income.
+* Neutral: Savings are between 50% and 80% of the total income.
+* Bad: Savings are less than 50% of the total income.
+
+This feature aims to help users gauge their financial behavior and make informed decisions about saving.
+
+```java
+public String getSavingsIndicator() {
+    double totalIncome = summary.getTotalIncome(); // Get total income from Summary
+    double totalSavings = 0;
+
+    // Sum all savings records
+    for (SavingsRecord record : savingsRecords) {
+        totalSavings += record.amount;
+    }
+
+    if (totalIncome == 0) {
+        return "No income recorded.";  // Handle edge case where no income has been recorded
+    }
+
+    double savingsRatio = totalSavings / totalIncome;
+
+    // Determine the savings indicator based on the ratio
+    if (savingsRatio >= 0.8) {
+        return "Good - You are saving well!";
+    } else if (savingsRatio < 0.5) {
+        return "Bad - Try to save more.";
+    } else {
+        return "Neutral - You are on track.";
+    }
+}
+```
+
+How this code works:
+* Total Income: The method retrieves the user's total income from the `Summary` class using the `getTotalIncome()` 
+method.
+
+* Total Savings: The method iterates through all savings records stored in the `savingsRecords` list and calculates 
+the total savings.
+
+* Comparison Logic:
+
+  * The method compares the ratio of total savings to total income.
+
+  * Based on this ratio, it determines whether the savings are "Good," "Neutral," or "Bad."
+
+The logic ensures that the user gets a meaningful indicator of their saving habits, encouraging them to either 
+increase or maintain their savings rate.
+
+Why it's implemented this way:
+* Why Use Ratio: The ratio of savings to income provides a simple but effective way to evaluate savings behavior. This 
+method offers clarity to the user by presenting an easily understandable percentage-based feedback system.
+
+Alternatives considered:
+* Keeping a more rigid approach with fixed thresholds (e.g., "Good" for 80% or more, "Bad" for less than 50%, and 
+"Neutral" in between) could have been sufficient for basic applications. However, 
+this would lack the adaptability that a more dynamic solution could provide, especially for users with different 
+financial situations.
+
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v1.0|user|be able to navigate through the CLI|efficiently use the application|
-|v1.0|user|have access to a "help" command|view all possible commands and their usage|
-|v1.0|user|know when an action is invalid|correct my input and avoid errors|
-|v1.0|user|view a summary of my finances|understand my current financial situation|
-|v2.0|financial planner|get an alert when my account balance is below a certain amount|avoid overspending and maintain financial discipline|
-|v2.0|user|navigate through the CLI easily|save time and effort while managing my finances|
+| Version | As a ...          | I want to ...                                                  | So that I can ...                                      |
+|---------|-------------------|----------------------------------------------------------------|--------------------------------------------------------|
+| v1.0    | new user          | see usage instructions                                         | refer to them when I forget how to use the application |
+| v1.0    | user              | be able to navigate through the CLI                            | efficiently use the application                        |
+| v1.0    | user              | have access to a "help" command                                | view all possible commands and their usage             |
+| v1.0    | user              | know when an action is invalid                                 | correct my input and avoid errors                      |
+| v1.0    | user              | view a summary of my finances                                  | understand my current financial situation              |
+| v1.0    | user              | input income                                                   | compare it with expenses                               |
+| v2.0    | financial planner | get an alert when my account balance is below a certain amount | avoid overspending and maintain financial discipline   |
+| v2.0    | user              | navigate through the CLI easily                                | save time and effort while managing my finances        |
+| v2.0    | user              | view indicators (good/bad) based on amount saved               | discourage excessive spending                          |
 
 ## Non-Functional Requirements
 
