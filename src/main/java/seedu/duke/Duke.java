@@ -178,9 +178,5 @@ public class Duke {
         }
     }
 
-    public static void displayWelcomeMessage() {
-        System.out.println("Welcome to Common Cents!");
-        System.out.println("Use `help` to see available commands.");
-    }
 }
 
