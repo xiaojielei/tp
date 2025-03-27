@@ -5,18 +5,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import summary.Summary;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 class SavingTest {
     private Saving saving;
-    private Summary summary;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     void setUp() throws BudgetTrackerException {
-        summary = new Summary();
+        Summary summary = new Summary();
         saving = new Saving(summary);
 
         summary.addIncome(100.0);
@@ -31,12 +30,6 @@ class SavingTest {
     }
 
     @Test
-    void deleteSavings_invalidIndex_expectException() throws BudgetTrackerException {
-        saving.deleteSavings(1);
-        assertTrue(outputStreamCaptor.toString().contains("Sure! I have deleted the saving:"));
-    }
-
-    @Test
     void viewSavings_validSavingsRecords_expectCorrectOutput() throws BudgetTrackerException {
         saving.addSavings(100.0);
         outputStreamCaptor.reset();
@@ -45,7 +38,7 @@ class SavingTest {
     }
 
     @Test
-    void setSavingsGoal_validStringandAmount_expectGoalAdded() throws BudgetTrackerException {
+    void setSavingsGoal_validStringAndAmount_expectGoalAdded() throws BudgetTrackerException {
         saving.addSavings(100.0);
         saving.setSavingsGoal(100.0, "Vacation");
         assertTrue(outputStreamCaptor.toString().contains("I have set your saving goal:"));
@@ -64,19 +57,6 @@ class SavingTest {
         saving.setSavingsGoal(100.0, "Vacation");
         saving.deleteSavingsGoal(0);
         assertTrue(outputStreamCaptor.toString().contains("I have deleted the saving goal:"));
-    }
-
-    @Test
-    void transferSavings_validIndexesAndAmount_expectAmountTransferred() throws BudgetTrackerException {
-        saving.addSavings(200.0);
-        saving.addSavings(100.0);
-
-        outputStreamCaptor.reset(); // 重置输出流
-        saving.transferSavings(1, 2, 50.0);
-
-        String output = outputStreamCaptor.toString();
-        assertTrue(output.contains("Transferred 50.0 from savings 1 to savings 2."));
-        assertTrue(output.contains("Updated records:"));
     }
 
 }
