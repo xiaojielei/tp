@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import summary.Summary;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -28,7 +28,7 @@ class SavingTest {
         saving.addSavings(100.0);
         assertTrue(outputStreamCaptor.toString().contains("Sure! I have added your savings:"));
     }
-    
+
     @Test
     void viewSavings_validSavingsRecords_expectCorrectOutput() throws BudgetTrackerException {
         saving.addSavings(100.0);
