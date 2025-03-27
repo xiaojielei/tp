@@ -62,7 +62,7 @@ public class Saving {
     public void addSavings(double amount) throws BudgetTrackerException {
         assert amount > 0 : "Savings amount must be positive";
 
-        double balance = summary.getTotalBalance();
+        double balance = summary.getAvailableFunds() - amount;
         savingsRecords.add(new SavingsRecord(amount));
         System.out.println("Sure! I have added your savings:");
         System.out.println((savingsRecords.size()) + ". \t" + savingsRecords.get(savingsRecords.size() - 1));

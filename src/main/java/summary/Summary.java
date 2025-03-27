@@ -22,7 +22,7 @@ public class Summary {
         totalIncome = 0;
         totalExpense = 0;
         totalSavings = 0;
-        
+
         // Assertion to verify initial state
         assert totalIncome == 0 : "Initial income should be 0";
         assert totalExpense == 0 : "Initial expense should be 0";
@@ -31,7 +31,7 @@ public class Summary {
 
     /**
      * Registers an observer to be notified of financial changes.
-     * 
+     *
      * @param observer The observer to register
      */
     public void registerObserver(FinancialObserver observer) {
@@ -40,7 +40,7 @@ public class Summary {
 
     /**
      * Removes an observer from notification list.
-     * 
+     *
      * @param observer The observer to remove
      */
     public void removeObserver(FinancialObserver observer) {
@@ -97,7 +97,6 @@ public class Summary {
         return totalSavings;
     }
 
-
     /**
      * Adds income to the total income.
      *
@@ -110,10 +109,10 @@ public class Summary {
         }
         double oldIncome = this.totalIncome;
         this.totalIncome += income;
-        
+
         // Assertion to verify income was added correctly
         assert this.totalIncome == oldIncome + income : "Income was not added correctly";
-        
+
         notifyObservers();
     }
 
@@ -132,11 +131,11 @@ public class Summary {
         }
         double oldIncome = this.totalIncome;
         this.totalIncome -= income;
-        
+
         // Assertion to verify income was removed correctly
         assert this.totalIncome == oldIncome - income : "Income was not removed correctly";
         assert this.totalIncome >= 0 : "Total income should never be negative after removal";
-        
+
         notifyObservers();
     }
 
@@ -150,20 +149,20 @@ public class Summary {
         if (expense <= 0) {
             throw new BudgetTrackerException("Expense must be positive.");
         }
-        
+
         // Check if adding this expense would result in a negative balance
         double availableBalance = getAvailableFunds();
         if (expense > availableBalance) {
             throw new BudgetTrackerException("Cannot add this expense as it would exceed your available funds. "
                     + "Available balance: " + availableBalance);
         }
-        
+
         double oldExpense = this.totalExpense;
         this.totalExpense += expense;
-        
+
         // Assertion to verify expense was added correctly
         assert this.totalExpense == oldExpense + expense : "Expense was not added correctly";
-        
+
         notifyObservers();
     }
 
@@ -182,11 +181,11 @@ public class Summary {
         }
         double oldExpense = this.totalExpense;
         this.totalExpense -= expense;
-        
+
         // Assertion to verify expense was removed correctly
         assert this.totalExpense == oldExpense - expense : "Expense was not removed correctly";
         assert this.totalExpense >= 0 : "Total expense should never be negative after removal";
-        
+
         notifyObservers();
     }
 
@@ -202,16 +201,16 @@ public class Summary {
         }
 
         double availableFunds = getAvailableFunds();
-        
+
         if (savings > availableFunds) {
             throw new BudgetTrackerException("Savings cannot be greater than available funds.");
         }
         double oldSavings = this.totalSavings;
         this.totalSavings += savings;
-        
+
         // Assertion to verify savings was added correctly
         assert this.totalSavings == oldSavings + savings : "Savings was not added correctly";
-        
+
         notifyObservers();
     }
 
@@ -230,11 +229,11 @@ public class Summary {
         }
         double oldSavings = this.totalSavings;
         this.totalSavings -= savings;
-        
+
         // Assertion to verify savings was removed correctly
         assert this.totalSavings == oldSavings - savings : "Savings was not removed correctly";
         assert this.totalSavings >= 0 : "Total savings should never be negative after removal";
-        
+
         notifyObservers();
     }
 }
