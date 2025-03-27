@@ -30,6 +30,14 @@ public class Saving {
             this.goal = " ";
         }
 
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
+        }
+
         /**
          * Sets the goal for this savings record.
          * @param goal The goal description.
@@ -45,7 +53,7 @@ public class Saving {
     }
 
     private final List<SavingsRecord> savingsRecords = new ArrayList<>();
-    private Summary summary;
+    private final Summary summary;
 
     /**
      * Constructor that accepts a Summary instance.
@@ -62,7 +70,6 @@ public class Saving {
     public void addSavings(double amount) throws BudgetTrackerException {
         assert amount > 0 : "Savings amount must be positive";
 
-        double balance = summary.getAvailableFunds() - amount;
         savingsRecords.add(new SavingsRecord(amount));
         System.out.println("Sure! I have added your savings:");
         System.out.println((savingsRecords.size()) + ". \t" + savingsRecords.get(savingsRecords.size() - 1));
@@ -168,37 +175,32 @@ public class Saving {
         // Check for valid indices
         if (fromIndex < 0 || fromIndex >= savingsRecords.size() ||
                 toIndex < 0 || toIndex >= savingsRecords.size()) {
-            System.out.println("Invalid index.");
-            return;
+            throw new IllegalArgumentException("Invalid index.");
         }
 
         // Prevent transferring to the same record
         if (fromIndex == toIndex) {
-            System.out.println("Cannot transfer to the same savings record.");
-            return;
+            throw new IllegalArgumentException("Cannot transfer to the same savings record.");
         }
 
-        // Get the savings records at the provided indices
         SavingsRecord fromRecord = savingsRecords.get(fromIndex);
         SavingsRecord toRecord = savingsRecords.get(toIndex);
 
-        // Check if there are enough funds in the source record
-        if (fromRecord.amount < amount) {
-            System.out.println("Insufficient funds in the source savings.");
-            return;
+        // Check for sufficient funds
+        if (fromRecord.getAmount() < amount) {
+            throw new IllegalArgumentException("Insufficient funds in the source savings.");
         }
 
-        // Perform the transfer
-        fromRecord.amount -= amount;
-        toRecord.amount += amount;
+        // Perform the transfer using setters
+        fromRecord.setAmount(fromRecord.getAmount() - amount);
+        toRecord.setAmount(toRecord.getAmount() + amount);
 
-        // Output the result
-        System.out.println("Transferred " + amount + " from savings " + (fromIndex + 1) +
-                " to savings " + (toIndex + 1) + ".");
+        System.out.printf("Transferred %.2f from savings %d to savings %d.%n", amount, fromIndex + 1, toIndex + 1);
         System.out.println("Updated records:");
         System.out.println((fromIndex + 1) + ". \t" + fromRecord);
         System.out.println((toIndex + 1) + ". \t" + toRecord);
     }
+
 
     /**
      * Runs the savings management system, processing user commands.
