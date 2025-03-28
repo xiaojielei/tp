@@ -201,11 +201,6 @@ public class Summary {
             throw new BudgetTrackerException("Savings must be positive.");
         }
 
-        double availableFunds = getAvailableFunds();
-        
-        if (savings > availableFunds) {
-            throw new BudgetTrackerException("Savings cannot be greater than available funds.");
-        }
         double oldSavings = this.totalSavings;
         this.totalSavings += savings;
         
