@@ -194,7 +194,7 @@ public class Summary {
      * Adds savings to the total savings.
      *
      * @param savings The amount of savings to add.
-     * @throws BudgetTrackerException If the savings are negative or greater than available funds.
+     * @throws BudgetTrackerException If the savings are negative.
      */
     public void addSavings(double savings) throws BudgetTrackerException {
         if (savings <= 0) {

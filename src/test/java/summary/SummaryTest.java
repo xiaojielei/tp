@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SummaryTest {
 
@@ -145,4 +147,165 @@ class SummaryTest {
         assertEquals(0, summary.getTotalSavings(), 0.001);
     }
 
+    @Test
+    void addExpense_exceedingAvailableFunds_expectException() throws BudgetTrackerException {
+        Summary summary = new Summary();
+        summary.addIncome(100.0);
+
+        assertThrows(BudgetTrackerException.class, () -> summary.addExpense(150.0));
+
+        assertEquals(100.0, summary.getTotalIncome(), 0.001);
+        assertEquals(0.0, summary.getTotalExpense(), 0.001);
+    }
+
+    @Test
+    void removeIncome_exceedingCurrentIncome_expectException() throws BudgetTrackerException {
+        Summary summary = new Summary();
+        summary.addIncome(100.0);
+        summary.addExpense(50.0);
+
+        assertThrows(BudgetTrackerException.class, () -> summary.removeIncome(120.0));
+
+        assertEquals(100.0, summary.getTotalIncome(), 0.001);
+        assertEquals(50.0, summary.getTotalExpense(), 0.001);
+    }
+
+    @Test
+    void removeExpense_exceedingCurrentExpense_expectException() throws BudgetTrackerException {
+        Summary summary = new Summary();
+        summary.addIncome(100.0);
+        summary.addExpense(50.0);
+
+        assertThrows(BudgetTrackerException.class, () -> summary.removeExpense(75.0));
+
+        assertEquals(50.0, summary.getTotalExpense(), 0.001);
+    }
+
+    @Test
+    void observerNotification_whenFinancialChanges_observersAreNotified() throws BudgetTrackerException {
+        Summary summary = new Summary();
+        TestObserver observer = new TestObserver();
+
+        summary.registerObserver(observer);
+
+        summary.addIncome(100.0);
+        assertTrue(observer.wasNotified());
+        assertEquals(100.0, observer.getLastIncome(), 0.001);
+        
+        observer.reset();
+        summary.removeObserver(observer);
+        summary.addExpense(50.0);
+        assertFalse(observer.wasNotified());
+    }
+
+    @Test
+    void addSavings_largerThanIncome_shouldSucceed() throws BudgetTrackerException {
+        Summary summary = new Summary();
+        summary.addIncome(50.0);
+        summary.addExpense(20.0);
+
+        summary.addSavings(100.0);
+
+        assertEquals(100.0, summary.getTotalSavings(), 0.001);
+        assertEquals(50.0, summary.getTotalIncome(), 0.001);
+        assertEquals(20.0, summary.getTotalExpense(), 0.001);
+    }
+
+    @Test
+    void removeSavings_zeroAmount_expectException() throws BudgetTrackerException {
+        Summary summary = new Summary();
+        summary.addIncome(100.0);
+        summary.addSavings(50.0);
+
+        assertThrows(BudgetTrackerException.class, () -> summary.removeSavings(0.0));
+
+        assertEquals(50.0, summary.getTotalSavings(), 0.001);
+    }
+
+    @Test
+    void notifyObservers_multipleRegisteredObservers_allObserversNotified() throws BudgetTrackerException {
+        Summary summary = new Summary();
+        TestObserver observer1 = new TestObserver();
+        TestObserver observer2 = new TestObserver();
+        
+        summary.registerObserver(observer1);
+        summary.registerObserver(observer2);
+        
+        summary.addIncome(75.0);
+        
+        assertTrue(observer1.wasNotified());
+        assertTrue(observer2.wasNotified());
+        assertEquals(75.0, observer1.getLastIncome(), 0.001);
+        assertEquals(75.0, observer2.getLastIncome(), 0.001);
+        
+        observer1.reset();
+        observer2.reset();
+        
+        summary.addExpense(25.0);
+        
+        assertTrue(observer1.wasNotified());
+        assertTrue(observer2.wasNotified());
+        assertEquals(75.0, observer1.getLastIncome(), 0.001);
+        assertEquals(25.0, observer1.getLastExpense(), 0.001);
+    }
+    
+    @Test
+    void summaryOperations_complexSequenceOfOperations_correctFinalState() throws BudgetTrackerException {
+        Summary summary = new Summary();
+        
+        // Add some initial values
+        summary.addIncome(1000.0);
+        summary.addExpense(300.0);
+        summary.addSavings(400.0);
+        
+        // Modify with operations
+        summary.removeIncome(200.0);
+        summary.removeExpense(100.0);
+        summary.removeSavings(150.0);
+        
+        // Add more values
+        summary.addIncome(150.0);
+        summary.addExpense(125.0);
+        summary.addSavings(75.0);
+        
+        // Verify final state
+        assertEquals(950.0, summary.getTotalIncome(), 0.001);
+        assertEquals(325.0, summary.getTotalExpense(), 0.001);
+        assertEquals(325.0, summary.getTotalSavings(), 0.001);
+        assertEquals(625.0, summary.getAvailableFunds(), 0.001);
+    }
+
+    // Helper class for testing observer notifications
+    private static class TestObserver implements alerts.FinancialObserver {
+        private boolean notified = false;
+        private double lastAvailableFunds = 0;
+        private double lastIncome = 0;
+        private double lastExpense = 0;
+        private double lastSavings = 0;
+
+        @Override
+        public void update(double availableFunds, double income, double expense, double savings) {
+            notified = true;
+            this.lastAvailableFunds = availableFunds;
+            this.lastIncome = income;
+            this.lastExpense = expense;
+            this.lastSavings = savings;
+        }
+
+        public boolean wasNotified() {
+            return notified;
+        }
+
+        public double getLastIncome() {
+            return lastIncome;
+        }
+        
+        public double getLastExpense() {
+            return lastExpense;
+        }
+
+        public void reset() {
+            notified = false;
+        }
+    }
 }
