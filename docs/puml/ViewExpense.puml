@@ -10,16 +10,18 @@ autonumber
 User -> Duke: "view expense"
 activate Duke
 Duke -> ViewExpenseCommand: execute()
-ViewExpenseCommand --> User: display list of expenses
 activate ViewExpenseCommand
+ViewExpenseCommand --> User: display list of expenses
 
-activate ExpenseList
+
 ViewExpenseCommand -> ExpenseList: showExpenses()
+activate ExpenseList
 ExpenseList --> ViewExpenseCommand: return list of showExpenses
 deactivate ViewExpenseCommand
 
-activate Expenses
+
 ExpenseList -> Expenses: getAmount()
+activate Expenses
 Expenses --> ExpenseList: "amount"
 ExpenseList -> Expenses: getDescription()
 Expenses --> ExpenseList: "description"
