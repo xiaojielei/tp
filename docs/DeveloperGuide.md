@@ -169,7 +169,7 @@ for each of the saving entry.
 
 Here's the class diagram of the Saving component:
 
-![Saving class Diagram](img_1.png)
+![Saving class Diagram](img_3.png)
 
 How the Saving component works:
 
