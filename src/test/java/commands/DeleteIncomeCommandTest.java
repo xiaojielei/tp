@@ -44,10 +44,20 @@ public class DeleteIncomeCommandTest {
     @Test
     void testDeleteInvalidIndexThrowsException() {
         // Try to delete an income with an invalid index (greater than the list size)
-        Exception exception = assertThrows(BudgetTrackerException.class, () ->
+        BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
                 new DeleteIncomeCommand(5, summary).incomeExecute(IncomeManager.getInstance(), ui)
         );
         assertEquals("Invalid index. Please provide a valid income index between 1 and 2.", exception.getMessage());
     }
+
+    @Test
+    void testDeleteEmptyListThrowsException() {
+        IncomeManager.clearIncomeList(); // Make the list empty
+        BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
+                new DeleteIncomeCommand(1, summary).incomeExecute(IncomeManager.getInstance(), ui)
+        );
+        assertEquals("There are no income entries to delete.", exception.getMessage());
+    }
 }
+
 

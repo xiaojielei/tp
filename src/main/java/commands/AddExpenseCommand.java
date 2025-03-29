@@ -12,6 +12,7 @@ import exceptions.BudgetTrackerException;
 public class AddExpenseCommand extends Command {
     private double amount;
     private String description;
+    private Expense.Category category;
     private Summary summary;
 
     /**
@@ -21,9 +22,10 @@ public class AddExpenseCommand extends Command {
      * @param description The description or source of the expense.
      * @param summary     The summary object to update with the new expense.
      */
-    public AddExpenseCommand(double amount, String description, Summary summary) {
+    public AddExpenseCommand(double amount, String description, Expense.Category category, Summary summary) {
         this.amount = amount;
         this.description = description;
+        this.category = category;
         this.summary = summary;
     }
 
@@ -36,13 +38,13 @@ public class AddExpenseCommand extends Command {
     @Override
     public void execute(ExpenseList expenseList, Ui ui) {
         try {
-            Expense newExpense = new Expense(amount, description);
+            Expense newExpense = new Expense(amount, description, category);
             expenseList.addExpense(newExpense);
 
             // Update the summary with the new expense
             summary.addExpense(amount);
 
-            ui.showMessage("Added expense: $" + amount + " | Source: " + description);
+            ui.showMessage("Added expense: [" + category + "] $" + amount + " from " + description);
         } catch (BudgetTrackerException e) {
             ui.showMessage("Error adding expense: " + e.getMessage());
         }

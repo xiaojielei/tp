@@ -6,6 +6,9 @@ import java.util.List;
 import exceptions.BudgetTrackerException;
 import summary.Summary;
 
+//substring functions (substring(17)/substring(20), etc.) are used to trim the input
+//to only keep the amount/index/goal description part
+
 /**
  * The Saving class manages savings records, allowing users to add, delete,
  * view, and set goals for their savings.
@@ -27,6 +30,14 @@ public class Saving {
             this.goal = " ";
         }
 
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
+        }
+
         /**
          * Sets the goal for this savings record.
          * @param goal The goal description.
@@ -42,7 +53,7 @@ public class Saving {
     }
 
     private final List<SavingsRecord> savingsRecords = new ArrayList<>();
-    private Summary summary;
+    private final Summary summary;
 
     /**
      * Constructor that accepts a Summary instance.
@@ -57,6 +68,8 @@ public class Saving {
      * @param amount The amount to save.
      */
     public void addSavings(double amount) throws BudgetTrackerException {
+        assert amount > 0 : "Savings amount must be positive";
+
         savingsRecords.add(new SavingsRecord(amount));
         System.out.println("Sure! I have added your savings:");
         System.out.println((savingsRecords.size()) + ". \t" + savingsRecords.get(savingsRecords.size() - 1));
@@ -97,6 +110,7 @@ public class Saving {
             }
             System.out.println("You have " + savingsRecords.size() + " saving(s) in total.");
         }
+        System.out.println("Savings Indicator: " + getSavingsIndicator());
     }
 
     /**
@@ -147,6 +161,46 @@ public class Saving {
             System.out.println("Invalid index.");
         }
     }
+
+    /**
+     * Transfers a specified amount from one savings record to another.
+     * @param fromIndex The index of the savings record to transfer from.
+     * @param toIndex The index of the savings record to transfer to.
+     * @param amount The amount to transfer.
+     */
+    public void transferSavings(int fromIndex, int toIndex, double amount) {
+        fromIndex -= 1;
+        toIndex -= 1;
+
+        // Check for valid indices
+        if (fromIndex < 0 || fromIndex >= savingsRecords.size() ||
+                toIndex < 0 || toIndex >= savingsRecords.size()) {
+            throw new IllegalArgumentException("Invalid index.");
+        }
+
+        // Prevent transferring to the same record
+        if (fromIndex == toIndex) {
+            throw new IllegalArgumentException("Cannot transfer to the same savings record.");
+        }
+
+        SavingsRecord fromRecord = savingsRecords.get(fromIndex);
+        SavingsRecord toRecord = savingsRecords.get(toIndex);
+
+        // Check for sufficient funds
+        if (fromRecord.getAmount() < amount) {
+            throw new IllegalArgumentException("Insufficient funds in the source savings.");
+        }
+
+        // Perform the transfer using setters
+        fromRecord.setAmount(fromRecord.getAmount() - amount);
+        toRecord.setAmount(toRecord.getAmount() + amount);
+
+        System.out.printf("Transferred %.2f from savings %d to savings %d.%n", amount, fromIndex + 1, toIndex + 1);
+        System.out.println("Updated records:");
+        System.out.println((fromIndex + 1) + ". \t" + fromRecord);
+        System.out.println((toIndex + 1) + ". \t" + toRecord);
+    }
+
 
     /**
      * Runs the savings management system, processing user commands.
@@ -202,7 +256,17 @@ public class Saving {
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("Invalid index format.");
             }
-        }  else if (input.contains("exit savings")) {
+        }  else if (input.contains("transfer savings")) {
+            try {
+                String[] partsTransfer = input.substring(17).split(" ");
+                int fromIndex = Integer.parseInt(partsTransfer[0]);
+                int toIndex = Integer.parseInt(partsTransfer[1]);
+                double amount = Double.parseDouble(partsTransfer[2]);
+                transferSavings(fromIndex, toIndex, amount);
+            } catch (Exception e) {
+                System.out.println("Invalid format. Use: transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>");
+            }
+        } else if (input.contains("exit savings")) {
             System.out.println("Exited savings function.");
         } else if (input.contains("view savings") || input.contains("savings goal view")) {
             viewSavings();
@@ -210,4 +274,31 @@ public class Saving {
             System.out.println("Unknown command.");
         }
     }
+    /**
+     * Determines the savings indicator based on the total income.
+     * @return "Good" if savings are above 80% of income, "Bad" if below 50%, otherwise "Neutral".
+     */
+    public String getSavingsIndicator() {
+        double totalIncome = summary.getTotalIncome(); // Get total income from Summary
+        double totalSavings = 0;
+
+        for (SavingsRecord record : savingsRecords) {
+            totalSavings += record.amount;
+        }
+
+        if (totalIncome == 0) {
+            return "No income recorded.";
+        }
+
+        double savingsRatio = totalSavings / totalIncome;
+
+        if (savingsRatio >= 0.8) {
+            return "Good - You are saving well!";
+        } else if (savingsRatio < 0.5) {
+            return "Bad - Try to save more.";
+        } else {
+            return "Neutral - You are on track.";
+        }
+    }
+
 }

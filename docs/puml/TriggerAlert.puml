@@ -1,0 +1,58 @@
+@startuml
+hide footbox
+
+actor User
+participant ":Duke" as Duke
+participant ":IncomeParser" as IncomeParser
+participant ":AddIncomeCommand" as AddIncomeCommand
+participant ":ExpenseParser" as ExpenseParser
+participant ":AddExpenseCommand" as AddExpenseCommand
+participant ":ExpenseList" as ExpenseList
+participant ":Summary" as Summary
+participant ":FundsAlert" as FundsAlert
+participant ":Ui" as Ui
+
+note right of Duke
+  Initially:
+  funds = $0
+  alert threshold = $5.0
+end note
+
+User -> Duke: "add income \n43 / salary"
+activate Duke
+Duke -> IncomeParser: parse(...)
+IncomeParser --> Duke: income command
+Duke -> AddIncomeCommand: incomeExecute(...)
+AddIncomeCommand -> Summary: addIncome(43.0)
+Summary -> Summary: update totals
+note right of Summary
+  After income:
+  funds = $43.00
+end note
+AddIncomeCommand -> Ui: showMessage("Added income...")
+Ui --> User: display confirmation
+deactivate Duke
+
+User -> Duke: "add expense \n40 / groceries"
+activate Duke
+Duke -> ExpenseParser: parse(...)
+ExpenseParser --> Duke: expense command
+Duke -> AddExpenseCommand: execute(...)
+
+AddExpenseCommand -> ExpenseList: addExpense(...)\n(Record expense item)
+AddExpenseCommand -> Summary: addExpense(40.0)\n(Update financial totals)
+Summary -> Summary: update totals
+note right of Summary
+  After expense:
+  funds = $3.00
+  Alert should trigger!
+end note
+Summary -> FundsAlert: update(...)\n(Notify alert system\nof new state)
+FundsAlert -> FundsAlert: check funds\nvs threshold
+FundsAlert -> Ui: showAlert("WARNING:\nAvailable funds low...")
+Ui --> User: display alert
+AddExpenseCommand -> Ui: showMessage("Added expense...")
+Ui --> User: display confirmation
+deactivate Duke
+
+@enduml
