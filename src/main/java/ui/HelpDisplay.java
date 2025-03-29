@@ -63,7 +63,7 @@ public class HelpDisplay {
 
         addCommandHelp("transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>",
                 "transfers a specified amount from one savings record to another.");
-        
+
         addCategory(ALERTS_HEADING);
         addCommandHelp("alert set <AMOUNT>", "Sets the warning threshold for low available funds.");
 
@@ -81,7 +81,7 @@ public class HelpDisplay {
     private void addCategory(String heading) {
         if (heading == null || heading.trim().isEmpty()) {
             throw new IllegalArgumentException("Category heading cannot be null or empty");
-            
+
         }
         helpText.append("\n").append(heading).append("\n");
     }

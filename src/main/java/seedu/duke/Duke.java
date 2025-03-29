@@ -29,7 +29,7 @@ public class Duke {
     private final ExpenseList expenseList;
     private final Saving saving;
     private final FundsAlert fundsAlert;
-    
+
     /**
      * Constructs a new Duke application with all necessary components initialized.
      */
@@ -45,7 +45,7 @@ public class Duke {
         fundsAlert = new FundsAlert(ui);
         summary.registerObserver(fundsAlert);
     }
-    
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
@@ -53,7 +53,7 @@ public class Duke {
         displayWelcomeMessage();
         new Duke().runDuke();
     }
-    
+
     /**
      * Displays the welcome message for the application.
      */
@@ -61,7 +61,7 @@ public class Duke {
         System.out.println("Welcome to Common Cents!");
         System.out.println("Use `help` to see available commands.");
     }
-    
+
     /**
      * Runs the main program loop, processing user commands until exit.
      */
@@ -112,7 +112,7 @@ public class Duke {
                     commandRecognized = true;
                     continue;
                 }
-                
+
                 // Handle alert commands
                 if (fullCommand.startsWith("alert")) {
                     try {
@@ -182,4 +182,3 @@ public class Duke {
     }
 
 }
-
