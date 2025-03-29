@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+participant ":Duke" as Duke #LightBlue
+participant ":ViewExpenseCommand" as ViewExpenseCommand #LightGreen
+participant ":ExpenseList" as ExpenseList #LightGoldenRodYellow
+participant ":Expenses" as Expenses #LightCoral
+autonumber
+
+User -> Duke: "view expense"
+activate Duke
+Duke -> ViewExpenseCommand: execute()
+activate ViewExpenseCommand
+ViewExpenseCommand --> User: display list of expenses
+
+
+ViewExpenseCommand -> ExpenseList: showExpenses()
+activate ExpenseList
+ExpenseList --> ViewExpenseCommand: return list of showExpenses
+deactivate ViewExpenseCommand
+
+
+ExpenseList -> Expenses: getAmount()
+activate Expenses
+Expenses --> ExpenseList: "amount"
+ExpenseList -> Expenses: getDescription()
+Expenses --> ExpenseList: "description"
+ExpenseList -> Expenses: getCategory()
+Expenses --> ExpenseList: "category"
+deactivate Expenses
+deactivate ExpenseList
+deactivate Duke
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml)

@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+participant ":Duke" as Duke #LightBlue
+participant ":ExpenseParser" as ExpenseParser #LightGreen
+participant ":AddExpenseCommand" as AddExpenseCommand #LightCoral
+participant ":ExpenseList" as ExpenseList #LightGoldenRodYellow
+autonumber
+
+
+
+User -> Duke: "add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>"
+activate Duke
+Duke -> ExpenseParser: ExpenseParser.parse()
+activate ExpenseParser
+
+
+
+ExpenseParser -> ExpenseParser: parseAddExpense()
+activate ExpenseParser
+deactivate ExpenseParser
+
+
+ExpenseParser -> AddExpenseCommand:input AMOUNT, DESCRIPTION, CATEGORY
+activate AddExpenseCommand
+
+AddExpenseCommand -> ExpenseList: addExpense()
+activate ExpenseList
+
+
+
+@enduml
