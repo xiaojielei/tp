@@ -1,26 +1,33 @@
 @startuml
-'Summary class diagram for budget tracker application
-
+' Class diagram focusing on Summary and its relationships
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classBackgroundColor #E3F2FD
+skinparam classArrowColor #1565C0
+skinparam noteBackgroundColor #FFF9C4
+skinparam noteBorderColor #FBC02D
 
   class Summary {
+    ' Core attributes
     - totalIncome : double
     - totalExpense : double
     - totalSavings : double
     - observers : List<FinancialObserver>
-    + getAvailableFunds()
-    + addIncome(...)
-    + addExpense(...)
-    + registerObserver(...)
+    ' Key methods for external interaction
+    + addIncome(income : double)
+    + addExpense(expense : double)
+    + addSavings(savings : double)
+    + getAvailableFunds() : double
+    + registerObserver(observer : FinancialObserver)
     - notifyObservers()
   }
 
   interface FinancialObserver {
-    + update(...)
+    + update(availableFunds : double, ...)
   }
 
   class FundsAlert {
     - warningThreshold : double
-    + setWarningThreshold(...)
     + update(...)
   }
 
@@ -28,13 +35,42 @@
     + displaySummary()
   }
 
+  class Saving {
+    + addSavings(amount : double)
+    + viewSavings()
+  }
+
+  class Duke {
+    ' Main controller
+  }
+
+  ' Command classes that update Summary
+  class "Command Classes" as Commands {
+    AddIncomeCommand
+    AddExpenseCommand
+    DeleteIncomeCommand
+    DeleteExpenseCommand
+  }
+
+  ' Relationships centered around Summary
   Summary o--> "0..*" FinancialObserver : notifies >
   FundsAlert ..|> FinancialObserver
   SummaryDisplay --> Summary : uses >
-  
+  Saving --> Summary : updates >
+  Commands --> Summary : modify >
+  Duke --> Summary : contains >
+  Duke --> SummaryDisplay
+  Duke --> Saving
+  Duke --> FundsAlert
+
+  note "**Central Financial Data Hub**\n• Stores all financial data\n• Provides financial status methods\n• Manages observer notifications" as N0
+  N0 .. Summary
+
   note "At runtime, Summary will have\nFundsAlert instances in its\nobservers collection" as N1
   N1 .. Summary
   N1 .. FundsAlert
 
+  note "**Observer Pattern Implementation**\n1. Summary maintains list of observers\n2. When financial data changes, Summary calls notifyObservers()\n3. Each observer's update() method is called with current financial data\n4. Default alert threshold is $5.00" as N2
+  N2 .. FinancialObserver
 
 @enduml

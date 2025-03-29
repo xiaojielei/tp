@@ -88,22 +88,36 @@ commands into individual classes.
 
 ### Summary Component
 
-The Summary component is the core financial model of the application that maintains all financial data and provides methods to manipulate and retrieve this information.
+The Summary component is the central financial data hub of the application that maintains all financial information and coordinates updates between different components through the Observer pattern.
 
 #### API: Summary.java
 
 Here's the class diagram of the Summary component:
 
-![Summary Class Diagram](images/summary.png)
+![Summary Class Diagram](images/Summary.png)
 
-How the Summary component works:
+#### Design:
 
-1. The `Summary` class maintains running totals of income, expenses, and savings.
-2. It provides methods to add and remove financial entries (income, expenses, savings).
-3. When financial data changes, the `Summary` notifies registered observers using the Observer pattern.
-4. Validation is performed to ensure data integrity (e.g., preventing negative balances).
+The Summary component follows these key design principles:
 
-The Summary class implements the Observer pattern to notify other components when financial data changes:
+1. **Central Data Repository**: The `Summary` class maintains running totals of income, expenses, and savings, serving as the single source of truth for financial data.
+
+2. **Observer Pattern Implementation**: 
+   * At runtime, `Summary` maintains a collection of `FinancialObserver` instances (such as `FundsAlert`)
+   * When financial data changes, `Summary` calls `notifyObservers()` which triggers the `update()` method on all registered observers
+   * This allows components like `FundsAlert` to react to financial changes without `Summary` needing to know the specific implementation details
+
+3. **Command Pattern Integration**:
+   * Command classes like `AddIncomeCommand`, `AddExpenseCommand`, `DeleteIncomeCommand`, and `DeleteExpenseCommand` modify the `Summary` state
+   * Each command encapsulates a specific financial operation, promoting single responsibility and maintainability
+
+4. **Data Access**:
+   * The `SummaryDisplay` class uses `Summary` to retrieve and format financial information for presentation
+   * The `Saving` class updates `Summary` when savings operations are performed
+
+#### Implementation:
+
+The Observer pattern implementation in Summary:
 
 ```java
 // In Summary.java
@@ -114,19 +128,25 @@ public void registerObserver(FinancialObserver observer) {
 }
 
 private void notifyObservers() {
+    double availableFunds = getAvailableFunds();
     for (FinancialObserver observer : observers) {
-        observer.update(getAvailableFunds(), totalIncome, totalExpense, totalSavings);
+        observer.update(availableFunds, totalIncome, totalExpense, totalSavings);
     }
 }
 ```
 
-Why it's implemented this way:
-* The Observer pattern allows loose coupling between the financial data model and components that need to respond to financial changes (like alerts).
-* Validation within each method ensures the application maintains a consistent financial state.
+#### Rationale:
 
-Alternatives considered:
-* Direct method calls to alert components when financial data changes, but this would create tight coupling.
-* Storing transaction history instead of running totals, but this would require more computation for each summary view.
+The Summary component is designed this way to:
+
+1. **Maintain Data Integrity**: Centralizing financial data in one component ensures consistency and reduces the risk of data synchronization issues.
+
+2. **Support Loose Coupling**: The Observer pattern allows components to react to financial changes without creating tight dependencies. 
+
+3. **Enable Extensibility**: New financial observers can be added without modifying the `Summary` class, following the Open-Closed Principle.
+
+4. **Facilitate Testing**: The clear separation of responsibilities makes it easier to test individual components in isolation.
+
 
 ### Summary Display Component
 
