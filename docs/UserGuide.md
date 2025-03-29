@@ -60,6 +60,7 @@ view expense                                                 Lists all expense r
 --- Savings Management ---
 add savings <AMOUNT>                                         Adds a savings record.
 delete savings <INDEX>                                       Deletes a savings record by index.
+transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            Transfers certain amount of cash of one saving record to another.
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---
@@ -211,6 +212,130 @@ Example of usage:
 ============================
 ```
 
+### Deleting savings: delete a saving entry
+
+Deletes a savings record by index.
+
+Format: `delete savings <INDEX>`
+
+Example of usage:
+
+```
+> add savings 100.00
+Sure! I have added your savings:
+1. [ ] 100.00
+Now you have 1 saving in your list.
+
+> delete savings 1
+Sure! I have deleted the saving:
+1. [ ] 100.00
+   Now you have 0 savings in your list.
+```
+
+### Setting savings goal: savings goal set <AMOUNT> / <DESCRIPTION>
+
+Sets a savings goal with amount and description.
+
+Format: `savings goal set <AMOUNT> / <DESCRIPTION>`
+
+Example of usage:
+
+```
+> add savings 100.00
+Sure! I have added your savings:
+1. [ ] 100.00
+Now you have 1 saving in your list.
+
+> savings goal set 100.00/buy food
+I have set your saving goal:
+1. [buy food] 100.00
+```
+
+### Viewing savings goals: savings goal view
+Displays all current savings goals.
+
+Format: `savings goal view`
+
+Example of usage:
+
+```
+> add savings 100.00
+Sure! I have added your savings:
+1. [ ] 100.00
+Now you have 1 saving in your list.
+
+> savings goal view
+1. [buy food] 100.00
+```
+
+### Updating savings goal: update a savings goal 
+
+Updates an existing savings goal by index with new amount and description.
+
+Format: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
+
+Example of usage:
+
+```
+> add savings 100.00
+Sure! I have added your savings:
+1. [ ] 100.00
+Now you have 1 saving in your list.
+
+> savings goal update 1 100.00/donate
+I have updated your saving amount and saving goal:
+1. [donate] 100.00
+```
+
+### Deleting savings goal: delete a savings goal
+
+Deletes a savings goal by index.
+
+Format: `savings goal delete <INDEX>`
+
+Example of usage:
+
+```
+> add savings 100.00
+Sure! I have added your savings:
+1. [ ] 100.00
+Now you have 1 saving in your list.
+
+> savings goal set 100.00/buy food
+I have set your saving goal:
+1. [buy food] 100.00
+
+> savings goal delete 1
+I have deleted the saving goal:
+1. [ ] 100.00
+```
+
+### Transferring savings: transfer savings amount
+
+Transfers certain amount of one saving record to another
+
+Format: `transfer savings <INDEX1> <INDEX2> <AMOUNT>`
+
+Example of usage:
+
+```
+> add savings 100.00
+Sure! I have added your savings:
+1. [ ] 100.00
+Now you have 1 saving in your list.
+
+> add savings 200.00
+Sure! I have added your savings:
+1. [ ] 200.00
+Now you have 2 saving in your list.
+
+transfer savings 1 2 50.0
+Transferred 50.0 from savings 1 to savings 2.
+Updated records:
+1. [ ] 50.0
+2. [ ] 250.0
+```
+
 ### Exit the Application: `bye`
 
 Exits the Common Cents application.
@@ -245,6 +370,13 @@ Common Cents provides informative error messages for invalid commands:
 * Add income: `add income <AMOUNT> / <DESCRIPTION>`
 * Add expense: `add expense <AMOUNT> / <DESCRIPTION>`
 * Add to savings: `add savings <AMOUNT> / <DESCRIPTION>`
+* Delete savings: `delete savings <INDEX>`
+* Transfer savings: `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>`
+* View savings: `view savings`
+* Set savings goal: `savings goal set <AMOUNT> / <DESCRIPTION>`
+* View savings goal: `savings goal view`
+* Update savings goal: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
+* Delete savings goal: `savings goal delete <INDEX>`
 * View income entries: `view income`
 * View expense entries: `view expense`
 * View savings entries: `view savings`
