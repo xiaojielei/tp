@@ -95,4 +95,36 @@ public class FundsAlertTest {
         assertTrue(output.contains("alert set"),
                 "Initial notification should mention how to change the threshold");
     }
+    
+    @Test
+    public void update_thresholdChangedAndFundsCrossThreshold_correctAlertBehavior() throws BudgetTrackerException {
+        // First set a higher threshold
+        fundsAlert.setWarningThreshold(20.0);
+        
+        // Test with funds above new threshold - should not trigger alert
+        outputStream.reset();
+        fundsAlert.update(25.0, 100.0, 75.0, 0.0);
+        String output1 = outputStream.toString();
+        assertFalse(output1.contains("WARNING"), 
+                "No alert should be triggered when funds are above the new threshold");
+        
+        // Test with funds below new threshold but above original threshold - should trigger alert
+        outputStream.reset();
+        fundsAlert.update(15.0, 100.0, 85.0, 0.0);
+        String output2 = outputStream.toString();
+        assertTrue(output2.contains("WARNING") && output2.contains("below warning threshold"),
+                "Alert should be triggered when funds are below the new threshold");
+        assertTrue(output2.contains("$15.00") && output2.contains("$20.00"),
+                "Alert should show the correct available funds and threshold values");
+        
+        // Reset threshold to lower value
+        fundsAlert.setWarningThreshold(10.0);
+        
+        // Same funds should now be above threshold - should not trigger alert
+        outputStream.reset();
+        fundsAlert.update(15.0, 100.0, 85.0, 0.0);
+        String output3 = outputStream.toString();
+        assertFalse(output3.contains("WARNING"),
+                "No alert should be triggered when threshold is lowered below the available funds");
+    }
 }
