@@ -48,6 +48,8 @@ public class HelpDisplay {
         addCategory(SAVINGS_HEADING);
         addCommandHelp("add savings <AMOUNT>", "Adds a savings record.");
         addCommandHelp("delete savings <INDEX>", "Deletes a savings record by index.");
+        addCommandHelp("transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>",
+                "transfers a specified amount from one savings record to another.");
         addCommandHelp("view savings", "Lists all savings records.");
 
         addCategory(SUMMARY_HEADING);
@@ -60,9 +62,6 @@ public class HelpDisplay {
                 , "Updates an existing savings goal.");
         addCommandHelp("savings goal delete <INDEX>", "Deletes a savings goal by index.");
         addCommandHelp("exit savings", "exited savings function");
-
-        addCommandHelp("transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>",
-                "transfers a specified amount from one savings record to another.");
 
         addCategory(ALERTS_HEADING);
         addCommandHelp("alert set <AMOUNT>", "Sets the warning threshold for low available funds.");
