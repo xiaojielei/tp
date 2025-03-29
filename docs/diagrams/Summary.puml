@@ -1,0 +1,40 @@
+@startuml
+'Summary class diagram for budget tracker application
+
+
+  class Summary {
+    - totalIncome : double
+    - totalExpense : double
+    - totalSavings : double
+    - observers : List<FinancialObserver>
+    + getAvailableFunds()
+    + addIncome(...)
+    + addExpense(...)
+    + registerObserver(...)
+    - notifyObservers()
+  }
+
+  interface FinancialObserver {
+    + update(...)
+  }
+
+  class FundsAlert {
+    - warningThreshold : double
+    + setWarningThreshold(...)
+    + update(...)
+  }
+
+  class SummaryDisplay {
+    + displaySummary()
+  }
+
+  Summary o--> "0..*" FinancialObserver : notifies >
+  FundsAlert ..|> FinancialObserver
+  SummaryDisplay --> Summary : uses >
+  
+  note "At runtime, Summary will have\nFundsAlert instances in its\nobservers collection" as N1
+  N1 .. Summary
+  N1 .. FundsAlert
+
+
+@enduml

@@ -88,22 +88,38 @@ commands into individual classes.
 
 ### Summary Component
 
-The Summary component is the core financial model of the application that maintains all financial data and provides methods to manipulate and retrieve this information.
+The Summary component is the central financial data hub of the application that maintains all financial information and coordinates updates between different components through the Observer pattern.
 
 #### API: Summary.java
 
 Here's the class diagram of the Summary component:
 
-![Summary Class Diagram](images/summary.png)
+<div align="center">
+  <img src="images/Summary.png" alt="Summary Class Diagram" width="700"/>
+</div>
 
-How the Summary component works:
+#### Design:
 
-1. The `Summary` class maintains running totals of income, expenses, and savings.
-2. It provides methods to add and remove financial entries (income, expenses, savings).
-3. When financial data changes, the `Summary` notifies registered observers using the Observer pattern.
-4. Validation is performed to ensure data integrity (e.g., preventing negative balances).
+The Summary component follows these key design principles:
 
-The Summary class implements the Observer pattern to notify other components when financial data changes:
+1. **Central Data Repository**: The `Summary` class maintains running totals of income, expenses, and savings, serving as a manager for financial data.
+
+2. **Observer Pattern Implementation**: 
+   * At runtime, `Summary` maintains a collection of `FinancialObserver` instances (such as `FundsAlert`)
+   * When financial data changes, `Summary` calls `notifyObservers()` which triggers the `update()` method on all registered observers
+   * This allows components like `FundsAlert` to react to financial changes without `Summary` needing to know the specific implementation details
+
+3. **Command Pattern Integration**:
+   * Command classes like `AddIncomeCommand`, `AddExpenseCommand`, `DeleteIncomeCommand`, and `DeleteExpenseCommand` modify the `Summary` state
+   * Each command encapsulates a specific financial operation, promoting single responsibility and maintainability
+
+4. **Data Access**:
+   * The `SummaryDisplay` class uses `Summary` to retrieve and format financial information for presentation
+   * The `Saving` class updates `Summary` when savings operations are performed
+
+#### Implementation:
+
+The Observer pattern implementation in Summary:
 
 ```java
 // In Summary.java
@@ -114,19 +130,25 @@ public void registerObserver(FinancialObserver observer) {
 }
 
 private void notifyObservers() {
+    double availableFunds = getAvailableFunds();
     for (FinancialObserver observer : observers) {
-        observer.update(getAvailableFunds(), totalIncome, totalExpense, totalSavings);
+        observer.update(availableFunds, totalIncome, totalExpense, totalSavings);
     }
 }
 ```
 
-Why it's implemented this way:
-* The Observer pattern allows loose coupling between the financial data model and components that need to respond to financial changes (like alerts).
-* Validation within each method ensures the application maintains a consistent financial state.
+#### Rationale:
 
-Alternatives considered:
-* Direct method calls to alert components when financial data changes, but this would create tight coupling.
-* Storing transaction history instead of running totals, but this would require more computation for each summary view.
+The Summary component is designed this way to:
+
+1. **Maintain Data Integrity**: Centralizing financial data in one component ensures consistency and reduces the risk of data synchronization issues.
+
+2. **Support Loose Coupling**: The Observer pattern allows components to react to financial changes without creating tight dependencies. 
+
+3. **Enable Extensibility**: New financial observers can be added without modifying the `Summary` class.
+
+4. **Facilitate Testing**: The clear separation of responsibilities makes it easier to test individual components in isolation.
+
 
 ### Summary Display Component
 
@@ -134,9 +156,11 @@ The SummaryDisplay component formats and presents financial data to the user in 
 
 #### API: SummaryDisplay.java
 
-The sequence diagram below shows how the `view summary` command is processed:
+The sequence diagram below illustrates how the Summary Display component interacts with the Summary component:
 
-![Summary Display Sequence Diagram](images/ViewSummary.png)
+<div align="center">
+  <img src="images/ViewSummary.png" alt="Summary Display Sequence Diagram" width="700"/>
+</div>
 
 How the SummaryDisplay component works:
 
@@ -173,13 +197,65 @@ The FundsAlert component implements a warning system that alerts users when thei
 
 The sequence diagram below shows what happens when a user sets an alert threshold:
 
-![Set Alert Sequence Diagram](images/SetAlert.png)
+<div align="center">
+  <img src="images/SetAlert.png" alt="Set Alert Sequence Diagram" width="700"/>
+</div>
 
 The sequence diagram below shows what happens when an alert is triggered:
 
-![Trigger Alert Sequence Diagram](images/TriggerAlert.png)
+<div align="center">
+  <img src="images/TriggerAlert.png" alt="Trigger Alert Sequence Diagram" width="700"/>
+</div>
 
-How the FundsAlert component works:
+#### Implementation:
+
+The FundsAlert component uses the Observer pattern to monitor the financial state:
+
+```java
+// In FundsAlert.java
+public class FundsAlert implements FinancialObserver {
+    private double warningThreshold = 5.0; // Default threshold
+    
+    @Override
+    public void update(double availableFunds, double totalIncome, double totalExpense, double totalSavings) {
+        checkAndDisplayAlert(availableFunds);
+    }
+    
+    private void checkAndDisplayAlert(double availableFunds) {
+        if (availableFunds < warningThreshold) {
+            // Display alert to user
+        }
+    }
+    
+    public void displayInitialNotification() {
+        // Displays information about the alert feature when program starts
+        // Informs user of current threshold and how to change it
+    }
+}
+```
+
+In the main `Duke` class, the `FundsAlert` component is initialized and registered as an observer:
+
+```java
+// In Duke.java constructor
+fundsAlert = new FundsAlert(ui);
+summary.registerObserver(fundsAlert);
+```
+
+Then in the `runDuke()` method, the initial notification is displayed upon startup:
+
+```java
+// In Duke.java runDuke method
+public void runDuke() {
+    fundsAlert.displayInitialNotification(); // Displays intro message about alert feature
+    
+    // Main program loop continues...
+}
+```
+
+This ensures users are informed about the funds alert feature as soon as they start the application, making them aware of this financial safeguard and how to customize it to their needs.
+
+#### How it works:
 
 1. `FundsAlert` implements the `FinancialObserver` interface to receive updates from the `Summary` component.
 2. It maintains a warning threshold (default $5.00) that can be customized by the user.
@@ -198,11 +274,13 @@ Triggering an alert:
 
 Why it's implemented this way:
 * The Observer pattern allows FundsAlert to be notified of financial changes without tight coupling to Summary.
-* This design follows the Open/Closed Principle, making it easy to add new types of financial observers without modifying Summary.
+* This design makes it easy to add new types of financial observers without modifying Summary.
+* Displaying the initial notification at startup ensures users are aware of this feature from the beginning.
 
 Alternatives considered:
 * Checking funds after each transaction in Duke.java, but this would scatter alert logic throughout the codebase.
 * A polling approach where alerts check the summary periodically, but this would be less efficient and responsive.
+* Not showing an initial notification, but this would reduce user awareness of the feature.
 
 ## Savings component
 
