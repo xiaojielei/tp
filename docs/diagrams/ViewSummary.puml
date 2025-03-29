@@ -1,5 +1,4 @@
 @startuml
-hide footbox
 actor User
 participant ":Duke" as Duke #LightBlue
 participant ":SummaryDisplay" as SummaryDisplay #LightGreen

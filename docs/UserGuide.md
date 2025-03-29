@@ -7,7 +7,7 @@ Common Cents is a Command Line Interface (CLI) financial management application 
 ## Quick Start
 
 1. Ensure that you have Java 17 or above installed.
-2. Download the latest version of `Common Cents` from [here](http://link.to/commoncents).
+2. Download the latest version of `Common Cents` from [here](https://github.com/AY2425S2-CS2113-T11A-4/tp).
 3. Copy the file to the folder you want to use as the home folder for Common Cents.
 4. Open a command terminal and navigate to the folder.
 5. Run the command `java -jar commoncents.jar` to start the application.
