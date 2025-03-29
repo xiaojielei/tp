@@ -56,7 +56,7 @@ public class ExpenseList {
      */
     public boolean deleteExpense(int expenseNumber) {
         if (expenseNumber > 0 && expenseNumber <= expenses.size()) {
-            expenses.remove(expenseNumber - 1); // List is 0-indexed, so we subtract 1
+            expenses.remove(expenseNumber - 1); // List is 0-indexed, so subtract 1
             return true;
         }
         return false;
