@@ -130,6 +130,15 @@ public class Summary {
         if (income > this.totalIncome) {
             throw new BudgetTrackerException("Cannot remove more income than the current total income.");
         }
+
+        double availableBalance = getAvailableFunds();
+        if (availableBalance - income < 0) {
+            throw new BudgetTrackerException("Cannot remove this income "
+                    + "as it would result in negative available funds. "
+                    + "Current expenses: " + totalExpense + ", Available balance after removal would be: " 
+                    + (availableBalance - income));
+        }
+        
         double oldIncome = this.totalIncome;
         this.totalIncome -= income;
         
