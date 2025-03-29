@@ -17,6 +17,7 @@ view expense                                                 Lists all expense r
 --- Savings Management ---
 add savings <AMOUNT>                                         Adds a savings record.
 delete savings <INDEX>                                       Deletes a savings record by index.
+transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount from one savings record to another.
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---
@@ -28,7 +29,6 @@ savings goal view                                            Views all current s
 savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>       Updates an existing savings goal.
 savings goal delete <INDEX>                                  Deletes a savings goal by index.
 exit savings                                                 exited savings function
-transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount from one savings record to another.
 
 --- Funds Alerts ---
 alert set <AMOUNT>                                           Sets the warning threshold for low available funds.
@@ -69,32 +69,21 @@ Here are the savings in your list:
 2. 	[ ] 100.0
 You have 2 saving(s) in total.
 Savings Indicator: Bad - Try to save more.
-
-====== ALERT ======
-WARNING: Available funds ($-45.50) are below warning threshold ($5.00)
-===================
-
-Deleted income entry at index 1
-Successfully deleted income at index 1
+Error: Failed to delete income due to an unexpected error.
 ===== BUDGET SUMMARY =====
-Total Income:        $200.50
+Total Income:        $1200.50
 Total Expenses:      $246.00
-Available Balance:   $-45.50
+Available Balance:   $954.50
 Total Savings:       $250.00
 ===========================
-
-====== ALERT ======
-WARNING: Available funds ($4.50) are below warning threshold ($5.00)
-===================
-
 Deleted expense number 2.
 Your Expenses:
 1. [FOOD] $120.75 from groceries
 2. [FOOD] $75.25 from dinner
 ===== BUDGET SUMMARY =====
-Total Income:        $200.50
+Total Income:        $1200.50
 Total Expenses:      $196.00
-Available Balance:   $4.50
+Available Balance:   $1004.50
 Total Savings:       $250.00
 ===========================
 Exiting the application. Goodbye!

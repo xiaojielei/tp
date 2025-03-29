@@ -130,6 +130,15 @@ public class Summary {
         if (income > this.totalIncome) {
             throw new BudgetTrackerException("Cannot remove more income than the current total income.");
         }
+
+        double availableBalance = getAvailableFunds();
+        if (availableBalance - income < 0) {
+            throw new BudgetTrackerException("Cannot remove this income "
+                    + "as it would result in negative available funds. "
+                    + "Current expenses: " + totalExpense + ", Available balance after removal would be: " 
+                    + (availableBalance - income));
+        }
+        
         double oldIncome = this.totalIncome;
         this.totalIncome -= income;
         
@@ -194,7 +203,7 @@ public class Summary {
      * Adds savings to the total savings.
      *
      * @param savings The amount of savings to add.
-     * @throws BudgetTrackerException If the savings are negative or greater than available funds.
+     * @throws BudgetTrackerException If the savings are negative.
      */
     public void addSavings(double savings) throws BudgetTrackerException {
         if (savings <= 0) {
