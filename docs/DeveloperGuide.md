@@ -169,7 +169,7 @@ The Summary component is the central financial data hub of the application that 
 Here's the class diagram of the Summary component:
 
 <div align="center">
-  <img src="images/Summary.png" alt="Summary Class Diagram" width="700"/>
+  <img src="images/Summary.png" alt="Summary Class Diagram" width="1000"/>
 </div>
 
 #### Design:
@@ -272,13 +272,13 @@ The FundsAlert component implements a warning system that alerts users when thei
 The sequence diagram below shows what happens when a user sets an alert threshold:
 
 <div align="center">
-  <img src="images/SetAlert.png" alt="Set Alert Sequence Diagram" width="700"/>
+  <img src="images/SetAlert.png" alt="Set Alert Sequence Diagram" width="1000"/>
 </div>
 
 The sequence diagram below shows what happens when an alert is triggered:
 
 <div align="center">
-  <img src="images/TriggerAlert.png" alt="Trigger Alert Sequence Diagram" width="700"/>
+  <img src="images/TriggerAlert.png" alt="Trigger Alert Sequence Diagram" width="1000"/>
 </div>
 
 #### Implementation:
