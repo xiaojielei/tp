@@ -38,7 +38,7 @@ Common Cents is a personal finance management application that helps you track y
 
 ### Expense Management
 - **Add Expense**:
-    - `add expense <AMOUNT> / <SOURCE> / <CATEGORY>`
+    - `add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>`
     - Adds a new expense record with the specified amount, source, and category
     - Example: `add expense 50 / Lunch / F`
     - Note: Categories are F (Food), T (Transport), B (Bills), O (Others)
