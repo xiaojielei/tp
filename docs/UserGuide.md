@@ -232,7 +232,7 @@ Sure! I have deleted the saving:
    Now you have 0 savings in your list.
 ```
 
-### Setting savings goal: savings goal set <AMOUNT> / <DESCRIPTION>
+### Setting savings goal: savings goal set
 
 Sets a savings goal with amount and description.
 
@@ -272,7 +272,7 @@ Now you have 1 saving in your list.
 
 Updates an existing savings goal by index with new amount and description.
 
-Format: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
+Format: `savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>`
 
 Example of usage:
 
@@ -329,7 +329,7 @@ Sure! I have added your savings:
 1. [ ] 200.00
 Now you have 2 saving in your list.
 
-transfer savings 1 2 50.0
+> transfer savings 1 2 50.0
 Transferred 50.0 from savings 1 to savings 2.
 Updated records:
 1. [ ] 50.0
