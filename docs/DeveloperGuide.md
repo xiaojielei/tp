@@ -160,6 +160,33 @@ Alternatives considered:
 (add, delete, list). However, this would lead to bloated code and a lack of clarity, so we chose to separate the 
 commands into individual classes.
 
+### Saving Class
+The savings component is an important component of the Budget Tracker, and it allows
+students to add, delete, view saving amounts, and set, update, delete view savings goal
+for each of the saving entry.
+
+#### API: Saving.java
+
+Here's the class diagram of the Saving component:
+
+![Saving class Diagram](img_1.png)
+
+How the Saving component works:
+
+In the main method which is called Duke, when it detects input contains "savings" string,
+the main method will teh call run() which belongs to Saving.java. run() will check if input
+contains other strings like "add savings", "delete savings", etc., then call the corresponding
+method to dealt with the input command.
+
+Saving sequence diagram: (below only used the excecution of 1 method as example,
+the sequence diagram of other methods are similar)
+![img_2.png](img_2.png)
+
+Why it's implemented this way:
+1. Used a separate class to handle all commands related to saving records to reduce coupling
+2. Implemented run() method in Saving.java to improve the neatness of whole program
+
+
 ### Summary Component
 
 The Summary component is the central financial data hub of the application that maintains all financial information and coordinates updates between different components through the Observer pattern.
@@ -433,7 +460,7 @@ financial situations.
 | v2.0    | financial planner | get an alert when my account balance is below a certain amount | avoid overspending and maintain financial discipline   |
 | v2.0    | user              | navigate through the CLI easily                                | save time and effort while managing my finances        |
 | v2.0    | user              | view indicators (good/bad) based on amount saved               | discourage excessive spending                          |
-
+| v2.0    | user              | transfer certain amount of savings from one entry to another   | toggle amount of savings for different saving goals    |
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
@@ -445,3 +472,4 @@ financial situations.
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+

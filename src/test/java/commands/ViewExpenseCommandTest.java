@@ -25,6 +25,19 @@ public class ViewExpenseCommandTest {
     }
 
     @Test
+    public void viewExpense_noExpenses_expectEmpty() throws BudgetTrackerException {
+        AddIncomeCommand addIncome = new AddIncomeCommand(300.0, "salary", summary);
+        addIncome.incomeExecute(IncomeManager.getInstance(), ui);
+
+        ViewExpenseCommand viewCommand = new ViewExpenseCommand(expenseList);
+        viewCommand.execute(expenseList, ui);
+
+        assertEquals(0, expenseList.getExpenses().size(), "Expense list should be empty.");
+
+
+    }
+
+    @Test
     public void viewExpense_expectNumberedExpenseList() throws BudgetTrackerException {
         AddIncomeCommand addIncome = new AddIncomeCommand(300.0, "salary", summary);
         addIncome.incomeExecute(IncomeManager.getInstance(), ui);

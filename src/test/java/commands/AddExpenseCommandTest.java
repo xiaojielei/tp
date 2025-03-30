@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddExpenseCommandTest {
     private ExpenseList expenseList;
@@ -94,5 +95,27 @@ public class AddExpenseCommandTest {
         assertEquals(amount, expenseList.getExpenses().get(0).getAmount(), "Amount should be the same.");
         assertEquals(description, expenseList.getExpenses().get(0).getDescription(), "Description should be the same.");
         assertEquals(category, expenseList.getExpenses().get(0).getCategory(), "Category should be OTHERS.");
+    }
+
+    @Test
+    void addExpense_wrongCategory_expectException() throws BudgetTrackerException{
+        AddIncomeCommand addIncome = new AddIncomeCommand(300.0, "salary", summary);
+        addIncome.incomeExecute(IncomeManager.getInstance(), ui);
+
+        assertThrows(BudgetTrackerException.class, () -> {
+            Category category = Expense.getCategoryFromInput("M"); // This should trigger the exception
+            AddExpenseCommand command = new AddExpenseCommand(50.0, "Shopping", category, summary);
+            command.execute(expenseList, ui);
+        });
+    }
+
+    @Test
+    public void addExpense_noIncome_expectException() throws BudgetTrackerException{
+        assertThrows(BudgetTrackerException.class, () -> {
+            Category category = Expense.getCategoryFromInput("M"); // This should trigger the exception
+            AddExpenseCommand command = new AddExpenseCommand(50.0, "Shopping", category, summary);
+            command.execute(expenseList, ui);
+        });
+        assertEquals(0, expenseList.getExpenses().size(), "Expense list should contain no expenses.");
     }
 }
