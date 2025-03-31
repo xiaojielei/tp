@@ -297,6 +297,22 @@ Total Savings: $200.00
 Available Funds: $400.00
 ```
 
+#### Data Validation
+
+The Summary component includes built-in validation to ensure financial data integrity:
+- All amounts (income, expenses, savings) must be positive numbers
+- You cannot remove more income than your current total
+- You cannot add expenses that would result in negative available funds
+- You cannot remove more expenses or savings than currently recorded
+
+#### Financial Calculations
+
+The Summary component automatically:
+- Recalculates available funds after every transaction
+- Updates all observers (like the alert system) when financial data changes
+- Maintains running totals for all financial categories
+- Ensures data consistency across the application
+
 ### Alert System
 
 #### Low Funds Alert System
@@ -340,6 +356,14 @@ The alert system:
 - Has a default threshold of $5.00
 - Can be customized to any positive amount
 - Shows warnings immediately when funds drop below the threshold
+
+#### Alert System Features
+
+The FundsAlert component provides these additional features:
+- **Initial Notification**: Displays information about the alert feature when you start the application
+- **Real-time Monitoring**: Continuously checks your financial status after every transaction
+- **Customizable Threshold**: Allows you to set a warning level that matches your financial comfort zone
+- **Clear Visual Warnings**: Displays prominent alerts when your funds drop below the threshold
 
 ### Help Display: `help`
 
@@ -394,6 +418,15 @@ The help command organizes information into these categories:
 2. Alert System Commands
 3. Viewing Commands
 Each category shows relevant commands with their formats and examples.
+
+#### Help Display Features
+
+The HelpDisplay component:
+- Organizes commands into logical categories for easier reference
+- Formats command information consistently with clear descriptions
+- Aligns text for better readability
+- Provides a comprehensive overview of all available functionality
+- Includes proper syntax examples for each command
 
 ### Exit: `exit`
 
