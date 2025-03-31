@@ -180,7 +180,7 @@ method to dealt with the input command.
 
 Saving sequence diagram: (below only used the excecution of 1 method as example,
 the sequence diagram of other methods are similar)
-![img_2.png](images/SavingSequenceDiagram.png)
+![Saving Sequence Diagram.png](images/SavingSequenceDiagram.png)
 
 Why it's implemented this way:
 1. Used a separate class to handle all commands related to saving records to reduce coupling
