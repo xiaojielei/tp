@@ -35,7 +35,8 @@ public class ExpenseParser {
             if (argument.startsWith("expense ")) {
                 return parseAddExpense(argument.substring(8).trim(), summary);
             } else {
-                throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <SOURCE> / <CATEGORY>");
+                throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <DESCRIPITON> / " +
+                        "<CATEGORY>");
             }
 
         case "view":
@@ -66,12 +67,12 @@ public class ExpenseParser {
      */
     private static Command parseAddExpense(String argument, Summary summary) throws BudgetTrackerException {
         if (argument.isEmpty()) {
-            throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <SOURCE> / <CATEGORY>");
+            throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>");
         }
 
         String[] parts = argument.split(" / ", 3);
         if (parts.length < 3) {
-            throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <SOURCE> / <CATEGORY>");
+            throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>");
         }
 
         try {

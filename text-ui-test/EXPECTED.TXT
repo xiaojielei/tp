@@ -10,7 +10,7 @@ delete income <INDEX>                                        Deletes an income r
 view income                                                  Lists all income records.
 
 --- Expense Management ---
-add expense <AMOUNT> / <SOURCE> / <CATEGORY>                 Adds an expense record.
+add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>            Adds an expense record.
 delete expense <INDEX>                                       Deletes an expense record by index.
 view expense                                                 Lists all expense records.
 
@@ -45,13 +45,14 @@ List of income entries:
 2. $200.5 from part-time job
 Total Income: $1200.5
 Successfully listed income entries.
-Added expense: [FOOD] $120.75 from groceries
-Added expense: [TRANSPORT] $50.0 from transportation
-Added expense: [FOOD] $75.25 from dinner
-Your Expenses:
-1. [FOOD] $120.75 from groceries
-2. [TRANSPORT] $50.0 from transportation
-3. [FOOD] $75.25 from dinner
+Added expense: [FOOD] $120.75 for groceries
+Added expense: [TRANSPORT] $50.0 for transportation
+Added expense: [FOOD] $75.25 for dinner
+===== EXPENSE ENTRIES =====
+1. [FOOD] $120.75 for groceries
+2. [TRANSPORT] $50.0 for transportation
+3. [FOOD] $75.25 for dinner
+============================
 ===== BUDGET SUMMARY =====
 Total Income:        $1200.50
 Total Expenses:      $246.00
@@ -77,9 +78,10 @@ Available Balance:   $954.50
 Total Savings:       $250.00
 ===========================
 Deleted expense number 2.
-Your Expenses:
-1. [FOOD] $120.75 from groceries
-2. [FOOD] $75.25 from dinner
+===== EXPENSE ENTRIES =====
+1. [FOOD] $120.75 for groceries
+2. [FOOD] $75.25 for dinner
+============================
 ===== BUDGET SUMMARY =====
 Total Income:        $1200.50
 Total Expenses:      $196.00

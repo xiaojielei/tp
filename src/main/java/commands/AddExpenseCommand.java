@@ -44,7 +44,7 @@ public class AddExpenseCommand extends Command {
             // Update the summary with the new expense
             summary.addExpense(amount);
 
-            ui.showMessage("Added expense: [" + category + "] $" + amount + " from " + description);
+            ui.showMessage("Added expense: [" + category + "] $" + amount + " for " + description);
         } catch (BudgetTrackerException e) {
             ui.showMessage("Error adding expense: " + e.getMessage());
         }
