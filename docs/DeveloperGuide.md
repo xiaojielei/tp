@@ -169,7 +169,7 @@ for each of the saving entry.
 
 Here's the class diagram of the Saving component:
 
-![Saving class Diagram](img_1.png)
+![Saving class Diagram](images/Saving.png)
 
 How the Saving component works:
 
@@ -180,7 +180,7 @@ method to dealt with the input command.
 
 Saving sequence diagram: (below only used the excecution of 1 method as example,
 the sequence diagram of other methods are similar)
-![img_2.png](img_2.png)
+![Saving Sequence Diagram.png](images/SavingSequenceDiagram.png)
 
 Why it's implemented this way:
 1. Used a separate class to handle all commands related to saving records to reduce coupling

@@ -82,13 +82,19 @@ public class Saving {
      * @param index The index of the savings record to delete.
      */
     public void deleteSavings(int index) {
-        if (index >= 0 && index < savingsRecords.size()) {
+        int zeroBasedIndex = index - 1;
+        if (zeroBasedIndex >= 0 && zeroBasedIndex < savingsRecords.size()) {
+            SavingsRecord removedRecord = savingsRecords.get(zeroBasedIndex);
+
             System.out.println("Sure! I have deleted the saving:");
-            System.out.println((index + 1) + ". \t" + savingsRecords.get(index));
-            savingsRecords.remove(index);
+            System.out.println(index + ". \t" + removedRecord);
+
+            savingsRecords.remove(zeroBasedIndex);
+
             System.out.println("Now you have " + savingsRecords.size() + " savings in your list.");
+
             try {
-                summary.removeSavings(savingsRecords.get(index).amount);
+                summary.removeSavings(removedRecord.amount);
             } catch (BudgetTrackerException e) {
                 throw new RuntimeException(e);
             }
@@ -96,6 +102,8 @@ public class Saving {
             System.out.println("Invalid index.");
         }
     }
+
+
 
     /**
      * Displays all savings records.
@@ -224,7 +232,7 @@ public class Saving {
             }
         } else if (input.contains("delete savings")) {
             try {
-                int index = Integer.parseInt(parts[2]) - 1;
+                int index = Integer.parseInt(parts[2]);
                 deleteSavings(index);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("Invalid index format.");
