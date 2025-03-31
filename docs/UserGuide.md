@@ -53,7 +53,7 @@ delete income <INDEX>                                        Deletes an income r
 view income                                                  Lists all income records.
 
 --- Expense Management ---
-add expense <AMOUNT> / <SOURCE>                              Adds an expense record.
+add expense <AMOUNT> / <SOURCE> / <CATEGORY>                 Adds an expense record.
 delete expense <INDEX>                                       Deletes an expense record by index.
 view expense                                                 Lists all expense records.
 
@@ -135,16 +135,17 @@ Added income: $50.00 from salary
 
 Adds a new expense entry to your financial record.
 
-Format: `add expense <AMOUNT> / <DESCRIPTION>`
+Format: `add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>`
 
 * `<AMOUNT>` must be a positive number.
 * `<DESCRIPTION>` is a description of what the expense was for.
+* `<CATEGORY>` is the category of the expense (F (Food), T (Transport), B (Bills), O (Others))
 
 Example of usage:
 
 ```
 > add expense 25 / food
-Added expense: $25.00 for food
+Added expense: [FOOD] $25.00 for food
 ```
 
 ### Adding to Savings: `add savings`
@@ -191,9 +192,9 @@ Example of usage:
 ```
 > view expense
 ===== EXPENSE ENTRIES =====
-1. $25.00 for food
-2. $50.00 for utilities
-============================
+1. [FOOD] $25.00 for food
+2. [BILLS] $50.00 for utilities
+===========================
 ```
 
 ### Viewing Savings: `view savings`
@@ -368,9 +369,10 @@ Common Cents provides informative error messages for invalid commands:
 * View help information: `help`
 * Set alert threshold: `alert set <AMOUNT>`
 * Add income: `add income <AMOUNT> / <DESCRIPTION>`
-* Add expense: `add expense <AMOUNT> / <DESCRIPTION>`
+* Add expense: `add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>`
 * Add to savings: `add savings <AMOUNT> / <DESCRIPTION>`
 * Delete savings: `delete savings <INDEX>`
+* Delete expense entry: `delete expense <INDEX>`
 * Transfer savings: `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>`
 * View savings: `view savings`
 * Set savings goal: `savings goal set <AMOUNT> / <DESCRIPTION>`

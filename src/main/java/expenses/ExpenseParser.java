@@ -24,6 +24,8 @@ public class ExpenseParser {
     public static Command parse(String fullCommand,
                                 Summary summary,
                                 ExpenseList expenseList) throws BudgetTrackerException {
+        assert fullCommand != null : "User command should not be null.";
+        assert !fullCommand.trim().isEmpty() : "User command should not be empty.";
         String[] words = fullCommand.split(" ", 2);  // Split the command into words
         String commandWord = words[0].toLowerCase(); // First word is the command
         String argument = words.length > 1 ? words[1] : ""; // Remaining part is the argument
@@ -95,6 +97,7 @@ public class ExpenseParser {
     private static Command parseDeleteExpense(String argument, Summary summary) throws BudgetTrackerException {
         try {
             int expenseNumber = Integer.parseInt(argument.trim());
+            assert expenseNumber > 0 : "Expense number should be greater than zero.";
             return new DeleteExpenseCommand(expenseNumber, summary);
         } catch (NumberFormatException e) {
             throw new BudgetTrackerException("Invalid expense number! Please enter a valid number.");
