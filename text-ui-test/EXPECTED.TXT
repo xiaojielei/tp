@@ -69,7 +69,7 @@ Here are the savings in your list:
 2. 	[ ] 100.0
 You have 2 saving(s) in total.
 Savings Indicator: Bad - Try to save more.
-Error: Failed to delete income due to an unexpected error.
+Cannot remove this income as it would result in negative available funds. Current expenses: 246.0, Available balance after removal would be: -45.5
 ===== BUDGET SUMMARY =====
 Total Income:        $1200.50
 Total Expenses:      $246.00
