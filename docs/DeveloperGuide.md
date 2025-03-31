@@ -169,7 +169,7 @@ for each of the saving entry.
 
 Here's the class diagram of the Saving component:
 
-![Saving class Diagram](img_1.png)
+![Saving class Diagram](images/Saving.png)
 
 How the Saving component works:
 
@@ -180,7 +180,7 @@ method to dealt with the input command.
 
 Saving sequence diagram: (below only used the excecution of 1 method as example,
 the sequence diagram of other methods are similar)
-![img_2.png](img_2.png)
+![Saving Sequence Diagram.png](images/SavingSequenceDiagram.png)
 
 Why it's implemented this way:
 1. Used a separate class to handle all commands related to saving records to reduce coupling
@@ -461,15 +461,33 @@ financial situations.
 | v2.0    | user              | navigate through the CLI easily                                | save time and effort while managing my finances        |
 | v2.0    | user              | view indicators (good/bad) based on amount saved               | discourage excessive spending                          |
 | v2.0    | user              | transfer certain amount of savings from one entry to another   | toggle amount of savings for different saving goals    |
+
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. **Compatibility**
+   * Should work on any mainstream OS as long as it has Java 17 or above installed.
+   * Should be able to run without requiring an internet connection.
+
+2. **Performance**
+   * Should be able to hold up to 1000 financial records (combined income, expenses, and savings) without a noticeable sluggishness in performance for typical usage.
+   * All commands should execute and display results within 2 seconds on a typical modern computer.
+
+3. **Usability**
+   * A user with above average typing speed for regular English text should be able to accomplish most tasks faster using commands than using a mouse-driven GUI application.
+   * Error messages should be clear and provide guidance on how to correct invalid inputs.
 
 ## Glossary
 
-* *glossary item* - Definition
+* **Mainstream OS** - Windows, Linux, Unix, macOS
+* **CLI** - Command Line Interface, where users interact with the application by typing commands
+* **Income** - Money received, typically on a regular basis, from work, investments, or other sources
+* **Expense** - Money spent on goods or services
+* **Savings** - Money set aside for future use, not immediately spent
+* **Available Funds** - The amount of money available for spending, calculated as Total Income - Total Expenses
+* **Financial Observer** - A component that monitors changes in financial data and responds accordingly
+* **Alert Threshold** - The minimum amount of available funds below which the system will display a warning
+* **Savings Goal** - A target amount of money to be saved for a specific purpose
 
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
