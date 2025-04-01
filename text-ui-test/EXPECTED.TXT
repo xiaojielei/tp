@@ -70,6 +70,11 @@ Here are the savings in your list:
 2. 	[ ] 100.0
 You have 2 saving(s) in total.
 Savings Indicator: Bad - Try to save more.
+
+====== ALERT ======
+WARNING: Available funds ($-45.50) are below warning threshold ($5.00)
+===================
+
 Cannot remove this income as it would result in negative available funds. Current expenses: 246.0, Available balance after removal would be: -45.5
 ===== BUDGET SUMMARY =====
 Total Income:        $1200.50
