@@ -8,13 +8,14 @@ import commands.ViewExpenseCommand;
 import exceptions.BudgetTrackerException;
 import expenses.Ui;
 import income.IncomeParser;
-import savings.RunSavings;
+import savings.SavingCommandHandler;
 import summary.Summary;
 import summary.ui.SummaryDisplay;
 import ui.HelpDisplay;
 import expenses.BudgetTracker;
 import expenses.ExpenseParser;
 import expenses.ExpenseList;
+import savings.Saving;
 import alerts.FundsAlert;
 import alerts.AlertParser;
 import java.util.Scanner;
@@ -27,8 +28,10 @@ public class Duke {
     private final Ui ui;
     private final BudgetTracker tracker;
     private final ExpenseList expenseList;
+    private final Saving saving;
     private final FundsAlert fundsAlert;
-
+    private final SavingCommandHandler handler;
+    
     /**
      * Constructs a new Duke application with all necessary components initialized.
      */
@@ -40,8 +43,10 @@ public class Duke {
         ui = new Ui();
         tracker = new BudgetTracker();
         expenseList = new ExpenseList();
+        saving = new Saving(summary);
         fundsAlert = new FundsAlert(ui);
         summary.registerObserver(fundsAlert);
+        handler = new SavingCommandHandler(saving);
     }
 
     /**
@@ -145,7 +150,7 @@ public class Duke {
 
                 // Handle savings commands
                 if (fullCommand.contains("savings")) {
-                    RunSavings.run(fullCommand);
+                    handler.processSavingCommand(fullCommand);
                     commandRecognized = true;
                 }
 

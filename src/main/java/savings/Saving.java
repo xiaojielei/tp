@@ -11,22 +11,23 @@ import summary.Summary;
  * view, and set goals for their savings.
  */
 public class Saving {
-    private static final List<SavingsRecord> savingsRecords = new ArrayList<>();
-    private static Summary summary = new Summary();
+
+    private final List<SavingsRecord> savingsRecords = new ArrayList<>();
+    private final Summary summary;
 
     /**
      * Constructor that accepts a Summary instance.
      * @param summary the shared Summary instance
      */
     public Saving(Summary summary) {
-        Saving.summary = summary;
+        this.summary = summary;
     }
 
     /**
      * Adds a savings record with the specified amount.
      * @param amount The amount to save.
      */
-    public static void addSavings(double amount) throws BudgetTrackerException {
+    public void addSavings(double amount) throws BudgetTrackerException {
         assert amount > 0 : "Savings amount must be positive";
 
         savingsRecords.add(new SavingsRecord(amount));
@@ -40,7 +41,7 @@ public class Saving {
      * Deletes a savings record at the specified index.
      * @param index The index of the savings record to delete.
      */
-    public static void deleteSavings(int index) {
+    public void deleteSavings(int index) {
         int zeroBasedIndex = index - 1;
         if (zeroBasedIndex >= 0 && zeroBasedIndex < savingsRecords.size()) {
             SavingsRecord removedRecord = savingsRecords.get(zeroBasedIndex);
@@ -62,12 +63,10 @@ public class Saving {
         }
     }
 
-
-
     /**
      * Displays all savings records.
      */
-    public static void viewSavings() {
+    public void viewSavings() {
         if (savingsRecords.isEmpty()) {
             System.out.println("No savings records.");
         } else {
@@ -85,7 +84,7 @@ public class Saving {
      * @param amount The savings amount to associate with the goal.
      * @param description The goal description.
      */
-    public static void setSavingsGoal(double amount, String description) {
+    public void setSavingsGoal(double amount, String description) {
         for (SavingsRecord record : savingsRecords) {
             if (record.amount == amount) {
                 record.setGoal(description);
@@ -103,7 +102,7 @@ public class Saving {
      * @param amount The new savings amount.
      * @param description The new goal description.
      */
-    public static void updateSavingsGoal(int index, double amount, String description) {
+    public void updateSavingsGoal(int index, double amount, String description) {
         if (index >= 0 && index < savingsRecords.size()) {
             SavingsRecord record = savingsRecords.get(index);
             record.amount = amount;
@@ -119,7 +118,7 @@ public class Saving {
      * Deletes the goal of a specified savings record.
      * @param index The index of the savings record.
      */
-    public static void deleteSavingsGoal(int index) {
+    public void deleteSavingsGoal(int index) {
         if (index >= 0 && index < savingsRecords.size()) {
             savingsRecords.get(index).goal = " ";
             System.out.println("I have deleted the saving goal:");
@@ -135,7 +134,7 @@ public class Saving {
      * @param toIndex The index of the savings record to transfer to.
      * @param amount The amount to transfer.
      */
-    public static void transferSavings(int fromIndex, int toIndex, double amount) {
+    public void transferSavings(int fromIndex, int toIndex, double amount) {
         fromIndex -= 1;
         toIndex -= 1;
 
@@ -172,7 +171,7 @@ public class Saving {
      * Determines the savings indicator based on the total income.
      * @return "Good" if savings are above 80% of income, "Bad" if below 50%, otherwise "Neutral".
      */
-    public static String getSavingsIndicator() {
+    public String getSavingsIndicator() {
         double totalIncome = summary.getTotalIncome(); // Get total income from Summary
         double totalSavings = 0;
 
