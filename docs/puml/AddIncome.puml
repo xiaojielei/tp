@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+participant ":Duke" as Duke #LightBlue
+participant ":IncomeParser" as IncomeParser #LightGreen
+participant ":AddIncomeCommand" as AddIncomeCommand #LightCoral
+participant ":IncomeManager" as IncomeManager #LightGoldenRodYellow
+autonumber
+
+User -> Duke: "add income <AMOUNT> / <DESCRIPTION>"
+activate Duke
+
+Duke -> IncomeParser: IncomeParser.parseAddIncomeCommand();
+activate IncomeParser
+
+IncomeParser -> AddIncomeCommand: input AMOUNT, DESCRIPTION
+activate AddIncomeCommand
+
+AddIncomeCommand -> IncomeManager: addIncome()
+activate IncomeManager
+
+@enduml

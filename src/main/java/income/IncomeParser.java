@@ -5,8 +5,19 @@ import commands.DeleteIncomeCommand;
 import exceptions.BudgetTrackerException;
 import summary.Summary;
 
+/**
+ * Parses user input related to income commands and returns appropriate command objects.
+ */
 public class IncomeParser {
 
+    /**
+     * Parses the user input for the "add income" command and returns an AddIncomeCommand object.
+     *
+     * @param fullCommand The full user input string containing the command and parameters.
+     * @param summary     The Summary object to update with the new income.
+     * @return An AddIncomeCommand object containing the parsed income details.
+     * @throws BudgetTrackerException If the input format is incorrect or contains invalid data.
+     */
     public static AddIncomeCommand parseAddIncomeCommand(String fullCommand, Summary summary)
             throws BudgetTrackerException {
         String[] parts = fullCommand.split(" / ");
@@ -24,6 +35,14 @@ public class IncomeParser {
         }
     }
 
+    /**
+     * Parses the user input for the "delete income" command and returns a DeleteIncomeCommand object.
+     *
+     * @param fullCommand The full user input string containing the command and parameters.
+     * @param summary     The Summary object to update after deleting the income entry.
+     * @return A DeleteIncomeCommand object containing the parsed index to delete.
+     * @throws BudgetTrackerException If the input format is incorrect or contains an invalid index.
+     */
     public static DeleteIncomeCommand parseDeleteIncomeCommand(String fullCommand, Summary summary)
             throws BudgetTrackerException {
         String[] parts = fullCommand.split(" ");

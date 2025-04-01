@@ -98,14 +98,19 @@ public class DeleteIncomeCommand extends IncomeCommand {
         Income incomeToDelete = IncomeManager.getIncomeList().get(index - 1);
         double amountToRemove = incomeToDelete.getAmount();
 
-        try {
+        double availableBalanceAfterRemoval = summary.getAvailableFunds() - amountToRemove;
+        if (availableBalanceAfterRemoval < 0) {
+            logger.log(Level.SEVERE, "Cannot remove this income as it would result in negative available funds. " +
+                            "Current expenses: {0}, Available balance after removal would be: {1}",
+                    new Object[]{summary.getTotalExpense(), availableBalanceAfterRemoval});
+            System.out.println("Cannot remove this income as it would result in negative available funds. " +
+                    "Current expenses: " + summary.getTotalExpense() +
+                    ", Available balance after removal would be: " + availableBalanceAfterRemoval);
+        } else {
             IncomeManager.deleteIncome(index - 1);
             summary.removeIncome(amountToRemove);
             ui.showMessage("Deleted income entry at index " + index);
             System.out.println("Successfully deleted income at index " + index);
-        } catch (BudgetTrackerException e) {
-            logger.log(Level.SEVERE, "BudgetTrackerException: " + e.getMessage());
-            System.out.println(e.getMessage());
         }
     }
 

@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+participant ":Duke" as Duke #LightBlue
+participant ":IncomeParser" as IncomeParser #LightGreen
+participant ":DeleteIncomeCommand" as DeleteIncomeCommand #LightCoral
+participant ":IncomeManager" as IncomeManager #LightGoldenRodYellow
+autonumber
+
+User -> Duke: "delete income <INDEX>"
+activate Duke
+
+Duke -> IncomeParser: IncomeParser.parseDeleteIncomeCommand();
+activate IncomeParser
+
+IncomeParser -> DeleteIncomeCommand: input INDEX
+activate DeleteIncomeCommand
+
+DeleteIncomeCommand -> IncomeManager: deleteIncome()
+activate IncomeManager
+@enduml

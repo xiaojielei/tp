@@ -32,7 +32,8 @@ Example of usage:
 
 ```
 > add income 50 / salary
-Added income: $50.00 from salary
+Added income: $50.0 from salary
+Successfully added income: $50.0 from salary
 ```
 
 #### Viewing Income: `view income`
@@ -49,6 +50,8 @@ Example of usage:
 1. 	$50.00 from salary
 2. 	$100.00 from freelance
 =========================
+Total Income: $150.0
+Successfully listed income entries.
 ```
 
 #### Deleting Income: `delete income`
@@ -64,7 +67,8 @@ Example of usage:
 
 ```
 > delete income 1
-Deleted income: $50.00 from salary
+Deleted income entry at index 1
+Successfully deleted income at index 1
 ```
 
 ### Expense Management
@@ -139,7 +143,9 @@ Added to savings: $20.00 for emergency fund
 
 #### Viewing Savings: `view savings`
 
-Lists all your savings entries.
+Lists all your savings entries. 
+Gives a savings indicator based on the ratio of total savings to total income, 
+which is either Good, Neutral or Bad.
 
 Format: `view savings`
 
@@ -151,6 +157,7 @@ Example of usage:
 1. 	$20.00 for emergency fund
 2. 	$10.00 for vacation
 ==========================
+Savings Indicator: Bad - Try to save more.
 ```
 
 #### Deleting Savings: `delete savings`

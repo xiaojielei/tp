@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+participant ":Duke" as Duke #LightBlue
+participant ":ListIncomeCommand" as ListIncomeCommand #LightGreen
+participant ":IncomeManager" as IncomeManager #LightGoldenRodYellow
+participant ":Income" as Income #LightCoral
+autonumber
+
+User -> Duke: "view income"
+activate Duke
+Duke -> ListIncomeCommand: execute()
+activate ListIncomeCommand
+ListIncomeCommand --> User: display list of income
+
+ListIncomeCommand -> IncomeManager: getIncomeList()
+activate IncomeManager
+IncomeManager --> ListIncomeCommand: return list of getIncomeList()
+
+IncomeManager -> Income: getAmount();
+activate Income
+Income --> IncomeManager: "amount"
+IncomeManager -> Income: getSource();
+Income --> IncomeManager: "source"
+
+@enduml

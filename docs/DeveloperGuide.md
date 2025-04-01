@@ -91,6 +91,7 @@ to record their income sources, making it easier for them to manage their financ
 ### API: Income.java
 
 Here is the class diagram of the Income Component:
+![Income Class Diagram](images/Income.png)
 
 How the Income Component works:
 
@@ -114,6 +115,8 @@ public class AddIncomeCommand implements Command {
     }
 }
 ```
+![Add Income Sequence Diagram](images/AddIncome.png)
+
 
 2. Deleting Income: The `DeleteIncomeCommand` class handles the deletion of income entries. The manager removes the 
 selected Income record from the list.
@@ -132,6 +135,7 @@ public class DeleteIncomeCommand implements Command {
     }
 }
 ```
+![Delete Income Sequence Diagram](images/DeleteIncome.png)
 
 3. Listing Income: The `ListIncomeCommand` class retrieves the list of all income entries and displays them to the 
 user through the view.
@@ -145,6 +149,9 @@ public class ListIncomeCommand implements Command {
     }
 }
 ```
+![List Income Sequence Diagram](images/ListIncome.png)
+
+
 Why it's implemented this way:
 
 * Separation of Concerns: By using separate classes for the model, manager, and view, the system remains modular, 
@@ -188,6 +195,67 @@ Why it's implemented this way:
 1. Used a separate class to handle all commands related to saving records to reduce coupling
 2. Implemented run() method in Saving.java to improve the neatness of whole program
 
+The `getSavingsIndicator()` method calculates a savings indicator based on the total savings and the total income of the
+user. This indicator provides feedback to the user regarding their saving habits by categorizing them into three levels:
+
+* Good: Savings are 80% or more of the total income.
+* Neutral: Savings are between 50% and 80% of the total income.
+* Bad: Savings are less than 50% of the total income.
+
+This feature aims to help users gauge their financial behavior and make informed decisions about saving.
+
+```java
+public String getSavingsIndicator() {
+    double totalIncome = summary.getTotalIncome(); // Get total income from Summary
+    double totalSavings = 0;
+
+    // Sum all savings records
+    for (SavingsRecord record : savingsRecords) {
+        totalSavings += record.amount;
+    }
+
+    if (totalIncome == 0) {
+        return "No income recorded.";  // Handle edge case where no income has been recorded
+    }
+
+    double savingsRatio = totalSavings / totalIncome;
+
+    // Determine the savings indicator based on the ratio
+    if (savingsRatio >= 0.8) {
+        return "Good - You are saving well!";
+    } else if (savingsRatio < 0.5) {
+        return "Bad - Try to save more.";
+    } else {
+        return "Neutral - You are on track.";
+    }
+}
+```
+
+How this code works:
+* Total Income: The method retrieves the user's total income from the `Summary` class using the `getTotalIncome()`
+  method.
+
+* Total Savings: The method iterates through all savings records stored in the `savingsRecords` list and calculates
+  the total savings.
+
+* Comparison Logic:
+
+    * The method compares the ratio of total savings to total income.
+
+    * Based on this ratio, it determines whether the savings are "Good," "Neutral," or "Bad."
+
+The logic ensures that the user gets a meaningful indicator of their saving habits, encouraging them to either
+increase or maintain their savings rate.
+
+Why it's implemented this way:
+* Why Use Ratio: The ratio of savings to income provides a simple but effective way to evaluate savings behavior. This
+  method offers clarity to the user by presenting an easily understandable percentage-based feedback system.
+
+Alternatives considered:
+* Keeping a more rigid approach with fixed thresholds (e.g., "Good" for 80% or more, "Bad" for less than 50%, and
+  "Neutral" in between) could have been sufficient for basic applications. However,
+  this would lack the adaptability that a more dynamic solution could provide, especially for users with different
+  financial situations.
 
 ### Summary Component
 
@@ -385,69 +453,6 @@ Alternatives considered:
 * A polling approach where alerts check the summary periodically, but this would be less efficient and responsive.
 * Not showing an initial notification, but this would reduce user awareness of the feature.
 
-## Savings component
-
-The `getSavingsIndicator()` method calculates a savings indicator based on the total savings and the total income of the 
-user. This indicator provides feedback to the user regarding their saving habits by categorizing them into three levels:
-
-* Good: Savings are 80% or more of the total income.
-* Neutral: Savings are between 50% and 80% of the total income.
-* Bad: Savings are less than 50% of the total income.
-
-This feature aims to help users gauge their financial behavior and make informed decisions about saving.
-
-```java
-public String getSavingsIndicator() {
-    double totalIncome = summary.getTotalIncome(); // Get total income from Summary
-    double totalSavings = 0;
-
-    // Sum all savings records
-    for (SavingsRecord record : savingsRecords) {
-        totalSavings += record.amount;
-    }
-
-    if (totalIncome == 0) {
-        return "No income recorded.";  // Handle edge case where no income has been recorded
-    }
-
-    double savingsRatio = totalSavings / totalIncome;
-
-    // Determine the savings indicator based on the ratio
-    if (savingsRatio >= 0.8) {
-        return "Good - You are saving well!";
-    } else if (savingsRatio < 0.5) {
-        return "Bad - Try to save more.";
-    } else {
-        return "Neutral - You are on track.";
-    }
-}
-```
-
-How this code works:
-* Total Income: The method retrieves the user's total income from the `Summary` class using the `getTotalIncome()` 
-method.
-
-* Total Savings: The method iterates through all savings records stored in the `savingsRecords` list and calculates 
-the total savings.
-
-* Comparison Logic:
-
-  * The method compares the ratio of total savings to total income.
-
-  * Based on this ratio, it determines whether the savings are "Good," "Neutral," or "Bad."
-
-The logic ensures that the user gets a meaningful indicator of their saving habits, encouraging them to either 
-increase or maintain their savings rate.
-
-Why it's implemented this way:
-* Why Use Ratio: The ratio of savings to income provides a simple but effective way to evaluate savings behavior. This 
-method offers clarity to the user by presenting an easily understandable percentage-based feedback system.
-
-Alternatives considered:
-* Keeping a more rigid approach with fixed thresholds (e.g., "Good" for 80% or more, "Bad" for less than 50%, and 
-"Neutral" in between) could have been sufficient for basic applications. However, 
-this would lack the adaptability that a more dynamic solution could provide, especially for users with different 
-financial situations.
 
 ## User Stories
 

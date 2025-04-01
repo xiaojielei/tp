@@ -12,11 +12,21 @@ public class IncomeManager {
     private static final IncomeManager instance = new IncomeManager();
     private static final List<Income> incomeList = new ArrayList<>();
 
+    /**
+     * Constructs an IncomeManager instance.
+     * Public constructor allows external instantiation if needed.
+     */
     public IncomeManager() {}
 
+    /**
+     * Retrieves the singleton instance of IncomeManager.
+     *
+     * @return The singleton instance of IncomeManager.
+     */
     public static IncomeManager getInstance() {
         return instance;
     }
+
     /**
      * Adds a new income entry to the list.
      *
@@ -33,13 +43,11 @@ public class IncomeManager {
      * @throws BudgetTrackerException if the index is out of bounds
      */
     public static void deleteIncome(int index) throws BudgetTrackerException {
-        // Validate index is within bounds
         if (index < 0 || index >= incomeList.size()) {
             throw new BudgetTrackerException("Invalid index: " + (index + 1)
                     + ". Index must be between 1 and " + incomeList.size());
         }
-        
-        // Check that the list is not empty
+
         if (incomeList.isEmpty()) {
             throw new BudgetTrackerException("Cannot delete from an empty income list.");
         }
