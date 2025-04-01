@@ -201,7 +201,7 @@ Common Cents is a personal finance management application that helps you track y
 
 - **Invalid Format**:
     - Input: `add expense 50 Lunch`
-    - Error: "Invalid format! Use: add expense <AMOUNT> / <SOURCE> / <CATEGORY>"
+    - Error: "Invalid format! Use: add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>"
     - Validation: Checks if command follows the correct format
 
 ### Savings Management Errors
@@ -242,29 +242,29 @@ Common Cents is a personal finance management application that helps you track y
 
 ## Command Summary Table
 
-| Command | Format | Description |
-|---------|--------|-------------|
-| **Income** | | |
-| Add Income | `add income <AMOUNT> / <SOURCE>` | Adds a new income record |
-| Delete Income | `delete income <INDEX>` | Deletes an income record |
-| View Income | `view income` | Lists all income records |
-| **Expenses** | | |
-| Add Expense | `add expense <AMOUNT> / <SOURCE> / <CATEGORY>` | Adds a new expense record |
-| Delete Expense | `delete expense <INDEX>` | Deletes an expense record |
-| View Expense | `view expense` | Lists all expense records |
-| **Savings** | | |
-| Add Savings | `add savings <AMOUNT>` | Adds a new savings record |
-| Delete Savings | `delete savings <INDEX>` | Deletes a savings record |
-| View Savings | `view savings` | Lists all savings records |
-| Set Goal | `savings goal set <AMOUNT> / <DESCRIPTION>` | Sets a new savings goal |
-| View Goals | `savings goal view` | Views all savings goals |
+| Command | Format                                                   | Description |
+|---------|----------------------------------------------------------|-------------|
+| **Income** |                                                          | |
+| Add Income | `add income <AMOUNT> / <SOURCE>`                         | Adds a new income record |
+| Delete Income | `delete income <INDEX>`                                  | Deletes an income record |
+| View Income | `view income`                                            | Lists all income records |
+| **Expenses** |                                                          | |
+| Add Expense | `add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>`      | Adds a new expense record |
+| Delete Expense | `delete expense <INDEX>`                                 | Deletes an expense record |
+| View Expense | `view expense`                                           | Lists all expense records |
+| **Savings** |                                                          | |
+| Add Savings | `add savings <AMOUNT>`                                   | Adds a new savings record |
+| Delete Savings | `delete savings <INDEX>`                                 | Deletes a savings record |
+| View Savings | `view savings`                                           | Lists all savings records |
+| Set Goal | `savings goal set <AMOUNT> / <DESCRIPTION>`              | Sets a new savings goal |
+| View Goals | `savings goal view`                                      | Views all savings goals |
 | Update Goal | `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>` | Updates a savings goal |
-| Delete Goal | `savings goal delete <INDEX>` | Deletes a savings goal |
-| Transfer | `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>` | Transfers between savings records |
-| **Summary** | | |
-| View Summary | `view summary` | Shows financial summary |
-| **Alerts** | | |
-| Set Alert | `alert set <AMOUNT>` | Sets low funds warning threshold |
-| **General** | | |
-| Help | `help` | Shows available commands |
-| Exit | `bye` | Exits the application |
+| Delete Goal | `savings goal delete <INDEX>`                            | Deletes a savings goal |
+| Transfer | `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>`      | Transfers between savings records |
+| **Summary** |                                                          | |
+| View Summary | `view summary`                                           | Shows financial summary |
+| **Alerts** |                                                          | |
+| Set Alert | `alert set <AMOUNT>`                                     | Sets low funds warning threshold |
+| **General** |                                                          | |
+| Help | `help`                                                   | Shows available commands |
+| Exit | `bye`                                                    | Exits the application |

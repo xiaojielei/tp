@@ -35,7 +35,7 @@ public class ExpenseParser {
             if (argument.startsWith("expense ")) {
                 return parseAddExpense(argument.substring(8).trim(), summary);
             } else {
-                throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <DESCRIPITON> / " +
+                throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <DESCRIPTION> / " +
                         "<CATEGORY>");
             }
 

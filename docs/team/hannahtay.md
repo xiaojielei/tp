@@ -56,3 +56,4 @@ Implemented the following command classes
   * `ViewExpense.puml`: Shows how the expenses are retrieved and displayed
 * Added implementation details of the Add Expense component 
 * Added implementation details of the View Expense component
+* Added implementation details of the Delete Expense component
