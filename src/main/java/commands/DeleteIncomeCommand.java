@@ -96,16 +96,16 @@ public class DeleteIncomeCommand extends IncomeCommand {
         }
 
         Income incomeToDelete = IncomeManager.getIncomeList().get(index - 1);
-        double amountToRemove = incomeToDelete.getAmount();  // Use the getter method
+        double amountToRemove = incomeToDelete.getAmount();
 
         try {
             IncomeManager.deleteIncome(index - 1);
             summary.removeIncome(amountToRemove);
             ui.showMessage("Deleted income entry at index " + index);
-            System.out.println("Successfully deleted income at index " + index); // logging message
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error deleting income at index: " + index, e);
-            throw new BudgetTrackerException("Failed to delete income due to an unexpected error.");
+            System.out.println("Successfully deleted income at index " + index);
+        } catch (BudgetTrackerException e) {
+            logger.log(Level.SEVERE, "BudgetTrackerException: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -116,6 +116,6 @@ public class DeleteIncomeCommand extends IncomeCommand {
      */
     @Override
     public boolean isExit() {
-        return false; // DeleteIncomeCommand does not exit the program
+        return false;
     }
 }
