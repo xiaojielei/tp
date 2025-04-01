@@ -5,7 +5,12 @@ public class Ui {
     public void showMessage(String message) {
         System.out.println(message);
     }
-    
+
+    public static void showList(String message) {
+        System.out.println("===== EXPENSE ENTRIES =====");
+        System.out.println(message);
+        System.out.println("============================");
+    }
     /**
      * Displays an alert message with emphasis.
      * 

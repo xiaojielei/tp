@@ -50,11 +50,16 @@ public class ExpenseList {
             System.out.println("No expenses recorded.");
             assert expenses.isEmpty() : "Expense list should be empty if 'No expenses recorded' is displayed.";
         } else {
+            StringBuilder expenseMessage = new StringBuilder();
             logger.info("Displaying expenses.");
-            System.out.println("Your Expenses:");
+
             for (int i = 0; i < expenses.size(); i++) {
-                System.out.println((i + 1) + ". " + expenses.get(i));
+                expenseMessage.append((i + 1)).append(". ").append(expenses.get(i));
+                if (i < expenses.size() - 1) { // Add newline only if it's not the last item
+                    expenseMessage.append("\n");
+                }
             }
+            Ui.showList(expenseMessage.toString());
             assert !expenses.isEmpty() : "Expense list should not be empty when expenses are displayed.";
         }
     }

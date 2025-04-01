@@ -96,9 +96,9 @@ Example of usage:
 
 ```
 > view expense
-===== EXPENSE RECORDS =====
-1. 	[FOOD] $25.00 for food
-2. 	[TRANSPORT] $15.00 for bus fare
+===== EXPENSE ENTRIES =====
+1. [FOOD] $25.00 for food
+2. [BILLS] $50.00 for utilities
 ==========================
 ```
 
@@ -383,7 +383,7 @@ delete income <INDEX>                                        Deletes an income r
 view income                                                  Lists all income records.
 
 --- Expense Management ---
-add expense <AMOUNT> / <SOURCE> / <CATEGORY>                 Adds an expense record.
+add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>            Adds an expense record.
 delete expense <INDEX>                                       Deletes an expense record by index.
 view expense                                                 Lists all expense records.
 

@@ -49,7 +49,7 @@ public class Expense {
      */
     @Override
     public String toString() {
-        return "[" + category + "] $" + amount + " from " + description;
+        return "[" + category + "] $" + amount + " for " + description;
     }
 
     public static Category getCategoryFromInput(String input) throws BudgetTrackerException {
