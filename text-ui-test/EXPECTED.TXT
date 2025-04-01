@@ -10,7 +10,7 @@ delete income <INDEX>                                        Deletes an income r
 view income                                                  Lists all income records.
 
 --- Expense Management ---
-add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>            Adds an expense record.
+add expense <AMOUNT> / <SOURCE> / <CATEGORY>                 Adds an expense record.
 delete expense <INDEX>                                       Deletes an expense record by index.
 view expense                                                 Lists all expense records.
 
@@ -45,14 +45,13 @@ List of income entries:
 2. $200.5 from part-time job
 Total Income: $1200.5
 Successfully listed income entries.
-Added expense: [FOOD] $120.75 for groceries
-Added expense: [TRANSPORT] $50.0 for transportation
-Added expense: [FOOD] $75.25 for dinner
-===== EXPENSE ENTRIES =====
-1. [FOOD] $120.75 for groceries
-2. [TRANSPORT] $50.0 for transportation
-3. [FOOD] $75.25 for dinner
-============================
+Added expense: [FOOD] $120.75 from groceries
+Added expense: [TRANSPORT] $50.0 from transportation
+Added expense: [FOOD] $75.25 from dinner
+Your Expenses:
+1. [FOOD] $120.75 from groceries
+2. [TRANSPORT] $50.0 from transportation
+3. [FOOD] $75.25 from dinner
 ===== BUDGET SUMMARY =====
 Total Income:        $1200.50
 Total Expenses:      $246.00
@@ -70,22 +69,32 @@ Here are the savings in your list:
 2. 	[ ] 100.0
 You have 2 saving(s) in total.
 Savings Indicator: Bad - Try to save more.
-Cannot remove this income as it would result in negative available funds. Current expenses: 246.0, Available balance after removal would be: -45.5
+
+====== ALERT ======
+WARNING: Available funds ($-45.50) are below warning threshold ($5.00)
+===================
+
+Deleted income entry at index 1
+Successfully deleted income at index 1
 ===== BUDGET SUMMARY =====
-Total Income:        $1200.50
+Total Income:        $200.50
 Total Expenses:      $246.00
-Available Balance:   $954.50
+Available Balance:   $-45.50
 Total Savings:       $250.00
 ===========================
+
+====== ALERT ======
+WARNING: Available funds ($4.50) are below warning threshold ($5.00)
+===================
+
 Deleted expense number 2.
-===== EXPENSE ENTRIES =====
-1. [FOOD] $120.75 for groceries
-2. [FOOD] $75.25 for dinner
-============================
+Your Expenses:
+1. [FOOD] $120.75 from groceries
+2. [FOOD] $75.25 from dinner
 ===== BUDGET SUMMARY =====
-Total Income:        $1200.50
+Total Income:        $200.50
 Total Expenses:      $196.00
-Available Balance:   $1004.50
+Available Balance:   $4.50
 Total Savings:       $250.00
 ===========================
 Exiting the application. Goodbye!
