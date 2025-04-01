@@ -60,6 +60,13 @@ Common Cents is a personal finance management application that helps you track y
     - `view expense`
     - Lists all expense records
     - Example: `view expense`
+    - Example output:
+      ```
+      > view expense
+      ===== EXPENSE ENTRIES =====
+      1. [FOOD] $20.0 for lunch
+      ============================
+      ``` 
 
 ### Savings Management
 - **Add Savings**:
@@ -230,13 +237,13 @@ Common Cents is a personal finance management application that helps you track y
 
 ### Parameter Conventions
 - `<AMOUNT>`: A positive decimal number (e.g., 100, 50.50)
-- `<SOURCE>`: Text describing the source of income/expense
+- `<SOURCE>`: Text describing the source of expense
 - `<CATEGORY>`: Single letter code for expense categories (F, T, B, O)
 - `<INDEX>`: Integer representing the position in a list (starting from 1)
-- `<DESCRIPTION>`: Text describing a savings goal
+- `<DESCRIPTION>`: Text describing an expense/savings goal
 
 ### Command Syntax Rules
-- Parameters are separated by forward slashes with spaces (`/`)
+- Parameters are separated by forward slashes with spaces (` / `)
 - Commands are case-insensitive (e.g., `ADD INCOME` is the same as `add income`)
 - Amounts should not include currency symbols
 

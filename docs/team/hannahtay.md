@@ -42,6 +42,11 @@ Implemented the following command classes
   * `ViewExpenseCommand` tests testing most possible scenarios
   * `DeleteExpenseCommand` tests
 
+### Github Practices
+* **Community Contributions**:
+  * Approved code changes from teammates ([#7](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7), [#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34))
+  * Added Github Issues and closed them respectively ([#14](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/14))
+
 ### Documentation
 * Wrote JavaDoc comments for almost all the Expenses code, [#38](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/38)
 

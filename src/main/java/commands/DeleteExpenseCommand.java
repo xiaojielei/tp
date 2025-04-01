@@ -35,7 +35,7 @@ public class DeleteExpenseCommand extends Command {
         try {
             // Check if the expense number is valid
             if (expenseNumber <= 0 || expenseNumber > expenseList.getExpenses().size()) {
-                ui.showMessage("There is no such expense number.");
+                ui.showMessage("Invalid index. Please use an index from the list.");
                 return;
             }
             
@@ -49,7 +49,7 @@ public class DeleteExpenseCommand extends Command {
                 summary.removeExpense(amountToRemove);
                 ui.showMessage("Deleted expense number " + expenseNumber + ".");
             } else {
-                ui.showMessage("There is no such expense number.");
+                ui.showMessage("Invalid index. Please use an index from the list.");
             }
         } catch (BudgetTrackerException e) {
             ui.showMessage("Error deleting expense: " + e.getMessage());

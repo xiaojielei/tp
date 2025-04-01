@@ -18,6 +18,7 @@ of the added expense. `ExpenseParser` class parses the command input by the user
 called, the `parseAddExpense()` function splits the user input into amount, description and category respectively. The 
 inputs are sent to the `AddExpenseCommand` class, which adds the expense into `ExpenseList`.
    ![Add Expense Sequence Diagram](images/AddExpense.png)
+
 2. Viewing Expense: The `ViewExpenseCommand` extends the `Command` class, and allows the user to view their list of
 expenses. Upon user input, `ViewExpenseCommand` class is called, and takes in the `ExpenseList` as a parameter. In the 
 `ExpenseList` class, all previously added expenses are accessed via the `List<Expense> expenses` ArrayList. The 
@@ -41,6 +42,7 @@ class.
 * Instead of treating categories as plain strings, we use Enums:
   * Prevents invalid categories as FOOD, TRANSPORT, BILLS, OTHERS categories are predefined.
   * More efficient and avoids checking string values at runtime.
+
 For example, in the `Expense` class:
 ```java
 public enum Category {
