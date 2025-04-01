@@ -92,10 +92,10 @@ public class AddIncomeCommand extends IncomeCommand {
 
         Income income = new Income(amount, source);
         try {
-            IncomeManager.addIncome(income);  // Add to the income manager's list
-            summary.addIncome(amount);  // Update the summary with the new income
-            ui.showMessage("Added income: " + income); // Display success message using Ui
-            System.out.println("Successfully added income: " + income); // logging message
+            IncomeManager.addIncome(income);
+            summary.addIncome(amount);
+            ui.showMessage("Added income: " + income);
+            System.out.println("Successfully added income: " + income);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error adding income: " + income, e);
             throw new BudgetTrackerException("Failed to add income due to an unexpected error.");
@@ -109,7 +109,7 @@ public class AddIncomeCommand extends IncomeCommand {
      */
     @Override
     public boolean isExit() {
-        return false; // AddIncomeCommand does not exit the program
+        return false;
     }
 }
 
