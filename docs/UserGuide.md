@@ -469,7 +469,7 @@ Common Cents provides helpful error messages to guide you when something goes wr
 
 * **Invalid command:**
   * If you enter an unrecognized command, Common Cents will suggest using the help command.
-  * Example: `hello` → `I'm sorry, but I don't know what that means. Try 'help' for a list of commands.`
+  * Example: `hello` → `Oops! I don't recognize that command. Type 'help' to see available commands.`
 
 * **Invalid command format:**
   * If you enter a command with incorrect formatting, Common Cents will explain the proper format.

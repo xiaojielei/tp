@@ -35,7 +35,7 @@ public class ExpenseParser {
             if (argument.startsWith("expense ")) {
                 return parseAddExpense(argument.substring(8).trim(), summary);
             } else {
-                throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <DESCRIPITON> / " +
+                throw new BudgetTrackerException("Invalid format! Use: add expense <AMOUNT> / <DESCRIPTION> / " +
                         "<CATEGORY>");
             }
 
@@ -98,10 +98,10 @@ public class ExpenseParser {
     private static Command parseDeleteExpense(String argument, Summary summary) throws BudgetTrackerException {
         try {
             int expenseNumber = Integer.parseInt(argument.trim());
-            assert expenseNumber > 0 : "Expense number should be greater than zero.";
+
             return new DeleteExpenseCommand(expenseNumber, summary);
         } catch (NumberFormatException e) {
-            throw new BudgetTrackerException("Invalid expense number! Please enter a valid number.");
+            throw new BudgetTrackerException("Invalid index. Please use an index from the list.");
         }
     }
 }
