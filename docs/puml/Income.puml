@@ -1,0 +1,74 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classBackgroundColor #E3F2FD
+skinparam classArrowColor #1565C0
+skinparam noteBackgroundColor #FFF9C4
+skinparam noteBorderColor #FBC02D
+
+' ================== Classes ==================
+class Income {
+    - amount: double
+    - source: String
+    + getAmount(): double
+    + getSource(): String
+}
+
+class IncomeManager {
+    - incomeList: List<Income>
+    + addIncome(income: Income)
+    + deleteIncome(index: int)
+    + getAllIncome(): List<Income>
+}
+
+class IncomeCommand {
+    + execute()
+}
+
+class AddIncomeCommand {
+    - amount: double
+    - source: String
+    + execute()
+}
+
+class DeleteIncomeCommand {
+    - incomeIndex: int
+    + execute()
+}
+
+class ListIncomeCommand {
+    + execute()
+}
+
+class Summary {
+    + updateSummary()
+}
+
+class Duke {
+    ' Main controller
+}
+
+' ================== Relationships ==================
+IncomeManager *-- "0..*" Income : manages >
+IncomeCommand <|-- AddIncomeCommand
+IncomeCommand <|-- DeleteIncomeCommand
+IncomeCommand <|-- ListIncomeCommand
+AddIncomeCommand --> IncomeManager : modifies >
+DeleteIncomeCommand --> IncomeManager : modifies >
+ListIncomeCommand --> IncomeManager : queries >
+DeleteIncomeCommand --> Summary : updates >
+Duke --> IncomeManager : contains >
+Duke --> Summary : contains >
+
+' ================== Notes ==================
+note "**Handles Income Records**\nStores income data and provides management operations." as N1
+N1 .. IncomeManager
+
+note "**Base Command Class**\nParent class for all income-related commands." as N2
+N2 .. IncomeCommand
+
+note "**Updates Summary**\nWhen income is deleted, Summary updates balance." as N3
+N3 .. Summary
+N3 .. DeleteIncomeCommand
+
+@enduml
