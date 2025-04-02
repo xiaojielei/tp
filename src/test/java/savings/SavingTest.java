@@ -75,7 +75,7 @@ class SavingTest {
         assertEquals(500, saving.getSavingsRecords().get(0).getAmount());
         assertEquals(300, saving.getSavingsRecords().get(1).getAmount());
 
-        saving.transferSavings(1, 2, 200); // 从第一条转移200到第二条
+        saving.transferSavings(1, 2, 200);
 
         assertEquals(300, saving.getSavingsRecords().get(0).getAmount());
         assertEquals(500, saving.getSavingsRecords().get(1).getAmount());
