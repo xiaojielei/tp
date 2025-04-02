@@ -237,7 +237,7 @@ Common Cents is a personal finance management application that helps you track y
 
 ### Parameter Conventions
 - `<AMOUNT>`: A positive decimal number (e.g., 100, 50.50)
-- `<SOURCE>`: Text describing the source of expense
+- `<SOURCE>`: Text describing the source of income
 - `<CATEGORY>`: Single letter code for expense categories (F, T, B, O)
 - `<INDEX>`: Integer representing the position in a list (starting from 1)
 - `<DESCRIPTION>`: Text describing an expense/savings goal

@@ -23,10 +23,10 @@ Common Cents offers several features to help you manage your finances effectivel
 
 Adds a new income entry to your financial record.
 
-Format: `add income <AMOUNT> / <DESCRIPTION>`
+Format: `add income <AMOUNT> / <SOURCE>`
 
 * `<AMOUNT>` must be a positive number.
-* `<DESCRIPTION>` is a description of where the income came from.
+* `<SOURCE>` is a description of where the income came from.
 
 Example of usage:
 

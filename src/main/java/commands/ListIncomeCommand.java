@@ -34,7 +34,7 @@ public class ListIncomeCommand {
     }
 
     static {
-        configureLogger();  // Configure the logger when the class is loaded
+        configureLogger();
     }
 
     /**
