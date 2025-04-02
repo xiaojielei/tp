@@ -7,13 +7,13 @@ participant ":AddIncomeCommand" as AddIncomeCommand #LightCoral
 participant ":IncomeManager" as IncomeManager #LightGoldenRodYellow
 autonumber
 
-User -> Duke: "add income <AMOUNT> / <DESCRIPTION>"
+User -> Duke: "add income <AMOUNT> / <SOURCE>"
 activate Duke
 
 Duke -> IncomeParser: IncomeParser.parseAddIncomeCommand();
 activate IncomeParser
 
-IncomeParser -> AddIncomeCommand: input AMOUNT, DESCRIPTION
+IncomeParser -> AddIncomeCommand: input AMOUNT, SOURCE
 activate AddIncomeCommand
 
 AddIncomeCommand -> IncomeManager: addIncome()

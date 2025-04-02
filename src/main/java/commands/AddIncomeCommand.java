@@ -46,7 +46,7 @@ public class AddIncomeCommand extends IncomeCommand {
     }
 
     static {
-        configureLogger();  // Configure the logger when the class is loaded
+        configureLogger();
     }
 
     /**
