@@ -8,6 +8,7 @@ import commands.ViewExpenseCommand;
 import exceptions.BudgetTrackerException;
 import expenses.Ui;
 import income.IncomeParser;
+import savings.SavingCommandHandler;
 import summary.Summary;
 import summary.ui.SummaryDisplay;
 import ui.HelpDisplay;
@@ -29,7 +30,8 @@ public class Duke {
     private final ExpenseList expenseList;
     private final Saving saving;
     private final FundsAlert fundsAlert;
-
+    private final SavingCommandHandler handler;
+    
     /**
      * Constructs a new Duke application with all necessary components initialized.
      */
@@ -44,6 +46,7 @@ public class Duke {
         saving = new Saving(summary);
         fundsAlert = new FundsAlert(ui);
         summary.registerObserver(fundsAlert);
+        handler = new SavingCommandHandler(saving);
     }
 
     /**
@@ -147,7 +150,7 @@ public class Duke {
 
                 // Handle savings commands
                 if (fullCommand.contains("savings")) {
-                    saving.run(fullCommand);
+                    handler.processSavingCommand(fullCommand);
                     commandRecognized = true;
                 }
 

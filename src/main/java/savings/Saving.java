@@ -6,51 +6,11 @@ import java.util.List;
 import exceptions.BudgetTrackerException;
 import summary.Summary;
 
-//substring functions (substring(17)/substring(20), etc.) are used to trim the input
-//to only keep the amount/index/goal description part
-
 /**
  * The Saving class manages savings records, allowing users to add, delete,
  * view, and set goals for their savings.
  */
 public class Saving {
-    /**
-     * Represents a single savings record with an amount and an optional goal.
-     */
-    private static class SavingsRecord {
-        double amount;
-        String goal;
-
-        /**
-         * Constructs a SavingsRecord with a specified amount.
-         * @param amount The savings amount.
-         */
-        public SavingsRecord(double amount) {
-            this.amount = amount;
-            this.goal = " ";
-        }
-
-        public double getAmount() {
-            return amount;
-        }
-
-        public void setAmount(double amount) {
-            this.amount = amount;
-        }
-
-        /**
-         * Sets the goal for this savings record.
-         * @param goal The goal description.
-         */
-        public void setGoal(String goal) {
-            this.goal = goal;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + goal + "] " + amount;
-        }
-    }
 
     private final List<SavingsRecord> savingsRecords = new ArrayList<>();
     private final Summary summary;
@@ -61,6 +21,10 @@ public class Saving {
      */
     public Saving(Summary summary) {
         this.summary = summary;
+    }
+
+    public List<SavingsRecord> getSavingsRecords() {
+        return savingsRecords;
     }
 
     /**
@@ -102,8 +66,6 @@ public class Saving {
             System.out.println("Invalid index.");
         }
     }
-
-
 
     /**
      * Displays all savings records.
@@ -209,79 +171,6 @@ public class Saving {
         System.out.println((toIndex + 1) + ". \t" + toRecord);
     }
 
-
-    /**
-     * Runs the savings management system, processing user commands.
-     * @param input The Scanner object for user input.
-     */
-    public void run(String input) {
-        String[] parts = input.split(" ", 4);
-        if (parts.length < 2) {
-            System.out.println("Invalid command.");
-            return;
-        }
-
-        if (input.contains("add savings")) {
-            try {
-                double amount = Double.parseDouble(parts[2]);
-                addSavings(amount);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Invalid amount format.");
-            } catch (BudgetTrackerException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (input.contains("delete savings")) {
-            try {
-                int index = Integer.parseInt(parts[2]);
-                deleteSavings(index);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Invalid index format.");
-            }
-        } else if (input.contains("savings goal set")) {
-            try {
-                String[] goalParts = input.substring(17).split(" / ", 2);
-                double amount = Double.parseDouble(goalParts[0].trim());
-                String description = goalParts[1].trim();
-                setSavingsGoal(amount, description);
-            } catch (Exception e) {
-                System.out.println("Invalid format. Use: savings goal set <AMOUNT> / <DESCRIPTION>");
-            }
-        } else if (input.contains("savings goal update")) {
-            try {
-                String[] goalParts = input.substring(20).split(" / ", 2);
-                String[] indexAmount = goalParts[0].trim().split(" ");
-                int index = Integer.parseInt(indexAmount[0]) - 1;
-                double amount = Double.parseDouble(indexAmount[1]);
-                String description = goalParts[1].trim();
-                updateSavingsGoal(index, amount, description);
-            } catch (Exception e) {
-                System.out.println("Invalid format. Use: savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>");
-            }
-        } else if (input.contains("savings goal delete")) {
-            try {
-                int index = Integer.parseInt(parts[3]) - 1;
-                deleteSavingsGoal(index);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Invalid index format.");
-            }
-        }  else if (input.contains("transfer savings")) {
-            try {
-                String[] partsTransfer = input.substring(17).split(" ");
-                int fromIndex = Integer.parseInt(partsTransfer[0]);
-                int toIndex = Integer.parseInt(partsTransfer[1]);
-                double amount = Double.parseDouble(partsTransfer[2]);
-                transferSavings(fromIndex, toIndex, amount);
-            } catch (Exception e) {
-                System.out.println("Invalid format. Use: transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>");
-            }
-        } else if (input.contains("exit savings")) {
-            System.out.println("Exited savings function.");
-        } else if (input.contains("view savings") || input.contains("savings goal view")) {
-            viewSavings();
-        } else {
-            System.out.println("Unknown command.");
-        }
-    }
     /**
      * Determines the savings indicator based on the total income.
      * @return "Good" if savings are above 80% of income, "Bad" if below 50%, otherwise "Neutral".
