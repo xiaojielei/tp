@@ -14,7 +14,6 @@ public class SavingCommandHandler {
      * @param input The Scanner object for user input.
      */
     public void processSavingCommand(String input) {
-        System.out.println("Received input: " + input);
         String[] parts = input.split(" ", 4);
         if (parts.length < 2) {
             System.out.println("Invalid command.");
