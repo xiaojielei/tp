@@ -19,7 +19,6 @@ note right of Duke
 end note
 
 User -> Duke: "add income \n43 / salary"
-activate Duke
 Duke -> IncomeParser: parse(...)
 IncomeParser --> Duke: income command
 Duke -> AddIncomeCommand: incomeExecute(...)
@@ -31,10 +30,8 @@ note right of Summary
 end note
 AddIncomeCommand -> Ui: showMessage("Added income...")
 Ui --> User: display confirmation
-deactivate Duke
 
 User -> Duke: "add expense \n40 / groceries"
-activate Duke
 Duke -> ExpenseParser: parse(...)
 ExpenseParser --> Duke: expense command
 Duke -> AddExpenseCommand: execute(...)
@@ -53,6 +50,5 @@ FundsAlert -> Ui: showAlert("WARNING:\nAvailable funds low...")
 Ui --> User: display alert
 AddExpenseCommand -> Ui: showMessage("Added expense...")
 Ui --> User: display confirmation
-deactivate Duke
 
 @enduml
