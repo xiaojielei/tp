@@ -23,6 +23,10 @@ public class Saving {
         this.summary = summary;
     }
 
+    public List<SavingsRecord> getSavingsRecords() {
+        return savingsRecords;
+    }
+
     /**
      * Adds a savings record with the specified amount.
      * @param amount The amount to save.

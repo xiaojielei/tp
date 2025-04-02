@@ -20,6 +20,10 @@ public class SavingsRecord {
         return amount;
     }
 
+    public String getGoal() {
+        return goal;
+    }
+
     public void setAmount(double amount) {
         this.amount = amount;
     }

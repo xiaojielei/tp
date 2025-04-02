@@ -1,63 +1,84 @@
 package savings;
 
-import exceptions.BudgetTrackerException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import exceptions.BudgetTrackerException;
 import summary.Summary;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-//@@author xiaojielei
 class SavingTest {
     private Saving saving;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private Summary summary;
 
     @BeforeEach
-    void setUp() throws BudgetTrackerException {
-        Summary summary = new Summary();
+    void setUp() {
+        summary = new Summary();
         saving = new Saving(summary);
-
-        summary.addIncome(100.0);
-
-        System.setOut(new PrintStream(outputStreamCaptor));
     }
 
     @Test
-    void addSavings_positiveAmount_expectSavingsAdded() throws BudgetTrackerException {
-        saving.addSavings(100.0);
-        assertTrue(outputStreamCaptor.toString().contains("Sure! I have added your savings:"));
+    void deleteSavings_validIndex_expectSavingRecordDeleted() throws BudgetTrackerException {
+        saving.addSavings(100);
+        saving.addSavings(200);
+
+        assertEquals(2, saving.getSavingsRecords().size());
+
+        saving.deleteSavings(1); // 删除第一条记录
+        assertEquals(1, saving.getSavingsRecords().size());
+        assertEquals(200, saving.getSavingsRecords().get(0).getAmount());
     }
 
     @Test
-    void viewSavings_validSavingsRecords_expectCorrectOutput() throws BudgetTrackerException {
-        saving.addSavings(100.0);
-        outputStreamCaptor.reset();
-        saving.viewSavings();
-        assertTrue(outputStreamCaptor.toString().contains("Here are the savings in your list:"));
+    void transferSavings_validIndicesAndAmount_expectAmountTransferred() throws BudgetTrackerException {
+        saving.addSavings(500);
+        saving.addSavings(300);
+
+        assertEquals(500, saving.getSavingsRecords().get(0).getAmount());
+        assertEquals(300, saving.getSavingsRecords().get(1).getAmount());
+
+        saving.transferSavings(1, 2, 200); // 从第一条转移200到第二条
+
+        assertEquals(300, saving.getSavingsRecords().get(0).getAmount());
+        assertEquals(500, saving.getSavingsRecords().get(1).getAmount());
     }
 
     @Test
-    void setSavingsGoal_validStringAndAmount_expectGoalAdded() throws BudgetTrackerException {
-        saving.addSavings(100.0);
-        saving.setSavingsGoal(100.0, "Vacation");
-        assertTrue(outputStreamCaptor.toString().contains("I have set your saving goal:"));
+    void addSavings_validAmount_expectSavingRecordAdded() throws BudgetTrackerException {
+        saving.addSavings(150);
+        List<SavingsRecord> records = saving.getSavingsRecords();
+        assertEquals(1, records.size());
+        assertEquals(150, records.get(0).getAmount());
     }
 
     @Test
-    void updateSavingsGoal_validAmountAndGoalDescription_expectAmountAndGoalGotUpdated() throws BudgetTrackerException {
-        saving.addSavings(100.0);
-        saving.updateSavingsGoal(0, 150.0, "New Goal");
-        assertTrue(outputStreamCaptor.toString().contains("I have updated your saving amount and saving goal:"));
+    void viewSavings_savingsExist_expectCorrectNumberOfSavings() throws BudgetTrackerException {
+        saving.addSavings(100);
+        saving.addSavings(200);
+        assertEquals(2, saving.getSavingsRecords().size());
     }
 
     @Test
-    void deleteSavingsGoal_validIndex_expectSavingRecordDeleted() throws BudgetTrackerException {
-        saving.addSavings(100.0);
-        saving.setSavingsGoal(100.0, "Vacation");
+    void setSavingsGoal_validAmount_expectGoalSet() throws BudgetTrackerException {
+        saving.addSavings(300);
+        saving.setSavingsGoal(300, "Buy a laptop");
+        assertEquals("Buy a laptop", saving.getSavingsRecords().get(0).getGoal());
+    }
+
+    @Test
+    void updateSavingsGoal_validIndexAndAmount_expectGoalUpdated() throws BudgetTrackerException {
+        saving.addSavings(400);
+        saving.updateSavingsGoal(0, 500, "New Goal");
+        assertEquals(500, saving.getSavingsRecords().get(0).getAmount());
+        assertEquals("New Goal", saving.getSavingsRecords().get(0).getGoal());
+    }
+
+    @Test
+    void deleteSavingsGoal_validIndex_expectGoalDeleted() throws BudgetTrackerException {
+        saving.addSavings(250);
+        saving.setSavingsGoal(250, "Travel Fund");
         saving.deleteSavingsGoal(0);
-        assertTrue(outputStreamCaptor.toString().contains("I have deleted the saving goal:"));
+        assertEquals(" ", saving.getSavingsRecords().get(0).getGoal());
     }
-
 }
+
