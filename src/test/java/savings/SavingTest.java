@@ -2,7 +2,7 @@ package savings;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import exceptions.BudgetTrackerException;
 import summary.Summary;
 import java.util.List;
@@ -27,20 +27,6 @@ class SavingTest {
         saving.deleteSavings(1); // 删除第一条记录
         assertEquals(1, saving.getSavingsRecords().size());
         assertEquals(200, saving.getSavingsRecords().get(0).getAmount());
-    }
-
-    @Test
-    void transferSavings_validIndicesAndAmount_expectAmountTransferred() throws BudgetTrackerException {
-        saving.addSavings(500);
-        saving.addSavings(300);
-
-        assertEquals(500, saving.getSavingsRecords().get(0).getAmount());
-        assertEquals(300, saving.getSavingsRecords().get(1).getAmount());
-
-        saving.transferSavings(1, 2, 200); // 从第一条转移200到第二条
-
-        assertEquals(300, saving.getSavingsRecords().get(0).getAmount());
-        assertEquals(500, saving.getSavingsRecords().get(1).getAmount());
     }
 
     @Test
@@ -79,6 +65,20 @@ class SavingTest {
         saving.setSavingsGoal(250, "Travel Fund");
         saving.deleteSavingsGoal(0);
         assertEquals(" ", saving.getSavingsRecords().get(0).getGoal());
+    }
+
+    @Test
+    void transferSavings_validIndicesAndAmount_expectAmountTransferred() throws BudgetTrackerException {
+        saving.addSavings(500);
+        saving.addSavings(300);
+
+        assertEquals(500, saving.getSavingsRecords().get(0).getAmount());
+        assertEquals(300, saving.getSavingsRecords().get(1).getAmount());
+
+        saving.transferSavings(1, 2, 200); // 从第一条转移200到第二条
+
+        assertEquals(300, saving.getSavingsRecords().get(0).getAmount());
+        assertEquals(500, saving.getSavingsRecords().get(1).getAmount());
     }
 }
 
