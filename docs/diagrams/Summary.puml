@@ -1,40 +1,87 @@
 @startuml
-'Summary class diagram for budget tracker application
+' Improved class diagram based on code and CS2113 principles
 
+skinparam classAttributeIconSize 0 ' Hide default attribute icon for cleaner look
 
-  class Summary {
-    - totalIncome : double
-    - totalExpense : double
-    - totalSavings : double
-    - observers : List<FinancialObserver>
-    + getAvailableFunds()
-    + addIncome(...)
-    + addExpense(...)
-    + registerObserver(...)
-    - notifyObservers()
-  }
+interface FinancialObserver <<interface>> {
+  + update(availableFunds: double, totalIncome: double, totalExpense: double, totalSavings: double)
+}
 
-  interface FinancialObserver {
-    + update(...)
-  }
+class Summary {
+  - totalIncome : double
+  - totalExpense : double
+  - totalSavings : double
+  - observers : List<FinancialObserver>
+  + getTotalIncome() : double
+  + getTotalExpense() : double
+  + getAvailableFunds() : double
+  + getTotalSavings() : double
+  + addIncome(income: double)
+  + removeIncome(income: double)
+  + addExpense(expense: double)
+  + removeExpense(expense: double)
+  + addSavings(savings: double)
+  + removeSavings(savings: double)
+  + registerObserver(observer: FinancialObserver)
+  + removeObserver(observer: FinancialObserver)
+  - notifyObservers()
+}
 
-  class FundsAlert {
-    - warningThreshold : double
-    + setWarningThreshold(...)
-    + update(...)
-  }
+class FundsAlert {
+  - warningThreshold : double
+  - ui : Ui
+  + FundsAlert(ui: Ui)
+  + setWarningThreshold(newThreshold: double) : boolean
+  + getWarningThreshold() : double
+  + update(availableFunds: double, totalIncome: double, totalExpense: double, totalSavings: double)
+  + displayInitialNotification()
+  - checkAndDisplayAlert(availableFunds: double)
+}
 
-  class SummaryDisplay {
-    + displaySummary()
-  }
+class AlertCommand extends Command {
+  - threshold : double
+  - fundsAlert : FundsAlert
+  + AlertCommand(threshold: double, fundsAlert: FundsAlert)
+  + execute(expenseList: ExpenseList, ui: Ui)
+  + isExit() : boolean
+}
 
-  Summary o--> "0..*" FinancialObserver : notifies >
-  FundsAlert ..|> FinancialObserver
-  SummaryDisplay --> Summary : uses >
-  
-  note "At runtime, Summary will have\nFundsAlert instances in its\nobservers collection" as N1
-  N1 .. Summary
-  N1 .. FundsAlert
+class AlertParser {
+  + {static} parse(fullCommand: String, fundsAlert: FundsAlert) : Command
+}
 
+class SummaryDisplay {
+  + displaySummary()
+}
+
+' --- External/Placeholder Classes ---
+interface Ui <<interface>> {
+  + showMessage(message: String)
+  + showAlert(message: String)
+}
+
+abstract class Command {
+  + {abstract} execute(expenseList: ExpenseList, ui: Ui)
+  + {abstract} isExit() : boolean
+}
+
+' --- Relationships ---
+Summary "1" --> "0..*" FinancialObserver : observers >
+FundsAlert ..|> FinancialObserver
+FundsAlert --> "1" Ui : uses >
+
+AlertCommand --|> Command
+AlertCommand --> "1" FundsAlert : modifies >
+AlertCommand ..> Ui : uses >
+
+AlertParser ..> AlertCommand : creates
+AlertParser ..> FundsAlert : uses >
+
+SummaryDisplay ..> Summary : uses >
+
+' --- Notes ---
+note "At runtime, Summary holds FundsAlert\ninstances in its observers collection via\nthe FinancialObserver interface." as N1
+N1 .. Summary
+N1 .. FundsAlert
 
 @enduml
