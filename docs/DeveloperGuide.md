@@ -438,7 +438,7 @@ Alternatives considered:
 2. Download the latest JAR file from [here](https://github.com/AY2425S2-CS2113-T11a-4/tp/releases) under latest release.
 3. Copy the file to the folder you want Common Cents to be in.
 4. Open your terminal and cd into the folder Common Cents is in.
-5. Run the file by inputting `java -jar tp.jar`
+5. Run the file by inputting `java -jar commoncents.jar`
 
 ### Testing the program
 Upon running the JAR file, you should see a welcome message.
