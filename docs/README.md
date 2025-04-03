@@ -43,12 +43,10 @@ Common Cents is a personal finance management application that helps you track y
     - Example: `add expense 50 / Lunch / F`
     - Note: Categories are F (Food), T (Transport), B (Bills), O (Others)
     - Example output:
-      ```
-      > add expense 50 / Lunch / F
-      Sure! I have added your expense:
-      1. 	[FOOD] $50.0 from Lunch
-      Now you have 1 expense(s) in your list.
-      ```
+```
+> add expense 50 / Lunch / F
+Added expense: [FOOD] $50.00 for Lunch
+```
 
 - **Delete Expense**:
     - `delete expense <INDEX>`
@@ -61,12 +59,12 @@ Common Cents is a personal finance management application that helps you track y
     - Lists all expense records
     - Example: `view expense`
     - Example output:
-      ```
-      > view expense
-      ===== EXPENSE ENTRIES =====
-      1. [FOOD] $20.0 for lunch
-      ============================
-      ``` 
+```
+> view expense
+===== EXPENSE ENTRIES =====
+1. [FOOD] $20.0 for lunch
+============================
+```
 
 ### Savings Management
 - **Add Savings**:
