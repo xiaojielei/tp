@@ -1,4 +1,9 @@
-# Developer Guide
+# Common Cents Developer Guide
+
+## About Common Cents
+Common Cents is a personal finance management application that helps you track your income, expenses, savings, 
+and financial goals. The application provides a command-line interface for managing your finances with features for 
+budget tracking, savings management, and financial alerts.
 
 ## Design & Implementation
 
