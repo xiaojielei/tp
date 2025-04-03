@@ -17,6 +17,9 @@ Common Cents is a Command Line Interface (CLI) financial management application 
 
 Common Cents offers several features to help you manage your finances effectively:
 
+## Input Notes
+* IMPORTANT: Parameters should be padded with spaces! eg. `add expense 30 / lunch / f`
+
 ### Income Management
 
 #### Adding Income: `add income`
@@ -81,11 +84,9 @@ Format: `add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>`
 
 * `<AMOUNT>` must be a positive number.
 * `<DESCRIPTION>` is a description of what the expense was for.
-* `<DESCRIPTION>` cannot have '/' symbols.
+* `<DESCRIPTION>` should not contain '/' symbols.
 * `<CATEGORY>` is the category of the expense (F (Food), T (Transport), B (Bills), O (Others))
-* Able to input either 'F', 'T', 'B' or 'O' into the `<CATEGORY>` parameter.
-
-* IMPORTANT: leave a space between parameters! eg. `add expense 30 / lunch / f`
+* Able to input either 'F', 'T', 'B' or 'O' into the `<CATEGORY>` parameter. This is NOT case-sensitive!
 
 Example of usage:
 
