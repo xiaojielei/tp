@@ -1,4 +1,9 @@
-# Developer Guide
+# Common Cents Developer Guide
+
+## About Common Cents
+Common Cents is a personal finance management application that helps you track your income, expenses, savings, 
+and financial goals. The application provides a command-line interface for managing your finances with features for 
+budget tracking, savings management, and financial alerts.
 
 ## Design & Implementation
 
@@ -428,4 +433,55 @@ Alternatives considered:
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Set up the program
+1. Ensure you have Java 17 or above installed.
+2. Download the latest JAR file from [here](https://github.com/AY2425S2-CS2113-T11a-4/tp/releases) under latest release.
+3. Copy the file to the folder you want Common Cents to be in.
+4. Open your terminal and cd into the folder Common Cents is in.
+5. Run the file by inputting `java -jar tp.jar`
+
+### Testing the program
+Upon running the JAR file, you should see a welcome message.
+```
+Welcome to Common Cents!
+Use `help` to see available commands.
+Funds Alert feature is active. You will be warned when available funds fall below $5.00.
+Use 'alert set <amount>' to change this threshold.
+```
+Now you can perform the following tests:
+
+#### Adding Expenses
+1. Command: `add expense 25 / lunch / f`
+Expected:
+```
+Added expense: [FOOD] $25.0 for lunch
+```
+2. Command: `add expense 5 / MRT / t`
+Expected:
+```
+Added expense: [TRANSPORT] $5.0 for MRT
+```
+3. Command: `add expense 50 / hostel stay / b`
+Expected: 
+```
+Added expense: [BILLS] $50.0 for hostel stay
+```
+4. Command: `add expense 20 / shopping / o`
+Expected:
+```
+Added expense: [OTHERS] $50.0 for shopping
+```
+5. Command: `add expense 20 / shopping / n`
+Expected: throws an error for invalid category.
+6. Command: `add expense `
+Expected: throws an error for invalid format.
+
+#### Viewing list of expenses
+1. Command: `view expense`
+Expected: a numbered list of expenses.
+
+#### Deleting expenses
+1. Command: `delete expense 1`
+Expected: expense with index 1 deleted.
+2. Command: `delete expense 0`, `delete expense -1`, `delete expense <OUT_OF_BOUNDS>`
+Expected: throws an error for invalid index.

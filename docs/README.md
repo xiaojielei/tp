@@ -18,12 +18,12 @@ Common Cents is a personal finance management application that helps you track y
   - Example: `add income 1000 / Salary`
   - Note: Amount must be a positive number
   - Example output:
-    ```
-    > add income 2000 / Monthly Salary
-    Sure! I have added your income:
-    1. 	$2000.0 from Monthly Salary
-    Now you have 1 income(s) in your list.
-    ```
+```
+> add income 2000 / Monthly Salary
+Sure! I have added your income:
+1. $2000.0 from Monthly Salary
+Now you have 1 income(s) in your list.
+```
 
 - **Delete Income**:
     - `delete income <INDEX>`
