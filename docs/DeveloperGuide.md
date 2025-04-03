@@ -183,7 +183,7 @@ the main method will teh call run() which belongs to Saving.java. run() will che
 contains other strings like "add savings", "delete savings", etc., then call the corresponding
 method to dealt with the input command.
 
-Saving sequence diagram: (below only used the excecution of 1 method as example,
+Saving sequence diagram: (below only used the execution of 1 method as example,
 the sequence diagram of other methods are similar)
 ![Saving Sequence Diagram.png](images/SavingSequenceDiagram.png)
 
