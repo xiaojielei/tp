@@ -297,18 +297,8 @@ Total Savings:        $30.00
 #### Detailed Financial Tracking
 
 The Summary component maintains your financial data using these calculations:
-- **Available Funds** = Total Income - (Total Expenses + Total Savings)
+- **Available Funds** = Total Income - Total Expenses
 - All calculations are performed automatically when you add or remove entries
-
-#### Summary Display Format
-
-When you view your summary, you'll see information organized like this:
-```
-Total Income: $1000.00
-Total Expenses: $400.00
-Total Savings: $200.00
-Available Funds: $400.00
-```
 
 #### Data Validation
 
@@ -425,14 +415,6 @@ help                                                         Displays this help 
 ```
 
 ### Help Command Details
-
-The help command organizes information into these categories:
-1. Financial Management Commands
-2. Alert System Commands
-3. Viewing Commands
-Each category shows relevant commands with their formats and examples.
-
-#### Help Display Features
 
 The HelpDisplay component:
 - Organizes commands into logical categories for easier reference
