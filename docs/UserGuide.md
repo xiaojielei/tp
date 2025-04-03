@@ -19,6 +19,7 @@ Common Cents offers several features to help you manage your finances effectivel
 
 ## Input Notes
 * IMPORTANT: Parameters should be padded with spaces! eg. `add expense 30 / lunch / f`
+* Commands should be entered in lowercase.
 
 ### Income Management
 
