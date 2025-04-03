@@ -26,7 +26,10 @@ activate AddExpenseCommand
 
 AddExpenseCommand -> ExpenseList: addExpense()
 activate ExpenseList
-
+deactivate AddExpenseCommand
+deactivate  ExpenseList
+deactivate Duke
+deactivate ExpenseParser
 
 
 @enduml

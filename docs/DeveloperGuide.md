@@ -42,8 +42,8 @@ class.
 For example, in the `Expense` class:
 ```java
 public enum Category {
-        FOOD, TRANSPORT, BILLS, OTHERS
-    }
+    FOOD, TRANSPORT, BILLS, OTHERS
+}
 public static Category getCategoryFromInput(String input) throws BudgetTrackerException {
     switch (input.toUpperCase()) {
     case "F":
