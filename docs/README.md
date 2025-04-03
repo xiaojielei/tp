@@ -75,6 +75,7 @@ Common Cents is a personal finance management application that helps you track y
     - Example: `add savings 200`
     - Note: Amount must be a positive number
     - Example output:
+  
       ```
       > add savings 500
       Sure! I have added your savings:
@@ -93,6 +94,7 @@ Common Cents is a personal finance management application that helps you track y
     - Lists all savings records
     - Example: `view savings`
     - Example output:
+  
       ```
       > view savings
       Here are the savings in your list:
@@ -106,6 +108,7 @@ Common Cents is a personal finance management application that helps you track y
     - Sets a new savings goal for a specific amount
     - Example: `savings goal set 1000 / Emergency Fund`
     - Example output:
+    - 
       ```
       > savings goal set 500 / Emergency Fund
       I have set your saving goal:
