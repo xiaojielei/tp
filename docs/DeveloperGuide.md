@@ -205,33 +205,6 @@ user. This indicator provides feedback to the user regarding their saving habits
 
 This feature aims to help users gauge their financial behavior and make informed decisions about saving.
 
-```java
-public String getSavingsIndicator() {
-    double totalIncome = summary.getTotalIncome(); // Get total income from Summary
-    double totalSavings = 0;
-
-    // Sum all savings records
-    for (SavingsRecord record : savingsRecords) {
-        totalSavings += record.amount;
-    }
-
-    if (totalIncome == 0) {
-        return "No income recorded.";  // Handle edge case where no income has been recorded
-    }
-
-    double savingsRatio = totalSavings / totalIncome;
-
-    // Determine the savings indicator based on the ratio
-    if (savingsRatio >= 0.8) {
-        return "Good - You are saving well!";
-    } else if (savingsRatio < 0.5) {
-        return "Bad - Try to save more.";
-    } else {
-        return "Neutral - You are on track.";
-    }
-}
-```
-
 How this code works:
 * Total Income: The method retrieves the user's total income from the `Summary` class using the `getTotalIncome()`
   method.
@@ -270,57 +243,29 @@ Here's the class diagram of the Summary component:
   <img src="images/Summary.png" alt="Summary Class Diagram" width="1000"/>
 </div>
 
-#### Design:
+How the Summary Component works:
 
-The Summary component follows these key design principles:
+1.  **Central Data Repository**: The `Summary` class acts as the single source of truth for financial data. It maintains running totals for income, expenses, and savings.
+2.  **Observer Pattern for Updates**: `Summary` implements the Subject role in the Observer pattern.
+    *   Other components interested in financial changes (like `FundsAlert`) register themselves as observers using `Summary.registerObserver()`. `Summary` keeps a list of these observers.
+    *   Whenever a financial value changes (e.g., adding income, removing savings), `Summary` calls its internal `notifyObservers()` method.
+    *   This method iterates through the list of registered observers and calls the `update()` method on each one, passing the latest financial state (available funds, totals).
+    *   This mechanism allows components like `FundsAlert` to react to financial changes without `Summary` needing specific knowledge of what those components do.
+3.  **Interaction with Commands**: Various command classes (e.g., `AddIncomeCommand`, `AddExpenseCommand`, `DeleteExpenseCommand`) interact directly with the `Summary` component to modify the financial state. Each command encapsulates a specific financial operation.
+4.  **Data Provision**: `Summary` provides getter methods (e.g., `getTotalIncome()`, `getAvailableFunds()`) allowing other components like `SummaryDisplay` and `Saving` to retrieve the current financial information for display or calculation purposes.
+5.  **Data Validation**: Methods within `Summary` that modify financial data (e.g., `addExpense`, `removeSavings`) include validation checks to ensure data integrity, such as preventing negative amounts or ensuring expenses don't exceed available funds.
 
-1. **Central Data Repository**: The `Summary` class maintains running totals of income, expenses, and savings, serving as a manager for financial data.
+Why it's implemented this way:
 
-2. **Observer Pattern Implementation**: 
-   * At runtime, `Summary` maintains a collection of `FinancialObserver` instances (such as `FundsAlert`)
-   * When financial data changes, `Summary` calls `notifyObservers()` which triggers the `update()` method on all registered observers
-   * This allows components like `FundsAlert` to react to financial changes without `Summary` needing to know the specific implementation details
+1.  **Maintain Data Integrity**: Centralizing financial data management in one component ensures consistency and reduces the risk of data synchronization errors across the application.
+2.  **Support Loose Coupling**: The Observer pattern decouples the `Summary` component (the data source) from components that react to data changes (the observers). This makes the system more flexible and easier to modify, as observers can be added or removed without changing `Summary`.
+3.  **Enable Extensibility**: New features requiring awareness of financial changes (e.g., different types of alerts or reports) can be implemented as new observers and registered with `Summary` without altering its core logic.
+4.  **Facilitate Testing**: The clear separation of responsibilities (data management vs. reacting to changes) makes it easier to test the `Summary` component and its observers in isolation.
 
-3. **Command Pattern Integration**:
-   * Command classes like `AddIncomeCommand`, `AddExpenseCommand`, `DeleteIncomeCommand`, and `DeleteExpenseCommand` modify the `Summary` state
-   * Each command encapsulates a specific financial operation, promoting single responsibility and maintainability
+Alternatives considered:
 
-4. **Data Access**:
-   * The `SummaryDisplay` class uses `Summary` to retrieve and format financial information for presentation
-   * The `Saving` class updates `Summary` when savings operations are performed
-
-#### Implementation:
-
-The Observer pattern implementation in Summary:
-
-```java
-// In Summary.java
-private List<FinancialObserver> observers = new ArrayList<>();
-
-public void registerObserver(FinancialObserver observer) {
-    observers.add(observer);
-}
-
-private void notifyObservers() {
-    double availableFunds = getAvailableFunds();
-    for (FinancialObserver observer : observers) {
-        observer.update(availableFunds, totalIncome, totalExpense, totalSavings);
-    }
-}
-```
-
-#### Rationale:
-
-The Summary component is designed this way to:
-
-1. **Maintain Data Integrity**: Centralizing financial data in one component ensures consistency and reduces the risk of data synchronization issues.
-
-2. **Support Loose Coupling**: The Observer pattern allows components to react to financial changes without creating tight dependencies. 
-
-3. **Enable Extensibility**: New financial observers can be added without modifying the `Summary` class.
-
-4. **Facilitate Testing**: The clear separation of responsibilities makes it easier to test individual components in isolation.
-
+*   **Direct method calls:** Instead of the Observer pattern, commands or `Summary` itself could directly call methods on components like `FundsAlert` whenever data changes. This was avoided as it would create tight coupling, making the system harder to modify and extend. If `FundsAlert` changed its method signature, `Summary` or multiple command classes might need updating.
+*   **Storing transaction history:** Instead of maintaining running totals, the `Summary` could store a list of all individual income/expense/savings transactions. While offering a more detailed history, this approach would require recalculating totals every time a summary is needed, potentially impacting performance for large datasets, and might complicate the state management for features like the current available balance.
 
 ### Summary Display Component
 
@@ -345,6 +290,12 @@ Why it's implemented this way:
 * Separating display logic from data management follows the Single Responsibility Principle.
 * The component depends only on the public interface of `Summary`, making it resilient to internal changes in the data model.
 
+
+Alternatives considered:
+* **Embedding display logic:** The logic for formatting and displaying the summary could have been placed directly within the `Summary` component or the main `Duke` class. This was rejected because it would violate the Single Responsibility Principle, mixing data management/application logic with presentation concerns, leading to lower cohesion and making the code harder to maintain.
+* **Direct data structure access:** `SummaryDisplay` could have accessed the internal data structures of `Summary` directly. This was avoided to maintain loose coupling; depending only on the public API makes `SummaryDisplay` less likely to break if the internal implementation of `Summary` changes.
+
+
 ### Help Display Component
 
 The HelpDisplay component provides users with information about available commands and their usage.
@@ -361,11 +312,22 @@ Why it's implemented this way:
 * Centralizing help text in one component makes it easier to maintain and update as commands change.
 * The straightforward approach prioritizes clarity and maintainability over complexity.
 
+
+Alternatives considered:
+* **Distributing help text:** Help information could have been stored within each respective command class. This was deemed less maintainable, as updating or viewing all help information would require checking multiple files.
+
 ### Funds Alert Component
 
 The FundsAlert component implements a warning system that alerts users when their available balance falls below a set threshold.
 
 #### API: FundsAlert.java, FinancialObserver.java
+
+How the Funds Alert Component works:
+
+1.  `FundsAlert` implements the `FinancialObserver` interface to receive updates from the `Summary` component.
+2.  It maintains a warning threshold (default $5.00) that can be customized by the user.
+3.  When financial data changes, the `Summary` component calls the `update()` method of all registered observers.
+4.  `FundsAlert` checks if available funds are below the threshold and displays a warning if necessary.
 
 The sequence diagram below shows what happens when a user sets an alert threshold:
 
@@ -373,76 +335,22 @@ The sequence diagram below shows what happens when a user sets an alert threshol
   <img src="images/SetAlert.png" alt="Set Alert Sequence Diagram" width="1000"/>
 </div>
 
+Setting an alert threshold (as shown in the **Set Alert Sequence Diagram** above):
+1. When the user enters `alert set 20`, the command is parsed by `AlertParser`.
+2. An `AlertCommand` is created and executed.
+3. The command calls `fundsAlert.setWarningThreshold(20.0)` to update the threshold stored within the `FundsAlert` instance.
+
+
 The sequence diagram below shows what happens when an alert is triggered:
 
 <div align="center">
   <img src="images/TriggerAlert.png" alt="Trigger Alert Sequence Diagram" width="1000"/>
 </div>
 
-#### Implementation:
-
-The FundsAlert component uses the Observer pattern to monitor the financial state:
-
-```java
-// In FundsAlert.java
-public class FundsAlert implements FinancialObserver {
-    private double warningThreshold = 5.0; // Default threshold
-    
-    @Override
-    public void update(double availableFunds, double totalIncome, double totalExpense, double totalSavings) {
-        checkAndDisplayAlert(availableFunds);
-    }
-    
-    private void checkAndDisplayAlert(double availableFunds) {
-        if (availableFunds < warningThreshold) {
-            // Display alert to user
-        }
-    }
-    
-    public void displayInitialNotification() {
-        // Displays information about the alert feature when program starts
-        // Informs user of current threshold and how to change it
-    }
-}
-```
-
-In the main `Duke` class, the `FundsAlert` component is initialized and registered as an observer:
-
-```java
-// In Duke.java constructor
-fundsAlert = new FundsAlert(ui);
-summary.registerObserver(fundsAlert);
-```
-
-Then in the `runDuke()` method, the initial notification is displayed upon startup:
-
-```java
-// In Duke.java runDuke method
-public void runDuke() {
-    fundsAlert.displayInitialNotification(); // Displays intro message about alert feature
-    
-    // Main program loop continues...
-}
-```
-
-This ensures users are informed about the funds alert feature as soon as they start the application, making them aware of this financial safeguard and how to customize it to their needs.
-
-#### How it works:
-
-1. `FundsAlert` implements the `FinancialObserver` interface to receive updates from the `Summary` component.
-2. It maintains a warning threshold (default $5.00) that can be customized by the user.
-3. When financial data changes, the `Summary` component calls the `update()` method of all registered observers.
-4. `FundsAlert` checks if available funds are below the threshold and displays a warning if necessary.
-
-Setting an alert threshold:
-1. When the user enters `alert set 20`, the command is parsed by `AlertParser`.
-2. An `AlertCommand` is created and executed.
-3. The command calls `fundsAlert.setWarningThreshold(20.0)` to update the threshold.
-
-Triggering an alert:
-1. When the user adds an expense that reduces available funds below the threshold, `Summary` updates its data.
-2. `Summary` notifies all observers, including `FundsAlert`.
-3. `FundsAlert` compares available funds to the threshold and displays a warning if funds are too low.
+Triggering an alert (as illustrated in the **Trigger Alert Sequence Diagram** above):
+1. When the user adds an expense that reduces available funds below the threshold, the corresponding command updates the `Summary`'s financial data.
+2. `Summary` then calls `notifyObservers()`, which in turn calls the `update()` method on the registered `FundsAlert` instance.
+3. `FundsAlert`'s `update` method calls `checkAndDisplayAlert()`, which compares the current available funds to the threshold and, if funds are too low, instructs the UI to display the warning message.
 
 Why it's implemented this way:
 * The Observer pattern allows FundsAlert to be notified of financial changes without tight coupling to Summary.
@@ -517,36 +425,50 @@ Now you can perform the following tests:
 
 #### Adding Expenses
 1. Command: `add expense 25 / lunch / f`
-Expected:
-```
-Added expense: [FOOD] $25.0 for lunch
-```
+
+    Expected:
+    ```
+    Added expense: [FOOD] $25.0 for lunch
+    ```
 2. Command: `add expense 5 / MRT / t`
-Expected:
-```
-Added expense: [TRANSPORT] $5.0 for MRT
-```
+
+    Expected:
+    ```
+    Added expense: [TRANSPORT] $5.0 for MRT
+    ```
 3. Command: `add expense 50 / hostel stay / b`
-Expected: 
-```
-Added expense: [BILLS] $50.0 for hostel stay
-```
+
+    Expected: 
+    ```
+    Added expense: [BILLS] $50.0 for hostel stay
+    ```
 4. Command: `add expense 20 / shopping / o`
-Expected:
-```
-Added expense: [OTHERS] $50.0 for shopping
-```
+
+    Expected:
+    ```
+    Added expense: [OTHERS] $50.0 for shopping
+    ```
 5. Command: `add expense 20 / shopping / n`
-Expected: throws an error for invalid category.
+
+    Expected: throws an error for invalid category.
+
+
 6. Command: `add expense `
-Expected: throws an error for invalid format.
+
+    Expected: throws an error for invalid format.
 
 #### Viewing list of expenses
 1. Command: `view expense`
-Expected: a numbered list of expenses.
+
+    Expected: a numbered list of expenses.
 
 #### Deleting expenses
 1. Command: `delete expense 1`
-Expected: expense with index 1 deleted.
+
+    Expected: expense with index 1 deleted.
+
+
 2. Command: `delete expense 0`, `delete expense -1`, `delete expense <OUT_OF_BOUNDS>`
-Expected: throws an error for invalid index.
+
+    Expected: throws an error for invalid index.
+
