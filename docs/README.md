@@ -55,16 +55,17 @@ Added expense: [FOOD] $50.00 for Lunch
     - Note: Index starts from 1
 
 - **View Expense**:
-    - `view expense`
-    - Lists all expense records
-    - Example: `view expense`
-    - Example output:
-```
-> view expense
-===== EXPENSE ENTRIES =====
-1. [FOOD] $20.0 for lunch
-============================
-```
+  - `view expense`
+  - Lists all expense records
+  - Example: `view expense`
+  - Example output:
+
+    ```
+    > view expense
+    ===== EXPENSE ENTRIES =====
+    1. [FOOD] $20.0 for lunch
+    ============================
+    ```
 
 ### Savings Management
 - **Add Savings**:
