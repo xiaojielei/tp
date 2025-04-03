@@ -205,33 +205,6 @@ user. This indicator provides feedback to the user regarding their saving habits
 
 This feature aims to help users gauge their financial behavior and make informed decisions about saving.
 
-```java
-public String getSavingsIndicator() {
-    double totalIncome = summary.getTotalIncome(); // Get total income from Summary
-    double totalSavings = 0;
-
-    // Sum all savings records
-    for (SavingsRecord record : savingsRecords) {
-        totalSavings += record.amount;
-    }
-
-    if (totalIncome == 0) {
-        return "No income recorded.";  // Handle edge case where no income has been recorded
-    }
-
-    double savingsRatio = totalSavings / totalIncome;
-
-    // Determine the savings indicator based on the ratio
-    if (savingsRatio >= 0.8) {
-        return "Good - You are saving well!";
-    } else if (savingsRatio < 0.5) {
-        return "Bad - Try to save more.";
-    } else {
-        return "Neutral - You are on track.";
-    }
-}
-```
-
 How this code works:
 * Total Income: The method retrieves the user's total income from the `Summary` class using the `getTotalIncome()`
   method.
@@ -498,3 +471,4 @@ Now you can perform the following tests:
 2. Command: `delete expense 0`, `delete expense -1`, `delete expense <OUT_OF_BOUNDS>`
 
     Expected: throws an error for invalid index.
+    
