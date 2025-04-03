@@ -517,36 +517,49 @@ Now you can perform the following tests:
 
 #### Adding Expenses
 1. Command: `add expense 25 / lunch / f`
-Expected:
-```
-Added expense: [FOOD] $25.0 for lunch
-```
+
+    Expected:
+    ```
+    Added expense: [FOOD] $25.0 for lunch
+    ```
 2. Command: `add expense 5 / MRT / t`
-Expected:
-```
-Added expense: [TRANSPORT] $5.0 for MRT
-```
+
+    Expected:
+    ```
+    Added expense: [TRANSPORT] $5.0 for MRT
+    ```
 3. Command: `add expense 50 / hostel stay / b`
-Expected: 
-```
-Added expense: [BILLS] $50.0 for hostel stay
-```
+
+    Expected: 
+    ```
+    Added expense: [BILLS] $50.0 for hostel stay
+    ```
 4. Command: `add expense 20 / shopping / o`
-Expected:
-```
-Added expense: [OTHERS] $50.0 for shopping
-```
+
+    Expected:
+    ```
+    Added expense: [OTHERS] $50.0 for shopping
+    ```
 5. Command: `add expense 20 / shopping / n`
-Expected: throws an error for invalid category.
+
+    Expected: throws an error for invalid category.
+
+
 6. Command: `add expense `
-Expected: throws an error for invalid format.
+
+    Expected: throws an error for invalid format.
 
 #### Viewing list of expenses
 1. Command: `view expense`
-Expected: a numbered list of expenses.
+
+    Expected: a numbered list of expenses.
 
 #### Deleting expenses
 1. Command: `delete expense 1`
-Expected: expense with index 1 deleted.
+
+    Expected: expense with index 1 deleted.
+
+
 2. Command: `delete expense 0`, `delete expense -1`, `delete expense <OUT_OF_BOUNDS>`
-Expected: throws an error for invalid index.
+
+    Expected: throws an error for invalid index.
