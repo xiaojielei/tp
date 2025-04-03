@@ -317,6 +317,9 @@ The Summary component is designed this way to:
 4. **Facilitate Testing**: The clear separation of responsibilities makes it easier to test individual components in isolation.
 
 
+Alternatives considered:
+* **Direct method calls:** Instead of the Observer pattern, commands directly call methods on components like `FundsAlert` when data changes. This was avoided as it would create tight coupling, making the system harder to modify and extend.
+
 ### Summary Display Component
 
 The SummaryDisplay component formats and presents financial data to the user in a readable format.
@@ -340,6 +343,12 @@ Why it's implemented this way:
 * Separating display logic from data management follows the Single Responsibility Principle.
 * The component depends only on the public interface of `Summary`, making it resilient to internal changes in the data model.
 
+
+Alternatives considered:
+* **Embedding display logic:** The logic for formatting and displaying the summary could have been placed directly within the `Summary` component or the main `Duke` class. This was rejected because it would violate the Single Responsibility Principle, mixing data management/application logic with presentation concerns, leading to lower cohesion and making the code harder to maintain.
+* **Direct data structure access:** `SummaryDisplay` could have accessed the internal data structures of `Summary` directly. This was avoided to maintain loose coupling; depending only on the public API makes `SummaryDisplay` less likely to break if the internal implementation of `Summary` changes.
+
+
 ### Help Display Component
 
 The HelpDisplay component provides users with information about available commands and their usage.
@@ -355,6 +364,10 @@ How the HelpDisplay component works:
 Why it's implemented this way:
 * Centralizing help text in one component makes it easier to maintain and update as commands change.
 * The straightforward approach prioritizes clarity and maintainability over complexity.
+
+
+Alternatives considered:
+* **Distributing help text:** Help information could have been stored within each respective command class. This was deemed less maintainable, as updating or viewing all help information would require checking multiple files.
 
 ### Funds Alert Component
 
