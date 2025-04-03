@@ -28,7 +28,6 @@ public class BudgetTracker {
         try {
             command.execute(expenseList, ui);
         } catch (BudgetTrackerException e) {
-            // Handle the exception by printing the message
             System.out.println("Error: " + e.getMessage());
         }
     }
@@ -43,7 +42,6 @@ public class BudgetTracker {
         try {
             incomeCommand.incomeExecute(new IncomeManager(), ui);
         } catch (BudgetTrackerException e) {
-            // Handle the exception by printing the message
             System.out.println("Error: " + e.getMessage());
         }
     }
