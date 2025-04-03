@@ -81,7 +81,11 @@ Format: `add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>`
 
 * `<AMOUNT>` must be a positive number.
 * `<DESCRIPTION>` is a description of what the expense was for.
+* `<DESCRIPTION>` cannot have '/' symbols.
 * `<CATEGORY>` is the category of the expense (F (Food), T (Transport), B (Bills), O (Others))
+* Able to input either 'F', 'T', 'B' or 'O' into the `<CATEGORY>` parameter.
+
+* IMPORTANT: leave a space between parameters! eg. `add expense 30 / lunch / f`
 
 Example of usage:
 
