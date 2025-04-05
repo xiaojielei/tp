@@ -44,6 +44,10 @@ public class FundsAlert implements FinancialObserver {
         double oldThreshold = this.warningThreshold;
         this.warningThreshold = newThreshold;
         
+        logger.log(Level.INFO, "Funds alert threshold changed from " + 
+                               String.format("%.2f", oldThreshold) + " to " + 
+                               String.format("%.2f", newThreshold));
+
         assert this.warningThreshold == newThreshold : "Threshold was not properly updated";
         assert this.warningThreshold != oldThreshold || newThreshold == oldThreshold : 
                 "Threshold did not change when it should have";
@@ -82,7 +86,12 @@ public class FundsAlert implements FinancialObserver {
         if (availableFunds < warningThreshold) {
             String message = "WARNING: Available funds ($" + String.format("%.2f", availableFunds) + 
                     ") are below warning threshold ($" + String.format("%.2f", warningThreshold) + ")";
+            logger.log(Level.WARNING, "Alert triggered: " + message);
             ui.showAlert(message);
+        } else {
+            logger.log(Level.FINE, "Funds check for alerts passed: Available funds ($" + 
+                                 String.format("%.2f", availableFunds) + ") >= Threshold ($" + 
+                                 String.format("%.2f", warningThreshold) + ")");
         }
     }
     
@@ -96,6 +105,7 @@ public class FundsAlert implements FinancialObserver {
         String message = "Funds Alert feature is active. You will be warned when available funds fall below $" 
                 + String.format("%.2f", warningThreshold) + ".";
         ui.showMessage(message);
+        logger.log(Level.INFO, "Displayed initial funds alert notification. Threshold: $" + String.format("%.2f", warningThreshold));
         ui.showMessage("Use 'alert set <amount>' to change this threshold.");
     }
 }
