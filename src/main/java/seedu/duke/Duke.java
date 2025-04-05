@@ -103,7 +103,7 @@ public class Duke {
                     listIncomeCommand.execute();
                     commandRecognized = true;
                     continue;
-                } else if (fullCommand.equals("view expense")) {
+                } else if (fullCommand.trim().equals("view expense")) {
                     ViewExpenseCommand viewExpenseCommand = new ViewExpenseCommand(expenseList);
                     viewExpenseCommand.execute(expenseList, ui);
                     commandRecognized = true;
