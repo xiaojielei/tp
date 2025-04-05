@@ -54,7 +54,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         displayWelcomeMessage();
-        new Duke().runDuke();
+        new Duke().execute();
     }
 
     /**
@@ -68,10 +68,9 @@ public class Duke {
     /**
      * Runs the main program loop, processing user commands until exit.
      */
-    public void runDuke() {
+    public void execute() {
         fundsAlert.displayInitialNotification();
 
-        // Main program loop
         while (true) {
             try {
                 // Check if there's input available before reading

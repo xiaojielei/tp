@@ -19,10 +19,11 @@ public class AlertCommand extends Command {
      * @param fundsAlert The funds alert object to modify
      */
     public AlertCommand(double threshold, FundsAlert fundsAlert) {
+        assert fundsAlert != null : "FundsAlert object cannot be null in AlertCommand constructor";
+
         this.threshold = threshold;
         this.fundsAlert = fundsAlert;
     }
-
     /**
      * Executes the command to set the warning threshold for the funds alert.
      *
@@ -32,6 +33,8 @@ public class AlertCommand extends Command {
      */
     @Override
     public void execute(ExpenseList expenseList, Ui ui) throws BudgetTrackerException {
+        assert ui != null : "Ui object cannot be null in AlertCommand execute";
+
         fundsAlert.setWarningThreshold(threshold);
         ui.showMessage("Funds alert threshold set to $" + String.format("%.2f", threshold));
     }

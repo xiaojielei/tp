@@ -17,10 +17,10 @@ public class FundsAlert implements FinancialObserver {
      * @param ui UI handler for displaying alerts
      */
     public FundsAlert(Ui ui) {
+        assert ui != null : "Ui object cannot be null in FundsAlert constructor";
         this.warningThreshold = 5.0;
         this.ui = ui;
         assert warningThreshold > 0 : "Warning threshold must be positive";
-        assert ui != null : "UI handler cannot be null";
     }
     
     /**
@@ -43,6 +43,7 @@ public class FundsAlert implements FinancialObserver {
         assert this.warningThreshold == newThreshold : "Threshold was not properly updated";
         assert this.warningThreshold != oldThreshold || newThreshold == oldThreshold : 
                 "Threshold did not change when it should have";
+        assert this.warningThreshold >= 0 : "Warning threshold should be non-negative after validation";
         
         return true;
     }
@@ -70,6 +71,7 @@ public class FundsAlert implements FinancialObserver {
      * @param availableFunds Current available funds
      */
     private void checkAndDisplayAlert(double availableFunds) {
+        assert warningThreshold >= 0 : "Warning threshold should always be non-negative here";
         if (availableFunds < warningThreshold) {
             String message = "WARNING: Available funds ($" + String.format("%.2f", availableFunds) + 
                     ") are below warning threshold ($" + String.format("%.2f", warningThreshold) + ")";
