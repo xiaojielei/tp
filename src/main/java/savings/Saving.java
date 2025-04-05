@@ -76,6 +76,24 @@ public class Saving {
     }
 
     /**
+     * Displays all savings goals.
+     */
+    public void viewSavingsGoal() {
+        if (savingsRecords.isEmpty()) {
+            System.out.println("No savings records.");
+            return;
+        }
+
+        System.out.println("===== SAVINGS GOALS =====");
+        for (int i = 0; i < savingsRecords.size(); i++) {
+            SavingsRecord record = savingsRecords.get(i);
+            System.out.printf("%d. \t$%.2f for %s%n", i + 1, record.getAmount(), record.getGoal());
+        }
+        System.out.println("=========================");
+        System.out.println("Savings Indicator: " + getSavingsIndicator());
+    }
+
+    /**
      * Sets a savings goal for a specific amount.
      * @param amount The savings amount to associate with the goal.
      * @param newSavingGoal The new goal description.
