@@ -2,6 +2,7 @@ package savings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import exceptions.BudgetTrackerException;
 import summary.Summary;
@@ -31,13 +32,11 @@ public class Saving {
      * Adds a savings record with the specified amount.
      * @param amount The amount to save.
      */
-    public void addSavings(double amount) throws BudgetTrackerException {
+    public void addSavings(double amount, String goal) throws BudgetTrackerException {
         assert amount > 0 : "Savings amount must be positive";
 
-        savingsRecords.add(new SavingsRecord(amount));
-        System.out.println("Sure! I have added your savings:");
-        System.out.println((savingsRecords.size()) + ". \t" + savingsRecords.get(savingsRecords.size() - 1));
-        System.out.println("Now you have " + savingsRecords.size() + " saving(s) in your list.");
+        savingsRecords.add(new SavingsRecord(amount, goal));
+        System.out.printf("Added to savings: $%.2f for %s%n", amount, goal);
         summary.addSavings(amount);
     }
 
@@ -45,26 +44,14 @@ public class Saving {
      * Deletes a savings record at the specified index.
      * @param index The index of the savings record to delete.
      */
-    public void deleteSavings(int index) {
+    public void deleteSavings(int index) throws BudgetTrackerException {
         int zeroBasedIndex = index - 1;
-        if (zeroBasedIndex >= 0 && zeroBasedIndex < savingsRecords.size()) {
-            SavingsRecord removedRecord = savingsRecords.get(zeroBasedIndex);
-
-            System.out.println("Sure! I have deleted the saving:");
-            System.out.println(index + ". \t" + removedRecord);
-
-            savingsRecords.remove(zeroBasedIndex);
-
-            System.out.println("Now you have " + savingsRecords.size() + " savings in your list.");
-
-            try {
-                summary.removeSavings(removedRecord.amount);
-            } catch (BudgetTrackerException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            System.out.println("Invalid index.");
+        if (zeroBasedIndex < 0 || zeroBasedIndex >= savingsRecords.size()) {
+            throw new BudgetTrackerException("Invalid index.");
         }
+        SavingsRecord removedRecord = savingsRecords.remove(zeroBasedIndex);
+        System.out.printf("Deleted savings: $%.2f for %s%n", removedRecord.getAmount(), removedRecord.getGoal());
+        summary.removeSavings(removedRecord.getAmount());
     }
 
     /**
@@ -73,27 +60,28 @@ public class Saving {
     public void viewSavings() {
         if (savingsRecords.isEmpty()) {
             System.out.println("No savings records.");
-        } else {
-            System.out.println("Here are the savings in your list:");
-            for (int i = 0; i < savingsRecords.size(); i++) {
-                System.out.println((i + 1) + ". \t" + savingsRecords.get(i));
-            }
-            System.out.println("You have " + savingsRecords.size() + " saving(s) in total.");
+            return;
         }
+
+        System.out.println("===== SAVINGS RECORDS =====");
+        for (int i = 0; i < savingsRecords.size(); i++) {
+            SavingsRecord record = savingsRecords.get(i);
+            System.out.printf("%d. \t$%.2f for %s%n", i + 1, record.getAmount(), record.getGoal());
+        }
+        System.out.println("===========================");
         System.out.println("Savings Indicator: " + getSavingsIndicator());
     }
 
     /**
      * Sets a savings goal for a specific amount.
      * @param amount The savings amount to associate with the goal.
-     * @param description The goal description.
+     * @param newSavingGoal The new goal description.
      */
-    public void setSavingsGoal(double amount, String description) {
+    public void setSavingsGoal(double amount, String newSavingGoal) {
         for (SavingsRecord record : savingsRecords) {
             if (record.amount == amount) {
-                record.setGoal(description);
-                System.out.println("I have set your saving goal:");
-                System.out.println("[" + description + "] " + record.amount);
+                record.setGoal(newSavingGoal);
+                System.out.printf("Savings goal set: $%.2f for %s%n", amount, newSavingGoal);
                 return;
             }
         }
@@ -104,15 +92,14 @@ public class Saving {
      * Updates a savings goal for a specified index.
      * @param index The index of the savings record.
      * @param amount The new savings amount.
-     * @param description The new goal description.
+     * @param newSavingGoal The new goal description.
      */
-    public void updateSavingsGoal(int index, double amount, String description) {
+    public void updateSavingsGoal(int index, double amount, String newSavingGoal) {
         if (index >= 0 && index < savingsRecords.size()) {
             SavingsRecord record = savingsRecords.get(index);
             record.amount = amount;
-            record.goal = description;
-            System.out.println("I have updated your saving amount and saving goal:");
-            System.out.println((index + 1) + ". \t" + record);
+            record.goal = newSavingGoal;
+            System.out.printf("Updated savings goal: $%.2f for %s%n", amount, newSavingGoal);
         } else {
             System.out.println("Invalid index.");
         }
@@ -124,9 +111,14 @@ public class Saving {
      */
     public void deleteSavingsGoal(int index) {
         if (index >= 0 && index < savingsRecords.size()) {
-            savingsRecords.get(index).goal = " ";
-            System.out.println("I have deleted the saving goal:");
-            System.out.println((index + 1) + ". \t" + savingsRecords.get(index));
+            if (Objects.equals(savingsRecords.get(index).goal, "(savings goal not provided)")) {
+                System.out.println("Saving goal for this saving entry already does not exist");
+                return;
+            }
+            Double originalSavingAmount = savingsRecords.get(index).amount;
+            String originalSavingGoal = savingsRecords.get(index).goal;
+            savingsRecords.get(index).goal = "(savings goal not provided)";
+            System.out.printf("Deleted savings goal: $%.2f for %s(now the saving goal for this entry is empty)%n", originalSavingAmount, originalSavingGoal);
         } else {
             System.out.println("Invalid index.");
         }
@@ -165,10 +157,7 @@ public class Saving {
         fromRecord.setAmount(fromRecord.getAmount() - amount);
         toRecord.setAmount(toRecord.getAmount() + amount);
 
-        System.out.printf("Transferred %.2f from savings %d to savings %d.%n", amount, fromIndex + 1, toIndex + 1);
-        System.out.println("Updated records:");
-        System.out.println((fromIndex + 1) + ". \t" + fromRecord);
-        System.out.println((toIndex + 1) + ". \t" + toRecord);
+        System.out.printf("Transferred $%.2f from %s to %s%n", amount, fromRecord.getGoal(), toRecord.getGoal());
     }
 
     /**
