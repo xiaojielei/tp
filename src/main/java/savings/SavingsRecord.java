@@ -11,9 +11,9 @@ public class SavingsRecord {
      * Constructs a SavingsRecord with a specified amount.
      * @param amount The savings amount.
      */
-    public SavingsRecord(double amount) {
+    public SavingsRecord(double amount, String goal) {
         this.amount = amount;
-        this.goal = " ";
+        this.goal = goal;
     }
 
     public double getAmount() {
@@ -34,10 +34,5 @@ public class SavingsRecord {
      */
     public void setGoal(String goal) {
         this.goal = goal;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + goal + "] " + amount;
     }
 }
