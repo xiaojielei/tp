@@ -38,10 +38,10 @@ public class AddExpenseCommand extends Command {
     @Override
     public void execute(ExpenseList expenseList, Ui ui) {
         try {
+            summary.addExpense(amount);
+
             Expense newExpense = new Expense(amount, description, category);
             expenseList.addExpense(newExpense);
-
-            summary.addExpense(amount);
 
             ui.showMessage("Added expense: [" + category + "] $" + amount + " for " + description);
         } catch (BudgetTrackerException e) {

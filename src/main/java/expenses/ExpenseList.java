@@ -2,6 +2,8 @@ package expenses;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -9,6 +11,15 @@ import java.util.logging.Logger;
  */
 public class ExpenseList {
     private static final Logger logger = Logger.getLogger(ExpenseList.class.getName());
+
+    static {
+        // Set up the logger to only log warnings or higher
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.WARNING);  // Only log warnings and errors
+        logger.addHandler(consoleHandler);
+        logger.setLevel(Level.WARNING); // Set global level to WARNING
+    }
+
     private List<Expense> expenses;
 
     /**
