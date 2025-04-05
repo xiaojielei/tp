@@ -59,7 +59,7 @@ public class FundsAlert implements FinancialObserver {
     
     @Override
     public void update(double availableFunds, double totalIncome, double totalExpense, double totalSavings) {
-        assert availableFunds == totalIncome - totalExpense - totalSavings : 
+        assert availableFunds == totalIncome - totalExpense :
                 "Available funds calculation is inconsistent";
         checkAndDisplayAlert(availableFunds);
     }

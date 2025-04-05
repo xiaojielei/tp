@@ -32,13 +32,8 @@ public class AlertCommand extends Command {
      */
     @Override
     public void execute(ExpenseList expenseList, Ui ui) throws BudgetTrackerException {
-        try {
-            fundsAlert.setWarningThreshold(threshold);
-            ui.showMessage("Funds alert threshold set to $" + String.format("%.2f", threshold));
-        } catch (BudgetTrackerException e) {
-            ui.showMessage(e.getMessage());
-            throw e;
-        }
+        fundsAlert.setWarningThreshold(threshold);
+        ui.showMessage("Funds alert threshold set to $" + String.format("%.2f", threshold));
     }
 
     /**
