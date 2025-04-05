@@ -65,8 +65,7 @@ _Note: Links to the respective PRs or commits have been embedded within the rele
   * Setup milestones & deadlines for v1.0, v2.0 & v2.1
   * Managed releases v1.0 and v2.0 on GitHub, which includes:
     * Conversion of UG and DG into PDF versions
-    * Tagging the correct commit for release
-    * Building the submission JAR files
+    * Tagging the correct commit for release & building the submission JAR files
 
 
 * **Community Contributions**:
