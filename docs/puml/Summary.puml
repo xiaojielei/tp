@@ -48,7 +48,7 @@ class SummaryDisplay {
 ' --- Relationships ---
 AddExpenseCommand --|> Command
 
-Summary o-- "0..*" FinancialObserver
+Summary o--> "0..*" FinancialObserver : notifies >
 FundsAlert ..|> FinancialObserver
 
 SummaryDisplay ..> Summary : uses >
@@ -58,10 +58,10 @@ AddExpenseCommand ..> Summary : modifies >
 ' --- Notes ---
 note top of Summary : **Central Financial Data Hub**\n• Stores financial data.\n• Manages observer notifications.
 
-note left of FundsAlert : **Runtime Setup:**\nAn initializer (like Duke) creates\nSummary & FundsAlert, then calls\n`Summary.registerObserver(fundsAlert)`.
+note top of FundsAlert : **Runtime Setup:**\nFundsAlert is initialized upon program startup.\nObserves the Summary class by implementing the\nFinancial Observer interface.
 
 note left of FinancialObserver : **Observer Pattern**\nSummary aggregates Observers.\nChanges trigger `notifyObservers()`,\nwhich calls `update()` on observers.\n`FundsAlert` implements `update()`.
 
-note left of AddExpenseCommand : **Command Pattern**\n`AddExpenseCommand` is one example\nof various commands inherited from `Command`.\nSpecific commands modify relevant\nobjects (e.g., `Summary`, `FundsAlert`).
+note top of AddExpenseCommand : **Command Pattern**\n`AddExpenseCommand` is one example\nof various commands inherited from `Command`.\nSpecific commands modify relevant\nobjects (e.g., `Summary`, `FundsAlert`).
 
 @enduml
