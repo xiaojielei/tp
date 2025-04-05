@@ -1,5 +1,13 @@
 # Common Cents Developer Guide
 
+## Acknowledgements
+
+Common Cents uses the following tools for development and testing:
+
+1. [JUnit 5](https://junit.org/junit5/) - Used for software testing.
+2. [Gradle](https://gradle.org) - Used for build automation.
+3. [AB3](https://github.com/se-edu/addressbook-level3) - Used for creating documentation.
+
 ## About Common Cents
 Common Cents is a personal finance management application that helps you track your income, expenses, savings, 
 and financial goals. The application provides a command-line interface for managing your finances with features for 
@@ -362,6 +370,14 @@ Alternatives considered:
 * A polling approach where alerts check the summary periodically, but this would be less efficient and responsive.
 * Not showing an initial notification, but this would reduce user awareness of the feature.
 
+
+## Features coming soon
+
+### Local Saving to Disk
+
+**Planned Feature:** We plan to implement functionality to save all financial data (income, expenses, savings, alert settings) locally to a file on the user's disk. This will allow users to persist their data between application sessions.
+
+**Reason for Delay:** Implementing local storage requires careful consideration of file formats, data serialization, error handling (e.g., corrupted files), and user experience for loading/saving data. We prioritized the development of core functionalities like tracking income/expenses, managing savings, viewing summaries, and setting alerts to deliver a functional baseline product first. The effort required for robust local saving was deferred to focus on these essential features.
 
 ## User Stories
 
