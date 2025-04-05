@@ -4,6 +4,7 @@ import expenses.Ui;
 import exceptions.BudgetTrackerException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -24,6 +25,13 @@ public class FundsAlertTest {
         System.setOut(new PrintStream(outputStream));
         ui = new Ui();
         fundsAlert = new FundsAlert(ui);
+    }
+    
+    @AfterEach
+    public void tearDown() {
+        // Reset stream for next test
+        System.setOut(originalOut);
+        outputStream.reset();
     }
     
     @Test
@@ -58,11 +66,19 @@ public class FundsAlertTest {
         assertEquals(5.0, fundsAlert.getWarningThreshold(),
                 "Warning threshold should remain at default after rejected update");
     }
-    
+
+    @Test
+    public void setWarningThreshold_zeroValue_expectThresholdUpdated() throws BudgetTrackerException {
+        double zeroThreshold = 0.0;
+        boolean result = fundsAlert.setWarningThreshold(zeroThreshold);
+
+        assertTrue(result, "Setting threshold to zero should return true");
+        assertEquals(zeroThreshold, fundsAlert.getWarningThreshold(),
+                "Warning threshold should be updated to zero");
+    }
+
     @Test
     public void update_fundsBelowThreshold_expectAlertTriggered() {
-        outputStream.reset();
-        
         fundsAlert.update(3.0, 100.0, 97.0, 0.0);
         
         String output = outputStream.toString();
@@ -72,8 +88,6 @@ public class FundsAlertTest {
     
     @Test
     public void update_fundsAboveThreshold_expectNoAlert() {
-        outputStream.reset();
-        
         fundsAlert.update(10.0, 100.0, 90.0, 0.0);
         
         String output = outputStream.toString();
@@ -83,11 +97,10 @@ public class FundsAlertTest {
     
     @Test
     public void displayInitialNotification_defaultSettings_expectCorrectMessage() {
-        outputStream.reset();
-        
         fundsAlert.displayInitialNotification();
         
         String output = outputStream.toString();
+        // 3 assertions to ensure that the initial notification is complete
         assertTrue(output.contains("Funds Alert feature is active"),
                 "Initial notification should indicate the feature is active");
         assertTrue(output.contains("below $5.00"),
@@ -97,34 +110,63 @@ public class FundsAlertTest {
     }
     
     @Test
-    public void update_thresholdChangedAndFundsCrossThreshold_correctAlertBehavior() throws BudgetTrackerException {
-        // First set a higher threshold
+    public void update_fundsAboveNewThreshold_noAlertTriggered() throws BudgetTrackerException {
         fundsAlert.setWarningThreshold(20.0);
         
-        // Test with funds above new threshold - should not trigger alert
-        outputStream.reset();
         fundsAlert.update(25.0, 100.0, 75.0, 0.0);
-        String output1 = outputStream.toString();
-        assertFalse(output1.contains("WARNING"), 
-                "No alert should be triggered when funds are above the new threshold");
         
-        // Test with funds below new threshold but above original threshold - should trigger alert
-        outputStream.reset();
+        String output = outputStream.toString();
+        assertFalse(output.contains("WARNING"), 
+                "No alert should be triggered when funds are above the new higher threshold");
+    }
+
+    @Test
+    public void update_fundsBelowNewThreshold_alertTriggered() throws BudgetTrackerException {
+        fundsAlert.setWarningThreshold(20.0);
+        
         fundsAlert.update(15.0, 100.0, 85.0, 0.0);
-        String output2 = outputStream.toString();
-        assertTrue(output2.contains("WARNING") && output2.contains("below warning threshold"),
-                "Alert should be triggered when funds are below the new threshold");
-        assertTrue(output2.contains("$15.00") && output2.contains("$20.00"),
+        
+        String output = outputStream.toString();
+        assertTrue(output.contains("WARNING") && output.contains("below warning threshold"),
+                "Alert should be triggered when funds are below the new higher threshold");
+        assertTrue(output.contains("$15.00") && output.contains("$20.00"),
                 "Alert should show the correct available funds and threshold values");
-        
-        // Reset threshold to lower value
-        fundsAlert.setWarningThreshold(10.0);
-        
-        // Same funds should now be above threshold - should not trigger alert
-        outputStream.reset();
+    }
+    
+    @Test
+    public void update_fundsAboveThenBelowNewThreshold_noAlertTriggered() throws BudgetTrackerException {
+        fundsAlert.setWarningThreshold(20.0);
         fundsAlert.update(15.0, 100.0, 85.0, 0.0);
-        String output3 = outputStream.toString();
-        assertFalse(output3.contains("WARNING"),
+
+        outputStream.reset();
+        fundsAlert.setWarningThreshold(10.0);
+        fundsAlert.update(15.0, 100.0, 85.0, 0.0);
+        
+        String output = outputStream.toString();
+        assertFalse(output.contains("WARNING"),
                 "No alert should be triggered when threshold is lowered below the available funds");
+    }
+
+    @Test
+    public void update_fundsEqualToDefaultThreshold_noAlertTriggered() {
+        double fundsEqualToThreshold = 5.0;
+        fundsAlert.update(fundsEqualToThreshold, 100.0, 95.0, 0.0); // Income/Expense adjusted for balance
+
+        String output = outputStream.toString();
+        assertFalse(output.contains("WARNING"),
+                "No alert should trigger when funds exactly match the default threshold");
+    }
+
+    @Test
+    public void update_fundsEqualToNewThreshold_noAlertTriggered() throws BudgetTrackerException {
+        double newThreshold = 10.0;
+        fundsAlert.setWarningThreshold(newThreshold);
+
+        double fundsEqualToThreshold = 10.0;
+        fundsAlert.update(fundsEqualToThreshold, 100.0, 90.0, 0.0); // Income/Expense adjusted
+
+        String output = outputStream.toString();
+        assertFalse(output.contains("WARNING"),
+                "No alert should trigger when funds exactly match the newly set threshold");
     }
 }
