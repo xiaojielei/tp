@@ -22,10 +22,11 @@ public class Summary {
         totalIncome = 0;
         totalExpense = 0;
         totalSavings = 0;
-
-        assert totalIncome == 0 : "Initial income should be 0";
-        assert totalExpense == 0 : "Initial expense should be 0";
-        assert totalSavings == 0 : "Initial savings should be 0";
+        observers = new ArrayList<>();
+        assert this.totalIncome == 0.0 : "Initial income should be zero";
+        assert this.totalExpense == 0.0 : "Initial expense should be zero";
+        assert this.totalSavings == 0.0 : "Initial savings should be zero";
+        assert observers != null : "Observers list should be initialized";
     }
 
     /**
@@ -34,6 +35,7 @@ public class Summary {
      * @param observer The observer to register
      */
     public void registerObserver(FinancialObserver observer) {
+        assert observer != null : "Cannot register a null observer";
         observers.add(observer);
     }
 
@@ -43,6 +45,7 @@ public class Summary {
      * @param observer The observer to remove
      */
     public void removeObserver(FinancialObserver observer) {
+        assert observer != null : "Cannot remove a null observer";
         observers.remove(observer);
     }
 
@@ -50,6 +53,7 @@ public class Summary {
      * Notifies all registered observers about changes in financial data.
      */
     private void notifyObservers() {
+        assert getAvailableFunds() >= 0 : "Invariant violated: Available funds became negative";
         double availableFunds = getAvailableFunds();
         for (FinancialObserver observer : observers) {
             observer.update(availableFunds, totalIncome, totalExpense, totalSavings);
@@ -62,7 +66,7 @@ public class Summary {
      * @return The total income.
      */
     public double getTotalIncome() {
-        assert totalIncome >= 0 : "Total income should never be negative";
+        assert this.totalIncome >= 0 : "Total income should never be negative";
         return totalIncome;
     }
 
@@ -72,7 +76,7 @@ public class Summary {
      * @return The total expenses.
      */
     public double getTotalExpense() {
-        assert totalExpense >= 0 : "Total expense should never be negative";
+        assert this.totalExpense >= 0 : "Total expense should never be negative";
         return totalExpense;
     }
 
@@ -83,6 +87,7 @@ public class Summary {
      * @return The available funds.
      */
     public double getAvailableFunds() {
+        assert this.totalIncome - this.totalExpense >= 0 : "Calculated available funds are negative";
         return totalIncome - totalExpense;
     }
 
@@ -92,10 +97,9 @@ public class Summary {
      * @return The total savings.
      */
     public double getTotalSavings() {
-        assert totalSavings >= 0 : "Total savings should never be negative";
+        assert this.totalSavings >= 0 : "Total savings should never be negative";
         return totalSavings;
     }
-
 
     /**
      * Adds income to the total income.
@@ -169,6 +173,7 @@ public class Summary {
         this.totalExpense += expense;
 
         assert this.totalExpense == oldExpense + expense : "Expense was not added correctly";
+        assert this.totalExpense >= 0 : "Total expense should remain non-negative after addition";
         
         notifyObservers();
     }
@@ -209,8 +214,9 @@ public class Summary {
         double oldSavings = this.totalSavings;
         this.totalSavings += savings;
 
-        assert this.totalSavings == oldSavings + savings : "Savings was not added correctly";
-        
+        assert this.totalSavings == oldSavings + savings : "Savings were not added correctly";
+        assert this.totalSavings >= 0 : "Total savings should remain non-negative after addition";
+ 
         notifyObservers();
     }
 

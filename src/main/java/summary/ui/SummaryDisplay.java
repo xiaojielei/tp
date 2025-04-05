@@ -18,6 +18,7 @@ public class SummaryDisplay {
      * Constructs a new SummaryDisplay object with summary to be printed.
      */
     public SummaryDisplay(Summary summary) {
+        assert summary != null : "Summary object cannot be null in SummaryDisplay constructor";
         this.summary = summary;
     }
     /**
