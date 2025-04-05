@@ -69,7 +69,7 @@ Cannot remove this income as it would result in negative available funds. Curren
 Total Income:        $1200.50
 Total Expenses:      $246.00
 Available Balance:   $954.50
-Total Savings:       $250.00
+Total Savings:       $20.00
 ===========================
 Deleted expense number 2.
 ===== EXPENSE ENTRIES =====
@@ -80,6 +80,6 @@ Deleted expense number 2.
 Total Income:        $1200.50
 Total Expenses:      $196.00
 Available Balance:   $1004.50
-Total Savings:       $250.00
+Total Savings:       $20.00
 ===========================
 Exiting the application. Goodbye!
