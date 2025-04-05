@@ -245,9 +245,9 @@ Here's the class diagram of the Summary component:
 
 How the Summary Component works:
 
-1.  **Central Data Repository**: The `Summary` class acts as the single source of truth for financial data. It maintains running totals for income, expenses, and savings.
+1.  **Central Data Repository**: The `Summary` class acts as a manager for financial data. It maintains running totals for income, expenses, and savings.
 2.  **Observer Pattern for Updates**: `Summary` implements the Subject role in the Observer pattern.
-    *   Other components interested in financial changes (like `FundsAlert`) register themselves as observers using `Summary.registerObserver()`. `Summary` keeps a list of these observers.
+    *   Components interested in financial changes (`FundsAlert`) register themselves as observers using `Summary.registerObserver()`. `Summary` keeps a list of these observers.
     *   Whenever a financial value changes (e.g., adding income, removing savings), `Summary` calls its internal `notifyObservers()` method.
     *   This method iterates through the list of registered observers and calls the `update()` method on each one, passing the latest financial state (available funds, totals).
     *   This mechanism allows components like `FundsAlert` to react to financial changes without `Summary` needing specific knowledge of what those components do.

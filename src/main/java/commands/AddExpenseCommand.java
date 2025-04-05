@@ -41,7 +41,6 @@ public class AddExpenseCommand extends Command {
             Expense newExpense = new Expense(amount, description, category);
             expenseList.addExpense(newExpense);
 
-            // Update the summary with the new expense
             summary.addExpense(amount);
 
             ui.showMessage("Added expense: [" + category + "] $" + amount + " for " + description);

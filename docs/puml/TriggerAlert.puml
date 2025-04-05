@@ -2,15 +2,15 @@
 hide footbox
 
 actor User
-participant ":Duke" as Duke
-participant ":IncomeParser" as IncomeParser
-participant ":AddIncomeCommand" as AddIncomeCommand
-participant ":ExpenseParser" as ExpenseParser
-participant ":AddExpenseCommand" as AddExpenseCommand
-participant ":ExpenseList" as ExpenseList
-participant ":Summary" as Summary
-participant ":FundsAlert" as FundsAlert
-participant ":Ui" as Ui
+participant ":Duke" as Duke #LightBlue
+participant ":IncomeParser" as IncomeParser #LightGreen
+participant ":AddIncomeCommand" as AddIncomeCommand #LightCoral
+participant ":ExpenseParser" as ExpenseParser #LightGoldenRodYellow
+participant ":AddExpenseCommand" as AddExpenseCommand #Lavender
+participant ":ExpenseList" as ExpenseList #LightSalmon
+participant ":Summary" as Summary #PeachPuff
+participant ":FundsAlert" as FundsAlert #Aquamarine
+participant ":Ui" as Ui #LightGray
 
 note right of Duke
   Initially:

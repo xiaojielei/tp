@@ -4,15 +4,11 @@ hide footbox
 actor User
 participant ":Duke" as Duke #LightBlue
 participant ":AlertParser" as AlertParser #LightGreen
-participant ":AlertCommand" as AlertCommand #Lavender
-participant ":FundsAlert" as FundsAlert #LightGoldenRodYellow
-participant ":Ui" as Ui #LightSalmon
-
 
 User -> Duke: "alert set 20"
 activate Duke
 
-Duke -> AlertParser: parse("alert set 20", fundsAlert)
+Duke -> AlertParser: parse("alert set 20",\nfundsAlert)
 activate AlertParser
 
   AlertParser -> AlertParser: validate command format
@@ -20,10 +16,16 @@ activate AlertParser
   AlertParser --> AlertParser
   deactivate AlertParser
 
-AlertParser -> AlertCommand: AlertCommand(20.0, fundsAlert)
+create ":AlertCommand" as AlertCommand #LightCoral
+AlertParser -> AlertCommand: new AlertCommand (20.0, fundsAlert)
 activate AlertCommand
 AlertCommand --> AlertParser: return alertCommand
 deactivate AlertCommand
+
+
+
+participant ":Ui" as Ui #Lavender
+participant ":FundsAlert" as FundsAlert #LightGoldenRodYellow
 
 AlertParser --> Duke: return alertCommand
 deactivate AlertParser
@@ -42,7 +44,7 @@ activate FundsAlert
 FundsAlert --> AlertCommand
 deactivate FundsAlert
 
-AlertCommand -> Ui: showMessage("Funds alert threshold set to $20.00")
+AlertCommand -> Ui: showMessage\n("Funds alert threshold\nset to $20.00")
 activate Ui
 Ui --> User: println("Funds alert threshold set to $20.00");
 Ui --> AlertCommand
