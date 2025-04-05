@@ -39,7 +39,12 @@ public class Summary {
      */
     public void registerObserver(FinancialObserver observer) {
         assert observer != null : "Cannot register a null observer";
-        observers.add(observer);
+        if (observer != null) {
+            observers.add(observer);
+            logger.log(Level.INFO, "Registered observer: " + observer.getClass().getName());
+        } else {
+            logger.log(Level.WARNING, "Attempted to register a null observer.");
+        }
     }
 
     /**
@@ -56,10 +61,21 @@ public class Summary {
      * Notifies all registered observers about changes in financial data.
      */
     private void notifyObservers() {
+        if (observers.isEmpty()) {
+            logger.log(Level.WARNING, "notifyObservers called but no observers are registered.");
+            return;
+        }
+        logger.log(Level.FINE, "Notifying " + observers.size() + " observers.");
         assert getAvailableFunds() >= 0 : "Available funds cannot be negative";
         double availableFunds = getAvailableFunds();
         for (FinancialObserver observer : observers) {
-            observer.update(availableFunds, totalIncome, totalExpense, totalSavings);
+            try {
+                observer.update(availableFunds, totalIncome, totalExpense, totalSavings);
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "Exception occurred while notifying observer: " 
+                                        + observer.getClass().getName(), e);
+
+            }
         }
     }
 
@@ -108,18 +124,19 @@ public class Summary {
      * Adds income to the total income.
      *
      * @param income The amount of income to add.
-     * @throws BudgetTrackerException If the income is negative.
+     * @throws BudgetTrackerException If the income is non-positive.
      */
     public void addIncome(double income) throws BudgetTrackerException {
         if (income <= 0) {
+            logger.log(Level.WARNING, "Attempted to add non-positive income: " + income);
             throw new BudgetTrackerException("Income must be positive.");
         }
         double oldIncome = this.totalIncome;
         this.totalIncome += income;
+        logger.log(Level.INFO, "Total income updated to: " + totalIncome);
 
         assert this.totalIncome == oldIncome + income : "Income was not added correctly";
         
-        logger.log(Level.INFO, "Total income updated to: " + totalIncome);
         notifyObservers();
     }
 
@@ -131,14 +148,17 @@ public class Summary {
      */
     public void removeIncome(double income) throws BudgetTrackerException {
         if (income < 0) {
+            logger.log(Level.WARNING, "Attempted to remove negative income: " + income);
             throw new BudgetTrackerException("Income must be positive.");
         }
         if (income > this.totalIncome) {
+            logger.log(Level.WARNING, "Attempted to remove more income (" + income + ") than available (" + this.totalIncome + ").");
             throw new BudgetTrackerException("Cannot remove more income than the current total income.");
         }
 
         double availableBalance = getAvailableFunds();
         if (availableBalance - income < 0) {
+            logger.log(Level.WARNING, "Attempted to remove more income (" + income + ") than available (" + availableBalance + ").");
             throw new BudgetTrackerException("Cannot remove this income "
                     + "as it would result in negative available funds. "
                     + "Current expenses: " + totalExpense + ", Available balance after removal would be: " 
@@ -147,12 +167,11 @@ public class Summary {
         
         double oldIncome = this.totalIncome;
         this.totalIncome -= income;
+        logger.log(Level.INFO, "Total income updated to: " + totalIncome);
         
-        // Assertion to verify income was removed correctly
         assert this.totalIncome == oldIncome - income : "Income was not removed correctly";
         assert this.totalIncome >= 0 : "Total income should never be negative after removal";
         
-        logger.log(Level.INFO, "Total income updated to: " + totalIncome);
         notifyObservers();
     }
 
@@ -164,23 +183,24 @@ public class Summary {
      */
     public void addExpense(double expense) throws BudgetTrackerException {
         if (expense <= 0) {
+            logger.log(Level.WARNING, "Attempted to add non-positive expense: " + expense);
             throw new BudgetTrackerException("Expense must be positive.");
         }
         
         // Check if adding this expense would result in a negative balance
         double availableBalance = getAvailableFunds();
         if (expense > availableBalance) {
+            logger.log(Level.WARNING, "Attempted to add expense (" + expense + ") that exceeds available funds (" + availableBalance + ").");
             throw new BudgetTrackerException("Cannot add this expense as it would exceed your available funds. "
                     + "Available balance: " + availableBalance);
         }
-        
         double oldExpense = this.totalExpense;
         this.totalExpense += expense;
+        logger.log(Level.INFO, "Total expenses updated to: " + totalExpense);
 
         assert this.totalExpense == oldExpense + expense : "Expense was not added correctly";
         assert this.totalExpense >= 0 : "Total expense should remain non-negative after addition";
         
-        logger.log(Level.INFO, "Total expenses updated to: " + totalExpense);
         notifyObservers();
     }
 
@@ -192,18 +212,20 @@ public class Summary {
      */
     public void removeExpense(double expense) throws BudgetTrackerException {
         if (expense <= 0) {
+            logger.log(Level.WARNING, "Attempted to remove non-positive expense: " + expense);
             throw new BudgetTrackerException("Expense must be positive.");
         }
         if (expense > this.totalExpense) {
+            logger.log(Level.WARNING, "Attempted to remove more expense (" + expense + ") than available (" + this.totalExpense + ").");
             throw new BudgetTrackerException("Cannot remove more expense than the current total expenses.");
         }
         double oldExpense = this.totalExpense;
         this.totalExpense -= expense;
+        logger.log(Level.INFO, "Total expenses updated to: " + totalExpense);
 
         assert this.totalExpense == oldExpense - expense : "Expense was not removed correctly";
         assert this.totalExpense >= 0 : "Total expense should never be negative after removal";
         
-        logger.log(Level.INFO, "Total expenses updated to: " + totalExpense);
         notifyObservers();
     }
 
@@ -215,16 +237,17 @@ public class Summary {
      */
     public void addSavings(double savings) throws BudgetTrackerException {
         if (savings <= 0) {
+            logger.log(Level.WARNING, "Attempted to add non-positive savings: " + savings);
             throw new BudgetTrackerException("Savings must be positive.");
         }
 
         double oldSavings = this.totalSavings;
         this.totalSavings += savings;
-
+        logger.log(Level.INFO, "Total savings updated to: " + totalSavings);
+ 
         assert this.totalSavings == oldSavings + savings : "Savings were not added correctly";
         assert this.totalSavings >= 0 : "Total savings should remain non-negative after addition";
- 
-        logger.log(Level.INFO, "Total savings updated to: " + totalSavings);
+  
         notifyObservers();
     }
 
@@ -236,18 +259,20 @@ public class Summary {
      */
     public void removeSavings(double savings) throws BudgetTrackerException {
         if (savings <= 0) {
+            logger.log(Level.WARNING, "Attempted to remove non-positive savings: " + savings);
             throw new BudgetTrackerException("Savings must be positive.");
         }
         if (savings > this.totalSavings) {
+            logger.log(Level.WARNING, "Attempted to remove more savings (" + savings + ") than available (" + this.totalSavings + ").");
             throw new BudgetTrackerException("Cannot remove more savings than the current total savings.");
         }
         double oldSavings = this.totalSavings;
         this.totalSavings -= savings;
-
+        logger.log(Level.INFO, "Total savings updated to: " + totalSavings);
+        
         assert this.totalSavings == oldSavings - savings : "Savings was not removed correctly";
         assert this.totalSavings >= 0 : "Total savings should never be negative after removal";
         
-        logger.log(Level.INFO, "Total savings updated to: " + totalSavings);
         notifyObservers();
     }
 }
