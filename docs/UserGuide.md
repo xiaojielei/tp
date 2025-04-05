@@ -1,4 +1,4 @@
-# User Guide
+﻿# User Guide
 
 ## Introduction
 
@@ -51,8 +51,8 @@ Example of usage:
 ```
 > view income
 ===== INCOME RECORDS =====
-1. 	$50.00 from salary
-2. 	$100.00 from freelance
+1.  $50.00 from salary
+2.  $100.00 from freelance
 =========================
 Total Income: $150.0
 Successfully listed income entries.
@@ -132,7 +132,7 @@ Deleted expense: [FOOD] $25.00 for food
 
 #### Adding to Savings: `add savings`
 
-Moves money from your available balance to your savings.
+Add a saving.
 
 Format: `add savings <AMOUNT> / <DESCRIPTION>`
 
@@ -160,15 +160,15 @@ Example of usage:
 ```
 > view savings
 ===== SAVINGS RECORDS =====
-1. 	$20.00 for emergency fund
-2. 	$10.00 for vacation
+1.  $20.00 for emergency fund
+2.  $10.00 for vacation
 ==========================
 Savings Indicator: Bad - Try to save more.
 ```
 
 #### Deleting Savings: `delete savings`
 
-Removes a savings entry and returns the amount to your available balance.
+Removes a savings entry.
 
 Format: `delete savings <INDEX>`
 
@@ -200,7 +200,12 @@ Transferred $10.00 from emergency fund to vacation
 
 #### Setting Savings Goals: `savings goal set`
 
-Sets a new savings goal.
+Sets a new savings goal. Note: If there are 2 saving entries with 
+the same amount in the saving list, this command will only set the
+goal of the first saving entry to the provided goal. However, if user
+would like to change the saving goal of the second/third... saving entry
+with the same amount, they may consider using command "savings goal update",
+which is shown below.
 
 Format: `savings goal set <AMOUNT> / <DESCRIPTION>`
 
@@ -225,7 +230,7 @@ Example of usage:
 ```
 > savings goal view
 ===== SAVINGS GOALS =====
-1. 	$500.00 for new laptop (Current: $0.00)
+1.  $500.00 for new laptop (Current: $0.00)
 =========================
 ```
 
@@ -481,3 +486,4 @@ Common Cents provides helpful error messages to guide you when something goes wr
 * **Invalid index:**
   * If you try to delete an entry with an invalid index, Common Cents will inform you.
   * Example: `delete income 10` when you only have 2 income entries → `Invalid index. Please use an index from the list.`
+
