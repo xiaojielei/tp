@@ -19,6 +19,7 @@ import savings.Saving;
 import alerts.FundsAlert;
 import alerts.AlertParser;
 import java.util.Scanner;
+import util.LoggingConfigurator;
 
 public class Duke {
     private final Scanner in;
@@ -47,14 +48,23 @@ public class Duke {
         fundsAlert = new FundsAlert(ui);
         summary.registerObserver(fundsAlert);
         handler = new SavingCommandHandler(saving);
+
+        assert ui != null : "Ui should be initialized";
+        assert summary != null : "Summary should be initialized";
+        assert summaryDisplay != null : "SummaryDisplay should be initialized";
+        assert fundsAlert != null : "FundsAlert should be initialized";
+        assert helpDisplay != null : "HelpDisplay should be initialized";
+        assert handler != null : "SavingCommandHandler should be initialized";
     }
 
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+        LoggingConfigurator.configureSummaryFileLogging();
+        LoggingConfigurator.configureAlertsFileLogging();
         displayWelcomeMessage();
-        new Duke().runDuke();
+        new Duke().execute();
     }
 
     /**
@@ -68,10 +78,9 @@ public class Duke {
     /**
      * Runs the main program loop, processing user commands until exit.
      */
-    public void runDuke() {
+    public void execute() {
         fundsAlert.displayInitialNotification();
 
-        // Main program loop
         while (true) {
             try {
                 // Check if there's input available before reading
