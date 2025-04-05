@@ -4,9 +4,9 @@ hide footbox
 actor User
 participant ":Duke" as Duke #LightBlue
 participant ":AlertParser" as AlertParser #LightGreen
-participant ":AlertCommand" as AlertCommand #Lavender
+participant ":AlertCommand" as AlertCommand #LightCoral
 participant ":FundsAlert" as FundsAlert #LightGoldenRodYellow
-participant ":Ui" as Ui #LightSalmon
+participant ":Ui" as Ui #Lavender
 
 
 User -> Duke: "alert set 20"
