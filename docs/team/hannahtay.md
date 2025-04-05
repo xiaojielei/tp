@@ -49,10 +49,11 @@ Implemented the following command classes
 
 #### Updating Developer Docs
 * Added instructions for manual testing under Expenses and Start up, [#85](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/85)
-* Added Product Scope and index page
+* Added Product Scope and index page, [#143](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/143)
 
 ### Documentation
 * Wrote JavaDoc comments for almost all the Expenses code, [#38](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/38)
+* Added logging and assertions in code, [#62](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/62)
 
 ### User Guide:
 * Added documentation for the Add Expense feature that allows users to add expenses with categorisation.
@@ -63,7 +64,7 @@ Implemented the following command classes
 * Created UML sequence diagrams to illustrate component interactions:
   * `AddExpense.puml`: Shows how expenses are added by the user, [#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45)
   * `ViewExpense.puml`: Shows how the expenses are retrieved and displayed
-  * `Expense.puml`: Shows how the expenses are managed
+  * `Expense.puml`: Shows how the expenses are managed, [#143](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/143)
 * Added implementation details of the Add Expense component 
 * Added implementation details of the View Expense component
 * Added implementation details of the Delete Expense component
