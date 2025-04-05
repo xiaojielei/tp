@@ -263,7 +263,7 @@ Example of usage:
 
 ```
 > savings goal delete 1
-Deleted savings goal: $600.00 for gaming laptop
+Deleted savings goal: $600.00 for gaming laptop(now the saving goal for this entry is empty)
 ```
 
 #### Exiting Savings Mode: `exit savings`
