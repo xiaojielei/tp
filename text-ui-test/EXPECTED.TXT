@@ -60,10 +60,10 @@ Available Balance:   $954.50
 Total Savings:       $0.00
 ===========================
 Added to savings: $20.00 for emergency fund
-Savings Indicator: Bad - Try to save more.
 ===== SAVINGS RECORDS =====
 1. 	$20.00 for emergency fund
 ==========================
+Savings Indicator: Bad - Try to save more.
 Cannot remove this income as it would result in negative available funds. Current expenses: 246.0, Available balance after removal would be: -45.5
 ===== BUDGET SUMMARY =====
 Total Income:        $1200.50
