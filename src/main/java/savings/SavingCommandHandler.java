@@ -13,7 +13,7 @@ public class SavingCommandHandler {
      * Runs the savings management system, processing user commands.
      * @param input The Scanner object for user input.
      */
-    public void processSavingCommand(String input) {
+    public void processSavingCommand(String input) throws BudgetTrackerException {
         String[] parts = input.split(" ", 4);
         if (parts.length < 2) {
             System.out.println("Invalid command.");
@@ -23,17 +23,24 @@ public class SavingCommandHandler {
         if (input.contains("add savings")) {
             try {
                 double amount = Double.parseDouble(parts[2]);
-                saving.addSavings(amount);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("Invalid amount format.");
-            } catch (BudgetTrackerException e) {
-                System.out.println("Error: " + e.getMessage());
+                String goal;
+                boolean goalMissing1 = !input.contains("/");
+                boolean goalMissing2 = input.split("/").length < 2;
+                boolean goalMissing3 = input.substring(input.indexOf("/") + 1).trim().isEmpty();
+                if (goalMissing1 || goalMissing2 ||goalMissing3) {
+                    goal = "(savings goal not provided)";
+                } else {
+                    goal = input.substring(input.indexOf("/") + 1).trim();
+                }
+                saving.addSavings(amount, goal);
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException | BudgetTrackerException e) {
+                System.out.println("Invalid format.");
             }
         } else if (input.contains("delete savings")) {
             try {
                 int index = Integer.parseInt(parts[2]);
                 saving.deleteSavings(index);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException | BudgetTrackerException e) {
                 System.out.println("Invalid index format.");
             }
         } else if (input.contains("savings goal set")) {
@@ -60,7 +67,7 @@ public class SavingCommandHandler {
             }
         } else if (input.contains("savings goal delete")) {
             try {
-                int index = Integer.parseInt(parts[3]) - 1;
+                int index = Integer.parseInt(parts[3]);
                 saving.deleteSavingsGoal(index);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("Invalid index format.");
@@ -77,7 +84,7 @@ public class SavingCommandHandler {
                 System.out.println("Invalid format. Use: transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>");
             }
         } else if (input.contains("exit savings")) {
-            System.out.println("Exited savings function.");
+            System.out.println("Exited savings management.");
         } else if (input.contains("view savings") || input.contains("savings goal view")) {
             saving.viewSavings();
         } else {
