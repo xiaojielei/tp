@@ -24,8 +24,6 @@ public class LoggingConfigurator {
      */
     public static void configureSummaryFileLogging() {
         Logger summaryLogger = Logger.getLogger(Summary.class.getName());
-
-        // Ensure logs are not sent to console
         summaryLogger.setUseParentHandlers(false);
 
         try {
@@ -44,6 +42,36 @@ public class LoggingConfigurator {
             summaryLogger.addHandler(fileHandler);
         } catch (IOException e) {
             System.err.println("Error setting up summary log file handler: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Configures logging to redirect logs specifically from the alerts package 
+     * to a file named alerts.log within the logs directory.
+     * It prevents these logs from appearing in the console via parent handlers.
+     */
+    public static void configureAlertsFileLogging() {
+        // Logger for the entire 'alerts' package
+        Logger alertsLogger = Logger.getLogger("alerts"); 
+        alertsLogger.setUseParentHandlers(false);
+
+        try {
+            String logFilePath = "logs/alerts.log";
+            Path logPath = Paths.get(logFilePath);
+            Path parentDir = logPath.getParent();
+            
+            if (parentDir != null && !Files.exists(parentDir)) {
+                Files.createDirectories(parentDir);
+            }
+
+            FileHandler fileHandler = new FileHandler(logFilePath, true);
+            fileHandler.setLevel(Level.INFO);
+            fileHandler.setFormatter(new SimpleFormatter());
+
+            alertsLogger.addHandler(fileHandler);
+
+        } catch (IOException e) {
+            System.err.println("Error setting up alerts log file handler: " + e.getMessage());
         }
     }
 }

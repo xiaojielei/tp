@@ -2,6 +2,8 @@ package alerts;
 
 import expenses.Ui;
 import exceptions.BudgetTrackerException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Alerts when funds fall below a warning threshold.
@@ -10,6 +12,7 @@ import exceptions.BudgetTrackerException;
 public class FundsAlert implements FinancialObserver {
     private double warningThreshold;
     private final Ui ui;
+    private static final Logger logger = Logger.getLogger(FundsAlert.class.getName());
     
     /**
      * Creates a new FundsAlert with the default threshold of $5.
@@ -21,6 +24,7 @@ public class FundsAlert implements FinancialObserver {
         this.warningThreshold = 5.0;
         this.ui = ui;
         assert warningThreshold > 0 : "Warning threshold must be positive";
+        logger.log(Level.INFO, "FundsAlert initialized with threshold: " + warningThreshold);
     }
     
     /**
@@ -60,6 +64,7 @@ public class FundsAlert implements FinancialObserver {
     
     @Override
     public void update(double availableFunds, double totalIncome, double totalExpense, double totalSavings) {
+        logger.log(Level.FINE, "FundsAlert update called. Available funds: " + availableFunds + ", Threshold: " + warningThreshold);
         assert availableFunds == totalIncome - totalExpense :
                 "Available funds calculation is inconsistent";
         checkAndDisplayAlert(availableFunds);

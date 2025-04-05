@@ -62,6 +62,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         LoggingConfigurator.configureSummaryFileLogging();
+        LoggingConfigurator.configureAlertsFileLogging();
         displayWelcomeMessage();
         new Duke().execute();
     }
