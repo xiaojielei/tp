@@ -10,9 +10,9 @@ import java.util.logging.Logger;
  * This class observes financial data without being tightly coupled to Summary.
  */
 public class FundsAlert implements FinancialObserver {
+    private static final Logger logger = Logger.getLogger(FundsAlert.class.getName());
     private double warningThreshold;
     private final Ui ui;
-    private static final Logger logger = Logger.getLogger(FundsAlert.class.getName());
     
     /**
      * Creates a new FundsAlert with the default threshold of $5.
@@ -68,7 +68,8 @@ public class FundsAlert implements FinancialObserver {
     
     @Override
     public void update(double availableFunds, double totalIncome, double totalExpense, double totalSavings) {
-        logger.log(Level.FINE, "FundsAlert update called. Available funds: " + availableFunds + ", Threshold: " + warningThreshold);
+        logger.log(Level.FINE, "FundsAlert update called. Available funds: "
+                + availableFunds + ", Threshold: " + warningThreshold);
         assert availableFunds == totalIncome - totalExpense :
                 "Available funds calculation is inconsistent";
         checkAndDisplayAlert(availableFunds);
@@ -105,7 +106,8 @@ public class FundsAlert implements FinancialObserver {
         String message = "Funds Alert feature is active. You will be warned when available funds fall below $" 
                 + String.format("%.2f", warningThreshold) + ".";
         ui.showMessage(message);
-        logger.log(Level.INFO, "Displayed initial funds alert notification. Threshold: $" + String.format("%.2f", warningThreshold));
+        logger.log(Level.INFO, "Displayed initial funds alert notification. " +
+                "Threshold: $" + String.format("%.2f", warningThreshold));
         ui.showMessage("Use 'alert set <amount>' to change this threshold.");
     }
 }

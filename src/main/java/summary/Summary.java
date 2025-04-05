@@ -12,11 +12,11 @@ import java.util.logging.Logger;
  * Provides methods for adding and removing income, expenses, and savings.
  */
 public class Summary {
+    private static final Logger logger = Logger.getLogger(Summary.class.getName());
     private double totalIncome;
     private double totalExpense;
     private double totalSavings;
     private List<FinancialObserver> observers = new ArrayList<>();
-    private static final Logger logger = Logger.getLogger(Summary.class.getName());
 
     /**
      * Constructs a new Summary object with all values initialized to 0.
@@ -152,13 +152,15 @@ public class Summary {
             throw new BudgetTrackerException("Income must be positive.");
         }
         if (income > this.totalIncome) {
-            logger.log(Level.WARNING, "Attempted to remove more income (" + income + ") than available (" + this.totalIncome + ").");
+            logger.log(Level.WARNING, "Attempted to remove more income (" + income + ") " +
+                    "than available (" + this.totalIncome + ").");
             throw new BudgetTrackerException("Cannot remove more income than the current total income.");
         }
 
         double availableBalance = getAvailableFunds();
         if (availableBalance - income < 0) {
-            logger.log(Level.WARNING, "Attempted to remove more income (" + income + ") than available (" + availableBalance + ").");
+            logger.log(Level.WARNING, "Attempted to remove more income (" + income + ") " +
+                    "than available (" + availableBalance + ").");
             throw new BudgetTrackerException("Cannot remove this income "
                     + "as it would result in negative available funds. "
                     + "Current expenses: " + totalExpense + ", Available balance after removal would be: " 
@@ -190,7 +192,8 @@ public class Summary {
         // Check if adding this expense would result in a negative balance
         double availableBalance = getAvailableFunds();
         if (expense > availableBalance) {
-            logger.log(Level.WARNING, "Attempted to add expense (" + expense + ") that exceeds available funds (" + availableBalance + ").");
+            logger.log(Level.WARNING, "Attempted to add expense (" + expense + ") " +
+                    "that exceeds available funds (" + availableBalance + ").");
             throw new BudgetTrackerException("Cannot add this expense as it would exceed your available funds. "
                     + "Available balance: " + availableBalance);
         }
@@ -216,7 +219,8 @@ public class Summary {
             throw new BudgetTrackerException("Expense must be positive.");
         }
         if (expense > this.totalExpense) {
-            logger.log(Level.WARNING, "Attempted to remove more expense (" + expense + ") than available (" + this.totalExpense + ").");
+            logger.log(Level.WARNING, "Attempted to remove more expense (" + expense + ") " +
+                    "than available (" + this.totalExpense + ").");
             throw new BudgetTrackerException("Cannot remove more expense than the current total expenses.");
         }
         double oldExpense = this.totalExpense;
@@ -263,7 +267,8 @@ public class Summary {
             throw new BudgetTrackerException("Savings must be positive.");
         }
         if (savings > this.totalSavings) {
-            logger.log(Level.WARNING, "Attempted to remove more savings (" + savings + ") than available (" + this.totalSavings + ").");
+            logger.log(Level.WARNING, "Attempted to remove more savings (" + savings + ") " +
+                    "than available (" + this.totalSavings + ").");
             throw new BudgetTrackerException("Cannot remove more savings than the current total savings.");
         }
         double oldSavings = this.totalSavings;
