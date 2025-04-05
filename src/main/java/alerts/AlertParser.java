@@ -19,6 +19,7 @@ public class AlertParser {
      */
     public static Command parse(String fullCommand, FundsAlert fundsAlert) throws BudgetTrackerException {
         assert fundsAlert != null : "FundsAlert object cannot be null in AlertParser";
+        
         String[] parts = fullCommand.split(" ", 3);
         
         if (parts.length < 3) {

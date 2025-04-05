@@ -48,11 +48,9 @@ public class Duke {
         summary.registerObserver(fundsAlert);
         handler = new SavingCommandHandler(saving);
 
-        // Ensure all core components are initialized
         assert ui != null : "Ui should be initialized";
         assert summary != null : "Summary should be initialized";
         assert summaryDisplay != null : "SummaryDisplay should be initialized";
-        assert expenseList != null : "ExpenseList should be initialized";
         assert fundsAlert != null : "FundsAlert should be initialized";
         assert helpDisplay != null : "HelpDisplay should be initialized";
         assert handler != null : "SavingCommandHandler should be initialized";

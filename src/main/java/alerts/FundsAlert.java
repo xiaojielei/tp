@@ -72,6 +72,8 @@ public class FundsAlert implements FinancialObserver {
      */
     private void checkAndDisplayAlert(double availableFunds) {
         assert warningThreshold >= 0 : "Warning threshold should always be non-negative here";
+        assert availableFunds >= 0 : "Available funds should always be non-negative";
+        
         if (availableFunds < warningThreshold) {
             String message = "WARNING: Available funds ($" + String.format("%.2f", availableFunds) + 
                     ") are below warning threshold ($" + String.format("%.2f", warningThreshold) + ")";

@@ -4,6 +4,8 @@ import exceptions.BudgetTrackerException;
 import alerts.FinancialObserver;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents a financial summary, storing total income, expenses, and savings.
@@ -14,6 +16,7 @@ public class Summary {
     private double totalExpense;
     private double totalSavings;
     private List<FinancialObserver> observers = new ArrayList<>();
+    private static final Logger logger = Logger.getLogger(Summary.class.getName());
 
     /**
      * Constructs a new Summary object with all values initialized to 0.
@@ -22,11 +25,11 @@ public class Summary {
         totalIncome = 0;
         totalExpense = 0;
         totalSavings = 0;
-        observers = new ArrayList<>();
+        logger.log(Level.INFO, "Summary object initialized.");
+
         assert this.totalIncome == 0.0 : "Initial income should be zero";
         assert this.totalExpense == 0.0 : "Initial expense should be zero";
         assert this.totalSavings == 0.0 : "Initial savings should be zero";
-        assert observers != null : "Observers list should be initialized";
     }
 
     /**
@@ -53,7 +56,7 @@ public class Summary {
      * Notifies all registered observers about changes in financial data.
      */
     private void notifyObservers() {
-        assert getAvailableFunds() >= 0 : "Invariant violated: Available funds became negative";
+        assert getAvailableFunds() >= 0 : "Available funds cannot be negative";
         double availableFunds = getAvailableFunds();
         for (FinancialObserver observer : observers) {
             observer.update(availableFunds, totalIncome, totalExpense, totalSavings);
@@ -116,6 +119,7 @@ public class Summary {
 
         assert this.totalIncome == oldIncome + income : "Income was not added correctly";
         
+        logger.log(Level.INFO, "Total income updated to: " + totalIncome);
         notifyObservers();
     }
 
@@ -148,6 +152,7 @@ public class Summary {
         assert this.totalIncome == oldIncome - income : "Income was not removed correctly";
         assert this.totalIncome >= 0 : "Total income should never be negative after removal";
         
+        logger.log(Level.INFO, "Total income updated to: " + totalIncome);
         notifyObservers();
     }
 
@@ -175,6 +180,7 @@ public class Summary {
         assert this.totalExpense == oldExpense + expense : "Expense was not added correctly";
         assert this.totalExpense >= 0 : "Total expense should remain non-negative after addition";
         
+        logger.log(Level.INFO, "Total expenses updated to: " + totalExpense);
         notifyObservers();
     }
 
@@ -197,6 +203,7 @@ public class Summary {
         assert this.totalExpense == oldExpense - expense : "Expense was not removed correctly";
         assert this.totalExpense >= 0 : "Total expense should never be negative after removal";
         
+        logger.log(Level.INFO, "Total expenses updated to: " + totalExpense);
         notifyObservers();
     }
 
@@ -217,6 +224,7 @@ public class Summary {
         assert this.totalSavings == oldSavings + savings : "Savings were not added correctly";
         assert this.totalSavings >= 0 : "Total savings should remain non-negative after addition";
  
+        logger.log(Level.INFO, "Total savings updated to: " + totalSavings);
         notifyObservers();
     }
 
@@ -239,6 +247,7 @@ public class Summary {
         assert this.totalSavings == oldSavings - savings : "Savings was not removed correctly";
         assert this.totalSavings >= 0 : "Total savings should never be negative after removal";
         
+        logger.log(Level.INFO, "Total savings updated to: " + totalSavings);
         notifyObservers();
     }
 }
