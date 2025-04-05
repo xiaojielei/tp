@@ -1,4 +1,4 @@
-﻿# User Guide
+﻿# Common Cents User Guide
 
 ## Introduction
 
@@ -466,6 +466,14 @@ Goodbye! Your financial data has been saved.
 * **Exit Savings Mode**: `exit savings`
 * **Set Alert Threshold**: `alert set <AMOUNT>`
 * **Exit Application**: `exit`
+
+## Features coming soon
+
+### Local Saving to Disk
+
+**Planned Feature:** We plan to implement functionality to save all financial data (income, expenses, savings, alert settings) locally to a file on the user's disk. This will allow users to persist their data between application sessions.
+
+**Reason for Delay:** Implementing local storage requires careful consideration of file formats, data serialization, error handling (e.g., corrupted files), and user experience for loading/saving data. We prioritized the development of core functionalities like tracking income/expenses, managing savings, viewing summaries, and setting alerts to deliver a functional baseline product first. The effort required for robust local saving was deferred to focus on these essential features.
 
 ## Error Messages
 
