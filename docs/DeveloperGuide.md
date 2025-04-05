@@ -389,7 +389,7 @@ Alternatives considered:
    * All commands should execute and display results within 2 seconds on a typical modern computer.
 
 3. **Usability**
-   * A user with above average typing speed for regular English text should be able to accomplish most tasks faster using commands than using a mouse-driven GUI application.
+   * A user with a typing speed of at least 30 to 40 words per minute (WPM) for regular English text should be able to accomplish most tasks at about the same speed as with a mouse-driven GUI application.
    * Error messages should be clear and provide guidance on how to correct invalid inputs.
 
 ## Glossary
@@ -472,3 +472,42 @@ Now you can perform the following tests:
 
     Expected: throws an error for invalid index.
     
+
+#### Viewing Help
+1. Command: `help`
+
+    Expected: displays the help menu.
+
+#### Viewing Summary
+1. Command: `add income 500 / salary`
+
+    Expected: as described in previous section
+
+
+2. Command: `view summary`
+
+    Expected: Summary with updated income and available balance
+
+
+3. Command: `add expense 200 / lunch / F`
+
+    Expected: as described in previous section
+
+
+4. Command: Summary with updated expense and available balance
+
+#### Setting and Triggering Funds Alert
+1. Command: `alert set 100`
+
+    Expected: Notification with the new funds alert displayed
+
+
+2. Command: `add expense 250 / rent / B`
+
+    Expected: The alert triggers before the expense confirmation as available balance goes below available funds
+    *(Note: Assumes income was positive before this, resulting in a valid balance before this command)*
+
+
+3. Command: `alert set -10`
+
+    Expected: An error message indicating the threshold cannot be negative.

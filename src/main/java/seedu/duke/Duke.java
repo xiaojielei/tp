@@ -81,25 +81,23 @@ public class Duke {
                 }
 
                 String fullCommand = in.nextLine();
+                String trimmedCommand = fullCommand.trim();
                 Command command = null;
                 IncomeCommand incomeCommand = null;
                 boolean commandRecognized = false;
 
-                // Handle help command
-                if (fullCommand.equals("help")) {
+                if (trimmedCommand.equals("help")) {
                     helpDisplay.display();
                     commandRecognized = true;
                     continue;
                 }
 
-                // Handle exit command
                 if (fullCommand.startsWith("bye")) {
                     Command exitCommand = new ExitCommand();
                     exitCommand.execute(expenseList, ui);
                     break;
                 }
 
-                // Handle view commands
                 if (fullCommand.equals("view income")) {
                     ListIncomeCommand listIncomeCommand = new ListIncomeCommand(summary);
                     listIncomeCommand.execute();
@@ -110,16 +108,15 @@ public class Duke {
                     viewExpenseCommand.execute(expenseList, ui);
                     commandRecognized = true;
                     continue;
-                } else if (fullCommand.equals("view summary")) {
+                } else if (trimmedCommand.equals("view summary")) {
                     summaryDisplay.displaySummary();
                     commandRecognized = true;
                     continue;
                 }
 
-                // Handle alert commands
-                if (fullCommand.startsWith("alert")) {
+                if (trimmedCommand.startsWith("alert")) {
                     try {
-                        Command alertCommand = AlertParser.parse(fullCommand, fundsAlert);
+                        Command alertCommand = AlertParser.parse(trimmedCommand, fundsAlert);
                         alertCommand.execute(expenseList, ui);
                         commandRecognized = true;
                         continue;
@@ -130,7 +127,6 @@ public class Duke {
                     }
                 }
 
-                // Handle income-related commands
                 if (fullCommand.startsWith("add income")) {
                     incomeCommand = IncomeParser.parseAddIncomeCommand(fullCommand, summary);
                     commandRecognized = true;
@@ -139,7 +135,6 @@ public class Duke {
                     commandRecognized = true;
                 }
 
-                // Handle expense-related commands
                 if (fullCommand.startsWith("add expense")) {
                     command = ExpenseParser.parse(fullCommand, summary, expenseList);
                     commandRecognized = true;
@@ -148,13 +143,11 @@ public class Duke {
                     commandRecognized = true;
                 }
 
-                // Handle savings commands
                 if (fullCommand.contains("savings")) {
                     handler.processSavingCommand(fullCommand);
                     commandRecognized = true;
                 }
 
-                // Execute income commands if any
                 if (incomeCommand != null) {
                     tracker.executeincomeCommand(incomeCommand, ui);
                     if (incomeCommand.isExit()) {
@@ -162,9 +155,8 @@ public class Duke {
                     }
                 }
 
-                // Execute expense commands if any
                 if (command != null) {
-                    command.execute(expenseList, ui);  // Pass the correct expenseList here
+                    command.execute(expenseList, ui);
                     if (command.isExit()) {
                         break;
                     }
