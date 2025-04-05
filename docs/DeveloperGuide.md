@@ -389,7 +389,7 @@ Alternatives considered:
    * All commands should execute and display results within 2 seconds on a typical modern computer.
 
 3. **Usability**
-   * A user with above average typing speed for regular English text should be able to accomplish most tasks faster using commands than using a mouse-driven GUI application.
+   * A user with a typing speed of at least 30 to 40 words per minute (WPM) for regular English text should be able to accomplish most tasks at about the same speed as with a mouse-driven GUI application.
    * Error messages should be clear and provide guidance on how to correct invalid inputs.
 
 ## Glossary
