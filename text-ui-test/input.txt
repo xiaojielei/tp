@@ -7,8 +7,7 @@ add expense 50 / transportation / T
 add expense 75.25 / dinner / F
 view expense
 view summary
-add savings 150
-add savings 100
+add savings 20 / emergency fund
 view savings
 delete income 1
 view summary

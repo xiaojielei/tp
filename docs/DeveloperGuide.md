@@ -472,7 +472,7 @@ Now you can perform the following tests:
 
     Expected: throws an error for invalid index.
     
-
+    
 #### Viewing Help
 1. Command: `help`
 
