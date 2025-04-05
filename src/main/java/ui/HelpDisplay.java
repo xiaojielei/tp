@@ -7,8 +7,6 @@ public class HelpDisplay {
 
     private static final String HELP_HEADER = "===== Budget Tracker Help =====";
     private static final String HELP_FOOTER = "===============================";
-
-    // Category Headings
     private static final String INCOME_HEADING = "--- Income Management ---";
     private static final String EXPENSE_HEADING = "--- Expense Management ---";
     private static final String SAVINGS_HEADING = "--- Savings Management ---";

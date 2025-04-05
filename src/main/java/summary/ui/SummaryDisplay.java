@@ -33,7 +33,7 @@ public class SummaryDisplay {
         sb.append(SUMMARY_FOOTER);
         
         String summaryText = sb.toString();
-        System.out.println(summaryText); // Print the summary to the console
-        return summaryText; // Return the formatted string
+        System.out.println(summaryText);
+        return summaryText;
     }
 }

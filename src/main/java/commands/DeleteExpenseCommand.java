@@ -45,7 +45,6 @@ public class DeleteExpenseCommand extends Command {
             
             // Delete the expense from the list
             if (expenseList.deleteExpense(expenseNumber)) {
-                // Update the summary by removing the expense amount
                 summary.removeExpense(amountToRemove);
                 ui.showMessage("Deleted expense number " + expenseNumber + ".");
             } else {
