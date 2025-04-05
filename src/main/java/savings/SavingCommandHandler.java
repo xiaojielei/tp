@@ -38,6 +38,10 @@ public class SavingCommandHandler {
         saving.viewSavings();
     }
 
+    public void handleViewSavingsGoal() {
+        saving.viewSavingsGoal();
+    }
+
     public void handleSetSavingsGoal(String input) {
         try {
             int trimSavingsGoalSetInUserCommand = 17;
@@ -118,8 +122,10 @@ public class SavingCommandHandler {
             handleTransferSavings(input);
         } else if (input.contains("exit savings")) {
             handleExitSavings();
-        } else if (input.contains("view savings") || input.contains("savings goal view")) {
+        } else if (input.contains("view savings")) {
             handleViewSavings();
+        } else if (input.contains("savings goal view")) {
+            handleViewSavingsGoal();
         } else {
             handleUnknownCommand();
         }
