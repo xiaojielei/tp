@@ -62,3 +62,4 @@ Implemented the following command classes
 * Added implementation details of the Add Expense component 
 * Added implementation details of the View Expense component
 * Added implementation details of the Delete Expense component
+* Added instructions for manual testing under Expenses and Start up, [#85](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/85)

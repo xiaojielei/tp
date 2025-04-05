@@ -92,7 +92,7 @@ Format: `add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>`
 Example of usage:
 
 ```
-> add expense 25 / food
+> add expense 25 / food / f
 Added expense: [FOOD] $25.00 for food
 ```
 
