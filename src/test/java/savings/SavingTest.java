@@ -200,7 +200,8 @@ class SavingTest {
     }
 
     @Test
-    void processSavingCommand_updateSavingsGoalValidGoalInput_expectGoalUpdated() throws BudgetTrackerException {
+    void processSavingCommand_updateSavingsGoalValidGoalInput_expectGoalUpdated()
+            throws BudgetTrackerException {
         saving.addSavings(400, "vacation");
         commandHandler.processSavingCommand("savings goal update 1 400 / New Goal");
         assertEquals("New Goal", saving.getSavingsRecords().get(0).getGoal());
