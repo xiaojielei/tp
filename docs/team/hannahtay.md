@@ -7,7 +7,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 ### [Code Contributed (Reposense Link)](https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=hannahtay&breakdown=true)
 
-### Features I Built
+### Enhancements implemented (Features I Built)
 
 #### Expenses
 I was responsible for implementing the expense management system, which allows users to add, delete and view their expenses.
@@ -42,10 +42,14 @@ Implemented the following command classes
   * `ViewExpenseCommand` tests testing most possible scenarios
   * `DeleteExpenseCommand` tests
 
-### Github Practices
-* **Community Contributions**:
-  * Approved code changes from teammates ([#7](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7), [#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34))
-  * Added Github Issues and closed them respectively ([#14](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/14))
+### Contributions to team-based tasks
+
+#### Github Community Contributions
+* Added Github Issues and closed them respectively ([#14](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/14))
+
+#### Updating Developer Docs
+* Added instructions for manual testing under Expenses and Start up, [#85](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/85)
+* Added Product Scope and index page
 
 ### Documentation
 * Wrote JavaDoc comments for almost all the Expenses code, [#38](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/38)
@@ -59,7 +63,10 @@ Implemented the following command classes
 * Created UML sequence diagrams to illustrate component interactions:
   * `AddExpense.puml`: Shows how expenses are added by the user, [#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45)
   * `ViewExpense.puml`: Shows how the expenses are retrieved and displayed
+  * `Expense.puml`: Shows how the expenses are managed
 * Added implementation details of the Add Expense component 
 * Added implementation details of the View Expense component
 * Added implementation details of the Delete Expense component
-* Added instructions for manual testing under Expenses and Start up, [#85](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/85)
+
+### Review/mentoring Contributions
+* Approved code changes from teammates ([#7](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7), [#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34))

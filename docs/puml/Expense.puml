@@ -1,0 +1,85 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classBackgroundColor #E3F2FD
+skinparam classArrowColor #1565C0
+skinparam noteBackgroundColor #FFF9C4
+skinparam noteBorderColor #FBC02D
+
+' ================== Classes ==================
+class Expense {
+    - amount: double
+    - description: String
+    - category: Category
+    + getAmount(): double
+    + getDescription(): String
+    + getCategory(): Category
+}
+
+class ExpenseList {
+    - expenses: List<Expense>
+    + addExpense(expense: Expense): void
+    + getExpenses(): List<Expense>
+    + showExpenses(): void
+    + deleteExpense(expenseNumber: int): boolean
+}
+
+class Command {
+    + execute()
+}
+
+class AddExpenseCommand {
+    - amount: double
+    - description: String
+    - category: Category
+    - summary: Summary
+    + execute()
+}
+
+class DeleteExpenseCommand {
+    - expenseNumber: int
+    - summary: Summary
+    + execute()
+}
+
+class ViewExpenseCommand {
+    - expenseList: ExpenseList
+    + execute()
+}
+
+class Summary {
+    + updateSummary()
+}
+
+class Duke {
+    ' Main controller
+}
+
+' ================== Relationships ==================
+ExpenseList *-- "0..*" Expense : manages >
+Command <|-u- AddExpenseCommand
+Command <|-u- DeleteExpenseCommand
+Command <|-u- ViewExpenseCommand
+AddExpenseCommand -u-> ExpenseList : modifies >
+DeleteExpenseCommand -u-> ExpenseList : modifies >
+ViewExpenseCommand -u-> ExpenseList : queries >
+AddExpenseCommand --> Summary : updates >
+DeleteExpenseCommand --> Summary : updates >
+Duke -d-> ExpenseList : contains >
+Duke -d-> Summary : contains >
+
+' ================== Notes ==================
+note top of ExpenseList
+ **Handles Expense Entries **
+ Stores expenses and manages commands.
+endnote
+
+note bottom of Command
+ **Base Command Class**
+ Parent class for all expense-related commands.
+endnote
+
+
+@enduml

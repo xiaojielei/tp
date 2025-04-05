@@ -1,15 +1,36 @@
 # Common Cents Developer Guide
 
 ## About Common Cents
-Common Cents is a personal finance management application that helps you track your income, expenses, savings, 
-and financial goals. The application provides a command-line interface for managing your finances with features for 
+Common Cents is a personal finance management application that helps you track your income, expenses, savings,
+and financial goals. The application provides a command-line interface for managing your finances with features for
 budget tracking, savings management, and financial alerts.
+
+* Acknowledgements
+* Design & Implementation
+  * Expense
+  * Income
+  * Saving
+  * Summary
+  * Summary Display
+  * Help Display
+  * Funds Alert
+* Product Scope
+* User Stories
+* Non-Functional Requirements
+* Glossary
+* Instructions for Manual Testing
+
+## Acknowledgements
+* The format of this DG was inspired by [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 ## Design & Implementation
 
 ### Expense Component
 
 The Expense component allows users to add, view, and delete expenses while categorizing them.
+
+Here is the class diagram of the Expense Component:
+![Expense Class Diagram](images/Expense.png)
 
 ### API: Expense.java
 How the Expense Component works:
@@ -362,6 +383,13 @@ Alternatives considered:
 * A polling approach where alerts check the summary periodically, but this would be less efficient and responsive.
 * Not showing an initial notification, but this would reduce user awareness of the feature.
 
+## Product Scope
+
+### Target user profile:
+* First year university undergraduates living in on-campus accommodations
+* has a need to manage finances confidently
+* can type fast
+* prefers typing to mouse interactions
 
 ## User Stories
 
