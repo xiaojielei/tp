@@ -19,6 +19,7 @@ import savings.Saving;
 import alerts.FundsAlert;
 import alerts.AlertParser;
 import java.util.Scanner;
+import util.LoggingConfigurator;
 
 public class Duke {
     private final Scanner in;
@@ -60,6 +61,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+        LoggingConfigurator.configureSummaryFileLogging();
         displayWelcomeMessage();
         new Duke().execute();
     }
