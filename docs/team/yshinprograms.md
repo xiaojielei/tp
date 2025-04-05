@@ -16,7 +16,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 *   **Key Design Aspects/Features**:
     *   **Observer Pattern (Subject)**: Designed as the subject, notifying registered observers (`FinancialObserver`) of financial changes via `notifyObservers()`.
     *   **Data Integrity**: Implemented robust input validation (e.g., positive amounts only) and safeguards (e.g., preventing expenses exceeding available funds).
-    *   **Reliability**: Utilized `java.util.logging` for tracing operations and assertions to enforce internal consistency (e.g., totals never being negative).
+    *   **Reliability**: Utilized `java.util.logging` for tracing operations (configured via `LoggingConfigurator` to output to `logs/summary.log` instead of the console) and assertions to enforce internal consistency (e.g., totals never being negative).
 
 #### Summary Display (`summary.ui` package)
 *   **What it is**: Responsible for presenting the financial summary held by the `Summary` object to the user in a clear and structured format.
@@ -35,7 +35,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 *   **Key Design Aspects/Features**:
     *   **Observer Pattern**: Uses the Observer pattern (`FundsAlert` as observer, `Summary` as subject) for loose coupling between financial tracking and alerting.
     *   **User Configurability**: Allows users to customize the alert threshold via the `alert set` command.
-    *   **Reliability**: Incorporated `java.util.logging` for tracking alert checks and threshold changes, along with assertions to ensure valid states (e.g., non-negative threshold).
+    *   **Reliability**: Incorporated `java.util.logging` for tracking alert checks and threshold changes (configured via `LoggingConfigurator` to output to `logs/alerts.log` instead of the console), along with assertions to ensure valid states (e.g., non-negative threshold).
 
 #### User Help System (`ui` package)
 *   **What it is**: Provides users with clear, categorized instructions on how to use the application's various commands.
@@ -53,46 +53,56 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 *   **`HelpDisplayTest.java`**: Tests validating the content of the generated help text (presence of headers, essential commands) and confirming that the `display` method prints the output correctly.
 
 ### Project Management
-* **GitHub Organization Setup**:
+* **Project Setup**:
   * Created and configured the GitHub organization and repository for the team
   * Established branch protection rules to enforce the forking workflow
+  * Setup & configured Gradle for team use
+
 
 * **Github Issues Management**
-  * Created and standardized all issue tags/labels for better project tracking
+  * Created and standardized all priority, severity, and type issue tags/labels for better project tracking
+  * Added, assigned and closed Github Issues in line with project tasks [Issue #6](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/6), [Issue #33](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/33), [Issue #133](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/133)
+
 
 * **Release Management**:
-  * Setup milestones for v1.0, v2.0 & v2.1
+  * Setup milestones & deadlines for v1.0, v2.0 & v2.1
   * Managed releases v1.0 and v2.0 on GitHub, which includes:
     * Conversion of UG and DG into PDF versions
     * Tagging the correct commit for release
     * Building the submission JAR files
 
-* **Community Contributions**:
-  * Reviewed and approved Pull Requests with non-trivial review comments: [#35](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/35), [#24](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/24), [#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45)
 
-### Contributions to Team Tasks
-* Wrote tests for the following classes:
-  * Tests for the Summary module covering most possible scenarios
-  * Tests for the alert system with simulated low funds situations
-  * Tests for the display components
+* **Community Contributions**:
+  * Reviewed and approved Pull Requests with non-trivial review comments: [#24](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/24), [#35](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/35), [#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45), [#58](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/58#discussion_r2020096560)
+
 
 ### Documentation
 
 ### User Guide:
-* Established the overall structure and format of the User Guide to ensure consistency and readability
-* Created standardized command format sections with clear syntax highlighting
-* Added documentation for the Summary Display feature that shows financial information, [#48](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)
-* Added documentation for the Help Display feature that lists all available commands
-* Added documentation for the Low Funds Alert system that warns users when funds are low
-* Added comprehensive error handling documentation for all financial operations
+* **Team Tasks**
+  * Established the overall structure and format of the User Guide to ensure consistency and readability
+  * Created standardized command format sections with clear syntax highlighting
+
+
+* **Individual Tasks**
+  * Added documentation for the Summary Display feature that shows financial information, [#48](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)
+  * Added documentation for the Help Display feature that lists all available commands
+  * Added documentation for the Low Funds Alert system that warns users when funds are low
+  * Added comprehensive error handling documentation for all financial operations
 
 ### Developer Guide:
-* Created UML sequence diagrams to illustrate component interactions:
-  * `Summary.puml`: Shows how the Summary class is connected to the rest of the program, [#48](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)
-  * `ViewSummary.puml`: Shows how financial data is retrieved and displayed
-  * `SetAlert.puml`: Illustrates the alert threshold configuration process
-  * `TriggerAlert.puml`: Demonstrates the Observer pattern in action when funds are low
-* Added implementation details of the Summary component including Observer pattern design
-* Added implementation details of the SummaryDisplay component with sequence flows
-* Added implementation details of the Funds Alert component with threshold management
-* Added explanation of the income removal validation to prevent negative funds
+* **Team Tasks**
+    * Established the overall structure and format of the User Guide to ensure consistency and readability
+    * Created standardized command format sections with clear syntax highlighting
+
+
+* **Individual Tasks**
+  * Created UML sequence diagrams to illustrate component interactions:
+    * `Summary.puml`: Shows how the Summary class is connected to the rest of the program, [#48](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)
+    * `ViewSummary.puml`: Shows how financial data is retrieved and displayed
+    * `SetAlert.puml`: Illustrates the alert threshold configuration process
+    * `TriggerAlert.puml`: Demonstrates the Observer pattern in action when funds are low
+  * Added implementation details of the Summary component including Observer pattern design
+  * Added implementation details of the SummaryDisplay component with sequence flows
+  * Added implementation details of the Funds Alert component with threshold management
+  * Added explanation of the income removal validation to prevent negative funds

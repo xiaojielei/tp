@@ -1,13 +1,5 @@
 # Common Cents Developer Guide
 
-## Acknowledgements
-
-Common Cents uses the following tools for development and testing:
-
-1. [JUnit 5](https://junit.org/junit5/) - Used for software testing.
-2. [Gradle](https://gradle.org) - Used for build automation.
-3. [AB3](https://github.com/se-edu/addressbook-level3) - Used for creating documentation.
-
 ## About Common Cents
 Common Cents is a personal finance management application that helps you track your income, expenses, savings,
 and financial goals. The application provides a command-line interface for managing your finances with features for
@@ -29,7 +21,12 @@ budget tracking, savings management, and financial alerts.
 * [Instructions for Manual Testing](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
 
 ## Acknowledgements
-* The format of this DG was inspired by the [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+
+Common Cents uses the following tools for development and testing:
+
+1. [JUnit 5](https://junit.org/junit5/) - Used for software testing.
+2. [Gradle](https://gradle.org) - Used for build automation.
+3. [AB3](https://github.com/se-edu/addressbook-level3) - Inspired the format of our DG.
 
 ## Design & Implementation
 
