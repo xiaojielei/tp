@@ -221,7 +221,8 @@ Savings goal set: $500.00 for new laptop
 
 #### Viewing Savings Goals: `savings goal view`
 
-Lists all your savings goals.
+Lists all your savings goals. This command is similar to view savings,
+but it emphasizes displaying the goals.
 
 Format: `savings goal view`
 
@@ -236,7 +237,10 @@ Example of usage:
 
 #### Updating Savings Goals: `savings goal update`
 
-Updates an existing savings goal.
+Updates an existing savings goal. One difference between this command 
+and "savings goal set" is this command can also update the amount, even
+though it is not that obvious to see in the command ("savings goal update")
+that it can also update amount.
 
 Format: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
 
