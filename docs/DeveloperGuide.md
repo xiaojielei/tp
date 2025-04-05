@@ -373,6 +373,9 @@ The sequence diagram below shows what happens when an alert is triggered:
   <img src="images/TriggerAlert.png" alt="Trigger Alert Sequence Diagram" width="1000"/>
 </div>
 
+_(Note: Activation bars omitted to reduce clutter due to size of the sequence diagram)_
+
+
 Triggering an alert (as illustrated in the **Trigger Alert Sequence Diagram** above):
 1. When the user adds an expense that reduces available funds below the threshold, the corresponding command updates the `Summary`'s financial data.
 2. `Summary` then calls `notifyObservers()`, which in turn calls the `update()` method on the registered `FundsAlert` instance.

@@ -17,7 +17,7 @@ Common Cents is a Command Line Interface (CLI) financial management application 
 
 Common Cents offers several features to help you manage your finances effectively:
 
-## Input Notes
+### Input Notes
 * IMPORTANT: Parameters should be padded with spaces! eg. `add expense 30 / lunch / f`
 * Commands should be entered in lowercase.
 
