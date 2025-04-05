@@ -1,9 +1,27 @@
 # Common Cents Developer Guide
 
 ## About Common Cents
-Common Cents is a personal finance management application that helps you track your income, expenses, savings, 
-and financial goals. The application provides a command-line interface for managing your finances with features for 
+Common Cents is a personal finance management application that helps you track your income, expenses, savings,
+and financial goals. The application provides a command-line interface for managing your finances with features for
 budget tracking, savings management, and financial alerts.
+
+* [Acknowledgements](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#acknowledgements)
+* [Design & Implementation](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#design--implementation)
+  * [Expense](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#expense-component)
+  * [Income](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#income-component)
+  * [Savings](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#savings-component)
+  * [Summary](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#summary-component)
+  * [Summary Display](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#summary-display-component)
+  * [Help Display](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#help-display-component)
+  * [Funds Alert](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#funds-alert-component)
+* [Product Scope](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#product-scope)
+* [User Stories](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#user-stories)
+* [Non-Functional Requirements](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#non-functional-requirements)
+* [Glossary](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#glossary)
+* [Instructions for Manual Testing](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
+
+## Acknowledgements
+* The format of this DG was inspired by the [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 ## Design & Implementation
 
@@ -11,7 +29,10 @@ budget tracking, savings management, and financial alerts.
 
 The Expense component allows users to add, view, and delete expenses while categorizing them.
 
-### API: Expense.java
+Here is the class diagram of the Expense Component:
+![Expense Class Diagram](images/Expense.png)
+
+#### API: Expense.java
 How the Expense Component works:
 
 1. Adding Expense: The `AddExpenseCommand` extends the `Command` class, and contains amount, description and category 
@@ -89,7 +110,7 @@ The Income component is a critical part of the budget tracker, allowing users to
 and list their income entries. The goal of this feature is to provide students with a simple and efficient way
 to record their income sources, making it easier for them to manage their finances over time. 
 
-### API: Income.java
+#### API: Income.java
 
 Here is the class diagram of the Income Component:
 ![Income Class Diagram](images/Income.png)
@@ -170,7 +191,7 @@ Alternatives considered:
 (add, delete, list). However, this would lead to bloated code and a lack of clarity, so we chose to separate the 
 commands into individual classes.
 
-### Saving Class
+### Savings Component
 The savings component is an important component of the Budget Tracker, and it allows
 students to add, delete, view saving amounts, and set, update, delete view savings goal
 for each of the saving entry.
@@ -362,6 +383,13 @@ Alternatives considered:
 * A polling approach where alerts check the summary periodically, but this would be less efficient and responsive.
 * Not showing an initial notification, but this would reduce user awareness of the feature.
 
+## Product Scope
+
+### Target user profile:
+* First year university undergraduates living in on-campus accommodations
+* has a need to manage finances confidently
+* can type fast
+* prefers typing to mouse interactions
 
 ## User Stories
 
