@@ -22,8 +22,7 @@ public class Summary {
         totalIncome = 0;
         totalExpense = 0;
         totalSavings = 0;
-        
-        // Assertion to verify initial state
+
         assert totalIncome == 0 : "Initial income should be 0";
         assert totalExpense == 0 : "Initial expense should be 0";
         assert totalSavings == 0 : "Initial savings should be 0";
@@ -110,8 +109,7 @@ public class Summary {
         }
         double oldIncome = this.totalIncome;
         this.totalIncome += income;
-        
-        // Assertion to verify income was added correctly
+
         assert this.totalIncome == oldIncome + income : "Income was not added correctly";
         
         notifyObservers();
@@ -169,8 +167,7 @@ public class Summary {
         
         double oldExpense = this.totalExpense;
         this.totalExpense += expense;
-        
-        // Assertion to verify expense was added correctly
+
         assert this.totalExpense == oldExpense + expense : "Expense was not added correctly";
         
         notifyObservers();
@@ -191,8 +188,7 @@ public class Summary {
         }
         double oldExpense = this.totalExpense;
         this.totalExpense -= expense;
-        
-        // Assertion to verify expense was removed correctly
+
         assert this.totalExpense == oldExpense - expense : "Expense was not removed correctly";
         assert this.totalExpense >= 0 : "Total expense should never be negative after removal";
         
@@ -212,8 +208,7 @@ public class Summary {
 
         double oldSavings = this.totalSavings;
         this.totalSavings += savings;
-        
-        // Assertion to verify savings was added correctly
+
         assert this.totalSavings == oldSavings + savings : "Savings was not added correctly";
         
         notifyObservers();
@@ -234,8 +229,7 @@ public class Summary {
         }
         double oldSavings = this.totalSavings;
         this.totalSavings -= savings;
-        
-        // Assertion to verify savings was removed correctly
+
         assert this.totalSavings == oldSavings - savings : "Savings was not removed correctly";
         assert this.totalSavings >= 0 : "Total savings should never be negative after removal";
         
