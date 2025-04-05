@@ -1,4 +1,4 @@
-# User Guide
+﻿# User Guide
 
 ## Introduction
 
@@ -51,8 +51,8 @@ Example of usage:
 ```
 > view income
 ===== INCOME RECORDS =====
-1. 	$50.00 from salary
-2. 	$100.00 from freelance
+1.  $50.00 from salary
+2.  $100.00 from freelance
 =========================
 Total Income: $150.0
 Successfully listed income entries.
@@ -132,7 +132,7 @@ Deleted expense: [FOOD] $25.00 for food
 
 #### Adding to Savings: `add savings`
 
-Moves money from your available balance to your savings.
+Add a saving.
 
 Format: `add savings <AMOUNT> / <DESCRIPTION>`
 
@@ -160,15 +160,15 @@ Example of usage:
 ```
 > view savings
 ===== SAVINGS RECORDS =====
-1. 	$20.00 for emergency fund
-2. 	$10.00 for vacation
+1.  $20.00 for emergency fund
+2.  $10.00 for vacation
 ==========================
 Savings Indicator: Bad - Try to save more.
 ```
 
 #### Deleting Savings: `delete savings`
 
-Removes a savings entry and returns the amount to your available balance.
+Removes a savings entry.
 
 Format: `delete savings <INDEX>`
 
@@ -200,7 +200,12 @@ Transferred $10.00 from emergency fund to vacation
 
 #### Setting Savings Goals: `savings goal set`
 
-Sets a new savings goal.
+Sets a new savings goal. Note: If there are 2 saving entries with 
+the same amount in the saving list, this command will only set the
+goal of the first saving entry to the provided goal. However, if user
+would like to change the saving goal of the second/third... saving entry
+with the same amount, they may consider using command "savings goal update",
+which is shown below.
 
 Format: `savings goal set <AMOUNT> / <DESCRIPTION>`
 
@@ -216,7 +221,8 @@ Savings goal set: $500.00 for new laptop
 
 #### Viewing Savings Goals: `savings goal view`
 
-Lists all your savings goals.
+Lists all your savings goals. This command is similar to view savings,
+but it emphasizes displaying the goals.
 
 Format: `savings goal view`
 
@@ -225,15 +231,18 @@ Example of usage:
 ```
 > savings goal view
 ===== SAVINGS GOALS =====
-1. 	$500.00 for new laptop (Current: $0.00)
+1.  $500.00 for new laptop (Current: $0.00)
 =========================
 ```
 
 #### Updating Savings Goals: `savings goal update`
 
-Updates an existing savings goal.
+Updates an existing savings goal. One difference between this command 
+and "savings goal set" is this command can also update the amount, even
+though it is not that obvious to see in the command ("savings goal update")
+that it can also update amount.
 
-Format: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
+Format: `savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>`
 
 * `<INDEX>` refers to the index number shown in the savings goals list.
 * `<AMOUNT>` is the new target amount.
@@ -242,7 +251,7 @@ Format: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
 Example of usage:
 
 ```
-> savings goal update 1 / 600 / gaming laptop
+> savings goal update 1 600 / gaming laptop
 Updated savings goal: $600.00 for gaming laptop
 ```
 
@@ -258,7 +267,7 @@ Example of usage:
 
 ```
 > savings goal delete 1
-Deleted savings goal: $600.00 for gaming laptop
+Deleted savings goal: $600.00 for gaming laptop(now the saving goal for this entry is empty)
 ```
 
 #### Exiting Savings Mode: `exit savings`
@@ -481,3 +490,4 @@ Common Cents provides helpful error messages to guide you when something goes wr
 * **Invalid index:**
   * If you try to delete an entry with an invalid index, Common Cents will inform you.
   * Example: `delete income 10` when you only have 2 income entries → `Invalid index. Please use an index from the list.`
+
