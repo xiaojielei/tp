@@ -242,7 +242,7 @@ and "savings goal set" is this command can also update the amount, even
 though it is not that obvious to see in the command ("savings goal update")
 that it can also update amount.
 
-Format: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
+Format: `savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>`
 
 * `<INDEX>` refers to the index number shown in the savings goals list.
 * `<AMOUNT>` is the new target amount.
@@ -251,7 +251,7 @@ Format: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
 Example of usage:
 
 ```
-> savings goal update 1 / 600 / gaming laptop
+> savings goal update 1 600 / gaming laptop
 Updated savings goal: $600.00 for gaming laptop
 ```
 
