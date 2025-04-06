@@ -1,25 +1,25 @@
 # Yong Shin's Project Portfolio Page
 
 ## Overview
-Budget Tracker is a command-line app that helps users manage their money. Users can track how much they earn, spend, and save using simple text commands. The app includes a money summary feature and alerts users when their funds get too low.
+Budget Tracker is a command-line app that helps users manage their money. Users can track how much they earn, spend, and save using simple text commands.
 
 ## Summary of Contributions
 
-_Note: Links to the respective PRs or commits have been embedded within the relevant text in the PPP_
+_Note: Links to the respective PRs or commits have also been embedded within the relevant text in the PPP_
 ### [Code Contributed (Reposense Link)](https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=yshinprograms&breakdown=true)
 
 ### Features I Built
 
 #### [Summary System (`summary` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7)
 *   **Functionality**:
-    *   `Summary.java`, is responsible for tracking the user's `totalIncome`, `totalExpense`, and `totalSavings`. It calculates the `availableFunds` (simply income minus expenses) to show current spending power. Methods are provided to add or remove financial records (income, expenses, savings) safely, incorporating checks to ensure data consistency and prevent invalid operations like creating a negative balance.
+    *   `Summary.java`, is responsible for tracking the user's `totalIncome`, `totalExpense`, and `totalSavings`. It dynamically calculates `availableFunds` (income minus expenses) with methods provided to add or remove income, expenses, and savings safely.
 *   **Key Design Aspects/Features**:
     *   [**Observer Pattern (Subject)**](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34): Designed as the subject, notifying registered observers (`FinancialObserver`) of financial changes via `notifyObservers()`.
     *   **Reliability**: Ensured internal consistency through defensive programming, utilizing `BudgetTrackerException` for invalid operations and `assert` statements to verify invariants (e.g., non-negative totals).
 
 #### [Summary Display (`summary.ui` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7)
 *   **Functionality**:
-    *   `SummaryDisplay.java` obtains the current financial data from the `Summary` object. It then formats key figures – Total Income, Total Expenses, Available Balance, and Total Savings – into a well-aligned table using `String.format()`. This formatted summary is then printed directly to the console for the user.
+    *   `SummaryDisplay.java` obtains financial data from the `Summary` It then formats `totalIncome`, `totalBalance`, `totalExpense`, and `totalSavings` into a well-formatted table that is printed directly to the console for the user.
 *   **Key Design Aspects/Features**:
     *   **Separation of Concerns**: Decouples the user interface logic from financial data management in `Summary`.
 
@@ -30,28 +30,24 @@ _Note: Links to the respective PRs or commits have been embedded within the rele
     *   `AlertParser.java`: Processes the raw user input string for commands like `alert set <AMOUNT>`.
     *   `AlertCommand.java`: Executes the logic to update the warning threshold within the `FundsAlert` instance based on the parsed command details.
 *   **Key Design Aspects/Features**:
-    *   [**Observer Pattern**](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34): Uses the Observer pattern (`FundsAlert` as observer, `Summary` as subject) for loose coupling between financial tracking and alerting.
+    *   [**Observer Pattern (Observer)**](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34): Uses the Observer pattern (`FundsAlert` as observer, `Summary` as subject) for loose coupling between financial tracking and alerting.
 
 #### [User Help System (`ui` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7)
 *   **What it is**: Provides users with clear, categorized instructions on how to use the application's various commands.
 *   **Detailed Functionality**:
     *   `HelpDisplay.java` displays user assistance. It lists all commands available in the application, including syntax (e.g., `add income <AMOUNT> / <SOURCE>`) and brief explanations.
 *   **Key Design Aspects/Features**:
-    *   **Maintainability**: Easy to update as commands are added or modified.
+    *   **Maintainability**: Easy to update for all team members as commands are added or modified.
 
 ### JUnit Tests
-*   [**`SummaryTest.java`**: Comprehensive tests](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/51) covering initialization, balance calculations, adding/removing income and expenses (including edge cases like zero/negative values, insufficient funds, operations leading to negative balances), and savings operations.
-*   **`SummaryDisplayTest.java`**: Tests verifying the correct formatting of the budget summary output for both populated and empty `Summary` objects.
-*   **`AlertParserTest.java`**: Tests ensuring correct parsing of valid `alert set` commands and proper handling (exception throwing) for invalid formats (missing arguments, non-numeric input, unrecognized subcommands).
-*   **`FundsAlertTest.java`**: Tests covering management of the warning threshold (default value, setting valid/invalid values), alert triggering logic (only when funds are strictly below the threshold), and initial notification messages.
-*   **`HelpDisplayTest.java`**: Tests validating the content of the generated help text (presence of headers, essential commands) and confirming that the `display` method prints the output correctly.
+* Created comprehensive tests for `Summary`, `SummaryDisplay`, `AlertParser`, `FundsAlert`, and `HelpDisplay` components, covering core functionality, edge cases, formatting and parsing logic.[PR#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34),[PR#51](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/51),[PR#140](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/140),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### [Assertion & Logging](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 *   **Logging Configuration (`util.LoggingConfigurator`)**: Implemented a dedicated utility class to manage logging for specific components.
     *   Configured `java.util.logging` to redirect logs from the `Summary` class and the `alerts` package to separate files (`logs/summary.log` and `logs/alerts.log` respectively).
     *   Utilized `FileHandler` to write logs and ensured the `logs` directory is created if it doesn't exist.
     *   Used `logger.setUseParentHandlers(false)` to prevent these specific logs from appearing in the console output, keeping the CLI clean for user interaction.
-*   **Assertions**: Incorporated `assert` statements within the `Summary` and `FundsAlert` classes to enforce crucial internal invariants during development and testing.
+*   **Assertions**: Incorporated `assert` statements within the `Summary` and `FundsAlert` classes to enforce crucial internal invariants during development and testing.[PR#27](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/27),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### Project Management
 * **Project Setup**:
@@ -63,7 +59,7 @@ _Note: Links to the respective PRs or commits have been embedded within the rele
 
 * **Release Management**:
   * Setup milestones & deadlines for v1.0, v2.0 & v2.1
-  * Managed releases v1.0 and v2.0 on GitHub, which includes:
+  * Managed releases v1.0, v2.0 & v2.1 on GitHub, which includes:
     * Conversion of UG and DG into PDF versions
     * Tagging the correct commit for release & building the submission JAR files
 
