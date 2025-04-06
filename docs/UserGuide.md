@@ -138,7 +138,6 @@ Format: `add savings <AMOUNT> / <DESCRIPTION>`
 
 * `<AMOUNT>` must be a positive number.
 * `<DESCRIPTION>` is a description of the savings purpose.
-* You cannot add to savings more than your available balance.
 
 Example of usage:
 
