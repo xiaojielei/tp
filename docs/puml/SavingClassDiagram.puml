@@ -46,7 +46,7 @@ class SavingCommandHandler {
 }
 
 ' Relationships
-Saving "1" *-- "*" SavingsRecord : manages
-SavingCommandHandler "1" *-- "1" Saving : uses
+Saving "1" *--> "*" SavingsRecord : manages
+SavingCommandHandler "1" *--> "1" Saving : uses
 
 @enduml
