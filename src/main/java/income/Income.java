@@ -14,6 +14,8 @@ public class Income {
      * @param source The source of the income.
      */
     public Income(double amount, String source) {
+        assert amount > 0 : "Income amount must be positive";
+        assert source != null && !source.trim().isEmpty() : "Income source cannot be null or empty";
         this.amount = amount;
         this.source = source;
     }

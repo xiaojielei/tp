@@ -37,7 +37,6 @@ Example of usage:
 ```
 > add income 50 / salary
 Added income: $50.0 from salary
-Successfully added income: $50.0 from salary
 ```
 
 #### Viewing Income: `view income`
@@ -52,10 +51,8 @@ Example of usage:
 > view income
 ===== INCOME RECORDS =====
 1.  $50.00 from salary
-2.  $100.00 from freelance
 =========================
-Total Income: $150.0
-Successfully listed income entries.
+Total Income: $50.0
 ```
 
 #### Deleting Income: `delete income`
@@ -72,7 +69,6 @@ Example of usage:
 ```
 > delete income 1
 Deleted income entry at index 1
-Successfully deleted income at index 1
 ```
 
 ### Expense Management
@@ -485,11 +481,11 @@ Common Cents provides helpful error messages to guide you when something goes wr
 
 * **Invalid command format:**
   * If you enter a command with incorrect formatting, Common Cents will explain the proper format.
-  * Example: `add income 50` → `Invalid format for 'add income' command. Please use 'add income <AMOUNT> / <DESCRIPTION>'`
+  * Example: `add income 50` → `Invalid format for 'add income' command. Please use 'add income <AMOUNT> / <SOURCE>'`
 
 * **Negative amount:**
   * If you try to add a negative amount, Common Cents will remind you that amounts must be positive.
-  * Example: `add income -50 / salary` → `Amount must be positive.`
+  * Example: `add income -50 / salary` → `Income amount must be greater than zero.`
 
 * **Insufficient funds:**
   * If you try to add to savings more than your available balance, Common Cents will warn you.
@@ -497,5 +493,5 @@ Common Cents provides helpful error messages to guide you when something goes wr
 
 * **Invalid index:**
   * If you try to delete an entry with an invalid index, Common Cents will inform you.
-  * Example: `delete income 10` when you only have 2 income entries → `Invalid index. Please use an index from the list.`
+  * Example: `delete income 10` when you only have 2 income entries → `Invalid index. Please provide a valid income index between 1 and 2.`
 

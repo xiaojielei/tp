@@ -15,14 +15,12 @@ Common Cents is a personal finance management application that helps you track y
 - **Add Income**:
   - `add income <AMOUNT> / <SOURCE>`
   - Adds a new income record with the specified amount and source
-  - Example: `add income 1000 / Salary`
+  - Example: `add income 2000 / Monthly Salary`
   - Note: Amount must be a positive number
   - Example output:
 ```
 > add income 2000 / Monthly Salary
-Sure! I have added your income:
-1. $2000.0 from Monthly Salary
-Now you have 1 income(s) in your list.
+Added income: $2000.0 from Monthly Salary
 ```
 
 - **Delete Income**:
@@ -35,6 +33,14 @@ Now you have 1 income(s) in your list.
     - `view income`
     - Lists all income records
     - Example: `view income`
+    - Example output:
+    ```
+    > view income
+    ===== INCOME ENTRIES =====
+    1. $2000.0 from Monthly Salary
+    =========================
+    Total Income: $2000.0
+    ```
 
 ### Expense Management
 - **Add Expense**:
@@ -99,7 +105,7 @@ Added expense: [FOOD] $50.00 for Lunch
       Here are the savings in your list:
       1. 	[Emergency Fund] 500.0
       You have 1 saving(s) in total.
-      Savings Indicator: Good
+      Savings Indicator: Bad - Try to save more.
       ```
 
 - **Set Savings Goal**:
@@ -117,6 +123,7 @@ Added expense: [FOOD] $50.00 for Lunch
 - **View Savings Goals**:
     - `savings goal view`
     - Views all current savings goals
+    - Gives a saving indicator based on total savings compared to total income
     - Example: `savings goal view`
 
 - **Update Savings Goal**:
@@ -184,13 +191,18 @@ Added expense: [FOOD] $50.00 for Lunch
 ### Income Management Errors
 - **Negative Income**:
     - Input: `add income -100 / Salary`
-    - Error: "Income must be positive."
+    - Error: "Income amount must be greater than zero."
     - Validation: Checks if income amount is positive
 
 - **Invalid Delete Index**:
     - Input: `delete income 999`
-    - Error: "Invalid index."
+    - Error: "Invalid index. Please provide a valid income index between 1 and (size of list)."
     - Validation: Checks if index is within valid range
+
+- **Invalid Format**:
+  - Input: `add income 20 / 20 / work`
+  - Error: "Invalid format for 'add income' command. Please use 'add income <AMOUNT> / <SOURCE>'."
+  - Validation: Checks if command follows correct format.
 
 ### Expense Management Errors
 - **Negative Expense**:

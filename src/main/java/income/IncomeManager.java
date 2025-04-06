@@ -33,6 +33,7 @@ public class IncomeManager {
      * @param income the income entry to add
      */
     public static void addIncome(Income income) {
+        assert !incomeList.isEmpty() : "Income list should not be empty after adding an income";
         incomeList.add(income);
     }
 
@@ -43,15 +44,15 @@ public class IncomeManager {
      * @throws BudgetTrackerException if the index is out of bounds
      */
     public static void deleteIncome(int index) throws BudgetTrackerException {
+        if (incomeList.isEmpty()) {
+            throw new BudgetTrackerException("Cannot delete from an empty income list.");
+        }
+
         if (index < 0 || index >= incomeList.size()) {
             throw new BudgetTrackerException("Invalid index: " + (index + 1)
                     + ". Index must be between 1 and " + incomeList.size());
         }
 
-        if (incomeList.isEmpty()) {
-            throw new BudgetTrackerException("Cannot delete from an empty income list.");
-        }
-        
         incomeList.remove(index);
     }
 
@@ -68,6 +69,7 @@ public class IncomeManager {
      * Clears all income entries from the list.
      */
     public static void clearIncomeList() {
+        assert incomeList != null : "Income list should not be null";
         incomeList.clear();
     }
 }

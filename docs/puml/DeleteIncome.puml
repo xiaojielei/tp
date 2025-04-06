@@ -18,4 +18,8 @@ activate DeleteIncomeCommand
 
 DeleteIncomeCommand -> IncomeManager: deleteIncome()
 activate IncomeManager
+deactivate DeleteIncomeCommand
+deactivate IncomeManager
+deactivate IncomeParser
+deactivate Duke
 @enduml

@@ -37,14 +37,12 @@ alert set <AMOUNT>                                           Sets the warning th
 help                                                         Displays this help message.
 ===============================
 Added income: $1000.0 from salary
-Successfully added income: $1000.0 from salary
 Added income: $200.5 from part-time job
-Successfully added income: $200.5 from part-time job
-List of income entries:
+===== INCOME RECORDS =====
 1. $1000.0 from salary
 2. $200.5 from part-time job
+=========================
 Total Income: $1200.5
-Successfully listed income entries.
 Added expense: [FOOD] $120.75 for groceries
 Added expense: [TRANSPORT] $50.0 for transportation
 Added expense: [FOOD] $75.25 for dinner

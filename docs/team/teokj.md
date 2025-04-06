@@ -16,7 +16,7 @@ incomes and sources.
 * **Income Handling**:
     * Designed and implemented the `Income` and `IncomeParser` class, which serves as the foundation for income 
   tracking.
-    * Created the `IncomeList` class to store and manage user incomes and sources.
+    * Created the `IncomeManager` class to store and manage user incomes and sources.
 
 * **Commands for Income Management**:
   Implemented the following command classes
@@ -50,6 +50,9 @@ This feature helps users assess their financial habits and encourages better sav
     * `AddIncomeCommand` tests for adding income with various sources
     * `ViewIncomeCommand` tests covering edge cases and different formats of income records
     * `DeleteIncomeCommand` tests for successful and erroneous income deletions
+    * `Income` tests to cover basic cases
+    * `IncomeManager` tests to cover different commands with various income lists
+    * `IncomeParser` tests to cover formatting of user inputs
 
 ### Github Practices
 * **Community Contributions**:
