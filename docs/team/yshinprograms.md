@@ -55,8 +55,6 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
   * Reviewed Pull Requests with non-trivial review comments: [PR#24](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/24), [PR#35](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/35), [PR#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45), [PR#58](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/58#discussion_r2020096560)
   * Assigned and closed Github Issues in line with project tasks [Issue #6](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/6), [Issue #33](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/33), [Issue #133](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/133)
 
-<div style="page-break-after: always;"></div>
-
 ### User Guide:
 * **Team Tasks**
   * Established the overall structure and format of the User Guide using standardized command format sections to ensure consistency and readability
@@ -95,7 +93,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
       *   `ViewSummary.puml`: Sequence diagram showing how financial data is retrieved and displayed.
 
         <div align="center">
-          <img src="../images/ViewSummary.png" alt="Summary Class Diagram" width="700"/>
+          <img src="../images/ViewSummary.png" alt="Summary Class Diagram" width="450"/>
         </div>
 
       *   `SetAlert.puml`: Sequence diagram illustrating the alert threshold configuration process.
