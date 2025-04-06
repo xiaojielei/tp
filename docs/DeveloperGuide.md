@@ -47,11 +47,13 @@ called, the `parseAddExpense()` function splits the user input into amount, desc
 inputs are sent to the `AddExpenseCommand` class, which adds the expense into `ExpenseList`.
    ![Add Expense Sequence Diagram](images/AddExpense.png)
 
+
 2. Viewing Expense: The `ViewExpenseCommand` extends the `Command` class, and allows the user to view their list of
 expenses. Upon user input, `ViewExpenseCommand` class is called, and takes in the `ExpenseList` as a parameter. In the 
 `ExpenseList` class, all previously added expenses are accessed via the `List<Expense> expenses` ArrayList. The 
 `showExpenses()` command is called and a numbered list is shown.
    ![View Expense Sequence Diagram](images/ViewExpense.png)
+
 
 3. Deleting Expense: The `DeleteExpenseCommand` class extends the `Command` class, and allows the user to delete an 
 expense based on its number in the expense list. Upon user input, `ExpenseParser` class parses the input, calling 
@@ -75,20 +77,6 @@ For example, in the `Expense` class:
 ```java
 public enum Category {
     FOOD, TRANSPORT, BILLS, OTHERS
-}
-public static Category getCategoryFromInput(String input) throws BudgetTrackerException {
-    switch (input.toUpperCase()) {
-    case "F":
-        return Category.FOOD;
-    case "T":
-        return Category.TRANSPORT;
-    case "B":
-        return Category.BILLS;
-    case "O":
-        return Category.OTHERS;
-    default:
-        throw new BudgetTrackerException("Invalid category! Use: F (Food), T (Transport), B (Bills), O (Others).");
-    }
 }
 ```
 
