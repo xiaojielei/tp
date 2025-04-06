@@ -5,7 +5,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 ## Summary of Contributions
 
-### [Code Contributed (Reposense Link)](https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=yshinprograms&breakdown=true)
+#### [Code Contributed (Reposense Link)](https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=yshinprograms&breakdown=true)
 
 ### Features I Built
 
@@ -26,8 +26,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
     *   **Observer Pattern (Observer)**: Uses the Observer pattern (`FundsAlert` as observer, `Summary` as subject) for loose coupling between financial tracking and alerting.
 
 #### [User Help System (`ui` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7)
-*   **What it is**: Provides users with clear, categorized instructions on how to use the application's various commands.
-*   **Detailed Functionality**:
+*   **Functionality**:
     *   `HelpDisplay.java` lists all commands available in the application, including syntax (e.g., `add income <AMOUNT> / <SOURCE>`) and explanations.
 
 ### JUnit Tests
@@ -58,9 +57,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 <div style="page-break-after: always;"></div>
 
-### Documentation
-
-#### User Guide:
+### User Guide:
 * **Team Tasks**
   * Established the overall structure and format of the User Guide using standardized command format sections to ensure consistency and readability
   * Created Introduction and Quick Start Guide [Commit: 7e9f000](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/7e9f0004dbca88ec879243c52117a181f814ada7)
@@ -77,7 +74,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 <div style="page-break-after: always;"></div>
 
-#### Developer Guide:
+### Developer Guide:
 * **Team Tasks**
     * Established the overall structure and format of the User Guide to ensure consistency and readability
     * Contributed to Acknowledgements [Commit: 2fcbdf5](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/2fcbdf513d5574d08fb9604f9f2555090240a1f3)
