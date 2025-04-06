@@ -5,7 +5,6 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 ## Summary of Contributions
 
-_Note: Links to the respective PRs or commits have also been embedded within the relevant text in the PPP_
 ### [Code Contributed (Reposense Link)](https://nus-cs2113-ay2425s2.github.io/tp-dashboard/?search=yshinprograms&breakdown=true)
 
 ### Features I Built
@@ -14,23 +13,19 @@ _Note: Links to the respective PRs or commits have also been embedded within the
 *   **Functionality**:
     *   `Summary.java`, is responsible for tracking the user's `totalIncome`, `totalExpense`, and `totalSavings`. It dynamically calculates `availableFunds` (income minus expenses) with methods provided to add or remove income, expenses, and savings safely.
 *   **Key Design Aspects/Features**:
-    *   [**Observer Pattern (Subject)**](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34): Designed as the subject, notifying registered observers (`FinancialObserver`) of financial changes via `notifyObservers()`.
+    *   **Observer Pattern (Subject)**: Designed as the subject, notifies observers (`FinancialObserver`) of financial changes via `notifyObservers()`. [PR#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34)
     *   **Reliability**: Ensured internal consistency through defensive programming, utilizing `BudgetTrackerException` for invalid operations and `assert` statements to verify invariants (e.g., non-negative totals).
 
-#### [Summary Display (`summary.ui` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7)
+#### [Summary Display (`summary.ui` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)
 *   **Functionality**:
     *   `SummaryDisplay.java` obtains financial data from the `Summary` It then formats `totalIncome`, `totalBalance`, `totalExpense`, and `totalSavings` into a well-formatted table that is printed directly to the console for the user.
 *   **Key Design Aspects/Features**:
     *   **Separation of Concerns**: Decouples the user interface logic from financial data management in `Summary`.
 
 #### [Alert System (`alerts`, `commands` packages)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34)
-*   **Functionality**:
-    *   `FinancialObserver.java`: An interface specifying how components can react to financial updates.
-    *   `FundsAlert.java`: Implements `FinancialObserver`, acting as an observer that watches the user's finances. It maintains a `warningThreshold` (defaulting to $5.00). When `Summary` updates its data, it notifies `FundsAlert`, which then checks if `availableFunds` are below the threshold, displaying a UI warning if necessary. It also presents an initial notification (`displayInitialNotification`) on startup.
-    *   `AlertParser.java`: Processes the raw user input string for commands like `alert set <AMOUNT>`.
-    *   `AlertCommand.java`: Executes the logic to update the warning threshold within the `FundsAlert` instance based on the parsed command details.
+*   **Functionality**: Implements an alert system using the Observer pattern. `FundsAlert` (Observer) monitors `Summary` (Subject) and triggers a warning if available funds fall below a user-configurable `warningThreshold` (default $5.00). Includes `AlertParser` for command input and `AlertCommand` for updating the threshold.
 *   **Key Design Aspects/Features**:
-    *   [**Observer Pattern (Observer)**](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34): Uses the Observer pattern (`FundsAlert` as observer, `Summary` as subject) for loose coupling between financial tracking and alerting.
+    *   **Observer Pattern (Observer)**: Uses the Observer pattern (`FundsAlert` as observer, `Summary` as subject) for loose coupling between financial tracking and alerting.
 
 #### [User Help System (`ui` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7)
 *   **What it is**: Provides users with clear, categorized instructions on how to use the application's various commands.
@@ -43,10 +38,7 @@ _Note: Links to the respective PRs or commits have also been embedded within the
 * Created comprehensive tests for `Summary`, `SummaryDisplay`, `AlertParser`, `FundsAlert`, and `HelpDisplay` components, covering core functionality, edge cases, formatting and parsing logic.[PR#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34),[PR#51](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/51),[PR#140](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/140),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### [Assertion & Logging](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
-*   **Logging Configuration (`util.LoggingConfigurator`)**: Implemented a dedicated utility class to manage logging for specific components.
-    *   Configured `java.util.logging` to redirect logs from the `Summary` class and the `alerts` package to separate files (`logs/summary.log` and `logs/alerts.log` respectively).
-    *   Utilized `FileHandler` to write logs and ensured the `logs` directory is created if it doesn't exist.
-    *   Used `logger.setUseParentHandlers(false)` to prevent these specific logs from appearing in the console output, keeping the CLI clean for user interaction.
+*   **Logging Configuration (`util.LoggingConfigurator`)**: Configured logging to redirect `Summary` and `alerts` logs to separate files, ensuring the `logs` directory exists and preventing console output.
 *   **Assertions**: Incorporated `assert` statements within the `Summary` and `FundsAlert` classes to enforce crucial internal invariants during development and testing.[PR#27](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/27),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### Project Management
@@ -75,10 +67,10 @@ _Note: Links to the respective PRs or commits have also been embedded within the
 #### User Guide:
 * **Team Tasks**
   * Established the overall structure and format of the User Guide using standardized command format sections to ensure consistency and readability
-  * [Created Introduction and Quick Start Guide](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/7e9f0004dbca88ec879243c52117a181f814ada7)
-  * [Consolidated and listed down Command Summary](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/6c5210fddfa32decc9f495233c0ccfafee5f468b)
-  * [Detailed "Features coming soon", which includes "Local Saving to Disk" with a brief explanation](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/ca9f7717c71feabd38a9b0e6c24e72b02b02c42a)
-  * [Provided a brief overview of possible error messages](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/7e9f0004dbca88ec879243c52117a181f814ada7)
+  * Created Introduction and Quick Start Guide [Commit: 7e9f000](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/7e9f0004dbca88ec879243c52117a181f814ada7)
+  * Consolidated and listed down Command Summary [Commit: 6c5210f](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/6c5210fddfa32decc9f495233c0ccfafee5f468b)
+  * Detailed "Features coming soon", which includes "Local Saving to Disk" with a brief explanation [Commit: ca9f771](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/ca9f7717c71feabd38a9b0e6c24e72b02b02c42a)
+  * Provided a brief overview of possible error messages [Commit: 7e9f000](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/7e9f0004dbca88ec879243c52117a181f814ada7)
 
 
 * **Individual Tasks**
@@ -92,14 +84,14 @@ _Note: Links to the respective PRs or commits have also been embedded within the
 #### Developer Guide:
 * **Team Tasks**
     * Established the overall structure and format of the User Guide to ensure consistency and readability
-    * [Contributed to Acknowledgements](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/2fcbdf513d5574d08fb9604f9f2555090240a1f3)
-    * [Contributed to User Stories](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/1d6cddd7f696f66cd32b2f11ea57a77946403868)
-    * [Detailed the non-functional requirements of "Compatibility", "Performance", and "Usability"](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/283a66cb6fee5c17acd82c6326181e961252df3c)
-    * [Developed the Glossary of technical terms](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/283a66cb6fee5c17acd82c6326181e961252df3c)
-    * [Contributed to "Help", "Summary", and "Alert" sections of the manual testing instructions](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/83c3d145afd1391b81eb26e66800782153fc74f1)
+    * Contributed to Acknowledgements [Commit: 2fcbdf5](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/2fcbdf513d5574d08fb9604f9f2555090240a1f3)
+    * Contributed to User Stories [Commit: 1d6cddd](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/1d6cddd7f696f66cd32b2f11ea57a77946403868)
+    * Detailed the non-functional requirements of "Compatibility", "Performance", and "Usability" [Commit: 283a66c](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/283a66cb6fee5c17acd82c6326181e961252df3c)
+    * Developed the Glossary of technical terms [Commit: 283a66c](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/283a66cb6fee5c17acd82c6326181e961252df3c)
+    * Contributed to "Help", "Summary", and "Alert" sections of the manual testing instructions [Commit: 83c3d14](https://github.com/AY2425S2-CS2113-T11A-4/tp/commit/83c3d145afd1391b81eb26e66800782153fc74f1)
 
 
-* **[Individual Tasks](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)**
+* **Individual Tasks**
   * Created UML sequence diagrams to illustrate component interactions:
     * `Summary.puml`: Shows how the Summary class is connected to the rest of the program
     * `ViewSummary.puml`: Shows how financial data is retrieved and displayed
