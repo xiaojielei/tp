@@ -15,6 +15,7 @@ budget tracking, savings management, and financial alerts.
   * [Help Display](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#help-display-component)
   * [Funds Alert](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#funds-alert-component)
 * [Product Scope](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#product-scope)
+* [Features Coming Soon](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#features-coming-soon)
 * [User Stories](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#user-stories)
 * [Non-Functional Requirements](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#non-functional-requirements)
 * [Glossary](https://ay2425s2-cs2113-t11a-4.github.io/tp/DeveloperGuide.html#glossary)
