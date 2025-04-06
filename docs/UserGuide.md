@@ -306,7 +306,7 @@ Total Savings:        $30.00
 #### Detailed Financial Tracking
 
 The Summary component maintains your financial data using these calculations:
-- **Available Funds** = Total Income - Total Expenses
+- Available Funds = Total Income - Total Expenses
 - All calculations are performed automatically when you add or remove entries
 
 #### Data Validation
@@ -314,8 +314,8 @@ The Summary component maintains your financial data using these calculations:
 The Summary component includes built-in validation to ensure financial data integrity:
 - All amounts (income, expenses, savings) must be positive numbers
 - You cannot remove more income than your current total
-- You cannot add expenses that would result in negative available funds
-- You cannot remove more expenses or savings than currently recorded
+- You cannot add expenses or remove income that would result in negative available funds
+- You cannot remove more income, expenses or savings than currently recorded
 
 #### Financial Calculations
 
@@ -352,13 +352,13 @@ Funds alert threshold set to $20.00
 When your available funds drop below the set threshold due to adding expenses, Common Cents will automatically display a warning:
 
 ```
-> add expense 40 / groceries
+> add expense 40 / groceries / F
 
 ====== ALERT ======
 WARNING: Available funds ($10.00) are below warning threshold ($20.00)
 ===================
 
-Added expense: $40.00 for groceries
+Added expense: [FOOD] $4.0 for groceries
 ```
 
 #### Alert System Implementation
@@ -406,7 +406,7 @@ transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            Transfers certain a
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---
-view summary                                                 Lists all income, expense and saving records.
+view summary                                                 Lists income, expense, balance and saving records.
 
 --- Savings Goals ---
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
