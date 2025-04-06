@@ -211,9 +211,9 @@ Here's the class diagram of the Saving component:
 How the Saving component works:
 
 In the main method which is called Duke, when it detects input contains "savings" string,
-the main method will teh call run() which belongs to Saving.java. run() will check if input
-contains other strings like "add savings", "delete savings", etc., then call the corresponding
-method to dealt with the input command.
+the main method will then call processSavingCommand() in SavingCommandHandler.java then the method 
+will check if input contains other strings like "add savings", "delete savings", etc., then call
+the corresponding method to dealt with the input command.
 
 Saving sequence diagram: (below only used the execution of 1 method as example,
 the sequence diagram of other methods are similar)
@@ -556,3 +556,4 @@ Now you can perform the following tests:
 3. Command: `alert set -10`
 
     Expected: An error message indicating the threshold cannot be negative.
+
