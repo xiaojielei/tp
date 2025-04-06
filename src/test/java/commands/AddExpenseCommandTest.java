@@ -141,6 +141,4 @@ public class AddExpenseCommandTest {
 
         assertEquals(0, expenseList.getExpenses().size(), "Expense list should contain no expenses.");
     }
-
-
 }
