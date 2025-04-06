@@ -432,17 +432,17 @@ The HelpDisplay component:
 - Provides a comprehensive overview of all available functionality
 - Includes proper syntax examples for each command
 
-### Exit: `exit`
+### Exit: `bye`
 
 Exits the application.
 
-Format: `exit`
+Format: `bye`
 
 Example of usage:
 
 ```
 > exit
-Goodbye! Your financial data has been saved.
+Exiting the application. Goodbye!
 ```
 
 ## Command Summary
@@ -465,7 +465,7 @@ Goodbye! Your financial data has been saved.
 * **Delete Savings Goal**: `savings goal delete <INDEX>`
 * **Exit Savings Mode**: `exit savings`
 * **Set Alert Threshold**: `alert set <AMOUNT>`
-* **Exit Application**: `exit`
+* **Exit Application**: `bye`
 
 ## Features coming soon
 
@@ -485,17 +485,17 @@ Common Cents provides helpful error messages to guide you when something goes wr
 
 * **Invalid command format:**
   * If you enter a command with incorrect formatting, Common Cents will explain the proper format.
-  * Example: `add income 50` → `Invalid format for 'add income' command. Please use 'add income <AMOUNT> / <DESCRIPTION>'`
+  * Example: `add income 50` → `Invalid format for 'add income' command. Please use 'add income <AMOUNT> / <SOURCE>'`
 
 * **Negative amount:**
   * If you try to add a negative amount, Common Cents will remind you that amounts must be positive.
-  * Example: `add income -50 / salary` → `Amount must be positive.`
+  * Example: `add income -50 / salary` → `Income amount must be greater than zero.`
 
 * **Insufficient funds:**
-  * If you try to add to savings more than your available balance, Common Cents will warn you.
-  * Example: `add savings 100 / vacation` when you only have $50 available → `Cannot add to savings more than available balance.`
+  * If you try to add expenses more than your available balance, Common Cents will warn you.
+  * Example: `add expense 100 / vacation / B` when you only have $50 available → `Error adding expense: Cannot add this expense as it would exceed your available funds. Available balance: 0.0`
 
 * **Invalid index:**
   * If you try to delete an entry with an invalid index, Common Cents will inform you.
-  * Example: `delete income 10` when you only have 2 income entries → `Invalid index. Please use an index from the list.`
+  * Example: `delete expense 10` when you only have 2 income entries → `Invalid index. Please use an index from the list.`
 
