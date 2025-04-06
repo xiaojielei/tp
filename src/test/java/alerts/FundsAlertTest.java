@@ -78,6 +78,26 @@ public class FundsAlertTest {
     }
 
     @Test
+    public void setWarningThreshold_thresholdExceedsMax_throwsException() {
+        double excessiveThreshold = 10000001.0;
+        BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () -> {
+            fundsAlert.setWarningThreshold(excessiveThreshold);
+        });
+        assertTrue(exception.getMessage().contains("Warning threshold cannot be too large"));
+        assertEquals(5.0, fundsAlert.getWarningThreshold(), 
+                "Threshold should remain at default after failed attempt");
+    }
+
+    @Test
+    void setWarningThreshold_thresholdEqualsMax_thresholdUpdated() throws BudgetTrackerException {
+        double maxThreshold = 10000000.0;
+        assertTrue(fundsAlert.setWarningThreshold(maxThreshold), 
+                "Setting threshold to MAX_THRESHOLD should return true");
+        assertEquals(maxThreshold, fundsAlert.getWarningThreshold(), 
+                "Threshold should be updated to MAX_THRESHOLD");
+    }
+
+    @Test
     public void update_fundsBelowThreshold_expectAlertTriggered() {
         fundsAlert.update(3.0, 100.0, 97.0, 0.0);
         
