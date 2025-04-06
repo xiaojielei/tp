@@ -33,7 +33,6 @@ public class IncomeManager {
      * @param income the income entry to add
      */
     public static void addIncome(Income income) {
-        assert !incomeList.isEmpty() : "Income list should not be empty after adding an income";
         incomeList.add(income);
     }
 
