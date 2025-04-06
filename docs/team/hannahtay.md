@@ -37,10 +37,10 @@ Implemented the following command classes
   * Designed the output format for expenses to ensure readability and user-friendly display.
 
 ### JUnit Tests
-* Wrote tests for the following classes ([#49](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/49), [#30](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/30)):
-  * `AddExpenseCommand` tests testing adding expenses with different category combinations
+* Wrote tests for the following classes ([#49](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/49), [#30](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/30),[#147](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/147)):
+  * `AddExpenseCommand` tests testing adding expenses with different category combinations, and most possible scenarios
   * `ViewExpenseCommand` tests testing most possible scenarios
-  * `DeleteExpenseCommand` tests
+  * `DeleteExpenseCommand` tests testing most possible scenarios
 
 ### Contributions to team-based tasks
 
@@ -49,7 +49,7 @@ Implemented the following command classes
 
 #### Updating Developer Docs
 * Added instructions for manual testing under Expenses and Start up, [#85](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/85)
-* Added Product Scope and index page, [#143](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/143)
+* Added Product Scope and hyperlinked content page, [#143](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/143)
 
 ### Documentation
 * Wrote JavaDoc comments for almost all the Expenses code, [#38](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/38)
@@ -70,4 +70,4 @@ Implemented the following command classes
 * Added implementation details of the Delete Expense component
 
 ### Review/mentoring Contributions
-* Approved code changes from teammates ([#7](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7), [#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34))
+* Approved code changes from teammates, ([#7](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7), [#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34))
