@@ -111,11 +111,34 @@ public class AddExpenseCommandTest {
 
     @Test
     public void addExpense_noIncome_expectException() throws BudgetTrackerException{
-        assertThrows(BudgetTrackerException.class, () -> {
-            Category category = Expense.getCategoryFromInput("M"); // This should trigger the exception
-            AddExpenseCommand command = new AddExpenseCommand(50.0, "Shopping", category, summary);
-            command.execute(expenseList, ui);
-        });
+        Category category = Expense.getCategoryFromInput("O");
+        AddExpenseCommand command = new AddExpenseCommand(50.0, "Shopping", category, summary);
+        command.execute(expenseList, ui);
+
+        assertEquals(0, expenseList.getExpenses().size(), "Expense list should contain no expenses.");
+    }
+
+    @Test
+    public void addExpense_negativeAmount_expectException() throws BudgetTrackerException{
+        AddIncomeCommand addIncome = new AddIncomeCommand(300.0, "salary", summary);
+        addIncome.incomeExecute(IncomeManager.getInstance(), ui);
+
+        Category category = Expense.getCategoryFromInput("O"); // This should trigger the exception
+        AddExpenseCommand command = new AddExpenseCommand(-50.0, "Shopping", category, summary);
+        command.execute(expenseList, ui);
+
+        assertEquals(0, expenseList.getExpenses().size(), "Expense list should contain no expenses.");
+    }
+
+    @Test
+    public void addExpense_exceedBalance_expectException() throws BudgetTrackerException{
+        AddIncomeCommand addIncome = new AddIncomeCommand(300.0, "salary", summary);
+        addIncome.incomeExecute(IncomeManager.getInstance(), ui);
+
+        Category category = Expense.getCategoryFromInput("O"); // This should trigger the exception
+        AddExpenseCommand command = new AddExpenseCommand(301.0, "Shopping", category, summary);
+        command.execute(expenseList, ui);
+
         assertEquals(0, expenseList.getExpenses().size(), "Expense list should contain no expenses.");
     }
 }

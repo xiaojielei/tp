@@ -14,8 +14,6 @@ import summary.Summary;
  * Utility class for configuring logging settings for the application during development.
  */
 public class LoggingConfigurator {
-
-    // Private constructor to prevent instantiation
     private LoggingConfigurator() {}
 
     /**
@@ -51,7 +49,6 @@ public class LoggingConfigurator {
      * It prevents these logs from appearing in the console via parent handlers.
      */
     public static void configureAlertsFileLogging() {
-        // Logger for the entire 'alerts' package
         Logger alertsLogger = Logger.getLogger("alerts"); 
         alertsLogger.setUseParentHandlers(false);
 

@@ -34,7 +34,7 @@ public class Duke {
     private final SavingCommandHandler handler;
     
     /**
-     * Constructs a new Duke application with all necessary components initialized.
+     * Initializes all attributes required for a new Duke construct.
      */
     public Duke() {
         in = new Scanner(System.in);

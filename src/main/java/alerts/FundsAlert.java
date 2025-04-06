@@ -10,6 +10,7 @@ import java.util.logging.Logger;
  * This class observes financial data without being tightly coupled to Summary.
  */
 public class FundsAlert implements FinancialObserver {
+    private static final double MAX_THRESHOLD = 10000000.0;
     private static final Logger logger = Logger.getLogger(FundsAlert.class.getName());
     private double warningThreshold;
     private final Ui ui;
@@ -35,8 +36,16 @@ public class FundsAlert implements FinancialObserver {
      * @throws BudgetTrackerException if the threshold is negative
      */
     public boolean setWarningThreshold(double newThreshold) throws BudgetTrackerException {
+        logger.log(Level.INFO, "Attempting to set warning threshold to: " + newThreshold);
         if (newThreshold < 0) {
+            logger.log(Level.WARNING, "Attempted to set negative warning threshold: " + newThreshold);
             throw new BudgetTrackerException("Warning threshold cannot be negative");
+        }
+        if (newThreshold > MAX_THRESHOLD) {
+            logger.log(Level.WARNING, "Attempted to set threshold exceeding maximum limit " +
+                    "(" + MAX_THRESHOLD + "): " + newThreshold);
+            throw new BudgetTrackerException("Warning threshold cannot be too large. " +
+                    "The maximum allowed is " + MAX_THRESHOLD + ".");
         }
         
         assert newThreshold >= 0 : "Warning threshold must be non-negative";

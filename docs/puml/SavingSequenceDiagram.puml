@@ -1,0 +1,43 @@
+@startuml
+title Sequence Diagram - Saving Class Operations
+
+' Custom Styles
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classBackgroundColor #E3F2FD
+skinparam classArrowColor #1565C0
+skinparam noteBackgroundColor #FFF9C4
+skinparam noteBorderColor #FBC02D
+skinparam ArrowFontSize 18
+
+' Participants
+participant ":Duke" as Duke #LightBlue
+participant ":SavingCommandHandler" as SCH #LightGreen
+participant ":Saving" as S #LightCoral
+participant ":SavingsRecord" as SR #LightGoldenRodYellow
+
+== Add Savings ==
+
+Duke -> SCH : handleCommand("add savings 100 lunch")
+SCH -> S : addSavings(100, "lunch")
+S -> SR : new SavingsRecord(100, "lunch")
+S <-- SR : return SavingsRecord
+SCH <-- S : confirmation message
+
+== Transfer Savings ==
+
+Duke -> SCH : handleCommand("transfer 1 2 50")
+SCH -> S : transferSavings(1, 2, 50)
+S -> SR : deductAmount(50)
+SR --> S : true
+S -> SR : addAmount(50)
+SR --> S : void
+SCH <-- S : confirmation message
+
+== Delete Savings ==
+
+Duke -> SCH : handleCommand("delete savings 1")
+SCH -> S : deleteSavings(1)
+SCH <-- S : confirmation message
+
+@enduml

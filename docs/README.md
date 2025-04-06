@@ -82,10 +82,8 @@ Added expense: [FOOD] $50.00 for Lunch
     - Example output:
   
       ```
-      > add savings 500
-      Sure! I have added your savings:
-      1. 	[ ] 500.0
-      Now you have 1 saving(s) in your list.
+      > add savings 20 / emergency fund
+      Added to savings: $20.00 for emergency fund
       ```
 
 - **Delete Savings**:
@@ -102,9 +100,10 @@ Added expense: [FOOD] $50.00 for Lunch
   
       ```
       > view savings
-      Here are the savings in your list:
-      1. 	[Emergency Fund] 500.0
-      You have 1 saving(s) in total.
+      ===== SAVINGS RECORDS ====
+      1.  $20.00 for emergency fund
+      2.  $10.00 for vacation
+      ==========================
       Savings Indicator: Bad - Try to save more.
       ```
 
@@ -113,11 +112,10 @@ Added expense: [FOOD] $50.00 for Lunch
     - Sets a new savings goal for a specific amount
     - Example: `savings goal set 1000 / Emergency Fund`
     - Example output:
-    - 
+  
       ```
-      > savings goal set 500 / Emergency Fund
-      I have set your saving goal:
-      [Emergency Fund] 500.0
+      > savings goal set 500 / new laptop
+      Savings goal set: $500.00 for new laptop
       ```
 
 - **View Savings Goals**:
@@ -127,9 +125,9 @@ Added expense: [FOOD] $50.00 for Lunch
     - Example: `savings goal view`
 
 - **Update Savings Goal**:
-    - `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
+    - `savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>`
     - Updates an existing savings goal
-    - Example: `savings goal update 1 / 1500 / Vacation Fund`
+    - Example: `savings goal update 1 1500 / Vacation Fund`
 
 - **Delete Savings Goal**:
     - `savings goal delete <INDEX>`
@@ -169,7 +167,7 @@ Added expense: [FOOD] $50.00 for Lunch
       
       > add expense 1900 / New Laptop / O
       Sure! I have added your expense:
-      2. 	[OTHERS] $1900.0 from New Laptop
+      2.    [OTHERS] $1900.0 from New Laptop
       Now you have 2 expense(s) in your list.
       
       WARNING: Available funds ($50.00) are below warning threshold ($100.00)
@@ -289,3 +287,4 @@ Added expense: [FOOD] $50.00 for Lunch
 | **General** |                                                          | |
 | Help | `help`                                                   | Shows available commands |
 | Exit | `bye`                                                    | Exits the application |
+

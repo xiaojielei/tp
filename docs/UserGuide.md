@@ -134,7 +134,6 @@ Format: `add savings <AMOUNT> / <DESCRIPTION>`
 
 * `<AMOUNT>` must be a positive number.
 * `<DESCRIPTION>` is a description of the savings purpose.
-* You cannot add to savings more than your available balance.
 
 Example of usage:
 
@@ -155,7 +154,7 @@ Example of usage:
 
 ```
 > view savings
-===== SAVINGS RECORDS =====
+===== SAVINGS RECORDS ====
 1.  $20.00 for emergency fund
 2.  $10.00 for vacation
 ==========================
@@ -185,7 +184,7 @@ Transfers a specified amount from one savings entry to another.
 Format: `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>`
 
 * `<FROM_INDEX>` and `<TO_INDEX>` refer to the index numbers shown in the savings list.
-* `<AMOUNT>` is the amount to transfer, which must be a positive number not exceeding the amount in the source savings entry.
+* `<AMOUNT>` is the amount to transfer
 
 Example of usage:
 
@@ -302,7 +301,7 @@ Total Savings:        $30.00
 #### Detailed Financial Tracking
 
 The Summary component maintains your financial data using these calculations:
-- **Available Funds** = Total Income - Total Expenses
+- Available Funds = Total Income - Total Expenses
 - All calculations are performed automatically when you add or remove entries
 
 #### Data Validation
@@ -310,8 +309,8 @@ The Summary component maintains your financial data using these calculations:
 The Summary component includes built-in validation to ensure financial data integrity:
 - All amounts (income, expenses, savings) must be positive numbers
 - You cannot remove more income than your current total
-- You cannot add expenses that would result in negative available funds
-- You cannot remove more expenses or savings than currently recorded
+- You cannot add expenses or remove income that would result in negative available funds
+- You cannot remove more income, expenses or savings than currently recorded
 
 #### Financial Calculations
 
@@ -348,13 +347,13 @@ Funds alert threshold set to $20.00
 When your available funds drop below the set threshold due to adding expenses, Common Cents will automatically display a warning:
 
 ```
-> add expense 40 / groceries
+> add expense 40 / groceries / F
 
 ====== ALERT ======
 WARNING: Available funds ($10.00) are below warning threshold ($20.00)
 ===================
 
-Added expense: $40.00 for groceries
+Added expense: [FOOD] $4.0 for groceries
 ```
 
 #### Alert System Implementation
@@ -402,7 +401,7 @@ transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            Transfers certain a
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---
-view summary                                                 Lists all income, expense and saving records.
+view summary                                                 Lists income, expense, balance and saving records.
 
 --- Savings Goals ---
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
@@ -428,17 +427,17 @@ The HelpDisplay component:
 - Provides a comprehensive overview of all available functionality
 - Includes proper syntax examples for each command
 
-### Exit: `exit`
+### Exit: `bye`
 
 Exits the application.
 
-Format: `exit`
+Format: `bye`
 
 Example of usage:
 
 ```
 > exit
-Goodbye! Your financial data has been saved.
+Exiting the application. Goodbye!
 ```
 
 ## Command Summary
@@ -461,7 +460,7 @@ Goodbye! Your financial data has been saved.
 * **Delete Savings Goal**: `savings goal delete <INDEX>`
 * **Exit Savings Mode**: `exit savings`
 * **Set Alert Threshold**: `alert set <AMOUNT>`
-* **Exit Application**: `exit`
+* **Exit Application**: `bye`
 
 ## Features coming soon
 
@@ -488,8 +487,8 @@ Common Cents provides helpful error messages to guide you when something goes wr
   * Example: `add income -50 / salary` → `Income amount must be greater than zero.`
 
 * **Insufficient funds:**
-  * If you try to add to savings more than your available balance, Common Cents will warn you.
-  * Example: `add savings 100 / vacation` when you only have $50 available → `Cannot add to savings more than available balance.`
+  * If you try to add expenses more than your available balance, Common Cents will warn you.
+  * Example: `add expense 100 / vacation / B` when you only have $50 available → `Error adding expense: Cannot add this expense as it would exceed your available funds. Available balance: 0.0`
 
 * **Invalid index:**
   * If you try to delete an entry with an invalid index, Common Cents will inform you.
