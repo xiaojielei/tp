@@ -30,11 +30,11 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
     *   `HelpDisplay.java` lists all commands available in the application, including syntax (e.g., `add income <AMOUNT> / <SOURCE>`) and explanations.
 
 ### JUnit Tests
-* Created comprehensive tests for `Summary`, `SummaryDisplay`, `AlertParser`, `FundsAlert`, and `HelpDisplay` components, covering core functionality, edge cases, formatting and parsing logic.[PR#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34),[PR#51](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/51),[PR#140](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/140),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
+* Created comprehensive tests for `Summary`, `SummaryDisplay`, `AlertParser`, `FundsAlert`, and `HelpDisplay` components, covering core functionality, edge cases, formatting and parsing logic.[PR#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34), [PR#51](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/51), [PR#140](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/140), [PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### [Assertion & Logging](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 *   **Logging Configuration (`util.LoggingConfigurator`)**: Redirects `Summary` and `alerts` logs to separate files, ensuring the `logs` directory exists and preventing console output.
-*   **Assertions**: Incorporated `assert` statements within the `Summary` and `FundsAlert` classes to enforce crucial internal invariants during development and testing. [PR#27](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/27),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
+*   **Assertions**: Incorporated `assert` statements within the `Summary` and `FundsAlert` classes to enforce crucial internal invariants during development and testing. [PR#27](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/27), [PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### Project Management
 * **Project Setup**:
@@ -52,7 +52,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 
 * **Community Contributions**:
-  * Reviewed Pull Requests with non-trivial review comments: [PR#24](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/24), [PR#35](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/35), [PR#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45), [PR#58](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/58#discussion_r2020096560)
+  * Reviewed Pull Requests with non-trivial review comments [PR#24](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/24), [PR#35](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/35), [PR#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45), [PR#58](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/58#discussion_r2020096560)
   * Assigned and closed Github Issues in line with project tasks [Issue #6](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/6), [Issue #33](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/33), [Issue #133](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/133)
 
 ### User Guide:
