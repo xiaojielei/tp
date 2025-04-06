@@ -47,6 +47,7 @@ public class IncomeParserTest {
 
     @Test
     void testParseDeleteIncomeCommand_indexOutOfRange() {
+        IncomeManager.clearIncomeList();
         IncomeManager.addIncome(new Income(100.0, "Job"));
         IncomeManager.addIncome(new Income(50.0, "Freelance"));
 
