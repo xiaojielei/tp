@@ -34,14 +34,14 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 ### [Assertion & Logging](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 *   **Logging Configuration (`util.LoggingConfigurator`)**: Redirects `Summary` and `alerts` logs to separate files, ensuring the `logs` directory exists and preventing console output.
-*   **Assertions**: Incorporated `assert` statements within the `Summary` and `FundsAlert` classes to enforce crucial internal invariants during development and testing.[PR#27](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/27),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
+*   **Assertions**: Incorporated `assert` statements within the `Summary` and `FundsAlert` classes to enforce crucial internal invariants during development and testing. [PR#27](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/27),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### Project Management
 * **Project Setup**:
   * Created and configured the GitHub organization and repository for the team
   * Established branch protection rules to enforce the forking workflow
   * Setup & configured Gradle for team use
-  * Created and standardized all priority, severity, and type issue tags/labels for project tracking
+  * Created all priority, severity, and type issue tags/labels for project tracking
 
 
 * **Release Management**:
@@ -85,11 +85,31 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 
 * **Individual Tasks**
-  * Created UML sequence diagrams to illustrate component interactions:
-    * `Summary.puml`: Shows how the Summary class is connected to the rest of the program
-    * `ViewSummary.puml`: Shows how financial data is retrieved and displayed
-    * `SetAlert.puml`: Illustrates the alert threshold configuration process
-    * `TriggerAlert.puml`: Demonstrates the Observer pattern in action when funds are low
-  * Added implementation details of the Summary component including Observer pattern design
-  * Added implementation details of the SummaryDisplay component with sequence flows
-  * Added implementation details of the Funds Alert component with threshold management
+  *   **UML Diagrams**: Created diagrams to visualize component interactions:
+      *   `Summary.png`: Class diagram for the `Summary` component.
+
+        <div align="center">
+          <img src="../images/Summary.png" alt="Summary Class Diagram" width="700"/>
+        </div>
+
+      *   `ViewSummary.puml`: Sequence diagram showing how financial data is retrieved and displayed.
+
+        <div align="center">
+          <img src="../images/ViewSummary.png" alt="Summary Class Diagram" width="700"/>
+        </div>
+
+      *   `SetAlert.puml`: Sequence diagram illustrating the alert threshold configuration process.
+
+        <div align="center">
+          <img src="../images/SetAlert.png" alt="Summary Class Diagram" width="700"/>
+        </div>
+
+      *   `TriggerAlert.puml`: Sequence diagram demonstrating the Observer pattern when funds are low.
+
+        <div align="center">
+          <img src="../images/TriggerAlert.png" alt="Summary Class Diagram" width="700"/>
+        </div>
+
+  *   **Summary Component Documentation**: Detailed the implementation of the `Summary` component, explaining its role as a central data repository, its use of the Observer pattern (as the Subject) to notify observers like `FundsAlert`, its interaction with commands, data validation methods, and design rationale. <!-- Keep 2 space indent -->
+  *   **Summary Display Documentation**: Explained the `SummaryDisplay` component's responsibility for formatting and presenting financial data fetched from `Summary`, emphasizing the separation of concerns. <!-- Keep 2 space indent -->
+  *   **Funds Alert Documentation**: Described the `FundsAlert` component's implementation as an Observer, detailing its role in monitoring available funds, managing the warning threshold, reacting to updates from `Summary` via the `FinancialObserver` interface, and triggering warnings. <!-- Keep 2 space indent -->
