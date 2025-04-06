@@ -87,19 +87,19 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
       *   `Summary.png`: Class diagram for the `Summary` component.
 
         <div align="center">
-          <img src="../images/Summary.png" alt="Summary Class Diagram" width="700"/>
+          <img src="../images/Summary.png" alt="Summary Class Diagram" width="650"/>
         </div>
 
       *   `ViewSummary.puml`: Sequence diagram showing how financial data is retrieved and displayed.
 
         <div align="center">
-          <img src="../images/ViewSummary.png" alt="Summary Class Diagram" width="450"/>
+          <img src="../images/ViewSummary.png" alt="Summary Class Diagram" width="400"/>
         </div>
 
       *   `SetAlert.puml`: Sequence diagram illustrating the alert threshold configuration process.
 
         <div align="center">
-          <img src="../images/SetAlert.png" alt="Summary Class Diagram" width="700"/>
+          <img src="../images/SetAlert.png" alt="Summary Class Diagram" width="650"/>
         </div>
 
       *   `TriggerAlert.puml`: Sequence diagram demonstrating the Observer pattern when funds are low.
