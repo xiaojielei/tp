@@ -518,10 +518,7 @@ Now you can perform the following tests:
     Expected: throws an error for invalid index.
 
 
-
-# Saving Command Handler Test Plan
-
-### Adding Savings
+#### Adding Savings
 Command: `add savings 20 / emergency fund`
 
    Expected:
@@ -529,7 +526,7 @@ Command: `add savings 20 / emergency fund`
    Added to savings: $20.00 for emergency fund
    ```
 
-### Viewing Savings
+#### Viewing Savings
 Command: `view savings`
 
    Expected:
@@ -546,7 +543,7 @@ Command: `view savings`
    Savings Indicator: Neutral - Keep saving for more financial security.
    ```
 
-### Deleting Savings
+#### Deleting Savings
 1. Command: `delete savings 1`
 
    Expected:
@@ -561,7 +558,7 @@ Command: `view savings`
    Error: Invalid index
    ```
 
-### Transferring Savings
+#### Transferring Savings
 1. Command: `transfer savings 1 2 10`
 
    Expected:
@@ -576,7 +573,7 @@ Command: `view savings`
    Error: Insufficient savings in source entry to transfer
    ```
 
-### Setting Savings Goals
+#### Setting Savings Goals
 Command: `savings goal set 500 / new laptop`
 
    Expected:
@@ -584,7 +581,7 @@ Command: `savings goal set 500 / new laptop`
    Savings goal set: $500.00 for new laptop
    ```
 
-### Viewing Savings Goals
+#### Viewing Savings Goals
 Command: `savings goal view`
 
    Expected:
@@ -595,7 +592,7 @@ Command: `savings goal view`
    =========================
    ```
 
-### Updating Savings Goals
+#### Updating Savings Goals
 Command: `savings goal update 1 600 / new laptop`
 
    Expected:
@@ -603,7 +600,7 @@ Command: `savings goal update 1 600 / new laptop`
    Updated savings goal: $600.00 for new laptop
    ```
 
-### Deleting Savings Goals
+#### Deleting Savings Goals
 Command: `savings goal delete 1`
 
    Expected:
@@ -611,14 +608,13 @@ Command: `savings goal delete 1`
    Deleted savings goal: $600.00 for new laptop (now the saving goal for this entry is empty)
    ```
 
-### Exiting Savings Mode
+#### Exiting Savings Mode
 Command: `exit savings`
 
    Expected:
    ```
    Exited savings management
    ```
-
 
 
 #### Viewing Help
