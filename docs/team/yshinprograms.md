@@ -14,13 +14,11 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
     *   `Summary.java`, is responsible for tracking the user's `totalIncome`, `totalExpense`, and `totalSavings`. It dynamically calculates `availableFunds` (income minus expenses) with methods provided to add or remove income, expenses, and savings safely.
 *   **Key Design Aspects/Features**:
     *   **Observer Pattern (Subject)**: Designed as the subject, notifies observers (`FinancialObserver`) of financial changes via `notifyObservers()`. [PR#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34)
-    *   **Reliability**: Ensured internal consistency through defensive programming, utilizing `BudgetTrackerException` for invalid operations and `assert` statements to verify invariants (e.g., non-negative totals).
+    *   **Reliability**: Ensured internal consistency through defensive programming, utilizing `BudgetTrackerException` for invalid operations and `assert` statements to verify invariants.
 
 #### [Summary Display (`summary.ui` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)
 *   **Functionality**:
-    *   `SummaryDisplay.java` obtains financial data from the `Summary` It then formats `totalIncome`, `totalBalance`, `totalExpense`, and `totalSavings` into a well-formatted table that is printed directly to the console for the user.
-*   **Key Design Aspects/Features**:
-    *   **Separation of Concerns**: Decouples the user interface logic from financial data management in `Summary`.
+    *   `SummaryDisplay.java` obtains `totalIncome`, `totalBalance`, `totalExpense`, and `totalSavings` from `Summary` and formats them into an easy-to-read table.
 
 #### [Alert System (`alerts`, `commands` packages)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34)
 *   **Functionality**: Implements an alert system using the Observer pattern. `FundsAlert` (Observer) monitors `Summary` (Subject) and triggers a warning if available funds fall below a user-configurable `warningThreshold` (default $5.00). Includes `AlertParser` for command input and `AlertCommand` for updating the threshold.
@@ -30,15 +28,13 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 #### [User Help System (`ui` package)](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/7)
 *   **What it is**: Provides users with clear, categorized instructions on how to use the application's various commands.
 *   **Detailed Functionality**:
-    *   `HelpDisplay.java` displays user assistance. It lists all commands available in the application, including syntax (e.g., `add income <AMOUNT> / <SOURCE>`) and brief explanations.
-*   **Key Design Aspects/Features**:
-    *   **Maintainability**: Easy to update for all team members as commands are added or modified.
+    *   `HelpDisplay.java` lists all commands available in the application, including syntax (e.g., `add income <AMOUNT> / <SOURCE>`) and explanations.
 
 ### JUnit Tests
 * Created comprehensive tests for `Summary`, `SummaryDisplay`, `AlertParser`, `FundsAlert`, and `HelpDisplay` components, covering core functionality, edge cases, formatting and parsing logic.[PR#34](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/34),[PR#51](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/51),[PR#140](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/140),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### [Assertion & Logging](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
-*   **Logging Configuration (`util.LoggingConfigurator`)**: Configured logging to redirect `Summary` and `alerts` logs to separate files, ensuring the `logs` directory exists and preventing console output.
+*   **Logging Configuration (`util.LoggingConfigurator`)**: Redirects `Summary` and `alerts` logs to separate files, ensuring the `logs` directory exists and preventing console output.
 *   **Assertions**: Incorporated `assert` statements within the `Summary` and `FundsAlert` classes to enforce crucial internal invariants during development and testing.[PR#27](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/27),[PR#144](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/144)
 
 ### Project Management
@@ -46,7 +42,7 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
   * Created and configured the GitHub organization and repository for the team
   * Established branch protection rules to enforce the forking workflow
   * Setup & configured Gradle for team use
-  * Created and standardized all priority, severity, and type issue tags/labels for better project tracking
+  * Created and standardized all priority, severity, and type issue tags/labels for project tracking
 
 
 * **Release Management**:
@@ -57,8 +53,8 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
 
 
 * **Community Contributions**:
-  * Reviewed and approved Pull Requests with non-trivial review comments: [PR#24](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/24), [PR#35](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/35), [PR#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45), [PR#58](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/58#discussion_r2020096560)
-  * Added, assigned and closed Github Issues in line with project tasks [Issue #6](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/6), [Issue #33](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/33), [Issue #133](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/133)
+  * Reviewed Pull Requests with non-trivial review comments: [PR#24](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/24), [PR#35](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/35), [PR#45](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/45), [PR#58](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/58#discussion_r2020096560)
+  * Assigned and closed Github Issues in line with project tasks [Issue #6](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/6), [Issue #33](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/33), [Issue #133](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/133)
 
 <div style="page-break-after: always;"></div>
 
