@@ -12,7 +12,7 @@ public class IncomeParserTest {
     private final Summary summary = new Summary();
 
     @Test
-    void testParseAddIncomeCommand_InvalidFormat() {
+    void testParseAddIncomeCommand_invalidFormat() {
         BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
                 IncomeParser.parseAddIncomeCommand("add income 100.0 Salary", summary)
         );
@@ -21,7 +21,7 @@ public class IncomeParserTest {
     }
 
     @Test
-    void testParseAddIncomeCommand_InvalidAmount() {
+    void testParseAddIncomeCommand_invalidAmount() {
         BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
                 IncomeParser.parseAddIncomeCommand("add income abc / Salary", summary)
         );
@@ -29,7 +29,7 @@ public class IncomeParserTest {
     }
 
     @Test
-    void testParseDeleteIncomeCommand_InvalidFormat() {
+    void testParseDeleteIncomeCommand_invalidFormat() {
         BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
                 IncomeParser.parseDeleteIncomeCommand("delete 1", summary)
         );
@@ -38,7 +38,7 @@ public class IncomeParserTest {
     }
 
     @Test
-    void testParseDeleteIncomeCommand_InvalidIndex() {
+    void testParseDeleteIncomeCommand_invalidIndex() {
         BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
                 IncomeParser.parseDeleteIncomeCommand("delete income abc", summary)
         );
@@ -46,7 +46,7 @@ public class IncomeParserTest {
     }
 
     @Test
-    void testParseDeleteIncomeCommand_IndexOutOfRange() {
+    void testParseDeleteIncomeCommand_indexOutOfRange() {
         IncomeManager.addIncome(new Income(100.0, "Job"));
         IncomeManager.addIncome(new Income(50.0, "Freelance"));
 
