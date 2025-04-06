@@ -138,7 +138,6 @@ Format: `add savings <AMOUNT> / <DESCRIPTION>`
 
 * `<AMOUNT>` must be a positive number.
 * `<DESCRIPTION>` is a description of the savings purpose.
-* You cannot add to savings more than your available balance.
 
 Example of usage:
 
@@ -159,7 +158,7 @@ Example of usage:
 
 ```
 > view savings
-===== SAVINGS RECORDS =====
+===== SAVINGS RECORDS ====
 1.  $20.00 for emergency fund
 2.  $10.00 for vacation
 ==========================
@@ -189,7 +188,7 @@ Transfers a specified amount from one savings entry to another.
 Format: `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>`
 
 * `<FROM_INDEX>` and `<TO_INDEX>` refer to the index numbers shown in the savings list.
-* `<AMOUNT>` is the amount to transfer, which must be a positive number not exceeding the amount in the source savings entry.
+* `<AMOUNT>` is the amount to transfer
 
 Example of usage:
 

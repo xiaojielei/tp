@@ -1,0 +1,52 @@
+@startuml
+title Savings Module Class Diagram
+
+' Custom Styles
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classBackgroundColor #E3F2FD
+skinparam classArrowColor #1565C0
+skinparam noteBackgroundColor #FFF9C4
+skinparam noteBorderColor #FBC02D
+skinparam ArrowFontSize 18
+
+' Class: Saving
+class Saving {
+    - ArrayList<SavingsRecord> savingsRecords
+    - double savingsGoal
+
+    + void addSavings(double amount, String description)
+    + boolean deleteSavings(int index)
+    + ArrayList<SavingsRecord> getSavingsRecords()
+    + double getTotalSavings()
+    + double getSavingsGoal()
+    + void setSavingsGoal(double goal)
+    + boolean updateSavingsGoal(double goal)
+    + boolean transferSavings(int fromIndex, int toIndex, double amount)
+}
+
+' Class: SavingsRecord
+class SavingsRecord {
+    - double amount
+    - String description
+
+    + SavingsRecord(double amount, String description)
+    + double getAmount()
+    + String getDescription()
+    + void addAmount(double amount)
+    + boolean deductAmount(double amount)
+}
+
+' Class: SavingCommandHandler
+class SavingCommandHandler {
+    - Saving saving
+
+    + SavingCommandHandler(Saving saving)
+    + String handleCommand(String input)
+}
+
+' Relationships
+Saving "1" *-- "*" SavingsRecord : manages
+SavingCommandHandler "1" *-- "1" Saving : uses
+
+@enduml

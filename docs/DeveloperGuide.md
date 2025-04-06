@@ -206,14 +206,14 @@ for each of the saving entry.
 
 Here's the class diagram of the Saving component:
 
-![Saving class Diagram](images/Saving.png)
+![Saving class Diagram](images/SavingClassDiagram.png)
 
 How the Saving component works:
 
 In the main method which is called Duke, when it detects input contains "savings" string,
-the main method will teh call run() which belongs to Saving.java. run() will check if input
-contains other strings like "add savings", "delete savings", etc., then call the corresponding
-method to dealt with the input command.
+the main method will then call processSavingCommand() in SavingCommandHandler.java then the method 
+will check if input contains other strings like "add savings", "delete savings", etc., then call
+the corresponding method to dealt with the input command.
 
 Saving sequence diagram: (below only used the execution of 1 method as example,
 the sequence diagram of other methods are similar)
@@ -516,8 +516,107 @@ Now you can perform the following tests:
 2. Command: `delete expense 0`, `delete expense -1`, `delete expense <OUT_OF_BOUNDS>`
 
     Expected: throws an error for invalid index.
-    
-    
+
+
+#### Adding Savings
+Command: `add savings 20 / emergency fund`
+
+   Expected:
+   ```
+   Added to savings: $20.00 for emergency fund
+   ```
+
+#### Viewing Savings
+Command: `view savings`
+
+   Expected:
+   ```
+   ===== SAVINGS RECORDS =====
+   1.  $20.00 for emergency fund
+   2.  $10.00 for vacation
+   3.  $50.00 for new phone
+   4.  $100.00 for holiday trip
+   5.  $500.00 for house down payment
+   6.  $1000.00 for emergency fund
+   7.  $200.00 for shopping
+   ==========================
+   Savings Indicator: Neutral - Keep saving for more financial security.
+   ```
+
+#### Deleting Savings
+1. Command: `delete savings 1`
+
+   Expected:
+   ```
+   Deleted savings: $20.00 for emergency fund
+   ```
+
+2. Command: `delete savings 0`, `delete savings -1`, `delete savings <OUT_OF_BOUNDS>`
+
+   Expected:
+   ```
+   Error: Invalid index
+   ```
+
+#### Transferring Savings
+1. Command: `transfer savings 1 2 10`
+
+   Expected:
+   ```
+   Transferred $10.00 from emergency fund to vacation
+   ```
+
+2. Command: `transfer savings 1 3 200`
+
+   Expected:
+   ```
+   Error: Insufficient savings in source entry to transfer
+   ```
+
+#### Setting Savings Goals
+Command: `savings goal set 500 / new laptop`
+
+   Expected:
+   ```
+   Savings goal set: $500.00 for new laptop
+   ```
+
+#### Viewing Savings Goals
+Command: `savings goal view`
+
+   Expected:
+   ```
+   ===== SAVINGS GOALS =====
+   1.  $500.00 for new laptop (Current: $0.00)
+   2.  $1000.00 for holiday trip (Current: $0.00)
+   =========================
+   ```
+
+#### Updating Savings Goals
+Command: `savings goal update 1 600 / new laptop`
+
+   Expected:
+   ```
+   Updated savings goal: $600.00 for new laptop
+   ```
+
+#### Deleting Savings Goals
+Command: `savings goal delete 1`
+
+   Expected:
+   ```
+   Deleted savings goal: $600.00 for new laptop (now the saving goal for this entry is empty)
+   ```
+
+#### Exiting Savings Mode
+Command: `exit savings`
+
+   Expected:
+   ```
+   Exited savings management
+   ```
+
+
 #### Viewing Help
 1. Command: `help`
 
