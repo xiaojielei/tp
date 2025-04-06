@@ -32,9 +32,12 @@ public class AddIncomeCommand extends IncomeCommand {
             logger.log(Level.SEVERE, "Invalid income amount: {0}", amount);
             throw new BudgetTrackerException("Income amount must be greater than zero.");
         }
-        if (source.trim().isEmpty()) {
+        if (source == null || source.trim().isEmpty()) {
             logger.log(Level.SEVERE, "Invalid income source: {0}", source);
             throw new BudgetTrackerException("Income source cannot be empty.");
+        }
+        if (summary == null) {
+            throw new BudgetTrackerException("Summary instance is required.");
         }
 
         this.amount = amount;
@@ -69,7 +72,7 @@ public class AddIncomeCommand extends IncomeCommand {
         logger.addHandler(consoleHandler);
 
         // Set the logger level to OFF to suppress all unwanted logging (including INFO, WARNING, etc.)
-        logger.setLevel(Level.INFO);  // This will suppress all log levels except SEVERE
+        logger.setLevel(Level.OFF);  // This will suppress all log levels except SEVERE
     }
 
     /**
@@ -95,7 +98,6 @@ public class AddIncomeCommand extends IncomeCommand {
             IncomeManager.addIncome(income);
             summary.addIncome(amount);
             ui.showMessage("Added income: " + income);
-            System.out.println("Successfully added income: " + income);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error adding income: " + income, e);
             throw new BudgetTrackerException("Failed to add income due to an unexpected error.");

@@ -23,5 +23,9 @@ activate Income
 Income --> IncomeManager: "amount"
 IncomeManager -> Income: getSource();
 Income --> IncomeManager: "source"
+deactivate IncomeManager
+deactivate Income
+deactivate ListIncomeCommand
+deactivate Duke
 
 @enduml

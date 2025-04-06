@@ -107,7 +107,7 @@ public class Duke {
                     break;
                 }
 
-                if (fullCommand.equals("view income")) {
+                if (fullCommand.trim().equals("view income")) {
                     ListIncomeCommand listIncomeCommand = new ListIncomeCommand(summary);
                     listIncomeCommand.execute();
                     commandRecognized = true;

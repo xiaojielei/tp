@@ -34,6 +34,15 @@ public class DeleteIncomeCommand extends IncomeCommand {
             logger.severe("Summary object cannot be null.");
             throw new BudgetTrackerException("Summary instance is required.");
         }
+
+        if (IncomeManager.getIncomeList().isEmpty()) {
+            throw new BudgetTrackerException("There are no income entries to delete.");
+        }
+
+        if (index > IncomeManager.getIncomeList().size()) {
+            throw new BudgetTrackerException("Invalid index. Please provide a valid income index between 1 and "
+                    + IncomeManager.getIncomeList().size() + ".");
+        }
         this.index = index;
         this.summary = summary;
     }
@@ -62,7 +71,7 @@ public class DeleteIncomeCommand extends IncomeCommand {
         logger.addHandler(consoleHandler);
 
         // Set the logger level to OFF to suppress all unwanted logging (including INFO, WARNING, etc.)
-        logger.setLevel(Level.INFO);  // This will suppress all log levels except SEVERE
+        logger.setLevel(Level.OFF);  // This will suppress all log levels except SEVERE
     }
 
     /**
@@ -110,7 +119,6 @@ public class DeleteIncomeCommand extends IncomeCommand {
             IncomeManager.deleteIncome(index - 1);
             summary.removeIncome(amountToRemove);
             ui.showMessage("Deleted income entry at index " + index);
-            System.out.println("Successfully deleted income at index " + index);
         }
     }
 

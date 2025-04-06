@@ -58,6 +58,91 @@ public class DeleteIncomeCommandTest {
         );
         assertEquals("There are no income entries to delete.", exception.getMessage());
     }
+
+    @Test
+    void testDeleteLastIncomeEntry() throws BudgetTrackerException {
+        DeleteIncomeCommand command1 = new DeleteIncomeCommand(2, summary);
+        command1.incomeExecute(IncomeManager.getInstance(), ui);
+
+        assertEquals(1, IncomeManager.getIncomeList().size());
+        assertEquals("Freelance", IncomeManager.getIncomeList().get(0).getSource());
+        assertEquals(200.0, summary.getTotalIncome());
+    }
+
+    @Test
+    void testDeleteIncomeIndexZeroThrowsException() {
+        BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
+                new DeleteIncomeCommand(0, summary).incomeExecute(IncomeManager.getInstance(), ui)
+        );
+        assertEquals("Index must be at least 1.", exception.getMessage());
+    }
+
+    @Test
+    void testDeleteIncomeNegativeIndexThrowsException() {
+        BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
+                new DeleteIncomeCommand(-1, summary).incomeExecute(IncomeManager.getInstance(), ui)
+        );
+        assertEquals("Index must be at least 1.", exception.getMessage());
+    }
+
+    @Test
+    void testDeleteIncomeWithNullSummaryThrowsException() {
+        BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
+                new DeleteIncomeCommand(1, null)
+        );
+        assertEquals("Summary instance is required.", exception.getMessage());
+    }
+
+    @Test
+    void testDeleteIncomeResultsInNegativeAvailableBalance() throws BudgetTrackerException {
+        summary.addExpense(230.0); // Now balance would go negative if we remove 200.0
+
+        DeleteIncomeCommand command = new DeleteIncomeCommand(1, summary);
+        command.incomeExecute(IncomeManager.getInstance(), ui);
+
+        // Income not deleted, list still has 2 entries
+        assertEquals(2, IncomeManager.getIncomeList().size());
+        assertEquals(250.0, summary.getTotalIncome());
+    }
+
+    @Test
+    void testDeleteMultipleIncomesSequentially() throws BudgetTrackerException {
+        // First delete
+        DeleteIncomeCommand command1 = new DeleteIncomeCommand(1, summary);
+        command1.incomeExecute(IncomeManager.getInstance(), ui);
+        assertEquals(1, IncomeManager.getIncomeList().size());
+
+        // Second delete
+        DeleteIncomeCommand command2 = new DeleteIncomeCommand(1, summary);
+        command2.incomeExecute(IncomeManager.getInstance(), ui);
+        assertEquals(0, IncomeManager.getIncomeList().size());
+
+        // Total income should now be 0
+        assertEquals(0.0, summary.getTotalIncome());
+    }
+
+    @Test
+    void testDeleteIncomeWithSameAmountDifferentSource() throws BudgetTrackerException {
+        IncomeManager.addIncome(new Income(50.0, "Allowance"));
+        summary.addIncome(50.0);
+
+        // Now index 2 = Gift ($50), index 3 = Allowance ($50)
+        DeleteIncomeCommand command = new DeleteIncomeCommand(2, summary);
+        command.incomeExecute(IncomeManager.getInstance(), ui);
+
+        assertEquals(2, IncomeManager.getIncomeList().size());
+        assertEquals("Allowance", IncomeManager.getIncomeList().get(1).getSource());
+    }
+
+    @Test
+    void testNullUiThrowsException() throws BudgetTrackerException {
+        DeleteIncomeCommand command = new DeleteIncomeCommand(1, summary);
+        BudgetTrackerException exception = assertThrows(BudgetTrackerException.class, () ->
+                command.incomeExecute(IncomeManager.getInstance(), null)
+        );
+        assertEquals("Ui instance cannot be null.", exception.getMessage());
+    }
+
 }
 
 

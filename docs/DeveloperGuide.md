@@ -111,60 +111,25 @@ Here is the class diagram of the Income Component:
 
 How the Income Component works:
 
-1. Adding Income: The `AddIncomeCommand` class is responsible for parsing and adding income to the system. The 
-IncomeManager adds a new Income instance to the list of income records stored in the model.
-Example:
-```java
-public class AddIncomeCommand implements Command {
-    private final String amount;
-    private final String source;
-
-    public AddIncomeCommand(String amount, String source) {
-        this.amount = amount;
-        this.source = source;
-    }
-
-    @Override
-    public void execute() {
-        Income income = new Income(amount, source);
-        incomeManager.addIncome(income);
-    }
-}
-```
+1. Adding Income: The `AddIncomeCommand` extends the `IncomeCommand` class, and contains amount, and source
+   of the added income. `IncomeParser` class parses the command input by the user. When the `AddIncomeCommand` is
+   called, it splits the user input into amount and source respectively. The
+   inputs are sent to the `AddIncomeCommand` class, which adds the expense into `IncomeManager`.
 ![Add Income Sequence Diagram](images/AddIncome.png)
 
 
-2. Deleting Income: The `DeleteIncomeCommand` class handles the deletion of income entries. The manager removes the 
-selected Income record from the list.
+2. Deleting Income: The `DeleteIncomeCommand` class extends the `IncomeCommand` class, and allows the user to delete an
+   income based on its index in the income list. Upon user input, `IncomeParser` class parses the input, calling
+   `parseDeleteIncomeCommand()`, which takes the input integer. By calling `DeleteIncomeCommand`, `DeleteIncomeCommand`
+   gets the item to be deleted from the `IncomeManager` class and successfully deletes it.
 Example:
-```java
-public class DeleteIncomeCommand implements Command {
-    private final int incomeIndex;
-
-    public DeleteIncomeCommand(int incomeIndex) {
-        this.incomeIndex = incomeIndex;
-    }
-
-    @Override
-    public void execute() {
-        incomeManager.deleteIncome(incomeIndex);
-    }
-}
-```
 ![Delete Income Sequence Diagram](images/DeleteIncome.png)
 
-3. Listing Income: The `ListIncomeCommand` class retrieves the list of all income entries and displays them to the 
-user through the view.
+3. Listing Income: The `ListIncomeCommand` class allows the user to view their list of
+   incomes. Upon user input, `ListIncomeCommand` class is called, and takes in the `IncomeManager` as a parameter. In the
+   `IncomeManager` class, all previously added incomes are accessed via the `List<Income> incomeList`. The
+   `getIncomeList()` command is called and a numbered list is shown.
 Example:
-```java
-public class ListIncomeCommand implements Command {
-    @Override
-    public void execute() {
-        List<Income> incomeList = incomeManager.getAllIncome();
-        incomeView.displayIncome(incomeList);
-    }
-}
-```
 ![List Income Sequence Diagram](images/ListIncome.png)
 
 
@@ -455,6 +420,50 @@ Funds Alert feature is active. You will be warned when available funds fall belo
 Use 'alert set <amount>' to change this threshold.
 ```
 Now you can perform the following tests:
+
+#### Adding Income
+1. Command: `add income 100 / work`
+
+   Expected:
+    ```
+    Added income: $100.0 from work
+    ```
+2. Command: `add income 200.55 / part-time job`
+
+   Expected:
+    ```
+    Added income: $200.55 from part-time job
+    ```
+3. Command: `add income -100 / work`
+
+   Expected: throws an error for invalid amount.
+    
+4. Command: `add income `
+
+   Expected: throws an error for invalid format.
+   
+5. Command: `add income 20 / 20 / work`
+
+   Expected: throws an error for invalid format.
+
+#### Viewing list of Income
+1. Command: `view income`
+
+   Expected: a numbered list of incomes.
+
+2. Command: `view income 1`
+
+   Expected: throws an error for unrecognised command.
+
+#### Deleting Income
+1. Command: `delete income 1`
+
+   Expected: income with index 1 deleted.
+
+
+2. Command: `delete income 0`, `delete income -1`, `delete income <OUT_OF_BOUNDS>`
+
+   Expected: throws an error for invalid index.
 
 #### Adding Expenses
 1. Command: `add expense 25 / lunch / f`

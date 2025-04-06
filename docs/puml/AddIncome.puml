@@ -18,5 +18,9 @@ activate AddIncomeCommand
 
 AddIncomeCommand -> IncomeManager: addIncome()
 activate IncomeManager
+deactivate AddIncomeCommand
+deactivate IncomeManager
+deactivate IncomeParser
+deactivate Duke
 
 @enduml

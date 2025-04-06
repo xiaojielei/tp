@@ -57,7 +57,7 @@ public class ListIncomeCommand {
         logger.addHandler(consoleHandler);
 
         // Set the logger level to OFF to suppress all unwanted logging (including INFO, WARNING, etc.)
-        logger.setLevel(Level.INFO);  // This will suppress all log levels except SEVERE
+        logger.setLevel(Level.OFF);  // This will suppress all log levels except SEVERE
     }
 
     /**
@@ -72,14 +72,14 @@ public class ListIncomeCommand {
                 return;
             }
 
-            System.out.println("List of income entries:");
+            System.out.println("===== INCOME RECORDS =====");
             for (int i = 0; i < IncomeManager.getIncomeList().size(); i++) {
                 Income income = IncomeManager.getIncomeList().get(i);
                 System.out.println((i + 1) + ". $" + income.getAmount() + " from " + income.getSource());
             }
 
+            System.out.println("=========================");
             System.out.println("Total Income: $" + summary.getTotalIncome());
-            System.out.println("Successfully listed income entries."); // logging message
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error while listing income entries.", e);
