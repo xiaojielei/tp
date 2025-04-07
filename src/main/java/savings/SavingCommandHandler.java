@@ -9,16 +9,17 @@ public class SavingCommandHandler {
         this.saving = saving;
     }
 
-    public void handleAddSavings(String input, Double amount) {
+    public void handleAddSavings(String input, Double amount) throws BudgetTrackerException {
         try {
             String goal;
             boolean goalMissing1 = !input.contains("/");
             boolean goalMissing2 = input.split("/").length < 2;
-            boolean goalMissing3 = input.substring(input.indexOf("/") + 1).trim().isEmpty();
+            String trim = input.substring(input.indexOf("/") + 1).trim();
+            boolean goalMissing3 = trim.isEmpty();
             if (goalMissing1 || goalMissing2 ||goalMissing3) {
                 goal = "(savings goal not provided)";
             } else {
-                goal = input.substring(input.indexOf("/") + 1).trim();
+                goal = trim;
             }
             saving.addSavings(amount, goal);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException | BudgetTrackerException e) {
@@ -26,7 +27,7 @@ public class SavingCommandHandler {
         }
     }
 
-    public void handleDeleteSavings(String input, int index) {
+    public void handleDeleteSavings(int index) {
         try {
             saving.deleteSavings(index);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException | BudgetTrackerException e) {
@@ -36,10 +37,6 @@ public class SavingCommandHandler {
 
     public void handleViewSavings() {
         saving.viewSavings();
-    }
-
-    public void handleViewSavingsGoal() {
-        saving.viewSavingsGoal();
     }
 
     public void handleSetSavingsGoal(String input) {
@@ -68,7 +65,7 @@ public class SavingCommandHandler {
         }
     }
 
-    public void handleDeleteSavingsGoal(String input, int index) {
+    public void handleDeleteSavingsGoal(int index) {
         try {
             saving.deleteSavingsGoal(index);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException | BudgetTrackerException e) {
@@ -111,21 +108,19 @@ public class SavingCommandHandler {
         if (input.startsWith("add savings")) {
             handleAddSavings(input, Double.valueOf(parts[2]));
         } else if (input.startsWith("delete savings")) {
-            handleDeleteSavings(input, Integer.parseInt(parts[2]));
+            handleDeleteSavings(Integer.parseInt(parts[2]));
         } else if (input.startsWith("savings goal set")) {
             handleSetSavingsGoal(input);
         } else if (input.startsWith("savings goal update")) {
             handleUpdateSavingsGoal(input);
         } else if (input.startsWith("savings goal delete")) {
-            handleDeleteSavingsGoal(input, Integer.parseInt(parts[3]));
+            handleDeleteSavingsGoal(Integer.parseInt(parts[3]));
         } else if (input.startsWith("transfer savings")) {
             handleTransferSavings(input);
         } else if (input.startsWith("exit savings")) {
             handleExitSavings();
         } else if (input.startsWith("view savings")) {
             handleViewSavings();
-        } else if (input.startsWith("savings goal view")) {
-            handleViewSavingsGoal();
         } else {
             handleUnknownCommand();
         }

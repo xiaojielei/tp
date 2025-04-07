@@ -44,7 +44,7 @@ public class HelpDisplay {
         addCommandHelp("view expense", "Lists all expense records.");
 
         addCategory(SAVINGS_HEADING);
-        addCommandHelp("add savings <AMOUNT>", "Adds a savings record.");
+        addCommandHelp("add savings <AMOUNT> / <SAVINGS GOAL>", "Adds a savings record with savings goal.");
         addCommandHelp("delete savings <INDEX>", "Deletes a savings record by index.");
         addCommandHelp("transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>",
                 "transfers a specified amount from one savings record to another.");
