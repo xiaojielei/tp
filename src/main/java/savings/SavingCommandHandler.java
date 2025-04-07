@@ -9,72 +9,139 @@ public class SavingCommandHandler {
         this.saving = saving;
     }
 
-    public void handleAddSavings(String input, Double amount) throws BudgetTrackerException {
+    public void handleAddSavings(String input){
         try {
-            String goal;
-            boolean goalMissing1 = !input.contains("/");
-            boolean goalMissing2 = input.split("/").length < 2;
-            String trim = input.substring(input.indexOf("/") + 1).trim();
-            boolean goalMissing3 = trim.isEmpty();
-            if (goalMissing1 || goalMissing2 ||goalMissing3) {
-                goal = "(savings goal not provided)";
+            String amountPart;
+            String goal = "(savings goal not provided)";
+
+            if (input.contains("/")) {
+                String[] parts = input.split("/", 2);
+                amountPart = parts[0].replaceFirst("add savings", "").trim();
+                if (parts.length == 2 && !parts[1].trim().isEmpty()) {
+                    goal = parts[1].trim();
+                }
             } else {
-                goal = trim;
+                amountPart = input.replaceFirst("add savings", "").trim();
             }
+
+            double amount = Double.parseDouble(amountPart);
+
             saving.addSavings(amount, goal);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException | BudgetTrackerException e) {
             System.out.println("Invalid format.");
         }
     }
 
-    public void handleDeleteSavings(int index) {
+    public void handleDeleteSavings(String input) {
         try {
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
+            String indexStr = input.replaceFirst("delete savings", "").trim();
+
+            if (indexStr.isEmpty()) {
+                System.out.println("Please provide an index.");
+                return;
+            }
+
+            int index = Integer.parseInt(indexStr);
             saving.deleteSavings(index);
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException | BudgetTrackerException e) {
+
+        } catch (NumberFormatException e) {
             System.out.println("Invalid index format.");
+        } catch (Exception e) {
+            System.out.println("An error occurred while deleting savings.");
         }
     }
 
-    public void handleViewSavings() {
-        saving.viewSavings();
+    public void handleViewSavings(String input) {
+        if (input.replaceFirst("view savings", "").trim().isEmpty()) {
+            saving.viewSavings();
+        } else {
+            System.out.println("Invalid command.");
+        }
     }
 
     public void handleSetSavingsGoal(String input) {
         try {
-            int trimSavingsGoalSetInUserCommand = 17;
-            String[] goalParts = input.substring(trimSavingsGoalSetInUserCommand).split(" / ", 2);
-            double amount = Double.parseDouble(goalParts[0].trim());
-            String description = goalParts[1].trim();
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
+            String commandKeyword = "savings goal set";
+
+            if (!input.startsWith(commandKeyword)) {
+                System.out.println("Invalid command format.");
+                return;
+            }
+
+            String details = input.substring(commandKeyword.length()).trim();
+
+            int separatorIndex = details.indexOf("/");
+
+            if (separatorIndex == -1) {
+                System.out.println("Invalid format. Use: savings goal set <AMOUNT> / <DESCRIPTION>");
+                return;
+            }
+
+            String amountStr = details.substring(0, separatorIndex).trim();
+            String description = details.substring(separatorIndex + 1).trim();
+
+            if (amountStr.isEmpty() || description.isEmpty()) {
+                System.out.println("Invalid format. Use: savings goal set <AMOUNT> / <DESCRIPTION>");
+                return;
+            }
+
+            double amount = Double.parseDouble(amountStr);
             saving.setSavingsGoal(amount, description);
-        } catch (Exception e) {
+
+        } catch (NumberFormatException e) {
             System.out.println("Invalid format. Use: savings goal set <AMOUNT> / <DESCRIPTION>");
-        }
-    }
-
-    public void handleUpdateSavingsGoal(String input) {
-        try {
-            int trimSavingsGoalUpdateInUserCommand = 20;
-            String[] goalParts = input.substring(trimSavingsGoalUpdateInUserCommand).split(" / ", 2);
-            String[] indexAmount = goalParts[0].trim().split(" ");
-            int index = Integer.parseInt(indexAmount[0]) - 1;
-            double amount = Double.parseDouble(indexAmount[1]);
-            String description = goalParts[1].trim();
-            saving.updateSavingsGoal(index, amount, description);
         } catch (Exception e) {
-            System.out.println("Invalid format. Use: savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>");
+            System.out.println("An error occurred while setting savings goal.");
         }
     }
 
-    public void handleDeleteSavingsGoal(int index) {
+
+    public void handleDeleteSavingsGoal(String input) {
         try {
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
+            String commandKeyword = "savings goal delete";
+
+            if (!input.startsWith(commandKeyword)) {
+                System.out.println("Invalid command format.");
+                return;
+            }
+
+            String indexStr = input.substring(commandKeyword.length()).trim();
+
+            if (indexStr.isEmpty()) {
+                System.out.println("Please provide an index.");
+                return;
+            }
+
+            int index = Integer.parseInt(indexStr);
             saving.deleteSavingsGoal(index);
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException | BudgetTrackerException e) {
+
+        } catch (NumberFormatException e) {
             System.out.println("Invalid index format.");
+        } catch (BudgetTrackerException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("An error occurred while deleting savings goal.");
         }
     }
 
     public void handleTransferSavings(String input) {
         try {
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
             int trimTransferSavingsInUserCommand = 17;
             String[] partsTransfer = input.substring(trimTransferSavingsInUserCommand).split(" ");
             int fromIndex = Integer.parseInt(partsTransfer[0]);
@@ -86,8 +153,51 @@ public class SavingCommandHandler {
         }
     }
 
-    public void handleExitSavings() {
-        System.out.println("Exited savings management.");
+    public void handleUpdateSavingsGoal(String input) {
+        try {
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
+
+            String commandKeyword = "savings goal update";
+
+            if (!input.startsWith(commandKeyword)) {
+                System.out.println("Invalid command format.");
+                return;
+            }
+
+            String details = input.substring(commandKeyword.length()).trim();
+
+            int separatorIndex = details.indexOf(" / ");
+            if (separatorIndex == -1) {
+                System.out.println("Invalid format. Use: savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>");
+                return;
+            }
+
+            String indexAmountPart = details.substring(0, separatorIndex).trim();
+            String[] indexAmount = indexAmountPart.split(" ");
+            if (indexAmount.length != 2) {
+                System.out.println("Invalid format. Use: savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>");
+                return;
+            }
+
+            int index = Integer.parseInt(indexAmount[0].trim()) - 1;
+            double amount = Double.parseDouble(indexAmount[1].trim());
+
+            String description = details.substring(separatorIndex + 3).trim();
+            if (description.isEmpty()) {
+                System.out.println("Description cannot be empty.");
+                return;
+            }
+
+            saving.updateSavingsGoal(index, amount, description);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid format. Use: savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>");
+        } catch (Exception e) {
+            System.out.println("An error occurred while updating savings goal.");
+        }
     }
 
     public void handleUnknownCommand() {
@@ -106,21 +216,19 @@ public class SavingCommandHandler {
         }
 
         if (input.startsWith("add savings")) {
-            handleAddSavings(input, Double.valueOf(parts[2]));
+            handleAddSavings(input);
         } else if (input.startsWith("delete savings")) {
-            handleDeleteSavings(Integer.parseInt(parts[2]));
+            handleDeleteSavings(input);
         } else if (input.startsWith("savings goal set")) {
             handleSetSavingsGoal(input);
-        } else if (input.startsWith("savings goal update")) {
-            handleUpdateSavingsGoal(input);
         } else if (input.startsWith("savings goal delete")) {
-            handleDeleteSavingsGoal(Integer.parseInt(parts[3]));
+            handleDeleteSavingsGoal(input);
         } else if (input.startsWith("transfer savings")) {
             handleTransferSavings(input);
-        } else if (input.startsWith("exit savings")) {
-            handleExitSavings();
-        } else if (input.startsWith("view savings")) {
-            handleViewSavings();
+        }  else if (input.startsWith("view savings")) {
+            handleViewSavings(input);
+        } else if (input.startsWith("savings goal update")) {
+            handleUpdateSavingsGoal(input);
         } else {
             handleUnknownCommand();
         }

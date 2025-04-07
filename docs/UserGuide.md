@@ -249,19 +249,6 @@ Example of usage:
 Deleted savings goal: $600.00 for gaming laptop(now the saving goal for this entry is empty)
 ```
 
-#### Exiting Savings Mode: `exit savings`
-
-Exits the savings management mode.
-
-Format: `exit savings`
-
-Example of usage:
-
-```
-> exit savings
-Exited savings management
-```
-
 ### Summary Management
 
 #### View Summary: `view summary`
@@ -312,7 +299,9 @@ Common Cents includes a low funds alert feature that warns you when your availab
 
 #### Set Alert Threshold: `alert set`
 
-Sets the threshold for low funds alerts. When your available funds drop below this amount, Common Cents will display a warning.
+Sets the threshold for low funds alerts. When your available funds drop below this amount, Common Cents will display a warning. Threshold is automatically rounded to 2 decimal places for values more than 2 decimal places (E.g. 0.004 will be rounded down to 0.00).
+
+_Note: There should only be a single whitespace between `alert` and `set`_.
 
 Format: `alert set <AMOUNT>`
 
@@ -370,38 +359,48 @@ Example of usage:
 
 --- Income Management ---
 add income <AMOUNT> / <SOURCE>                               Adds an income record.
-delete income <INDEX>                                        Deletes an income record by index.
+delete income <INDEX>                                        Deletes an income record 
+                                                             by index.
 view income                                                  Lists all income records.
 
 --- Expense Management ---
 add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>            Adds an expense record.
-delete expense <INDEX>                                       Deletes an expense record by index.
+delete expense <INDEX>                                       Deletes an expense record
+                                                             by index.
 view expense                                                 Lists all expense records.
 
 --- Savings Management ---
-add savings <AMOUNT> / <SAVINGS GOAL>                        Adds a savings record with savings goal.
-delete savings <INDEX>                                       Deletes a savings record by index.
-transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount from one savings record to another.
+add savings <AMOUNT> / <SAVINGS GOAL>                        Adds a savings record 
+                                                             with savings goal.
+delete savings <INDEX>                                       Deletes a savings record 
+                                                             by index.
+transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount 
+                                                             from one savings record to 
+                                                             another.
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---
-view summary                                                 Lists all income, expense and saving records.
+view summary                                                 Lists all income, expense 
+                                                             and saving records.
 
 --- Savings Goals ---
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
-savings goal view                                            Views all current savings goals.
-savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>       Updates an existing savings goal.
-savings goal delete <INDEX>                                  Deletes a savings goal by index.
-exit savings                                                 exited savings function
+savings goal view                                            Views all current 
+                                                             savings goals.
+savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>         Updates an existing 
+                                                             savings goal.
+savings goal delete <INDEX>                                  Deletes a savings goal 
+                                                             by index.
 
 --- Funds Alerts ---
-alert set <AMOUNT>                                           Sets the warning threshold for low available funds.
+alert set <AMOUNT>                                           Sets the warning threshold 
+                                                             for low available funds.
 
 --- General Commands ---
 help                                                         Displays this help message.
 ===============================
 ```
-
+_Note: Some of the explanations for the help display have been appended to the next line to prevent being cut off in pdf format._
 ### Help Command Details
 
 The HelpDisplay component:
@@ -439,10 +438,8 @@ Exiting the application. Goodbye!
 * **Delete Savings**: `delete savings <INDEX>`
 * **Transfer Savings**: `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>`
 * **Set Savings Goal**: `savings goal set <AMOUNT> / <DESCRIPTION>`
-* **View Savings Goals**: `savings goal view`
 * **Update Savings Goal**: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
 * **Delete Savings Goal**: `savings goal delete <INDEX>`
-* **Exit Savings Mode**: `exit savings`
 * **Set Alert Threshold**: `alert set <AMOUNT>`
 * **Exit Application**: `bye`
 
