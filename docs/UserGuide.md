@@ -214,26 +214,6 @@ Example of usage:
 Savings goal set: $500.00 for new laptop
 ```
 
-#### Updating Savings Goals: `savings goal update`
-
-Updates an existing savings goal. One difference between this command 
-and "savings goal set" is this command can also update the amount, even
-though it is not that obvious to see in the command ("savings goal update")
-that it can also update amount.
-
-Format: `savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>`
-
-* `<INDEX>` refers to the index number shown in the savings goals list.
-* `<AMOUNT>` is the new target amount.
-* `<DESCRIPTION>` is the new description.
-
-Example of usage:
-
-```
-> savings goal update 1 600 / gaming laptop
-Updated savings goal: $600.00 for gaming laptop
-```
-
 #### Deleting Savings Goals: `savings goal delete`
 
 Removes a savings goal.
@@ -247,19 +227,6 @@ Example of usage:
 ```
 > savings goal delete 1
 Deleted savings goal: $600.00 for gaming laptop(now the saving goal for this entry is empty)
-```
-
-#### Exiting Savings Mode: `exit savings`
-
-Exits the savings management mode.
-
-Format: `exit savings`
-
-Example of usage:
-
-```
-> exit savings
-Exited savings management
 ```
 
 ### Summary Management

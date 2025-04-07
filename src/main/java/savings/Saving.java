@@ -151,6 +151,10 @@ public class Saving {
      * @param amount The amount to transfer.
      */
     public void transferSavings(int fromIndex, int toIndex, double amount) {
+        if (toIndex < savingsRecords.size()) {
+            System.out.println("There is no enough saving records.");
+        }
+
         fromIndex -= 1;
         toIndex -= 1;
 
