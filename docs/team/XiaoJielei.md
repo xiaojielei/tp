@@ -24,12 +24,13 @@ Budget Tracker is a command-line app that helps users manage their money. Users 
     * Tests for the Saving class covering most possible scenarios
 
 ### Documentation
+* Wrote JavaDoc for Saving related classes
 
 ### User Guide:
 * Added documentation for the Saving feature that deals with user's saving []()
 
 ### Developer Guide:
-* Created UML sequence diagrams to illustrate component interactions:
-    * `Saving.puml`: Shows how the Summary class is connected to the rest of the program, [#48](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)
+* Created UML class and sequence diagrams to illustrate component interactions:
+    * `SavingClassDiagram.puml`: Shows how the Saving class is connected to the rest of the program, [#48](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/48)
     * `SavingSequencediagram.puml`: Shows how financial data is retrieved and displayed
 * Added implementation details of the Saving component
