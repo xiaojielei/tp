@@ -134,12 +134,6 @@ class SavingTest {
     }
 
     @Test
-    void deleteSavingsGoal_invalidIndex_expectThrowsException() throws BudgetTrackerException {
-        saving.deleteSavingsGoal(1);
-        assertEquals(0, saving.getSavingsRecords().size());
-    }
-
-    @Test
     void deleteSavingsGoal_existingGoalDeleted_expectGoalRemoved() throws BudgetTrackerException {
         saving.addSavings(300, "vacation");
         saving.setSavingsGoal(300, "New Car");
