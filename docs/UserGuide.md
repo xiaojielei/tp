@@ -214,6 +214,26 @@ Example of usage:
 Savings goal set: $500.00 for new laptop
 ```
 
+#### Updating Savings Goals: `savings goal update`
+
+Updates an existing savings goal. One difference between this command 
+and "savings goal set" is this command can also update the amount, even
+though it is not that obvious to see in the command ("savings goal update")
+that it can also update amount.
+
+Format: `savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>`
+
+* `<INDEX>` refers to the index number shown in the savings goals list.
+* `<AMOUNT>` is the new target amount.
+* `<DESCRIPTION>` is the new description.
+
+Example of usage:
+
+```
+> savings goal update 1 600 / gaming laptop
+Updated savings goal: $600.00 for gaming laptop
+```
+
 #### Deleting Savings Goals: `savings goal delete`
 
 Removes a savings goal.
@@ -371,7 +391,6 @@ savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>         Updates an existing
                                                              savings goal.
 savings goal delete <INDEX>                                  Deletes a savings goal 
                                                              by index.
-exit savings                                                 exited savings function
 
 --- Funds Alerts ---
 alert set <AMOUNT>                                           Sets the warning threshold 
@@ -419,10 +438,8 @@ Exiting the application. Goodbye!
 * **Delete Savings**: `delete savings <INDEX>`
 * **Transfer Savings**: `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>`
 * **Set Savings Goal**: `savings goal set <AMOUNT> / <DESCRIPTION>`
-* **View Savings Goals**: `savings goal view`
 * **Update Savings Goal**: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
 * **Delete Savings Goal**: `savings goal delete <INDEX>`
-* **Exit Savings Mode**: `exit savings`
 * **Set Alert Threshold**: `alert set <AMOUNT>`
 * **Exit Application**: `bye`
 

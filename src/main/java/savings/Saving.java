@@ -48,6 +48,15 @@ public class Saving {
      * @param index The index of the savings record to delete.
      */
     public void deleteSavings(int index) throws BudgetTrackerException {
+        if (savingsRecords.isEmpty()) {
+            System.out.println("No saving records.");
+            return;
+        }
+        if (index < 0 || index > savingsRecords.size()){
+            System.out.println("Invalid index.");
+            return;
+        }
+
         int zeroBasedIndex = index - 1;
         if (zeroBasedIndex < 0 || zeroBasedIndex >= savingsRecords.size()) {
             throw new BudgetTrackerException("Invalid index.");
@@ -92,12 +101,41 @@ public class Saving {
     }
 
     /**
+     * Deletes the goal of a specified savings record.
+     * @param oneBasedIndex The index of the savings record.
+     */
+    public void deleteSavingsGoal(int oneBasedIndex) throws BudgetTrackerException {
+        if (savingsRecords.isEmpty()) {
+            System.out.println("No saving records.");
+            return;
+        }
+        int zeroBasedIndex = oneBasedIndex - 1;
+        if (oneBasedIndex > 0 && oneBasedIndex <= savingsRecords.size()) {
+            if (Objects.equals(savingsRecords.get(zeroBasedIndex).goal, "(savings goal not provided)")) {
+                System.out.println("Saving goal for this saving entry already does not exist");
+                return;
+            }
+            Double originalSavingAmount = savingsRecords.get(zeroBasedIndex).amount;
+            String originalSavingGoal = savingsRecords.get(zeroBasedIndex).goal;
+            savingsRecords.get(zeroBasedIndex).goal = "(savings goal not provided)";
+            System.out.printf("Deleted savings goal: $%.2f for %s(now the saving " +
+                    "goal for this entry is empty)%n", originalSavingAmount, originalSavingGoal);
+        } else {
+            throw new BudgetTrackerException("Invalid index.");
+        }
+    }
+
+    /**
      * Updates a savings goal for a specified index.
      * @param index The index of the savings record.
      * @param amount The new savings amount.
      * @param newSavingGoal The new goal description.
      */
     public void updateSavingsGoal(int index, double amount, String newSavingGoal) throws BudgetTrackerException {
+        if (savingsRecords.isEmpty()) {
+            System.out.println("No saving records.");
+            return;
+        }
         if (amount < 0) {
             throw new BudgetTrackerException("Invalid amount. Amount cannot be less than 0.");
         }
@@ -124,57 +162,43 @@ public class Saving {
     }
 
     /**
-     * Deletes the goal of a specified savings record.
-     * @param oneBasedIndex The index of the savings record.
-     */
-    public void deleteSavingsGoal(int oneBasedIndex) throws BudgetTrackerException {
-        int zeroBasedIndex = oneBasedIndex - 1;
-        if (oneBasedIndex > 0 && oneBasedIndex <= savingsRecords.size()) {
-            if (Objects.equals(savingsRecords.get(zeroBasedIndex).goal, "(savings goal not provided)")) {
-                System.out.println("Saving goal for this saving entry already does not exist");
-                return;
-            }
-            Double originalSavingAmount = savingsRecords.get(zeroBasedIndex).amount;
-            String originalSavingGoal = savingsRecords.get(zeroBasedIndex).goal;
-            savingsRecords.get(zeroBasedIndex).goal = "(savings goal not provided)";
-            System.out.printf("Deleted savings goal: $%.2f for %s(now the saving " +
-                    "goal for this entry is empty)%n", originalSavingAmount, originalSavingGoal);
-        } else {
-            throw new BudgetTrackerException("Invalid index.");
-        }
-    }
-
-    /**
      * Transfers a specified amount from one savings record to another.
      * @param fromIndex The index of the savings record to transfer from.
      * @param toIndex The index of the savings record to transfer to.
      * @param amount The amount to transfer.
      */
     public void transferSavings(int fromIndex, int toIndex, double amount) {
-        if (toIndex < savingsRecords.size()) {
+        if (savingsRecords.isEmpty()) {
+            System.out.println("No saving records.");
+            return;
+        }
+        if (fromIndex > savingsRecords.size() || toIndex > savingsRecords.size()) {
             System.out.println("There is no enough saving records.");
+            return;
+        } else if (fromIndex <= 0 || toIndex <= 0) {
+            System.out.println("Invalid index.");
+            return;
+        }
+        // Prevent transferring to the same record
+        if (fromIndex == toIndex) {
+            System.out.println("Cannot transfer to the same savings record.");
+            return;
+        }
+        if (amount < 0) {
+            System.out.println("Transferred amount cannot be less than 0.");
+            return;
         }
 
         fromIndex -= 1;
         toIndex -= 1;
-
-        // Check for valid indices
-        if (fromIndex < 0 || fromIndex >= savingsRecords.size() ||
-                toIndex < 0 || toIndex >= savingsRecords.size()) {
-            throw new IllegalArgumentException("Invalid index.");
-        }
-
-        // Prevent transferring to the same record
-        if (fromIndex == toIndex) {
-            throw new IllegalArgumentException("Cannot transfer to the same savings record.");
-        }
 
         SavingsRecord fromRecord = savingsRecords.get(fromIndex);
         SavingsRecord toRecord = savingsRecords.get(toIndex);
 
         // Check for sufficient funds
         if (fromRecord.getAmount() < amount) {
-            throw new IllegalArgumentException("Insufficient funds in the source savings.");
+            System.out.println("Insufficient funds in the source savings.");
+            return;
         }
 
         // Perform the transfer using setters
