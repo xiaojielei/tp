@@ -15,7 +15,7 @@ delete expense <INDEX>                                       Deletes an expense 
 view expense                                                 Lists all expense records.
 
 --- Savings Management ---
-add savings <AMOUNT>                                         Adds a savings record.
+add savings <AMOUNT> / <SAVINGS GOAL>                        Adds a savings record with savings goal.
 delete savings <INDEX>                                       Deletes a savings record by index.
 transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount from one savings record to another.
 view savings                                                 Lists all savings records.
@@ -81,3 +81,4 @@ Available Balance:   $1004.50
 Total Savings:       $20.00
 ===========================
 Exiting the application. Goodbye!
+
