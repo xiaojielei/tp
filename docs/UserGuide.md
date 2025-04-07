@@ -475,3 +475,4 @@ Common Cents provides helpful error messages to guide you when something goes wr
   * If you try to delete an entry with an invalid index, Common Cents will inform you.
   * Example: `delete income 10` when you only have 2 income entries → `Invalid index. Please provide a valid income index between 1 and 2.`
 
+
