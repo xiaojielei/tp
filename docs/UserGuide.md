@@ -388,38 +388,48 @@ Example of usage:
 
 --- Income Management ---
 add income <AMOUNT> / <SOURCE>                               Adds an income record.
-delete income <INDEX>                                        Deletes an income record by index.
+delete income <INDEX>                                        Deletes an income record 
+                                                             by index.
 view income                                                  Lists all income records.
 
 --- Expense Management ---
 add expense <AMOUNT> / <DESCRIPTION> / <CATEGORY>            Adds an expense record.
-delete expense <INDEX>                                       Deletes an expense record by index.
+delete expense <INDEX>                                       Deletes an expense record
+                                                             by index.
 view expense                                                 Lists all expense records.
 
 --- Savings Management ---
 add savings <AMOUNT>                                         Adds a savings record.
-delete savings <INDEX>                                       Deletes a savings record by index.
-transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount from one savings record to another.
+delete savings <INDEX>                                       Deletes a savings record 
+                                                             by index.
+transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount 
+                                                             from one savings record to 
+                                                             another.
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---
-view summary                                                 Lists all income, expense and saving records.
+view summary                                                 Lists all income, expense 
+                                                             and saving records.
 
 --- Savings Goals ---
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
-savings goal view                                            Views all current savings goals.
-savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>       Updates an existing savings goal.
-savings goal delete <INDEX>                                  Deletes a savings goal by index.
+savings goal view                                            Views all current 
+                                                             savings goals.
+savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>       Updates an existing 
+                                                             savings goal.
+savings goal delete <INDEX>                                  Deletes a savings goal 
+                                                             by index.
 exit savings                                                 exited savings function
 
 --- Funds Alerts ---
-alert set <AMOUNT>                                           Sets the warning threshold for low available funds.
+alert set <AMOUNT>                                           Sets the warning threshold 
+                                                             for low available funds.
 
 --- General Commands ---
 help                                                         Displays this help message.
 ===============================
 ```
-
+_Note: Some of the explanations for the help display have been appended to the next line to prevent being cutoff in pdf format._
 ### Help Command Details
 
 The HelpDisplay component:
