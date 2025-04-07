@@ -10,6 +10,8 @@ skinparam noteBackgroundColor #FFF9C4
 skinparam noteBorderColor #FBC02D
 skinparam ArrowFontSize 18
 
+hide circle
+
 ' Class: Saving
 class Saving {
     - ArrayList<SavingsRecord> savingsRecords
