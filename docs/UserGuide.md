@@ -195,7 +195,7 @@ Transferred $10.00 from emergency fund to vacation
 
 #### Setting Savings Goals: `savings goal set`
 
-Sets a new savings goal. Note: If there are 2 saving entries with 
+Edits the savings goal description. Note: If there are 2 saving entries with 
 the same amount in the saving list, this command will only set the
 goal of the first saving entry to the provided goal. However, if user
 would like to change the saving goal of the second/third... saving entry
@@ -212,22 +212,6 @@ Example of usage:
 ```
 > savings goal set 500 / new laptop
 Savings goal set: $500.00 for new laptop
-```
-
-#### Viewing Savings Goals: `savings goal view`
-
-Lists all your savings goals. This command is similar to view savings,
-but it emphasizes displaying the goals.
-
-Format: `savings goal view`
-
-Example of usage:
-
-```
-> savings goal view
-===== SAVINGS GOALS =====
-1.  $500.00 for new laptop (Current: $0.00)
-=========================
 ```
 
 #### Updating Savings Goals: `savings goal update`
@@ -399,12 +383,9 @@ delete expense <INDEX>                                       Deletes an expense 
 view expense                                                 Lists all expense records.
 
 --- Savings Management ---
-add savings <AMOUNT>                                         Adds a savings record.
-delete savings <INDEX>                                       Deletes a savings record 
-                                                             by index.
-transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount 
-                                                             from one savings record to 
-                                                             another.
+add savings <AMOUNT> / <SAVINGS GOAL>                        Adds a savings record with savings goal.
+delete savings <INDEX>                                       Deletes a savings record by index.
+transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount from one savings record to another.
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---

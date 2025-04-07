@@ -76,24 +76,6 @@ public class Saving {
     }
 
     /**
-     * Displays all savings goals.
-     */
-    public void viewSavingsGoal() {
-        if (savingsRecords.isEmpty()) {
-            System.out.println("No savings records.");
-            return;
-        }
-
-        System.out.println("===== SAVINGS GOALS =====");
-        for (int i = 0; i < savingsRecords.size(); i++) {
-            SavingsRecord record = savingsRecords.get(i);
-            System.out.printf("%d. \t$%.2f for %s%n", i + 1, record.getAmount(), record.getGoal());
-        }
-        System.out.println("=========================");
-        System.out.println("Savings Indicator: " + getSavingsIndicator());
-    }
-
-    /**
      * Sets a savings goal for a specific amount.
      * @param amount The savings amount to associate with the goal.
      * @param newSavingGoal The new goal description.
@@ -122,9 +104,12 @@ public class Saving {
 
         if (index >= 0 && index < savingsRecords.size()) {
             SavingsRecord record = savingsRecords.get(index);
+            double originalAmount = record.amount;
             record.amount = amount;
             record.goal = newSavingGoal;
             System.out.printf("Updated savings goal: $%.2f for %s%n", amount, newSavingGoal);
+            summary.removeSavings(originalAmount);
+            summary.addSavings(amount);
         } else {
             System.out.println("Invalid index.");
         }
