@@ -108,8 +108,16 @@ public class Saving {
             record.amount = amount;
             record.goal = newSavingGoal;
             System.out.printf("Updated savings goal: $%.2f for %s%n", amount, newSavingGoal);
-            summary.removeSavings(originalAmount);
-            summary.addSavings(amount);
+
+            double difference = amount - originalAmount;
+
+            // Update summary only once with the net change
+            if (difference > 0) {
+                summary.addSavings(difference);
+            } else if (difference < 0) {
+                summary.removeSavings(-difference);
+            }
+
         } else {
             System.out.println("Invalid index.");
         }
