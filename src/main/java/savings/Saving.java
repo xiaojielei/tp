@@ -105,10 +105,6 @@ public class Saving {
      * @param oneBasedIndex The index of the savings record.
      */
     public void deleteSavingsGoal(int oneBasedIndex) throws BudgetTrackerException {
-        if (savingsRecords.isEmpty()) {
-            System.out.println("No saving records.");
-            return;
-        }
         int zeroBasedIndex = oneBasedIndex - 1;
         if (oneBasedIndex > 0 && oneBasedIndex <= savingsRecords.size()) {
             if (Objects.equals(savingsRecords.get(zeroBasedIndex).goal, "(savings goal not provided)")) {
@@ -132,10 +128,6 @@ public class Saving {
      * @param newSavingGoal The new goal description.
      */
     public void updateSavingsGoal(int index, double amount, String newSavingGoal) throws BudgetTrackerException {
-        if (savingsRecords.isEmpty()) {
-            System.out.println("No saving records.");
-            return;
-        }
         if (amount < 0) {
             throw new BudgetTrackerException("Invalid amount. Amount cannot be less than 0.");
         }
@@ -168,10 +160,6 @@ public class Saving {
      * @param amount The amount to transfer.
      */
     public void transferSavings(int fromIndex, int toIndex, double amount) {
-        if (savingsRecords.isEmpty()) {
-            System.out.println("No saving records.");
-            return;
-        }
         if (fromIndex > savingsRecords.size() || toIndex > savingsRecords.size()) {
             System.out.println("There is no enough saving records.");
             return;

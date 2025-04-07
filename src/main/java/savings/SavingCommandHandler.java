@@ -34,6 +34,10 @@ public class SavingCommandHandler {
 
     public void handleDeleteSavings(String input) {
         try {
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
             String indexStr = input.replaceFirst("delete savings", "").trim();
 
             if (indexStr.isEmpty()) {
@@ -61,6 +65,10 @@ public class SavingCommandHandler {
 
     public void handleSetSavingsGoal(String input) {
         try {
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
             String commandKeyword = "savings goal set";
 
             if (!input.startsWith(commandKeyword)) {
@@ -98,6 +106,10 @@ public class SavingCommandHandler {
 
     public void handleDeleteSavingsGoal(String input) {
         try {
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
             String commandKeyword = "savings goal delete";
 
             if (!input.startsWith(commandKeyword)) {
@@ -126,6 +138,10 @@ public class SavingCommandHandler {
 
     public void handleTransferSavings(String input) {
         try {
+            if (saving.getSavingsRecords().isEmpty()) {
+                System.out.println("No saving records.");
+                return;
+            }
             int trimTransferSavingsInUserCommand = 17;
             String[] partsTransfer = input.substring(trimTransferSavingsInUserCommand).split(" ");
             int fromIndex = Integer.parseInt(partsTransfer[0]);
