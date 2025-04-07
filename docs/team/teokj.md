@@ -45,8 +45,14 @@ This feature helps users assess their financial habits and encourages better sav
   * "Neutral": Savings are between 50% and 80% of income.
   * "Bad": Savings are less than 50% of total income.
 
+One key consideration during implementation was defining what "savings" meant within the scope of our project. Since 
+we do not explicitly track a user's savings, I derived savings by subtracting total expenses from total income. 
+To keep the implementation simple and intuitive for users, I decided to calculate the indicator as a percentage of 
+total savings over total income. This allowed the indicator to remain meaningful even without a dedicated savings input.
+
 ### JUnit Tests
-* Wrote tests for the following classes ([#25](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/25))
+* Wrote tests for the following classes ([#25](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/25), 
+[#154](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/154))
     * `AddIncomeCommand` tests for adding income with various sources
     * `ViewIncomeCommand` tests covering edge cases and different formats of income records
     * `DeleteIncomeCommand` tests for successful and erroneous income deletions
@@ -56,12 +62,17 @@ This feature helps users assess their financial habits and encourages better sav
 
 ### Github Practices
 * **Community Contributions**:
-    * Approved code changes from teammates ([#16](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/16), [#39](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/39))
+    * Approved code changes from teammates ([#16](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/16), 
+[#39](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/39), [#68](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/68)
+[#74](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/74), [#78](https://github.com/AY2425S2-CS2113-T11A-4/tp/pull/78))
     * Added Github Issues and closed them respectively ([#8](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/8),
 [#9](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/9), [#10](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/10),
 [#11](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/11), [#12](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/12),
 [#41](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/41), [#42](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/42),
-[#44](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/44))
+[#44](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/44), [#65](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/65),
+[#70](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/70), [#71](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/71),
+[#72](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/72), [#152](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/152),
+[#153](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/153), [#154](https://github.com/AY2425S2-CS2113-T11A-4/tp/issues/154))
 
 ### Documentation
 * Wrote extensive JavaDoc comments for most of the classes in the project, particularly the Income classes, 
@@ -72,13 +83,18 @@ improving code maintainability and clarity.
 * Added documentation for the Add Income feature, helping users add income with clear instructions on specifying sources and amounts.
 * Added documentation for the View Income feature, describing how users can view their income records with clear formatting.
 * Documented the Delete Income feature, explaining how users can delete income entries from the list.
+* Documented the savings indicator feature under `view savings` to allow users to have an indicator on how much they 
+are saving.
 
 ### Developer Guide:
-* Created UML class diagram `Income.puml` to illustrate the interactions between income-related classes
+* Created UML class diagram `Income.puml` to illustrate the interactions between income-related classes.
 * Created UML sequence diagrams to illustrate component interactions:
-    * `AddIncome.puml`: Shows how income is added through the user interface
-    * `ViewIncome.puml`: Demonstrates the flow for displaying income records to the user
-    * `DeleteIncome.puml`: Shows how income is deleted through the user interface
-* Added implementation details of the Add Income component
-* Added implementation details of the View Income component
-* Added implementation details of the Delete Income component
+    * `AddIncome.puml`: Shows how income is added through the user interface.
+    * `ViewIncome.puml`: Demonstrates the flow for displaying income records to the user.
+    * `DeleteIncome.puml`: Shows how income is deleted through the user interface.
+* Added implementation details of the Add Income component.
+* Added implementation details of the View Income component.
+* Added implementation details of the Delete Income component.
+* Added implementation of `getSavingsIndicator()` under the `view savings` command, explaining what the indicators 
+represented.
+* Added manual testing for the various Income Commands.
