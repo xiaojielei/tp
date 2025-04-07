@@ -328,7 +328,9 @@ Common Cents includes a low funds alert feature that warns you when your availab
 
 #### Set Alert Threshold: `alert set`
 
-Sets the threshold for low funds alerts. When your available funds drop below this amount, Common Cents will display a warning.
+Sets the threshold for low funds alerts. When your available funds drop below this amount, Common Cents will display a warning. Threshold is automatically rounded to 2 decimal places for values more than 2 decimal places (E.g. 0.004 will be rounded down to 0.00).
+
+_Note: There should only be a single whitespace between `alert` and `set`_.
 
 Format: `alert set <AMOUNT>`
 
