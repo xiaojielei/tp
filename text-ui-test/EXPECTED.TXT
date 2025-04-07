@@ -79,4 +79,3 @@ Available Balance:   $1004.50
 Total Savings:       $20.00
 ===========================
 Exiting the application. Goodbye!
-
