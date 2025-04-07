@@ -353,7 +353,7 @@ When your available funds drop below the set threshold due to adding expenses, C
 WARNING: Available funds ($10.00) are below warning threshold ($20.00)
 ===================
 
-Added expense: [FOOD] $4.0 for groceries
+Added expense: [FOOD] $40.0 for groceries
 ```
 
 #### Alert System Implementation
@@ -397,11 +397,11 @@ view expense                                                 Lists all expense r
 --- Savings Management ---
 add savings <AMOUNT>                                         Adds a savings record.
 delete savings <INDEX>                                       Deletes a savings record by index.
-transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            Transfers certain amount of cash of one saving record to another.
+transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount from one savings record to another.
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---
-view summary                                                 Lists income, expense, balance and saving records.
+view summary                                                 Lists all income, expense and saving records.
 
 --- Savings Goals ---
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
@@ -436,7 +436,7 @@ Format: `bye`
 Example of usage:
 
 ```
-> exit
+> bye
 Exiting the application. Goodbye!
 ```
 
