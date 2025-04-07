@@ -370,9 +370,13 @@ delete expense <INDEX>                                       Deletes an expense 
 view expense                                                 Lists all expense records.
 
 --- Savings Management ---
-add savings <AMOUNT> / <SAVINGS GOAL>                        Adds a savings record with savings goal.
-delete savings <INDEX>                                       Deletes a savings record by index.
-transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount from one savings record to another.
+add savings <AMOUNT> / <SAVINGS GOAL>                        Adds a savings record 
+                                                             with savings goal.
+delete savings <INDEX>                                       Deletes a savings record 
+                                                             by index.
+transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>            transfers a specified amount 
+                                                             from one savings record to 
+                                                             another.
 view savings                                                 Lists all savings records.
 
 --- Summary Management ---
@@ -383,7 +387,7 @@ view summary                                                 Lists all income, e
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
 savings goal view                                            Views all current 
                                                              savings goals.
-savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>       Updates an existing 
+savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>         Updates an existing 
                                                              savings goal.
 savings goal delete <INDEX>                                  Deletes a savings goal 
                                                              by index.
@@ -396,7 +400,7 @@ alert set <AMOUNT>                                           Sets the warning th
 help                                                         Displays this help message.
 ===============================
 ```
-_Note: Some of the explanations for the help display have been appended to the next line to prevent being cutoff in pdf format._
+_Note: Some of the explanations for the help display have been appended to the next line to prevent being cut off in pdf format._
 ### Help Command Details
 
 The HelpDisplay component:
