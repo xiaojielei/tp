@@ -108,23 +108,23 @@ public class SavingCommandHandler {
             return;
         }
 
-        if (input.contains("add savings")) {
+        if (input.startsWith("add savings")) {
             handleAddSavings(input, Double.valueOf(parts[2]));
-        } else if (input.contains("delete savings")) {
+        } else if (input.startsWith("delete savings")) {
             handleDeleteSavings(input, Integer.parseInt(parts[2]));
-        } else if (input.contains("savings goal set")) {
+        } else if (input.startsWith("savings goal set")) {
             handleSetSavingsGoal(input);
-        } else if (input.contains("savings goal update")) {
+        } else if (input.startsWith("savings goal update")) {
             handleUpdateSavingsGoal(input);
-        } else if (input.contains("savings goal delete")) {
+        } else if (input.startsWith("savings goal delete")) {
             handleDeleteSavingsGoal(input, Integer.parseInt(parts[3]));
-        } else if (input.contains("transfer savings")) {
+        } else if (input.startsWith("transfer savings")) {
             handleTransferSavings(input);
-        } else if (input.contains("exit savings")) {
+        } else if (input.startsWith("exit savings")) {
             handleExitSavings();
-        } else if (input.contains("view savings")) {
+        } else if (input.startsWith("view savings")) {
             handleViewSavings();
-        } else if (input.contains("savings goal view")) {
+        } else if (input.startsWith("savings goal view")) {
             handleViewSavingsGoal();
         } else {
             handleUnknownCommand();
