@@ -56,10 +56,7 @@ public class HelpDisplay {
         addCategory(GOALS_HEADING);
         addCommandHelp("savings goal set <AMOUNT> / <DESCRIPTION>", "Sets a new savings goal.");
         addCommandHelp("savings goal view", "Views all current savings goals.");
-        addCommandHelp("savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>"
-                , "Updates an existing savings goal.");
         addCommandHelp("savings goal delete <INDEX>", "Deletes a savings goal by index.");
-        addCommandHelp("exit savings", "exited savings function");
 
         addCategory(ALERTS_HEADING);
         addCommandHelp("alert set <AMOUNT>", "Sets the warning threshold for low available funds.");
