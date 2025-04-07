@@ -249,19 +249,6 @@ Example of usage:
 Deleted savings goal: $600.00 for gaming laptop(now the saving goal for this entry is empty)
 ```
 
-#### Exiting Savings Mode: `exit savings`
-
-Exits the savings management mode.
-
-Format: `exit savings`
-
-Example of usage:
-
-```
-> exit savings
-Exited savings management
-```
-
 ### Summary Management
 
 #### View Summary: `view summary`
@@ -404,7 +391,6 @@ savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>         Updates an existing
                                                              savings goal.
 savings goal delete <INDEX>                                  Deletes a savings goal 
                                                              by index.
-exit savings                                                 exited savings function
 
 --- Funds Alerts ---
 alert set <AMOUNT>                                           Sets the warning threshold 
@@ -452,10 +438,8 @@ Exiting the application. Goodbye!
 * **Delete Savings**: `delete savings <INDEX>`
 * **Transfer Savings**: `transfer savings <FROM_INDEX> <TO_INDEX> <AMOUNT>`
 * **Set Savings Goal**: `savings goal set <AMOUNT> / <DESCRIPTION>`
-* **View Savings Goals**: `savings goal view`
 * **Update Savings Goal**: `savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>`
 * **Delete Savings Goal**: `savings goal delete <INDEX>`
-* **Exit Savings Mode**: `exit savings`
 * **Set Alert Threshold**: `alert set <AMOUNT>`
 * **Exit Application**: `bye`
 
@@ -490,4 +474,5 @@ Common Cents provides helpful error messages to guide you when something goes wr
 * **Invalid index:**
   * If you try to delete an entry with an invalid index, Common Cents will inform you.
   * Example: `delete income 10` when you only have 2 income entries → `Invalid index. Please provide a valid income index between 1 and 2.`
+
 

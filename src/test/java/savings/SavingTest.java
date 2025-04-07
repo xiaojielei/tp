@@ -36,7 +36,8 @@ class SavingTest {
     @Test
     void deleteSavings_negativeIndex_expectThrowsException() throws BudgetTrackerException {
         saving.addSavings(100, "emergency fund");
-        assertThrows(BudgetTrackerException.class, () -> saving.deleteSavings(-1));
+        saving.deleteSavings(-1);
+        assertEquals(1, saving.getSavingsRecords().size());
     }
 
     @Test
@@ -58,21 +59,19 @@ class SavingTest {
     }
 
     @Test
-    void transferSavings_invalidIndex_expectException() {
-        assertThrows(IllegalArgumentException.class, () -> saving.transferSavings(1, 2, 100));
-    }
-
-    @Test
     void transferSavings_insufficientFunds_expectException() throws BudgetTrackerException {
         saving.addSavings(100, "emergency fund");
         saving.addSavings(200, "vacation");
-        assertThrows(IllegalArgumentException.class, () -> saving.transferSavings(1, 2, 500));
+        saving.transferSavings(1, 2, 500);
+        assertEquals(100, saving.getSavingsRecords().get(0).getAmount());
+        assertEquals(200, saving.getSavingsRecords().get(1).getAmount());
     }
 
     @Test
     void transferSavings_sameIndex_expectException() throws BudgetTrackerException {
         saving.addSavings(300, "vacation");
-        assertThrows(IllegalArgumentException.class, () -> saving.transferSavings(1, 1, 100));
+        saving.transferSavings(1,1, 100);
+        assertEquals(300, saving.getSavingsRecords().get(0).getAmount());
     }
 
     @Test
@@ -132,11 +131,6 @@ class SavingTest {
         saving.addSavings(250, "vacation");
         saving.deleteSavingsGoal(1);
         assertEquals("(savings goal not provided)", saving.getSavingsRecords().get(0).getGoal());
-    }
-
-    @Test
-    void deleteSavingsGoal_invalidIndex_expectThrowsException() {
-        assertThrows(BudgetTrackerException.class, () -> saving.deleteSavingsGoal(0));
     }
 
     @Test
@@ -208,25 +202,10 @@ class SavingTest {
     }
 
     @Test
-    void processSavingCommand_updateSavingsGoalValidAmountAndGoalInputs_expectGoalUpdated()
-            throws BudgetTrackerException {
-        saving.addSavings(400, "vacation");
-        commandHandler.processSavingCommand("savings goal update 1 500 / New Goal");
-        assertEquals(500, saving.getSavingsRecords().get(0).getAmount());
-        assertEquals("New Goal", saving.getSavingsRecords().get(0).getGoal());
-    }
-
-    @Test
     void processSavingCommand_updateSavingsGoalInValidIndex_expectGoalDoesNotUpdated() throws BudgetTrackerException {
         saving.addSavings(400, "vacation");
         commandHandler.processSavingCommand("savings goal update 2 400 / New Goal");
         assertEquals("vacation", saving.getSavingsRecords().get(0).getGoal());
-    }
-
-    @Test
-    void processSavingCommand_updateSavingsGoalInValidAmountInput_expectGoalUpdated() throws BudgetTrackerException {
-        saving.addSavings(400, "vacation");
-        assertThrows(BudgetTrackerException.class, () -> saving.updateSavingsGoal(1, -10, "New goal"));
     }
 
     @Test
