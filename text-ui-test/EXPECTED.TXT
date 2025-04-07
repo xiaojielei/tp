@@ -25,7 +25,7 @@ view summary                                                 Lists all income, e
 
 --- Savings Goals ---
 savings goal set <AMOUNT> / <DESCRIPTION>                    Sets a new savings goal.
-savings goal update <INDEX> / <AMOUNT> / <DESCRIPTION>       Updates an existing savings goal.
+savings goal update <INDEX> <AMOUNT> / <DESCRIPTION>         Updates an existing savings goal.
 savings goal delete <INDEX>                                  Deletes a savings goal by index.
 
 --- Funds Alerts ---
